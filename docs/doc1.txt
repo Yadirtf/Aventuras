@@ -1,0 +1,81 @@
+Diseño de la página web: «El camino de las aventuras» 🌎
+
+La página web tendrá una temática infantil, colorida y aventurera, relacionada con los tres ecosistemas que se trabajarán durante las dos semanas: el desértico, el marino y el selvático.
+
+La idea es que la página funcione como un recorrido de exploración, donde los visitantes puedan avanzar por diferentes caminos y descubrir cada ecosistema.
+
+1. Página de inicio: Bienvenidos a la aventura
+
+Al abrir la página aparecerá una portada con el título principal:
+
+EL CAMINO DE LAS AVENTURAS
+
+Debajo del título habrá una frase como: «Tres ecosistemas, muchas aventuras y un mundo por descubrir».
+
+El fondo estará decorado con ilustraciones de los tres ecosistemas: a un lado el desierto, en el centro el mar y al otro lado la selva. También tendrá animales, plantas, montañas, palmeras y otros elementos naturales.
+
+En la parte inferior aparecerá una huellita o botón que diga «Comenzar aventura». Al presionarlo, llevará al mapa principal.
+
+2. Mapa de exploración
+
+Esta será la sección principal de la página. Aparecerá un mapa ilustrado en el que se podrán observar los tres ecosistemas conectados por un camino de huellitas.
+
+Cada ecosistema tendrá su propio espacio, con una ilustración representativa y un botón para ingresar.
+
+Ecosistema desértico: decorado con arena, cactus, sol y animales del desierto.
+
+Ecosistema marino: decorado con agua, peces, corales, tortugas y otros animales marinos.
+
+Ecosistema selvático: decorado con árboles, plantas, flores, monos, aves y otros animales.
+
+Cada ecosistema tendrá una huellita que permitirá ingresar a su respectiva sección.
+
+3. Secciones de los ecosistemas
+
+Al seleccionar cualquiera de los tres ecosistemas, se abrirá una nueva pantalla con una decoración relacionada con el lugar elegido.
+
+Cada sección tendrá:
+
+Un título con el nombre del ecosistema.
+
+Una ilustración grande que represente el paisaje.
+
+Una pequeña descripción del ecosistema.
+
+Un espacio organizado para las tres planeaciones correspondientes.
+
+Un botón para regresar al mapa principal.
+
+Las tres secciones conservarán una misma estructura, pero tendrán colores, fondos y decoraciones diferentes.
+
+4. Sección final: Aventura completada
+
+Al terminar el recorrido por los tres ecosistemas, aparecerá una pantalla de cierre con una ilustración de los tres paisajes juntos.
+
+El mensaje principal será:
+
+¡FELICITACIONES, EXPLORADORES!
+
+«Hemos recorrido el desierto, explorado el mundo marino y descubierto los secretos de la selva. ¡Nuestra aventura ha terminado!».
+
+La pantalla estará decorada con huellitas, animales y elementos de los tres ecosistemas.
+
+5. Estilo visual de toda la página
+
+La página tendrá un diseño infantil, dinámico y llamativo, con:
+
+Colores alegres y relacionados con cada ecosistema.
+
+Ilustraciones infantiles de animales y paisajes.
+
+Huellitas que representen el camino de la aventura.
+
+Botones grandes y fáciles de identificar.
+
+Letras claras y títulos llamativos.
+
+Fondos diferentes para cada ecosistema.
+
+Transiciones sencillas entre las diferentes secciones.
+
+La idea principal: que la página no parezca un documento con nueve planeaciones, sino un mapa interactivo de aventuras en el que cada ecosistema sea una parada del recorrido de «El camino de las aventuras».
