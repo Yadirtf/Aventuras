@@ -1,0 +1,86 @@
+{
+  "id": "desierto-2",
+  "ecosistema": "desierto",
+  "numero": 2,
+  "titulo": "Los animales del desierto en títeres",
+  "guias": ["dunita", "don-camelio"],
+  "saludo": "¡Volvieron, exploradores! Don Camelio y yo tenemos una pregunta: ¿qué hacen los animales cuando hace mucho calor y casi no hay agua?",
+  "retoPantalla": "Cinco tarjetas de animales (camello, zorro, lagarto, serpiente y tortuga) se voltean para descubrir cómo se adaptan. Luego, un teatrino de tres escenas donde ustedes deciden qué dice cada títere. Don Camelio pregunta: «¿Mito o realidad?».",
+  "retoMovimiento": "Mímica de 30 segundos: un grupo representa su animal con el cuerpo, sin hablar, y los demás adivinan cuál es y cómo se las arregla con el calor.",
+  "sello": { "nombre": "Cactus", "icono": "🌵" },
+  "pista": "En la próxima parada haremos un viaje de pistas por todo lo que vivimos… y al final encontraremos una pista del siguiente lugar que vamos a visitar.",
+  "planeacion": {
+    "tema": "Los animales del desierto en obras de títeres",
+    "autora": "Katerin López",
+    "docenteTutora": null,
+    "fecha": null,
+    "duracion": "45 minutos",
+    "objetivo": "Entender cómo los animales del desierto se adaptan al calor y a la falta de agua, representarlos con un juego de roles y una obra de títeres, y fortalecer la expresión corporal, la motricidad fina, la creatividad y el trabajo en equipo.",
+    "inicio": [
+      {
+        "titulo": "Ambientación (antes de la llegada del grupo)",
+        "texto": "Se deja a la vista el mural que se realizó en la actividad anterior, se prepara el espacio con forma de dunas con cojines y telas, un sol de cartulina y las tarjetas de animales."
+      },
+      {
+        "titulo": "Cada grupo es un animal",
+        "texto": "La profesora recuerda el mural y la pregunta con la que se cerró la actividad anterior: «¿Qué hacen los animales cuando hace mucho calor y casi no hay agua?». A continuación forma cuatro o cinco grupos; cada uno saca de la bolsa una tarjeta con un animal del desierto y una pista de la forma en que se adapta a la escasez de agua. Cada grupo tiene unos 3 minutos para decidir cómo se mueve su animal, cómo busca sombra o agua según el momento del día y cómo se adapta, y después lo representa durante 30 segundos con el cuerpo y sin explicarlo. El grupo que sigue intenta adivinar qué animal es y cómo se las arregla con el calor."
+      }
+    ],
+    "desarrollo": [
+      {
+        "titulo": "El títere",
+        "texto": "Cada niño y niña colorea y recorta la figura de su animal y la pega en un palito de helado para confeccionar un títere de paleta."
+      },
+      {
+        "titulo": "El guion guía",
+        "texto": "La docente narra las tres escenas de la obra y cada grupo decide qué hará y qué dirá su animal en cada una de ellas (ver Anexo 2):",
+        "lista": [
+          "Escena 1, amanece y hace mucho calor: cada animal se despierta y cuenta cómo se siente con el sol fuerte.",
+          "Escena 2, se acaba el agua: cada animal muestra cómo se las arregla (buscando sombra, escondiéndose, reservando energía o saliendo de noche).",
+          "Escena 3: pendiente en el guion original."
+        ]
+      },
+      {
+        "titulo": "Rol de la docente",
+        "texto": "Acompaña a los grupos con preguntas («¿Cómo camina tu animal aunque haga mucho calor?», «¿Qué haría para conseguir agua?») y vela porque todos dispongan de un tiempo para participar."
+      }
+    ],
+    "cierre": [
+      {
+        "titulo": "Conversación en círculo",
+        "texto": "La maestra pregunta:",
+        "lista": [
+          "¿De qué forma se adapta tu animal al calor o a la falta de agua?",
+          "¿De qué forma se ayudaron los animales y de qué manera se ayudaron ustedes en el grupo?",
+          "¿Cómo se sintieron representando un animal?"
+        ]
+      },
+      {
+        "titulo": "Aclaración y mural",
+        "texto": "La maestra aclara las ideas del mural: no todos los desiertos son arenosos y, aunque el camello guarda grasa y no agua en la joroba, resiste muchos días sin beber. A continuación, cada grupo pega su títere o la tarjeta de su animal en el mural para que los animales «cobren vida» en él. Se hace un estiramiento suave con el cuerpo y tres respiraciones profundas. Se anticipa que mañana harán un viaje de pistas por todo lo que vivieron y que encontrarán una pista sobre el siguiente lugar que van a visitar."
+      }
+    ],
+    "materiales": [
+      "Mural del desierto de la sesión anterior, cinta o pinzas.",
+      "Cojines y telas para formar las dunas, sol de cartulina y tela azul para el oasis.",
+      "Tarjetas de animales con su adaptación.",
+      "Figuras de animales para colorear y recortar (camello, zorro del desierto, lagarto, serpiente y tortuga).",
+      "Palitos de helado, pegante, colores y tijeras.",
+      "Guion guía de la obra.",
+      "Espacio amplio y seguro."
+    ],
+    "tiempos": "Inicio 10 minutos, desarrollo 25 minutos y cierre 10 minutos (total aproximado: 45 minutos).",
+    "indicadoresDeLogro": [
+      "Representa un animal del desierto y explica cómo se adapta.",
+      "Participa en la creación de la obra manteniendo turnos.",
+      "Colabora con su grupo."
+    ],
+    "observaciones": [
+      "Ofrecer papeles con menor exposición a quienes se sienten tímidos (el sol, ayudar con las dunas o contar), pero nadie está obligado a contar algo delante del grupo.",
+      "Cuidar la seguridad con cojines y telas, y acompañar el manejo de las tijeras.",
+      "La obra puede hacerse con títeres o con el cuerpo, según el ánimo y el espacio del grupo."
+    ],
+    "anexos": [{ "titulo": "Anexo 2: Guion guía de la obra de títeres" }],
+    "pendientes": ["Escena 3 del guion de títeres.", "Fecha de la sesión."]
+  }
+}

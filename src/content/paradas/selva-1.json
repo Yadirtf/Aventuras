@@ -1,0 +1,79 @@
+{
+  "id": "selva-1",
+  "ecosistema": "selva",
+  "numero": 1,
+  "titulo": "Nos adentramos en la selva",
+  "guias": ["momo"],
+  "saludo": "¡Uh, uh, ah, ah! Soy Momo y no me puedo quedar quieto. ¿Escuchan esos sonidos? ¡Algo se mueve en la selva! ¿Qué animal será?",
+  "retoPantalla": "Sonido misterioso: escuchen un animal de la selva (mono, serpiente, rana, ave o jaguar) y elijan cuál es.",
+  "retoMovimiento": "Despertamos como animales: estírense como una jirafa, salten como un mono, den pasos fuertes como un elefante y muevan los brazos como un ave.",
+  "sello": { "nombre": "Hoja", "icono": "🍃" },
+  "pista": "En la próxima aventura seguiremos explorando la selva, pero esta vez habrá retos de movimiento para avanzar por sus caminos.",
+  "planeacion": {
+    "tema": "Nos adentramos en la selva",
+    "autora": "Yenifer Tatiana Fonseca Sánchez",
+    "docenteTutora": null,
+    "fecha": "1 de noviembre de 2026",
+    "duracion": "40 a 50 minutos",
+    "objetivo": "Reconocer algunas características de la selva y sus animales mediante la imitación de sus movimientos y la representación de diferentes especies, favoreciendo la coordinación y la expresión corporal.",
+    "inicio": [
+      {
+        "titulo": "Despertamos como animales de la selva",
+        "texto": "Se inicia invitando a los niños y niñas a una pausa activa. La docente les pide que se pongan de pie y sigan diferentes movimientos: estirarse como una jirafa, saltar como un mono, dar pasos fuertes como un elefante y mover los brazos como un ave."
+      },
+      {
+        "texto": "Después de los movimientos, se lleva a cabo una conversación breve con preguntas como:",
+        "lista": [
+          "¿Qué animales conocen que viven en la selva?",
+          "¿Cómo creen que es la selva?",
+          "¿Qué sonidos podemos escuchar en ella?",
+          "¿Cómo se mueven los animales que viven allí?"
+        ]
+      },
+      {
+        "texto": "Luego la docente explica de manera sencilla que la selva es un ecosistema donde hay muchos árboles, plantas, animales y diferentes sonidos, y menciona que durante las próximas actividades se convertirán en exploradores para conocer este maravilloso lugar."
+      }
+    ],
+    "desarrollo": [
+      {
+        "titulo": "Exploradores de la selva",
+        "texto": "Se explica que deberán imaginar que están entrando a este ecosistema y que, para avanzar, tendrán que imitar los movimientos de diferentes animales. En la primera parte se desplazan por el espacio siguiendo las indicaciones de la docente:",
+        "lista": [
+          "Caminar lentamente como un tigre que busca su alimento.",
+          "Saltar con los pies juntos como un mono.",
+          "Mover los brazos como un ave que vuela entre los árboles.",
+          "Caminar en cuatro apoyos como un jaguar.",
+          "Estirarse hacia arriba como una jirafa para alcanzar las hojas."
+        ]
+      },
+      {
+        "texto": "En la segunda parte, la docente nombra o presenta sonidos de diferentes animales de la selva (mono, serpiente, rana, ave, tigre, león, etc.) y los niños deben representarlos únicamente con los movimientos de su cuerpo."
+      }
+    ],
+    "cierre": [
+      {
+        "texto": "Al terminar, los niños y niñas se sientan en círculo para conversar sobre la experiencia. La docente pregunta:",
+        "lista": [
+          "¿Qué animales conocimos hoy?",
+          "¿Cuál fue el animal que más les gustó representar?",
+          "¿Qué movimientos realizamos con nuestro cuerpo?",
+          "¿Qué fue lo más divertido de explorar la selva?"
+        ]
+      },
+      {
+        "texto": "Finalmente, se explica que en la siguiente aventura continuarán explorando la selva, pero esta vez deberán superar diferentes retos de movimiento para avanzar por sus caminos."
+      }
+    ],
+    "materiales": [
+      "Imágenes de animales de la selva.",
+      "Sonidos de animales.",
+      "Parlante.",
+      "Espacio amplio y seguro."
+    ],
+    "tiempos": "Entre 40 y 50 minutos en total.",
+    "indicadoresDeLogro": [],
+    "observaciones": [],
+    "anexos": [],
+    "pendientes": ["Indicadores de logro."]
+  }
+}

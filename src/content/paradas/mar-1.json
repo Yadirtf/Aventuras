@@ -1,0 +1,74 @@
+{
+  "id": "mar-1",
+  "ecosistema": "mar",
+  "numero": 1,
+  "titulo": "Descubriendo el fondo del mar",
+  "guias": ["capitana-tortu"],
+  "saludo": "¡Atención, tripulación! Soy la Capitana Tortu. En el fondo del mar hay sombras misteriosas. ¿A qué animal pertenece cada una?",
+  "retoPantalla": "Arrastren el tiburón, la tortuga, el pez payaso y el pulpo hasta su silueta. Después, clasifiquen lo que come cada uno: ¿herbívoro, carnívoro u omnívoro?",
+  "retoMovimiento": "¡A comer! Cada uno elige un animal del mar y se mueve como él. A la señal, busca su alimento y celebra con el movimiento de su animal.",
+  "sello": { "nombre": "Concha", "icono": "🐚" },
+  "pista": "El mapa del gran tesoro marino quedó al otro lado del mar, vigilado por el Tiburón de Agua Salada. ¿Cómo lo vamos a cruzar?",
+  "planeacion": {
+    "tema": "Ecosistema marino: descubriendo el fondo del mar",
+    "autora": "Lina Campo",
+    "docenteTutora": "Angela Sierra",
+    "fecha": null,
+    "duracion": "55 minutos",
+    "objetivo": "Identificar las características del ecosistema marino a través de la exploración del movimiento corporal expresivo y la asociación de imágenes.",
+    "inicio": [
+      {
+        "texto": "El salón se decora previamente con telas azules en el suelo que simulan el océano. De fondo suena, a volumen moderado, una pista con sonidos de olas y ballenas, para que los estudiantes perciban el hábitat desde el ingreso."
+      },
+      {
+        "texto": "La docente recibe al grupo con un saludo alegre y enérgico y reproduce como provocación la canción «Muévete como los animales del mar» (Anexo 1). Mientras suena, los niños y niñas se desplazan libremente por el espacio azul siguiendo las instrucciones de la docente e imitando los movimientos que marca la canción: las pinzas del cangrejo de lado, la postura lenta de la tortuga, los saltos de la morsa, etc."
+      },
+      {
+        "texto": "Al terminar la canción, el grupo se sienta sobre las telas azules y se abre un círculo corto de diálogo:",
+        "lista": [
+          "¿Qué animales descubrimos en la canción y cómo se movían?",
+          "¿Qué creen que hay más allá, en el fondo del mar?"
+        ]
+      }
+    ],
+    "desarrollo": [
+      {
+        "titulo": "Las siluetas",
+        "texto": "La docente muestra un mural con las siluetas negras de varios animales marinos (tiburón, tortuga, pez payaso, pulpo) y lanza preguntas tipo adivinanza: «¿A qué animal pertenece cada sombra?». Los niños pasan por turnos al frente a ubicar la imagen sobre su silueta, y la docente aprovecha para preguntar: «¿Qué creen que come este animal? ¿Será que come plantas o carne?»."
+      },
+      {
+        "titulo": "¿Qué comen?",
+        "texto": "Escuchando las respuestas de los niños, la docente explica el concepto de forma sencilla: si comen plantas son herbívoros, si comen carne son carnívoros y si comen de todo son omnívoros. Les muestra la tarjeta con el alimento real correspondiente (peces pequeños, algas, crustáceos) y el niño la pega al lado del animal antes de regresar a su puesto. Se repite la dinámica con los demás animales del mural."
+      },
+      {
+        "titulo": "La búsqueda de alimento",
+        "texto": "En el espacio delimitado con las telas azules, la docente esparce por el suelo tarjetas con imágenes de los diferentes alimentos (algas, peces, crustáceos, etc.). A la señal, los niños se desplazan imitando con su cuerpo al animal marino que eligieron (la tortuga, el pulpo, el cangrejo). A la voz de «¡A comer!», cada uno busca el alimento que le corresponde a su animal según lo que aprendieron en el mural. Al hallarlo, se detienen, hacen el movimiento característico de su animal celebrando que encontró su comida y muestran su tarjeta."
+      }
+    ],
+    "cierre": [
+      {
+        "texto": "Los niños se acuestan boca arriba sobre las telas azules, cierran los ojos y respiran profundo imitando el vaivén de las olas, mientras la docente guía la calma con respiraciones pausadas, acompañadas del sonido del mar e imágenes, y pregunta:",
+        "lista": [
+          "¿Qué animal marino te gustó más imitar hoy con tu cuerpo?",
+          "¿De qué se alimentaba ese animal que elegiste?"
+        ]
+      }
+    ],
+    "materiales": [
+      "Papel kraft, tijeras, tela y cinta de enmascarar.",
+      "Tarjetas con imágenes de algunos animales marinos y su alimento.",
+      "Grabadora para reproducir sonido.",
+      "Recurso humano."
+    ],
+    "tiempos": "55 minutos en total.",
+    "indicadoresDeLogro": [],
+    "observaciones": [],
+    "anexos": [
+      {
+        "titulo": "Anexo 1: Pinkfong Canciones (2021). Muévete como los animales del mar.",
+        "url": "https://youtu.be/oNqbB5_zg58"
+      }
+    ],
+    "pendientes": ["Indicadores de logro.", "Día exacto de la sesión (noviembre de 2026)."]
+  }
+}

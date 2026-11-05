@@ -1,0 +1,71 @@
+{
+  "id": "selva-3",
+  "ecosistema": "selva",
+  "numero": 3,
+  "titulo": "La selva cobra vida",
+  "guias": ["momo"],
+  "saludo": "¡Hoy la selva va a cobrar vida y ustedes serán los protagonistas! Escuchen el cuento y muévanse como cada animal. ¿Listos?",
+  "retoPantalla": "El cuento «Un día en la selva» en cinco escenas animadas: amanecer, rugido, tormenta, regreso del sol y reunión final. Con los botones de lluvia, viento y trueno crearán la banda sonora de la tormenta.",
+  "retoMovimiento": "Representen la historia con el cuerpo: salten como monos, vuelen como aves, arrástrense como serpientes y den saltos de rana.",
+  "sello": { "nombre": "Mariposa", "icono": "🦋" },
+  "pista": "Cada ser vivo de la selva cumple una función importante y merece ser cuidado y protegido. ¡Vamos a ver todo lo que recorrimos!",
+  "planeacion": {
+    "tema": "La selva cobra vida",
+    "autora": "Yenifer Tatiana Fonseca Sánchez",
+    "docenteTutora": null,
+    "fecha": "3 de noviembre de 2026",
+    "duracion": "40 a 50 minutos",
+    "objetivo": "Representar el ecosistema de la selva mediante movimientos corporales que imiten sus animales y elementos naturales, fortaleciendo la expresión corporal, la creatividad, la coordinación y el trabajo en equipo.",
+    "inicio": [
+      {
+        "titulo": "La selva despierta",
+        "texto": "Pausa activa: la docente invita a los niños y niñas a cerrar los ojos e imaginar que se encuentran en medio de la selva. Escuchan diferentes sonidos de animales y, al reconocerlos, hacen movimientos con su cuerpo: al escuchar un mono pueden saltar; al escuchar un ave, mueven los brazos como alas; y al escuchar una serpiente, hacen movimientos ondulados."
+      }
+    ],
+    "desarrollo": [
+      {
+        "texto": "La docente explica que en esta última aventura no tendrán que superar obstáculos, sino convertirse en los protagonistas de una selva que cobrará vida. Narra la historia corta «Un día en la selva», en la que los niños participan haciendo diferentes movimientos según lo que ocurre en el relato:"
+      },
+      {
+        "titulo": "Un día en la selva",
+        "texto": "Una mañana, cuando el sol comenzó a salir, la selva despertó poco a poco. Los árboles movían sus ramas suavemente y las hojas bailaban con el viento. Los monos comenzaron a saltar de un árbol a otro, mientras las aves extendían sus alas y volaban por todo el cielo. Cerca de los árboles, las serpientes se desplazaban lentamente entre las plantas y las pequeñas ranas daban grandes saltos sobre el suelo húmedo."
+      },
+      {
+        "texto": "De repente, se escuchó el rugido de un tigre que caminaba entre los árboles buscando alimento. Los monos, al escucharlo, comenzaron a moverse rápidamente y las aves volaron hacia las ramas más altas. Mientras tanto, una familia de mariposas salió a recorrer la selva moviendo sus alas de un lado a otro."
+      },
+      {
+        "texto": "Más tarde, unas nubes grandes cubrieron el cielo y comenzó a soplar un viento muy fuerte. Los árboles movían sus ramas de un lado a otro, las hojas caían al suelo y los animales buscaron refugio para protegerse de la lluvia. Las serpientes se escondieron entre las plantas, los monos se sujetaron de las ramas y las aves buscaron un lugar seguro entre los árboles."
+      },
+      {
+        "texto": "Después de un rato, la lluvia terminó, el sol volvió a aparecer y la selva comenzó a llenarse de sonidos. Los monos salieron nuevamente a saltar, las aves retomaron su vuelo, las mariposas movieron sus alas y los demás animales continuaron recorriendo su hogar."
+      },
+      {
+        "texto": "Finalmente, todos los animales volvieron a encontrarse en medio de la selva, donde los árboles, las plantas, el agua y los animales formaban un ecosistema lleno de vida. Así terminó un día de aventuras en la selva, un lugar donde cada ser vivo cumple una función importante y merece ser cuidado y protegido."
+      },
+      {
+        "texto": "Durante la narración, los niños representan cada situación con movimientos corporales, siguiendo el relato y usando su creatividad para dar vida a los diferentes elementos de la selva."
+      }
+    ],
+    "cierre": [
+      {
+        "texto": "Al finalizar la representación, los niños y niñas se sientan en círculo para conversar sobre la experiencia. La docente pregunta:",
+        "lista": [
+          "¿Cómo se sintieron representando los animales y elementos de la selva?",
+          "¿Qué animal les gustó representar?",
+          "¿Qué movimientos utilizaron para darle vida a la selva?",
+          "¿Qué fue lo que más les gustó de esta aventura?",
+          "¿Qué aprendieron sobre la selva durante estas tres experiencias?"
+        ]
+      },
+      {
+        "texto": "Se hace una pequeña reflexión sobre la importancia de cuidar la selva, sus plantas y los animales que viven en ella. La docente recuerda las tres aventuras: cómo conocieron los animales, exploraron los caminos de la selva y usaron su cuerpo para representar este ecosistema. Para terminar, felicita a los niños por su participación y creatividad, y da por finalizada la aventura de la selva."
+      }
+    ],
+    "materiales": ["Parlante.", "Sonidos de animales.", "Espacio amplio."],
+    "tiempos": "Entre 40 y 50 minutos en total.",
+    "indicadoresDeLogro": [],
+    "observaciones": [],
+    "anexos": [],
+    "pendientes": ["Indicadores de logro."]
+  }
+}

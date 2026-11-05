@@ -1,0 +1,48 @@
+/* La ficha de planeación se imprime sola, sin cabecera ni botones. */
+@media print {
+  body {
+    background: #fff !important;
+    font-size: 11pt;
+  }
+
+  .cabecera,
+  .saltar,
+  .no-imprimir,
+  dialog {
+    display: none !important;
+  }
+
+  .solo-imprimir {
+    display: inline;
+  }
+
+  .principal {
+    width: auto;
+    padding: 0;
+  }
+
+  .ficha {
+    max-width: none;
+    padding: 0;
+    border: 0;
+    font-size: 11pt;
+  }
+
+  .ficha h1 {
+    font-size: 18pt;
+  }
+
+  .ficha h2 {
+    font-size: 13pt;
+    break-after: avoid;
+  }
+
+  .ficha__paso,
+  .ficha li {
+    break-inside: avoid;
+  }
+
+  a {
+    color: inherit;
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "id": "mar-2",
+  "ecosistema": "mar",
+  "numero": 2,
+  "titulo": "El mapa del tesoro",
+  "guias": ["capitana-tortu", "tiburon"],
+  "saludo": "¡Buzos y buzas! El mapa del tesoro quedó al otro lado del mar y lo vigila el Tiburón de Agua Salada. ¿Están listos para ser los mejores equilibristas?",
+  "retoPantalla": "Elijan la ruta A (una línea en zigzag) o la ruta B (aros para saltar) y crúcenla con el ratón, el dedo o las flechas sin tocar el agua del tiburón. Cada cruce entrega una tarjeta del mapa del tesoro.",
+  "retoMovimiento": "Abran los brazos como equilibristas y caminen sobre una línea imaginaria sin caer al agua.",
+  "sello": { "nombre": "Ancla", "icono": "⚓" },
+  "pista": "¡Armamos el mapa del tesoro! Ahora hay que seguir sus últimas pistas hasta la gran X.",
+  "planeacion": {
+    "tema": "Ecosistema marino: la gran expedición tras las pistas del mapa del tesoro",
+    "autora": "Lina Campo",
+    "docenteTutora": "Angela Sierra",
+    "fecha": null,
+    "duracion": "55 minutos",
+    "objetivo": "Afianzar el equilibrio dinámico, la agilidad motriz y el trabajo cooperativo superando dos circuitos de aventura con rutas graduadas para encontrar el mapa del tesoro.",
+    "inicio": [
+      {
+        "texto": "Se inicia con un saludo de buenos días enérgico y se reproduce una canción corta y alegre llamada «Sinfonía inconclusa en la mar» (Anexo 1). Luego la docente reúne a los niños y niñas en un semicírculo y les lee como provocación el cuento corto «La misión de los exploradores del mar» (Anexo 2)."
+      },
+      {
+        "texto": "«¡Muy bien, equipo! Así como en el cuento, hoy nos toca a nosotros cumplir esa misión. ¡Atención, buzos y buzas! Como ya sabemos, el mapa del gran tesoro marino ha quedado al otro lado del mar, vigilado por el temido Tiburón de Agua Salada, y para alcanzarlo hoy no podemos ir corriendo de cualquier manera. Necesitamos convertirnos en los mejores equilibristas. ¡Listos, que empieza nuestra expedición!»"
+      }
+    ],
+    "desarrollo": [
+      {
+        "titulo": "Calentamiento",
+        "texto": "Antes de cruzar el mar, los niños hacen un calentamiento guiado imitando a un buzo: estiran brazos y piernas, giran el tronco y se preparan para la expedición. Para que todos entiendan el trayecto sin depender únicamente de la voz, la docente les muestra un mapa táctil y visual con relieve para que puedan tocar y observar la ruta antes de empezar."
+      },
+      {
+        "titulo": "El mar de los tiburones",
+        "texto": "En un lugar seguro del salón se extiende una gran tela azul en el suelo que simula el mar con tiburones (Anexo 3). El grupo se divide en dos equipos cooperativos y, para asegurar que todos participen con autonomía según sus necesidades, se establecen dos rutas simultáneas sobre la tela:",
+        "lista": [
+          "Ruta A, reto de equilibrio dinámico: un camino curvo y en zigzag marcado con cinta gruesa sobre la tela, donde deben caminar con los brazos abiertos (como en la cuerda floja) pisando sobre la línea sin tocar el agua de los tiburones.",
+          "Ruta B, reto de coordinación y apoyo: un recorrido alternativo de aros entrelazados para saltar de uno a otro y líneas punteadas más anchas pintadas en la tela, ideal para estudiantes que requieren una base más estable, pero que igualmente pone a prueba su capacidad para saltar, coordinar sus pasos y mantener el cuerpo firme."
+        ]
+      },
+      {
+        "titulo": "La isla segura",
+        "texto": "Al atravesar el circuito, cada integrante llega a una isla segura donde recibe una tarjeta con una imagen marina: las piezas recortadas de un rompecabezas. Cuando todo el equipo completa el recorrido, juntan las tarjetas y colaboran para armar el rompecabezas, descubriendo el mapa del tesoro marino."
+      }
+    ],
+    "cierre": [
+      {
+        "texto": "Para bajar la frecuencia cardíaca, los niños caminan lento alrededor de la tela azul imitando las respiraciones profundas de los delfines que flotan en la superficie. Luego la docente reúne al grupo para validar su esfuerzo: «¡Miren lo que lograron armar uniendo cada pieza con la ayuda de todos!». Se abre un espacio de diálogo:",
+        "lista": [
+          "¿Cómo logramos cruzar el mar sin caer al agua de los tiburones?",
+          "¿Qué ruta te pareció más divertida y por qué?",
+          "¿Cómo nos ayudamos en equipo para armar el mapa del tesoro?"
+        ]
+      },
+      {
+        "titulo": "Transición",
+        "texto": "El mapa del tesoro armado se exhibe en el rincón del mar."
+      }
+    ],
+    "materiales": ["Tela.", "Cartón.", "Pinturas.", "Rompecabezas.", "Cinta gruesa."],
+    "tiempos": "55 minutos en total.",
+    "indicadoresDeLogro": [],
+    "observaciones": [],
+    "anexos": [
+      {
+        "titulo": "Anexo 1: Toy Cantando (2025). Sinfonía inconclusa en la mar.",
+        "url": "https://youtu.be/ycH8d5ZE8-Q"
+      },
+      {
+        "titulo": "Anexo 2: Campo (2026). La misión de los exploradores del mar (cuento en Canva).",
+        "url": "https://canva.link/0wb0igvwuxpqoiy"
+      },
+      { "titulo": "Anexo 3: Mar con tiburones (imagen de referencia)" }
+    ],
+    "pendientes": [
+      "Indicadores de logro.",
+      "Texto del cuento «La misión de los exploradores del mar» (está en Canva).",
+      "Día exacto de la sesión (noviembre de 2026)."
+    ]
+  }
+}

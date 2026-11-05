@@ -1,0 +1,361 @@
+/* --- Botones --------------------------------------------------------------------- */
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--toque-minimo);
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  border: 3px solid var(--acento);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+}
+
+.boton:active {
+  transform: translateY(1px);
+}
+
+.boton--huellita {
+  background: var(--acento);
+  color: var(--acento-texto);
+  box-shadow: var(--sombra);
+  font-size: 1.35rem;
+}
+
+.boton--secundario {
+  background: #fff;
+  color: var(--acento);
+}
+
+.boton--pasaporte {
+  min-height: 52px;
+  padding: 0.4rem 1rem;
+  background: #fff;
+  color: var(--tinta);
+  border-color: var(--borde);
+  font-size: 1.05rem;
+}
+
+.boton-icono {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  font-size: 1.4rem;
+  background: #fff;
+  border: 3px solid var(--borde);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.icono {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+/* --- Cabecera ------------------------------------------------------------------- */
+
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem max(1rem, (100% - var(--ancho-maximo)) / 2);
+  background: rgb(251 246 236 / 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 2px solid var(--borde);
+}
+
+.cabecera__marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.cabecera__docente {
+  padding: 0.15rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  background: #6a3d9a;
+  border-radius: 999px;
+}
+
+.cabecera__acciones {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.cabecera__cuenta {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 30rem) {
+  .cabecera__marca {
+    font-size: 0;
+  }
+
+  .cabecera__marca .icono {
+    font-size: 1.8rem;
+  }
+}
+
+/* --- Personaje que habla ---------------------------------------------------------- */
+
+.burbuja {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.burbuja__personaje {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  font-size: 3rem;
+  background: #fff;
+  border: 3px solid var(--acento);
+  border-radius: 50%;
+}
+
+.burbuja__texto {
+  position: relative;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 3px solid var(--borde);
+  border-radius: var(--radio-grande);
+  border-bottom-left-radius: 6px;
+  font-size: 1.35rem;
+}
+
+.burbuja__texto p {
+  margin: 0;
+}
+
+.burbuja__autor {
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+/* --- Tarjetas de parada ---------------------------------------------------------- */
+
+.region__paradas {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tarjeta-parada__cuerpo {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 5.5rem;
+  padding: 0.75rem 1.25rem;
+  color: var(--tinta);
+  text-decoration: none;
+  background: #fff;
+  border: 3px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+a.tarjeta-parada__cuerpo {
+  box-shadow: var(--sombra);
+  transition: transform 0.15s ease;
+}
+
+a.tarjeta-parada__cuerpo:hover {
+  transform: translateY(-3px);
+}
+
+.tarjeta-parada__numero {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--acento);
+  border-radius: 50%;
+}
+
+.tarjeta-parada__texto {
+  display: grid;
+}
+
+.tarjeta-parada__titulo {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.tarjeta-parada__estado {
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+
+.tarjeta-parada--disponible .tarjeta-parada__cuerpo {
+  border-color: var(--acento);
+}
+
+.tarjeta-parada--completada .tarjeta-parada__estado {
+  color: var(--exito);
+  font-weight: 700;
+}
+
+.tarjeta-parada--bloqueada .tarjeta-parada__cuerpo {
+  background: transparent;
+  border-style: dashed;
+  color: var(--tinta-suave);
+}
+
+.tarjeta-parada--bloqueada .tarjeta-parada__numero {
+  background: var(--bloqueado);
+}
+
+.tarjeta-parada .icono {
+  font-size: 2rem;
+}
+
+/* --- Paneles (pasaporte y opciones) --------------------------------------------- */
+
+.panel {
+  width: min(100% - 2rem, 34rem);
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  color: var(--tinta);
+  background: var(--papel);
+  border: 3px solid var(--borde);
+  border-radius: var(--radio-grande);
+}
+
+.panel::backdrop {
+  background: rgb(43 33 24 / 0.45);
+}
+
+.panel__cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid var(--borde);
+}
+
+.panel__cabecera h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.panel__cuerpo {
+  padding: 1.25rem;
+}
+
+.pasaporte__cuenta {
+  font-weight: 700;
+  color: var(--acento);
+}
+
+.pasaporte__sellos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.sello {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0.25rem;
+  text-align: center;
+  border: 3px dashed var(--borde);
+  border-radius: 50%;
+  aspect-ratio: 1;
+  align-content: center;
+}
+
+.sello__icono {
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--tinta-suave);
+}
+
+.sello__nombre {
+  font-size: 0.8rem;
+  line-height: 1.1;
+}
+
+.sello--puesto {
+  border-style: solid;
+  background: #fff;
+}
+
+.sello--puesto.sello--desierto {
+  border-color: var(--desierto);
+}
+
+.sello--puesto.sello--mar {
+  border-color: var(--mar);
+}
+
+.sello--puesto.sello--selva {
+  border-color: var(--selva);
+}
+
+.interruptor {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.interruptor input {
+  width: 2rem;
+  height: 2rem;
+  accent-color: var(--acento);
+}
+
+.interruptor label {
+  font-weight: 700;
+}
+
+.interruptor__ayuda {
+  grid-column: 2;
+  margin: 0;
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+
+@media (max-width: 30rem) {
+  .tarjeta-parada__cuerpo {
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+}

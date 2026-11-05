@@ -1,0 +1,86 @@
+{
+  "id": "selva-2",
+  "ecosistema": "selva",
+  "numero": 2,
+  "titulo": "Los retos de la selva",
+  "guias": ["momo", "cocodrilos"],
+  "saludo": "¡Exploradores! Para llegar al corazón de la selva hay que superar cuatro retos. ¡Shhh! Los Cocodrilos del Río están durmiendo. ¿Podrán saltar sin despertarlos?",
+  "retoPantalla": "Un circuito de cuatro estaciones: el río de los cocodrilos (saltar en el momento justo), el camino de las serpientes (zigzag), los troncos de la selva (de aro en aro) y «¡Mono arriba, abajo, a un lado!» para practicar derecha e izquierda.",
+  "retoMovimiento": "Hagan cada estación con el cuerpo: salten con los pies juntos, avancen en zigzag, pasen de aro en aro y sigan las órdenes del mono.",
+  "sello": { "nombre": "Banano", "icono": "🍌" },
+  "pista": "Recuerden los movimientos que hicimos hoy: en la próxima aventura, la selva cobrará vida.",
+  "planeacion": {
+    "tema": "Los retos de la selva",
+    "autora": "Yenifer Tatiana Fonseca Sánchez",
+    "docenteTutora": null,
+    "fecha": "2 de noviembre de 2026",
+    "duracion": "40 a 50 minutos",
+    "objetivo": "Explorar la selva a través de diferentes retos de movimiento relacionados con sus animales y elementos naturales, fortaleciendo el equilibrio, la coordinación, la lateralidad y la orientación espacial.",
+    "inicio": [
+      {
+        "titulo": "Recordamos los movimientos de la selva",
+        "texto": "Pausa activa: la docente invita a los niños a recordar los animales trabajados en la sesión anterior y a realizar nuevamente algunos de sus movimientos."
+      },
+      {
+        "texto": "Luego explica que en esta nueva aventura serán exploradores y deberán superar diferentes retos para llegar al corazón de la selva. Les recuerda prestar atención a las instrucciones, cuidar su cuerpo y respetar el espacio de sus compañeros."
+      }
+    ],
+    "desarrollo": [
+      {
+        "titulo": "El camino de los retos",
+        "texto": "Los niños recorren un circuito psicomotor inspirado en los caminos de la selva. La docente organiza previamente las estaciones y explica cada reto antes de comenzar."
+      },
+      {
+        "titulo": "Primera estación: el río de los cocodrilos",
+        "texto": "Se colocan dos cuerdas paralelas en el suelo, dejando entre ellas un espacio que representa un río. Los niños imaginan que hay cocodrilos en el agua y, para llegar al otro lado, saltan con los dos pies juntos sin pisar dentro del río. Cada niño hace el recorrido por turnos y continúa con la siguiente estación."
+      },
+      {
+        "titulo": "Segunda estación: el camino de las serpientes",
+        "texto": "Se ubican varios conos en el suelo formando un camino en zigzag. Los niños imaginan que son serpientes que recorren la selva y se desplazan entre los conos sin tocarlos, haciendo movimientos que simulan el desplazamiento de las serpientes hasta llegar al final del camino."
+      },
+      {
+        "titulo": "Tercera estación: los troncos de la selva",
+        "texto": "Se colocan varios aros en el suelo que representan troncos o piedras. Para avanzar, los niños se desplazan de un aro a otro libremente con diferentes movimientos: saltar con los pies juntos, alternar los pies o caminar."
+      },
+      {
+        "titulo": "Cuarta estación: los monos exploradores",
+        "texto": "Los niños imaginan que son monos y se desplazan libremente por el espacio con saltos y movimientos de brazos, siguiendo las indicaciones de la docente:",
+        "lista": [
+          "«¡Mono arriba!»: estirarse hacia el techo.",
+          "«¡Mono abajo!»: agacharse.",
+          "«¡Mono a un lado!»: desplazarse hacia la derecha o hacia la izquierda."
+        ]
+      },
+      {
+        "texto": "Los niños hacen el circuito por turnos, respetando el espacio de sus compañeros y animándose mutuamente."
+      }
+    ],
+    "cierre": [
+      {
+        "titulo": "Descansamos en la selva",
+        "texto": "Al finalizar el circuito, los niños se sientan cómodamente, respiran lentamente y estiran brazos y piernas para relajar el cuerpo. Luego se conversa sobre la experiencia:",
+        "lista": [
+          "¿Cuál fue el reto que más les gustó?",
+          "¿Qué movimiento les pareció más difícil de imitar?",
+          "¿Por qué es importante ayudar y respetar a nuestros compañeros?"
+        ]
+      },
+      {
+        "texto": "Se les pide que recuerden las actividades y movimientos realizados para la próxima aventura."
+      }
+    ],
+    "materiales": [
+      "Aros.",
+      "Conos.",
+      "Cuerdas.",
+      "Cinta adhesiva.",
+      "Imágenes de animales de la selva.",
+      "Espacio amplio y seguro."
+    ],
+    "tiempos": "Entre 40 y 50 minutos en total.",
+    "indicadoresDeLogro": [],
+    "observaciones": [],
+    "anexos": [],
+    "pendientes": ["Indicadores de logro."]
+  }
+}
