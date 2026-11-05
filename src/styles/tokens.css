@@ -1,0 +1,49 @@
+/*
+ * Variables de diseño. Son provisionales: la fase 2 define el sistema visual final
+ * (recorte de papel y crayola). Cada ecosistema cambia el color de acento.
+ */
+:root {
+  --fuente: 'Andika', 'Trebuchet MS', system-ui, sans-serif;
+
+  --papel: #fbf6ec;
+  --papel-2: #f4e9d4;
+  --tinta: #2b2118;
+  --tinta-suave: #5c4d3f;
+  --borde: #d9c8aa;
+
+  --acento: #8a4b1f;
+  --acento-texto: #ffffff;
+  --acento-suave: #f3e1c7;
+
+  --desierto: #9a5214;
+  --desierto-suave: #f7e3c4;
+  --mar: #0f6a8f;
+  --mar-suave: #d6edf5;
+  --selva: #2a6e2d;
+  --selva-suave: #dcefd5;
+
+  --exito: #2f7d32;
+  --bloqueado: #766c63;
+
+  --radio: 18px;
+  --radio-grande: 28px;
+  --sombra: 0 3px 0 rgb(43 33 24 / 0.15), 0 8px 24px rgb(43 33 24 / 0.08);
+  --toque-minimo: 64px;
+  --ancho-lectura: 46rem;
+  --ancho-maximo: 72rem;
+}
+
+[data-tema='desierto'] {
+  --acento: var(--desierto);
+  --acento-suave: var(--desierto-suave);
+}
+
+[data-tema='mar'] {
+  --acento: var(--mar);
+  --acento-suave: var(--mar-suave);
+}
+
+[data-tema='selva'] {
+  --acento: var(--selva);
+  --acento-suave: var(--selva-suave);
+}

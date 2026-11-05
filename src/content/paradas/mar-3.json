@@ -1,0 +1,69 @@
+{
+  "id": "mar-3",
+  "ecosistema": "mar",
+  "numero": 3,
+  "titulo": "El tesoro del mar",
+  "guias": ["capitana-tortu", "medusas"],
+  "saludo": "¡Miren hasta dónde llegamos, tripulación! Solo falta cruzar el arrecife de las Medusas Cosquillas. ¿Seguimos las últimas pistas del mapa?",
+  "retoPantalla": "Crucen el arrecife esquivando los tentáculos: si rozan uno, ¡congélense 3 segundos! Al final, abran el cofre, reciban la medalla y personalicen su pasaporte para abrir el candado del sobre «¿?».",
+  "retoMovimiento": "Avancen arrastrándose, caminando en cuclillas y en cámara lenta. Si alguien toca un tentáculo, se queda quieto como estatua por 3 segundos.",
+  "sello": { "nombre": "Medalla del mar", "icono": "🏅" },
+  "pista": "Si dejamos el fondo del mar y este pasaporte misterioso nos marca el camino… ¿a dónde nos invitará la próxima gran aventura fuera del agua?",
+  "planeacion": {
+    "tema": "Ecosistema marino: el tesoro del mar y rumbo a lo desconocido",
+    "autora": "Lina Campo",
+    "docenteTutora": "Angela Sierra",
+    "fecha": null,
+    "duracion": "55 minutos",
+    "objetivo": "Sintetizar los saberes del ecosistema marino mediante una lectura dramatizada, el control corporal y la creación artística.",
+    "inicio": [
+      {
+        "texto": "El salón mantiene la decoración del océano con las telas azules y suenan de fondo suaves sonidos del mar. Se inicia con un saludo de buenos días y se reproduce la canción «En el mar azul» (Anexo 1), invitando a los niños a moverse con la música para hacer el calentamiento corporal y motriz de forma divertida."
+      },
+      {
+        "texto": "La docente se coloca un sombrero de capitana y, con una voz misteriosa y divertida, reúne a los niños y niñas en círculo sobre el suelo azul. Les entrega accesorios de marineros (pañuelo para el cuello, cinta para la cabeza, etc.), saca el mapa que armaron en la clase pasada y abre un diálogo explorador: «¡Atención, tripulación! Miren hasta dónde hemos llegado. En nuestra última misión logramos armar las piezas de este mapa. ¿Están listos para seguir las últimas pistas y descubrir qué hay al final?»."
+      }
+    ],
+    "desarrollo": [
+      {
+        "titulo": "Lectura teatralizada del mapa",
+        "texto": "Guiados por la docente, la tripulación asume roles de expedición y hace la lectura teatralizada del mapa que encontraron la clase pasada. Analizan juntos que deben seguir una ruta marcada que los llevará directo a una gran X en el salón."
+      },
+      {
+        "titulo": "El arrecife de las medusas gigantes",
+        "texto": "Siguiendo las pistas del mapa por el salón, la docente frena a la tripulación y advierte el peligro: «¡Cuidado, marineros! El mapa nos marca que hemos entrado al temible arrecife de las medusas gigantes». Previamente ha colgado telas livianas a baja altura que simulan los tentáculos. Para cruzar sin ser tocados, los niños hacen un reto de control corporal y agilidad: avanzar arrastrándose boca abajo, caminar agachados (en cuclillas) y deslizarse en cámara lenta por debajo de las telas. Si algún marinero roza un tentáculo, congela su postura por 3 segundos antes de continuar."
+      },
+      {
+        "titulo": "El cofre del tesoro",
+        "texto": "Superado el arrecife, la tripulación llega a la gran X y encuentra el cofre del tesoro. Al abrirlo encuentran sus recompensas de exploradores (medallas del mar) y, en el fondo, un sobre cerrado con una huella misteriosa y un gran sello. La docente les dice: «¡Miren, tripulación! Es una nota secreta de invitación a una nueva aventura, pero tiene un candado mágico que solo se abrirá si cada marinero construye su propio pasaporte de viajero»."
+      },
+      {
+        "titulo": "El pasaporte de viajero",
+        "texto": "Cada niño recibe una plantilla en cartulina para personalizar su pasaporte: estampa su propia huella con pintura o marcador, le pone su sello de marinero y dibuja brevemente lo que más le gustó de su paso por el océano. Al terminar de armarlo y mostrarlo en equipo, el candado mágico se libera. La docente abre el sobre y lee la gran invitación oficial hacia una nueva aventura, sellada con un gran signo de interrogación «¿?» que apunta fuera del agua."
+      }
+    ],
+    "cierre": [
+      {
+        "texto": "Con su pasaporte en mano y sentados en círculo sobre las telas azules, la docente abre el espacio de reflexión:",
+        "lista": [
+          "¿Qué fue lo que más nos enseñó este viaje por el fondo del mar?",
+          "¿Cuál fue el mayor reto que superamos hoy como equipo?"
+        ]
+      },
+      {
+        "texto": "Para cerrar, la docente muestra el signo de interrogación del pasaporte y lanza la pregunta final: «Si dejamos el fondo del mar y nuestro mapa nos marca este pasaporte misterioso… ¿a dónde creen que nos invitará la próxima gran aventura fuera del agua?». Se despide el ecosistema marino celebrando el gran trabajo de los pequeños exploradores."
+      }
+    ],
+    "materiales": ["Tela.", "Mapa.", "Cinta.", "Accesorios de marineros.", "Recurso humano."],
+    "tiempos": "55 minutos en total.",
+    "indicadoresDeLogro": [],
+    "observaciones": [],
+    "anexos": [
+      {
+        "titulo": "Anexo 1: Super Simple Español (2019). En el mar azul.",
+        "url": "https://youtu.be/Zk_7rSz-6x4"
+      }
+    ],
+    "pendientes": ["Indicadores de logro.", "Día exacto de la sesión (noviembre de 2026)."]
+  }
+}

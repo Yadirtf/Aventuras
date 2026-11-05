@@ -1,0 +1,378 @@
+/* --- Paisaje provisional en tres partes ------------------------------------------ */
+
+.paisaje {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra);
+}
+
+.paisaje__parte {
+  display: grid;
+  place-items: center;
+  min-height: 9rem;
+  padding: 1rem;
+  font-size: clamp(1.5rem, 1rem + 2.5vw, 2.75rem);
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+.paisaje__parte--desierto {
+  background: linear-gradient(180deg, #ffd88a, #e9a95b);
+}
+
+.paisaje__parte--mar {
+  background: linear-gradient(180deg, #7cc8e4, #1b7fa6);
+}
+
+.paisaje__parte--selva {
+  background: linear-gradient(180deg, #a6d98a, #3f8f3a);
+}
+
+/* --- Portada ------------------------------------------------------------------- */
+
+.portada {
+  max-width: var(--ancho-lectura);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.portada__titulo {
+  margin-bottom: 0.25rem;
+  font-size: clamp(2.4rem, 1.5rem + 4.5vw, 4.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.portada__frase {
+  font-size: 1.4rem;
+  color: var(--tinta-suave);
+}
+
+.portada .burbuja {
+  text-align: left;
+}
+
+.portada__formulario {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+}
+
+.portada__formulario label {
+  font-weight: 700;
+}
+
+.portada__formulario input {
+  width: min(100%, 28rem);
+  min-height: var(--toque-minimo);
+  padding: 0.5rem 1rem;
+  font: inherit;
+  text-align: center;
+  background: #fff;
+  border: 3px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.portada__formulario input:focus {
+  border-color: var(--acento);
+}
+
+/* --- Mapa ---------------------------------------------------------------------- */
+
+.mapa__camino {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 2rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.region {
+  position: relative;
+  padding: 1.25rem;
+  background: var(--acento-suave);
+  border-radius: var(--radio-grande);
+}
+
+/* Huellitas que unen un ecosistema con el siguiente. */
+.region:not(:last-child)::after {
+  content: '🐾';
+  position: absolute;
+  right: -1.75rem;
+  top: 50%;
+  font-size: 1.5rem;
+  transform: translateY(-50%) rotate(90deg);
+}
+
+@media (max-width: 40rem) {
+  .region:not(:last-child)::after {
+    right: 50%;
+    top: auto;
+    bottom: -1.9rem;
+    transform: translateX(50%) rotate(180deg);
+  }
+}
+
+.region__titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.region__titulo a {
+  color: var(--acento);
+}
+
+.mapa__final {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.mapa__meta {
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+/* --- Ecosistema ---------------------------------------------------------------- */
+
+.ecosistema {
+  max-width: var(--ancho-lectura);
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.ecosistema .region__paradas {
+  width: 100%;
+}
+
+.ecosistema__ilustracion {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 10rem;
+  font-size: 6rem;
+  background: var(--acento-suave);
+  border-radius: var(--radio-grande);
+}
+
+.ecosistema__descripcion {
+  font-size: 1.35rem;
+}
+
+.ecosistema__creditos {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0;
+}
+
+.ecosistema__creditos dt {
+  font-weight: 700;
+}
+
+.ecosistema__creditos dd {
+  margin: 0;
+}
+
+.enlaces-docente {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+/* --- Parada -------------------------------------------------------------------- */
+
+.parada {
+  max-width: var(--ancho-lectura);
+  margin: 0 auto;
+}
+
+.parada__miga {
+  margin-bottom: 0.25rem;
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.parada__bloque {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border: 3px solid var(--borde);
+  border-radius: var(--radio-grande);
+}
+
+.parada__bloque:first-of-type {
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+.parada__bloque h2 {
+  color: var(--acento);
+}
+
+.en-construccion {
+  padding: 1rem;
+  background: var(--acento-suave);
+  border: 2px dashed var(--acento);
+  border-radius: var(--radio);
+  font-size: 1.1rem;
+}
+
+.parada__sello {
+  text-align: center;
+  border-color: var(--acento);
+}
+
+.parada__sello--puesto {
+  background: var(--acento-suave);
+}
+
+.sello-grande {
+  display: inline-block;
+  font-size: 2.5rem;
+  vertical-align: middle;
+  animation: sellar 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+@keyframes sellar {
+  from {
+    transform: scale(2.4) rotate(-20deg);
+    opacity: 0;
+  }
+}
+
+.pista {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  background: #fff;
+  border-radius: var(--radio);
+  border-left: 8px solid var(--acento);
+}
+
+.pista p {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.parada__navegacion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* --- Ficha de planeación ------------------------------------------------------- */
+
+.ficha {
+  max-width: var(--ancho-lectura);
+  margin: 0 auto;
+  padding: 2rem;
+  font-size: 1.1rem;
+  background: #fff;
+  border: 2px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.ficha h1 {
+  font-size: 2rem;
+}
+
+.ficha h2 {
+  margin-top: 1.5em;
+  font-size: 1.35rem;
+  color: var(--acento);
+  border-bottom: 2px solid var(--acento-suave);
+}
+
+.ficha h4 {
+  margin: 0.75em 0 0.25em;
+  font-size: 1.1rem;
+}
+
+.ficha__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ficha__sobretitulo {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+}
+
+.ficha__datos {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1rem;
+}
+
+.ficha__datos dt {
+  font-weight: 700;
+}
+
+.ficha__datos dd {
+  margin: 0;
+}
+
+.ficha__pendientes {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #fff6db;
+  border: 2px solid #e2b93b;
+  border-radius: var(--radio);
+}
+
+.ficha__pendientes h2 {
+  margin-top: 0;
+  border: 0;
+  color: var(--tinta);
+  font-size: 1.1rem;
+}
+
+.ficha__vacio {
+  font-style: italic;
+  color: var(--tinta-suave);
+}
+
+/* --- Final y página no encontrada ---------------------------------------------- */
+
+.final,
+.no-encontrada {
+  max-width: var(--ancho-lectura);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.final h1 {
+  text-transform: uppercase;
+}
+
+.final__nombre {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.final__mensaje {
+  font-size: 1.4rem;
+}
+
+.final__sellos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+  font-size: 2.25rem;
+}
