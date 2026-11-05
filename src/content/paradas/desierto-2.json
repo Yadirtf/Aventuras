@@ -7,8 +7,96 @@
   "saludo": "¡Volvieron, exploradores! Don Camelio y yo tenemos una pregunta: ¿qué hacen los animales cuando hace mucho calor y casi no hay agua?",
   "retoPantalla": "Cinco tarjetas de animales (camello, zorro, lagarto, serpiente y tortuga) se voltean para descubrir cómo se adaptan. Luego, un teatrino de tres escenas donde ustedes deciden qué dice cada títere. Don Camelio pregunta: «¿Mito o realidad?».",
   "retoMovimiento": "Mímica de 30 segundos: un grupo representa su animal con el cuerpo, sin hablar, y los demás adivinan cuál es y cómo se las arregla con el calor.",
-  "sello": { "nombre": "Cactus", "icono": "🌵" },
+  "sello": {
+    "nombre": "Cactus",
+    "imagen": "cactus"
+  },
   "pista": "En la próxima parada haremos un viaje de pistas por todo lo que vivimos… y al final encontraremos una pista del siguiente lugar que vamos a visitar.",
+  "juego": {
+    "tipo": "titeres",
+    "animales": [
+      {
+        "id": "camello",
+        "nombre": "Camello",
+        "imagen": "camello",
+        "adaptacion": "Guarda grasa en su joroba y puede pasar muchos días sin beber agua."
+      },
+      {
+        "id": "zorro",
+        "nombre": "Zorro del desierto",
+        "imagen": "zorro",
+        "adaptacion": "Sus orejas enormes le ayudan a soltar el calor, y sale de noche cuando hace fresco."
+      },
+      {
+        "id": "lagarto",
+        "nombre": "Lagarto",
+        "imagen": "lagarto",
+        "adaptacion": "Toma el sol en la mañana y se esconde bajo las piedras cuando hace mucho calor."
+      },
+      {
+        "id": "serpiente",
+        "nombre": "Serpiente",
+        "imagen": "serpiente",
+        "adaptacion": "Pasa el día escondida bajo la arena o en su cueva y sale cuando baja el calor."
+      },
+      {
+        "id": "tortuga",
+        "nombre": "Tortuga del desierto",
+        "imagen": "tortuga",
+        "adaptacion": "Cava cuevas para protegerse del sol y guarda agua dentro de su cuerpo."
+      }
+    ],
+    "segundosMimica": 30,
+    "escenas": [
+      {
+        "titulo": "Escena 1: amanece y hace mucho calor",
+        "narracion": "Sale el sol y la arena se calienta. Cada animal se despierta. ¿Cómo se siente con el sol tan fuerte?",
+        "frases": [
+          "¡Uf, qué calor hace hoy!",
+          "Voy a buscar una sombra.",
+          "¡Buenos días, desierto!",
+          "Me quedo quietito para no cansarme."
+        ]
+      },
+      {
+        "titulo": "Escena 2: se acaba el agua",
+        "narracion": "El oasis se está secando. ¿Cómo se las arregla cada animal sin agua?",
+        "frases": [
+          "Yo me escondo debajo de una piedra.",
+          "Guardo mi energía y descanso.",
+          "Saldré de noche, cuando haga fresco.",
+          "Yo puedo pasar muchos días sin beber."
+        ]
+      },
+      {
+        "titulo": "Escena 3: ¡la inventan ustedes!",
+        "narracion": "El guion todavía no tiene escena 3. ¿Qué pasa al final? Muevan los títeres y escriban lo que dicen.",
+        "frases": []
+      }
+    ],
+    "mitos": [
+      {
+        "texto": "El camello guarda agua en su joroba.",
+        "esRealidad": false,
+        "explicacion": "¡Mito! Mi joroba guarda grasa, no agua. Pero sí puedo pasar muchos días sin beber."
+      },
+      {
+        "texto": "Todos los desiertos son de arena.",
+        "esRealidad": false,
+        "explicacion": "¡Mito! Hay desiertos de piedras, de sal y hasta de hielo."
+      },
+      {
+        "texto": "El camello resiste muchos días sin beber agua.",
+        "esRealidad": true,
+        "explicacion": "¡Realidad! Por eso soy un gran viajero del desierto."
+      },
+      {
+        "texto": "En el desierto no hay vida.",
+        "esRealidad": false,
+        "explicacion": "¡Mito! Viven zorros, lagartos, serpientes, tortugas, cactus… ¡y yo!"
+      }
+    ]
+  },
   "planeacion": {
     "tema": "Los animales del desierto en obras de títeres",
     "autora": "Katerin López",
@@ -80,7 +168,11 @@
       "Cuidar la seguridad con cojines y telas, y acompañar el manejo de las tijeras.",
       "La obra puede hacerse con títeres o con el cuerpo, según el ánimo y el espacio del grupo."
     ],
-    "anexos": [{ "titulo": "Anexo 2: Guion guía de la obra de títeres" }],
+    "anexos": [
+      {
+        "titulo": "Anexo 2: Guion guía de la obra de títeres"
+      }
+    ],
     "pendientes": ["Escena 3 del guion de títeres.", "Fecha de la sesión."]
   }
 }

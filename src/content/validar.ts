@@ -1,3 +1,4 @@
+import { esImagen } from '../imagenes';
 import { ECOSISTEMAS, PERSONAJES, type Parada } from './types';
 
 /**
@@ -46,6 +47,39 @@ class Revisor {
     });
   }
 
+  imagen(obj: Registro, campo: string, ruta: string): void {
+    if (!esImagen(obj[campo]))
+      this.errores.push(
+        `${ruta}${campo}: imagen desconocida «${String(obj[campo])}» (ver src/imagenes.ts)`,
+      );
+  }
+
+  numero(obj: Registro, campo: string, ruta: string, min: number, max: number): void {
+    const v = obj[campo];
+    if (typeof v !== 'number' || v < min || v > max)
+      this.errores.push(`${ruta}${campo}: debe ser un número entre ${min} y ${max}`);
+  }
+
+  /** Revisa una lista de objetos con `revisar` y exige al menos `minimo` elementos. */
+  objetos(
+    obj: Registro,
+    campo: string,
+    ruta: string,
+    minimo: number,
+    revisar: (item: Registro, ruta: string) => void,
+  ): void {
+    const v = obj[campo];
+    if (!Array.isArray(v) || v.length < minimo) {
+      this.errores.push(`${ruta}${campo}: debe ser una lista con al menos ${minimo} elementos`);
+      return;
+    }
+    v.forEach((item, i) => {
+      const r = `${ruta}${campo}[${i}].`;
+      if (esRegistro(item)) revisar(item, r);
+      else this.errores.push(`${r.slice(0, -1)}: debe ser un objeto`);
+    });
+  }
+
   pasos(obj: Registro, campo: string, ruta: string): void {
     const v = obj[campo];
     if (!Array.isArray(v) || v.length === 0) {
@@ -89,8 +123,10 @@ export function validarParada(datos: unknown, origen: string): Parada {
   if (!esRegistro(datos.sello)) r.errores.push('sello: falta');
   else {
     r.texto(datos.sello, 'nombre', 'sello.');
-    r.texto(datos.sello, 'icono', 'sello.');
+    r.imagen(datos.sello, 'imagen', 'sello.');
   }
+
+  if ('juego' in datos) validarJuego(r, datos.juego);
 
   const p = datos.planeacion;
   if (!esRegistro(p)) r.errores.push('planeacion: falta');
@@ -127,4 +163,58 @@ export function validarParada(datos: unknown, origen: string): Parada {
 
   if (r.errores.length > 0) throw new ContenidoInvalido(origen, r.errores);
   return datos as unknown as Parada;
+}
+
+function validarJuego(r: Revisor, juego: unknown): void {
+  const ruta = 'juego.';
+  if (!esRegistro(juego)) {
+    r.errores.push('juego: debe ser un objeto');
+    return;
+  }
+  switch (juego.tipo) {
+    case 'pelota-preguntona':
+      r.listaDeTextos(juego, 'preguntas', ruta, { vacia: false });
+      r.objetos(juego, 'columnas', ruta, 1, (c, rc) => {
+        r.texto(c, 'nombre', rc);
+        r.imagen(c, 'imagen', rc);
+      });
+      return;
+    case 'titeres':
+      r.objetos(juego, 'animales', ruta, 2, (a, ra) => {
+        for (const campo of ['id', 'nombre', 'adaptacion']) r.texto(a, campo, ra);
+        r.imagen(a, 'imagen', ra);
+      });
+      r.numero(juego, 'segundosMimica', ruta, 5, 120);
+      r.objetos(juego, 'escenas', ruta, 1, (e, re) => {
+        r.texto(e, 'titulo', re);
+        r.texto(e, 'narracion', re);
+        r.listaDeTextos(e, 'frases', re);
+      });
+      r.objetos(juego, 'mitos', ruta, 1, (m, rm) => {
+        r.texto(m, 'texto', rm);
+        r.texto(m, 'explicacion', rm);
+        if (typeof m.esRealidad !== 'boolean')
+          r.errores.push(`${rm}esRealidad: debe ser true o false`);
+      });
+      return;
+    case 'rally':
+      r.objetos(juego, 'pistas', ruta, 2, (p, rp) => {
+        r.texto(p, 'objeto', rp);
+        r.texto(p, 'pista', rp);
+        r.imagen(p, 'imagen', rp);
+        r.numero(p, 'x', rp, 0, 100);
+        r.numero(p, 'y', rp, 0, 100);
+      });
+      r.texto(juego, 'reverso', ruta);
+      if (!esRegistro(juego.relevo)) r.errores.push('juego.relevo: falta');
+      else {
+        r.texto(juego.relevo, 'despedida', 'juego.relevo.');
+        r.texto(juego.relevo, 'respuesta', 'juego.relevo.');
+        if (!PERSONAJES.includes(juego.relevo.siguienteGuia as never))
+          r.errores.push('juego.relevo.siguienteGuia: personaje desconocido');
+      }
+      return;
+    default:
+      r.errores.push(`juego.tipo: tipo de juego desconocido «${String(juego.tipo)}»`);
+  }
 }

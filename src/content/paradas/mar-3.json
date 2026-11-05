@@ -7,7 +7,7 @@
   "saludo": "¡Miren hasta dónde llegamos, tripulación! Solo falta cruzar el arrecife de las Medusas Cosquillas. ¿Seguimos las últimas pistas del mapa?",
   "retoPantalla": "Crucen el arrecife esquivando los tentáculos: si rozan uno, ¡congélense 3 segundos! Al final, abran el cofre, reciban la medalla y personalicen su pasaporte para abrir el candado del sobre «¿?».",
   "retoMovimiento": "Avancen arrastrándose, caminando en cuclillas y en cámara lenta. Si alguien toca un tentáculo, se queda quieto como estatua por 3 segundos.",
-  "sello": { "nombre": "Medalla del mar", "icono": "🏅" },
+  "sello": { "nombre": "Medalla del mar", "imagen": "medalla" },
   "pista": "Si dejamos el fondo del mar y este pasaporte misterioso nos marca el camino… ¿a dónde nos invitará la próxima gran aventura fuera del agua?",
   "planeacion": {
     "tema": "Ecosistema marino: el tesoro del mar y rumbo a lo desconocido",

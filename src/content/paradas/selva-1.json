@@ -7,7 +7,7 @@
   "saludo": "¡Uh, uh, ah, ah! Soy Momo y no me puedo quedar quieto. ¿Escuchan esos sonidos? ¡Algo se mueve en la selva! ¿Qué animal será?",
   "retoPantalla": "Sonido misterioso: escuchen un animal de la selva (mono, serpiente, rana, ave o jaguar) y elijan cuál es.",
   "retoMovimiento": "Despertamos como animales: estírense como una jirafa, salten como un mono, den pasos fuertes como un elefante y muevan los brazos como un ave.",
-  "sello": { "nombre": "Hoja", "icono": "🍃" },
+  "sello": { "nombre": "Hoja", "imagen": "hoja" },
   "pista": "En la próxima aventura seguiremos explorando la selva, pero esta vez habrá retos de movimiento para avanzar por sus caminos.",
   "planeacion": {
     "tema": "Nos adentramos en la selva",

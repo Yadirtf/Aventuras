@@ -4,6 +4,7 @@ export type Ruta =
   | { vista: 'portada' }
   | { vista: 'mapa' }
   | { vista: 'ecosistema'; ecosistema: EcosistemaId }
+  | { vista: 'familia'; ecosistema: EcosistemaId }
   | { vista: 'parada'; ecosistema: EcosistemaId; numero: number }
   | { vista: 'planeacion'; ecosistema: EcosistemaId; numero: number }
   | { vista: 'final' }
@@ -22,6 +23,7 @@ export function interpretarRuta(pathname: string): Ruta {
   if (partes.length === 1 && a === 'final') return { vista: 'final' };
   if (!esEcosistema(a) || resto.length > 0) return { vista: 'no-encontrada' };
   if (b === undefined) return { vista: 'ecosistema', ecosistema: a };
+  if (b === 'familia' && c === undefined) return { vista: 'familia', ecosistema: a };
 
   const numero = /^[123]$/.test(b) ? Number(b) : NaN;
   if (Number.isNaN(numero)) return { vista: 'no-encontrada' };
@@ -35,6 +37,7 @@ export const rutas = {
   mapa: '/mapa',
   final: '/final',
   ecosistema: (eco: EcosistemaId) => `/${eco}`,
+  familia: (eco: EcosistemaId) => `/${eco}/familia`,
   parada: (eco: EcosistemaId, numero: number) => `/${eco}/${numero}`,
   planeacion: (eco: EcosistemaId, numero: number) => `/${eco}/${numero}/planeacion`,
 };

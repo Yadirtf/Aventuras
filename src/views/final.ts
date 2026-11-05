@@ -1,5 +1,8 @@
 import type { Contexto, Vista } from '../contexto';
 import { h, icono } from '../dom';
+import { imagen } from '../imagenes';
+import { figuraPersonaje } from '../components/personaje';
+import { PERSONAJES } from '../content/types';
 import { rutas } from '../router';
 import { aventuraCompleta } from '../state/progreso';
 import { paisaje } from './portada';
@@ -18,7 +21,12 @@ export function final({ store, paradas }: Contexto): Vista {
         { class: 'final' },
         h('h1', { tabindex: -1 }, '¡Todavía no termina la aventura!'),
         h('p', null, `Faltan ${faltan} ${faltan === 1 ? 'sello' : 'sellos'} en el pasaporte.`),
-        h('a', { class: 'boton boton--huellita', href: rutas.mapa }, icono('🐾'), 'Volver al mapa'),
+        h(
+          'a',
+          { class: 'boton boton--huellita', href: rutas.mapa },
+          icono('huellas'),
+          'Volver al mapa',
+        ),
       ),
     };
   }
@@ -32,6 +40,11 @@ export function final({ store, paradas }: Contexto): Vista {
       { class: 'final' },
       paisaje(),
       h('h1', { tabindex: -1 }, '¡Felicitaciones, exploradores!'),
+      h(
+        'div',
+        { class: 'final__personajes', 'aria-hidden': 'true' },
+        PERSONAJES.map((id) => figuraPersonaje(id, { pose: 'celebracion' })),
+      ),
       nombre && h('p', { class: 'final__nombre' }, nombre),
       h(
         'p',
@@ -45,7 +58,9 @@ export function final({ store, paradas }: Contexto): Vista {
           h(
             'li',
             { class: completadas.has(p.id) ? 'sello--puesto' : '' },
-            icono(completadas.has(p.id) ? p.sello.icono : '·'),
+            completadas.has(p.id)
+              ? imagen(p.sello.imagen, { clase: 'final__sello', carga: 'eager' })
+              : h('span', { class: 'final__sello final__sello--vacio' }),
             h(
               'span',
               { class: 'visualmente-oculto' },

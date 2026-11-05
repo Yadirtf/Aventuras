@@ -18,19 +18,20 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
-| Comando           | Qué hace                                                                 |
-| ----------------- | ------------------------------------------------------------------------ |
-| `npm run dev`     | Servidor de desarrollo con recarga automática                            |
-| `npm run build`   | Compila tipos y genera el sitio en `dist/`                               |
-| `npm run preview` | Sirve `dist/` para revisarlo como en producción                          |
-| `npm run check`   | Formato (Prettier), lint (ESLint), tipos (TypeScript) y pruebas (Vitest) |
-| `npm run format`  | Aplica el formato de Prettier                                            |
+| Comando           | Qué hace                                                                   |
+| ----------------- | -------------------------------------------------------------------------- |
+| `npm run dev`     | Servidor de desarrollo con recarga automática                              |
+| `npm run build`   | Compila tipos y genera el sitio en `dist/`                                 |
+| `npm run preview` | Sirve `dist/` para revisarlo como en producción                            |
+| `npm run check`   | Formato (Prettier), lint (ESLint), tipos (TypeScript) y pruebas (Vitest)   |
+| `npm run format`  | Aplica el formato de Prettier                                              |
+| `npm run e2e`     | Recorridos completos en el navegador con Playwright (computador y tableta) |
 
 ## Estructura
 
 ```
 docs/                  Planeaciones originales de las autoras (fuente, no se modifica)
-public/assets/         Ilustraciones y audios (fase 2 en adelante)
+public/assets/3d/      Figuras 3D de animales y objetos (ver «Imágenes»)
 src/
   content/
     paradas/*.json     Una parada por archivo: textos de pantalla + planeación completa
@@ -39,11 +40,16 @@ src/
     ecosistemas.ts     Nombre, descripción, autora y guía de cada ecosistema
     personajes.ts      Los 8 personajes
   state/               Pasaporte (localStorage) y reglas de desbloqueo
-  views/               Portada, mapa, ecosistema, parada, planeación y final
-  components/          Piezas reutilizables (tarjeta de parada, burbuja, pasaporte, opciones)
+  views/               Portada, mapa, ecosistema, parada, planeación, familia y final
+  components/          Piezas reutilizables (personajes con poses, burbuja con voz, fondo
+                       animado, celebración, rincón de calma, pasaporte, opciones)
+  juegos/              Los juegos de cada parada (pelota preguntona, títeres, rally)
+  imagenes.ts          Lista de figuras disponibles
+  voz.ts, sonido.ts    Lectura en voz alta y efectos de sonido del navegador
   styles/              Variables de diseño, estilos base, de vistas y de impresión
   router.ts            Rutas limpias con la History API
 tests/                 Pruebas de contenido, progreso, pasaporte y rutas
+tests/e2e/             Recorridos en el navegador (Playwright)
 .claude/skills/        Skill «Voz de los personajes» para redactar diálogos
 ```
 
@@ -56,6 +62,7 @@ tests/                 Pruebas de contenido, progreso, pasaporte y rutas
 | `/desierto`, `/mar`, `/selva` | Presentación de cada ecosistema           |
 | `/desierto/1` … `/selva/3`    | Paradas (1 a 3 dentro de cada ecosistema) |
 | `/desierto/1/planeacion` …    | Ficha imprimible de la planeación         |
+| `/desierto/familia` …         | Tarjeta imprimible para la familia        |
 | `/final`                      | Aventura completada                       |
 
 ## Editar el contenido
@@ -94,9 +101,24 @@ guardan solo en el navegador del equipo del salón; «Empezar de nuevo» los bor
 (Andika, diseñada para lectores que empiezan) va incluida en el sitio, sin pedirla a servicios
 externos.
 
+## Imágenes
+
+Las figuras de `public/assets/3d/` son de [Fluent Emoji 3D](https://github.com/microsoft/fluentui-emoji)
+de Microsoft, con licencia MIT (texto y crédito en `public/assets/3d/LICENCIA.md`). Para agregar una
+figura, copien el `.webp` en esa carpeta y súmenla a la lista de `src/imagenes.ts`.
+
 ## Fases
 
 Este repositorio sigue el [documento de fases](https://claude.ai/artifact/RaVMvBKENBKtxrc8YupKo6)
 del [plan de la página](https://claude.ai/artifact/Eu6R97BLZtGbquU5RJCuf2). Fases 0 y 1 listas:
 proyecto base, despliegue, contenido estructurado, portada, mapa, plantilla de parada, pasaporte y
-Modo Docente. Los juegos de cada parada llegan en las fases 3 a 5 y las ilustraciones en la fase 2.
+Modo Docente.
+
+Fases 2 y 3 listas: paleta de colores nueva, figuras 3D, personajes con poses y voz, fondo animado,
+sonidos, rincón de calma y los tres juegos del desierto (pelota preguntona con mural y lienzo,
+títeres con mímica, teatrino y «¿Mito o realidad?», y rally de pistas con rompecabezas), además de
+la tarjeta para la familia.
+
+Pendiente de revisión de las autoras: las adaptaciones de los animales y las frases del teatrino
+del desierto son un borrador. Quedan para más adelante las fotos de la galería y las voces grabadas;
+mientras tanto la página usa la voz del navegador.
