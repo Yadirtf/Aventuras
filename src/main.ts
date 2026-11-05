@@ -7,6 +7,8 @@ import './styles/base.css';
 import './styles/componentes.css';
 import './styles/vistas.css';
 import './styles/juegos.css';
+import './styles/juegos-mar.css';
+import './styles/juegos-selva.css';
 import './styles/imprimir.css';
 
 import { paradas } from './content';
@@ -15,7 +17,7 @@ import { opciones } from './components/opciones';
 import { pasaporte } from './components/pasaporte';
 import type { Contexto, Vista } from './contexto';
 import { h, icono } from './dom';
-import { detenerVoz } from './voz';
+import { detenerVoz, usarVoz } from './voz';
 import { Router, rutas, type Ruta } from './router';
 import { almacenDelNavegador, Store } from './state/store';
 import { ecosistema } from './views/ecosistema';
@@ -156,6 +158,7 @@ function actualizarCromo(): void {
   const total = paradas.filter((p) => completadas.has(p.id)).length;
   cuentaSellos.textContent = `${total}/${paradas.length}`;
   indicadorDocente.hidden = !store.estado.modoDocente;
+  usarVoz(store.estado.voz);
   document.documentElement.dataset.movimiento = menosMovimiento() ? 'reducido' : 'normal';
   fondo.moverse(!menosMovimiento());
   if (dialogoPasaporte.open) {

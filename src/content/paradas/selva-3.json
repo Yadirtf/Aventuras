@@ -7,8 +7,52 @@
   "saludo": "¡Hoy la selva va a cobrar vida y ustedes serán los protagonistas! Escuchen el cuento y muévanse como cada animal. ¿Listos?",
   "retoPantalla": "El cuento «Un día en la selva» en cinco escenas animadas: amanecer, rugido, tormenta, regreso del sol y reunión final. Con los botones de lluvia, viento y trueno crearán la banda sonora de la tormenta.",
   "retoMovimiento": "Representen la historia con el cuerpo: salten como monos, vuelen como aves, arrástrense como serpientes y den saltos de rana.",
-  "sello": { "nombre": "Mariposa", "imagen": "mariposa" },
+  "sello": {
+    "nombre": "Mariposa",
+    "imagen": "mariposa"
+  },
   "pista": "Cada ser vivo de la selva cumple una función importante y merece ser cuidado y protegido. ¡Vamos a ver todo lo que recorrimos!",
+  "juego": {
+    "tipo": "cuento",
+    "titulo": "Un día en la selva",
+    "escenas": [
+      {
+        "titulo": "La selva despierta",
+        "fondo": "amanecer",
+        "figuras": ["arbol", "mono", "pajaro", "serpiente", "rana"],
+        "texto": "Una mañana, cuando el sol comenzó a salir, la selva despertó poco a poco. Los árboles movían sus ramas y las hojas bailaban con el viento. Los monos saltaban de árbol en árbol, las aves volaban por el cielo, las serpientes se deslizaban entre las plantas y las ranas daban grandes saltos.",
+        "movimiento": "Muevan los brazos como ramas, salten como monos, vuelen como aves, arrástrense como serpientes y den saltos de rana."
+      },
+      {
+        "titulo": "¡Un rugido!",
+        "fondo": "rugido",
+        "figuras": ["tigre", "mono", "loro", "mariposa"],
+        "texto": "De repente, se escuchó el rugido de un tigre que caminaba entre los árboles buscando alimento. Los monos se movieron rápido y las aves volaron a las ramas más altas. Mientras tanto, una familia de mariposas salió a pasear moviendo sus alas.",
+        "movimiento": "Caminen despacio como el tigre, muévanse rápido como los monos y aleteen suave como mariposas."
+      },
+      {
+        "titulo": "La tormenta",
+        "fondo": "tormenta",
+        "figuras": ["nube", "lluvia", "arbol", "serpiente", "mono"],
+        "texto": "Más tarde, unas nubes grandes cubrieron el cielo y sopló un viento muy fuerte. Los árboles se movían de un lado a otro y las hojas caían. Los animales buscaron refugio: las serpientes se escondieron entre las plantas, los monos se sujetaron de las ramas y las aves buscaron un lugar seguro.",
+        "movimiento": "Muévanse de un lado a otro como los árboles con el viento. Luego, ¡a buscar refugio: agáchense y abrácense!"
+      },
+      {
+        "titulo": "Vuelve el sol",
+        "fondo": "sol",
+        "figuras": ["sol", "arcoiris", "mono", "pajaro", "mariposa"],
+        "texto": "Después de un rato, la lluvia terminó, el sol volvió a aparecer y la selva se llenó de sonidos. Los monos salieron a saltar, las aves volvieron a volar y las mariposas movieron sus alas.",
+        "movimiento": "Salten de alegría como monos, vuelen como aves y abran las alas como mariposas."
+      },
+      {
+        "titulo": "Todos juntos",
+        "fondo": "reunion",
+        "figuras": ["mono", "tigre", "loro", "rana", "serpiente", "mariposa"],
+        "texto": "Finalmente, todos los animales se encontraron en medio de la selva, donde los árboles, las plantas, el agua y los animales forman un ecosistema lleno de vida. Cada ser vivo cumple una función importante y merece ser cuidado y protegido.",
+        "movimiento": "Formen un círculo, tómense de las manos y hagan el movimiento de su animal favorito."
+      }
+    ]
+  },
   "planeacion": {
     "tema": "La selva cobra vida",
     "autora": "Yenifer Tatiana Fonseca Sánchez",

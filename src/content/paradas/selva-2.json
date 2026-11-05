@@ -7,8 +7,53 @@
   "saludo": "¡Exploradores! Para llegar al corazón de la selva hay que superar cuatro retos. ¡Shhh! Los Cocodrilos del Río están durmiendo. ¿Podrán saltar sin despertarlos?",
   "retoPantalla": "Un circuito de cuatro estaciones: el río de los cocodrilos (saltar en el momento justo), el camino de las serpientes (zigzag), los troncos de la selva (de aro en aro) y «¡Mono arriba, abajo, a un lado!» para practicar derecha e izquierda.",
   "retoMovimiento": "Hagan cada estación con el cuerpo: salten con los pies juntos, avancen en zigzag, pasen de aro en aro y sigan las órdenes del mono.",
-  "sello": { "nombre": "Banano", "imagen": "banano" },
+  "sello": {
+    "nombre": "Banano",
+    "imagen": "banano"
+  },
   "pista": "Recuerden los movimientos que hicimos hoy: en la próxima aventura, la selva cobrará vida.",
+  "juego": {
+    "tipo": "circuito",
+    "estaciones": [
+      {
+        "id": "rio",
+        "titulo": "El río de los cocodrilos",
+        "imagen": "cocodrilo",
+        "instruccion": "Salten solo cuando los cocodrilos estén dormidos, con los ojos cerrados. ¡Pies juntos!"
+      },
+      {
+        "id": "serpientes",
+        "titulo": "El camino de las serpientes",
+        "imagen": "serpiente",
+        "instruccion": "Avancen en zigzag: pasen un cono por un lado y el siguiente por el otro."
+      },
+      {
+        "id": "troncos",
+        "titulo": "Los troncos de la selva",
+        "imagen": "tronco",
+        "instruccion": "Salten de aro en aro hasta el final, sin pisar el suelo."
+      },
+      {
+        "id": "monos",
+        "titulo": "Los monos exploradores",
+        "imagen": "mono",
+        "instruccion": "Hagan lo que dice Momo: ¡arriba, abajo, a la derecha o a la izquierda!"
+      }
+    ],
+    "saltosRio": 3,
+    "conos": 5,
+    "aros": 5,
+    "ordenesMono": [
+      "arriba",
+      "derecha",
+      "abajo",
+      "izquierda",
+      "arriba",
+      "izquierda",
+      "derecha",
+      "abajo"
+    ]
+  },
   "planeacion": {
     "tema": "Los retos de la selva",
     "autora": "Yenifer Tatiana Fonseca Sánchez",

@@ -1,5 +1,7 @@
+import { personajes } from '../content';
 import { h } from '../dom';
 import type { Store } from '../state/store';
+import { alCargarVoces, hablar, hayVoz, vocesEnEspanol } from '../voz';
 
 function interruptor(
   etiqueta: string,
@@ -24,7 +26,54 @@ function interruptor(
   );
 }
 
-/** Preferencias de la clase: Modo Docente y menos movimiento. */
+/** Lista de voces en español del equipo, con botón para escucharla antes de elegir. */
+function selectorVoz(store: Store): HTMLElement | false {
+  if (!hayVoz()) return false;
+  const lista = h('select', {
+    id: 'op-voz',
+    'aria-describedby': 'op-voz-ayuda',
+    onchange: (e: Event) => store.cambiarVoz((e.currentTarget as HTMLSelectElement).value || null),
+  });
+  const llenar = () =>
+    lista.replaceChildren(
+      h('option', { value: '' }, 'Automática (la que mejor suena)'),
+      ...vocesEnEspanol().map((v) =>
+        h(
+          'option',
+          { value: v.voiceURI, selected: v.voiceURI === store.estado.voz },
+          `${v.name} (${v.lang})`,
+        ),
+      ),
+    );
+  llenar();
+  alCargarVoces(llenar);
+  return h(
+    'div',
+    { class: 'selector-voz' },
+    h('label', { for: 'op-voz' }, 'Voz de los personajes'),
+    h(
+      'div',
+      { class: 'selector-voz__fila' },
+      lista,
+      h(
+        'button',
+        {
+          type: 'button',
+          class: 'boton boton--secundario boton--chico',
+          onclick: () => void hablar('¡Hola, exploradores! Así suena mi voz.', personajes.huellita),
+        },
+        'Probar',
+      ),
+    ),
+    h(
+      'p',
+      { id: 'op-voz-ayuda', class: 'interruptor__ayuda' },
+      'Las voces «Natural» u «Online» (Edge) y las de Google (Chrome) suenan menos a robot.',
+    ),
+  );
+}
+
+/** Preferencias de la clase: Modo Docente, menos movimiento y voz. */
 export function opciones(store: Store, menosMovimientoActivo: boolean): HTMLElement {
   return h(
     'div',
@@ -41,5 +90,6 @@ export function opciones(store: Store, menosMovimientoActivo: boolean): HTMLElem
       menosMovimientoActivo,
       (v) => store.cambiarMenosMovimiento(v),
     ),
+    selectorVoz(store),
   );
 }

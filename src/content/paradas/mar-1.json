@@ -7,8 +7,66 @@
   "saludo": "¡Atención, tripulación! Soy la Capitana Tortu. En el fondo del mar hay sombras misteriosas. ¿A qué animal pertenece cada una?",
   "retoPantalla": "Arrastren el tiburón, la tortuga, el pez payaso y el pulpo hasta su silueta. Después, clasifiquen lo que come cada uno: ¿herbívoro, carnívoro u omnívoro?",
   "retoMovimiento": "¡A comer! Cada uno elige un animal del mar y se mueve como él. A la señal, busca su alimento y celebra con el movimiento de su animal.",
-  "sello": { "nombre": "Concha", "imagen": "concha" },
+  "sello": {
+    "nombre": "Concha",
+    "imagen": "concha"
+  },
   "pista": "El mapa del gran tesoro marino quedó al otro lado del mar, vigilado por el Tiburón de Agua Salada. ¿Cómo lo vamos a cruzar?",
+  "juego": {
+    "tipo": "siluetas",
+    "animales": [
+      {
+        "id": "tiburon",
+        "nombre": "Tiburón",
+        "articulo": "el",
+        "imagen": "tiburon",
+        "dieta": "carnivoro",
+        "alimento": "Peces",
+        "imagenAlimento": "pez",
+        "explicacion": "El tiburón es carnívoro: come peces y otros animales del mar."
+      },
+      {
+        "id": "tortuga",
+        "nombre": "Tortuga marina",
+        "articulo": "la",
+        "imagen": "tortuga",
+        "dieta": "herbivoro",
+        "alimento": "Algas",
+        "imagenAlimento": "algas",
+        "explicacion": "La tortuga marina verde es herbívora: come algas y pastos marinos."
+      },
+      {
+        "id": "pez-payaso",
+        "nombre": "Pez payaso",
+        "articulo": "el",
+        "imagen": "pez-tropical",
+        "dieta": "omnivoro",
+        "alimento": "Plancton",
+        "imagenAlimento": "plancton",
+        "explicacion": "El pez payaso es omnívoro: come plancton, algas y animalitos muy pequeños."
+      },
+      {
+        "id": "pulpo",
+        "nombre": "Pulpo",
+        "articulo": "el",
+        "imagen": "pulpo",
+        "dieta": "carnivoro",
+        "alimento": "Cangrejos",
+        "imagenAlimento": "cangrejo",
+        "explicacion": "El pulpo es carnívoro: le encantan los cangrejos y los camarones."
+      }
+    ],
+    "otrosAlimentos": [
+      {
+        "nombre": "Banano",
+        "imagen": "banano"
+      },
+      {
+        "nombre": "Hoja de árbol",
+        "imagen": "hoja"
+      }
+    ]
+  },
   "planeacion": {
     "tema": "Ecosistema marino: descubriendo el fondo del mar",
     "autora": "Lina Campo",

@@ -11,6 +11,8 @@ export interface Estado {
   menosMovimiento: boolean | null;
   /** Ideas pegadas en los murales, por clave («desierto-1:Clima»). */
   mural: Record<string, string[]>;
+  /** Voz del navegador elegida en Opciones (su voiceURI); null = la mejor disponible. */
+  voz: string | null;
 }
 
 export const CLAVE = 'camino-aventuras:v1';
@@ -22,6 +24,7 @@ const inicial = (): Estado => ({
   modoDocente: false,
   menosMovimiento: null,
   mural: {},
+  voz: null,
 });
 
 export const LARGO_MAXIMO_NOTA = 80;
@@ -53,6 +56,7 @@ function leer(almacen: Almacen | null): Estado {
       modoDocente: datos.modoDocente === true,
       menosMovimiento: typeof datos.menosMovimiento === 'boolean' ? datos.menosMovimiento : null,
       mural: leerMural(datos.mural),
+      voz: typeof datos.voz === 'string' ? datos.voz : null,
     };
   } catch {
     return inicial();
@@ -97,6 +101,10 @@ export class Store {
 
   cambiarMenosMovimiento(activo: boolean): void {
     this.#actualizar({ menosMovimiento: activo });
+  }
+
+  cambiarVoz(voz: string | null): void {
+    this.#actualizar({ voz });
   }
 
   notas(clave: string): readonly string[] {
