@@ -1,6 +1,7 @@
 /**
- * Figuras 3D de la página. Vienen de Fluent Emoji 3D de Microsoft (licencia MIT,
- * ver public/assets/3d/LICENCIA.md) y se sirven desde /assets/3d/<nombre>.webp.
+ * Figuras 3D de la página. Los personajes vienen de Pixabay y de imágenes propias; el resto,
+ * de Fluent Emoji 3D de Microsoft (MIT). Detalle en public/assets/3d/LICENCIA.md.
+ * Se sirven desde /assets/3d/<nombre>.webp.
  */
 
 export const IMAGENES = [
