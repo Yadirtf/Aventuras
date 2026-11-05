@@ -1,19 +1,25 @@
 import '@fontsource/andika/latin-400.css';
 import '@fontsource/andika/latin-700.css';
+import '@fontsource/baloo-2/latin-700.css';
+import '@fontsource/baloo-2/latin-800.css';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/componentes.css';
 import './styles/vistas.css';
+import './styles/juegos.css';
 import './styles/imprimir.css';
 
 import { paradas } from './content';
+import { FondoAnimado } from './components/fondo-animado';
 import { opciones } from './components/opciones';
 import { pasaporte } from './components/pasaporte';
 import type { Contexto, Vista } from './contexto';
 import { h, icono } from './dom';
+import { detenerVoz } from './voz';
 import { Router, rutas, type Ruta } from './router';
 import { almacenDelNavegador, Store } from './state/store';
 import { ecosistema } from './views/ecosistema';
+import { familia } from './views/familia';
 import { final } from './views/final';
 import { mapa } from './views/mapa';
 import { noEncontrada } from './views/no-encontrada';
@@ -38,6 +44,8 @@ function vistaPara(ruta: Ruta): Vista {
       return mapa(ctx);
     case 'ecosistema':
       return ecosistema(ctx, ruta.ecosistema);
+    case 'familia':
+      return familia(ctx, ruta.ecosistema);
     case 'parada':
       return parada(ctx, ruta.ecosistema, ruta.numero);
     case 'planeacion':
@@ -52,6 +60,7 @@ function vistaPara(ruta: Ruta): Vista {
 // --- Estructura fija: cabecera, contenido y paneles ---------------------------------
 
 const principal = h('main', { id: 'contenido', class: 'principal' });
+const fondo = new FondoAnimado();
 
 const panelPasaporte = h('div', { class: 'panel__cuerpo' });
 const panelOpciones = h('div', { class: 'panel__cuerpo' });
@@ -91,7 +100,12 @@ const indicadorDocente = h('span', { class: 'cabecera__docente', hidden: true },
 const cabecera = h(
   'header',
   { class: 'cabecera' },
-  h('a', { class: 'cabecera__marca', href: rutas.portada }, icono('🐾'), TITULO_SITIO),
+  h(
+    'a',
+    { class: 'cabecera__marca', href: rutas.portada },
+    icono('huellas', 'icono cabecera__logo'),
+    TITULO_SITIO,
+  ),
   indicadorDocente,
   h(
     'div',
@@ -106,8 +120,8 @@ const cabecera = h(
           dialogoPasaporte.showModal();
         },
       },
-      icono('🎫'),
-      'Pasaporte ',
+      icono('libro'),
+      h('span', { class: 'cabecera__etiqueta' }, 'Pasaporte'),
       cuentaSellos,
     ),
     h(
@@ -121,12 +135,13 @@ const cabecera = h(
           dialogoOpciones.showModal();
         },
       },
-      '⚙️',
+      icono('engranaje'),
     ),
   ),
 );
 
 document.body.replaceChildren(
+  fondo.lienzo,
   h('a', { class: 'saltar', href: '#contenido' }, 'Saltar al contenido'),
   cabecera,
   principal,
@@ -142,6 +157,7 @@ function actualizarCromo(): void {
   cuentaSellos.textContent = `${total}/${paradas.length}`;
   indicadorDocente.hidden = !store.estado.modoDocente;
   document.documentElement.dataset.movimiento = menosMovimiento() ? 'reducido' : 'normal';
+  fondo.moverse(!menosMovimiento());
   if (dialogoPasaporte.open) {
     panelPasaporte.replaceChildren(pasaporte(ctx, () => dialogoPasaporte.close()));
   }
@@ -151,9 +167,11 @@ function mostrar(ruta: Ruta, { esNavegacion }: { esNavegacion: boolean }): void 
   const vista = vistaPara(ruta);
   document.title = ruta.vista === 'portada' ? TITULO_SITIO : `${vista.titulo} · ${TITULO_SITIO}`;
   document.body.dataset.tema = vista.tema;
+  fondo.cambiarTema(vista.tema);
   principal.replaceChildren(vista.contenido);
 
   if (esNavegacion) {
+    detenerVoz();
     principal.classList.remove('entrada');
     void principal.offsetWidth; // reinicia la animación de entrada
     principal.classList.add('entrada');
@@ -162,9 +180,19 @@ function mostrar(ruta: Ruta, { esNavegacion }: { esNavegacion: boolean }): void 
   }
 }
 
+/** Solo se vuelve a pintar la vista si cambia algo que la afecta (no al pegar notas del mural). */
+const huella = () => {
+  const { explorador, completadas, modoDocente } = store.estado;
+  return JSON.stringify([explorador, completadas, modoDocente]);
+};
+let ultimaHuella = huella();
 store.suscribir(() => {
   actualizarCromo();
-  router.refrescar();
+  const nueva = huella();
+  if (nueva !== ultimaHuella) {
+    ultimaHuella = nueva;
+    router.refrescar();
+  }
 });
 prefiereMenosMovimiento.addEventListener('change', actualizarCromo);
 

@@ -1,49 +1,73 @@
 /*
- * Variables de diseño. Son provisionales: la fase 2 define el sistema visual final
- * (recorte de papel y crayola). Cada ecosistema cambia el color de acento.
+ * Sistema visual: colores alegres por ecosistema, tipografías redondeadas y botones
+ * con relieve que combinan con las figuras 3D. Todos los textos cumplen contraste AA.
  */
 :root {
   --fuente: 'Andika', 'Trebuchet MS', system-ui, sans-serif;
+  --fuente-titulos: 'Baloo 2', 'Andika', system-ui, sans-serif;
 
-  --papel: #fbf6ec;
-  --papel-2: #f4e9d4;
-  --tinta: #2b2118;
-  --tinta-suave: #5c4d3f;
-  --borde: #d9c8aa;
+  --papel: #fffaf0;
+  --tarjeta: #ffffff;
+  --tinta: #2a1f3d;
+  --tinta-suave: #5b5170;
+  --borde: #ece3f5;
 
-  --acento: #8a4b1f;
+  /* General: violeta aventura con amarillo sol. */
+  --primario: #6a2bd9;
+  --primario-oscuro: #4b1aa3;
+  --primario-suave: #f0e8ff;
+  --resalte: #ffc83d;
+
+  --desierto: #b4470c;
+  --desierto-oscuro: #8a3407;
+  --desierto-suave: #fff0d9;
+  --desierto-cielo: #ffe1a8;
+
+  --mar: #0a63a8;
+  --mar-oscuro: #074a80;
+  --mar-suave: #e2f3ff;
+  --mar-cielo: #a6e0ff;
+  --coral: #ff6f61;
+
+  --selva: #18793a;
+  --selva-oscuro: #0f5a2a;
+  --selva-suave: #e3f8e6;
+  --selva-cielo: #b9f0a8;
+
+  --exito: #18793a;
+  --bloqueado: #6f6680;
+
+  --acento: var(--primario);
+  --acento-oscuro: var(--primario-oscuro);
+  --acento-suave: var(--primario-suave);
   --acento-texto: #ffffff;
-  --acento-suave: #f3e1c7;
 
-  --desierto: #9a5214;
-  --desierto-suave: #f7e3c4;
-  --mar: #0f6a8f;
-  --mar-suave: #d6edf5;
-  --selva: #2a6e2d;
-  --selva-suave: #dcefd5;
-
-  --exito: #2f7d32;
-  --bloqueado: #766c63;
-
-  --radio: 18px;
-  --radio-grande: 28px;
-  --sombra: 0 3px 0 rgb(43 33 24 / 0.15), 0 8px 24px rgb(43 33 24 / 0.08);
+  --radio: 20px;
+  --radio-grande: 32px;
+  --sombra: 0 4px 0 rgb(42 31 61 / 0.12), 0 12px 28px rgb(42 31 61 / 0.1);
+  --sombra-suave: 0 8px 24px rgb(42 31 61 / 0.08);
   --toque-minimo: 64px;
-  --ancho-lectura: 46rem;
-  --ancho-maximo: 72rem;
+  --ancho-lectura: 50rem;
+  --ancho-maximo: 76rem;
 }
 
 [data-tema='desierto'] {
   --acento: var(--desierto);
+  --acento-oscuro: var(--desierto-oscuro);
   --acento-suave: var(--desierto-suave);
+  --cielo: var(--desierto-cielo);
 }
 
 [data-tema='mar'] {
   --acento: var(--mar);
+  --acento-oscuro: var(--mar-oscuro);
   --acento-suave: var(--mar-suave);
+  --cielo: var(--mar-cielo);
 }
 
 [data-tema='selva'] {
   --acento: var(--selva);
+  --acento-oscuro: var(--selva-oscuro);
   --acento-suave: var(--selva-suave);
+  --cielo: var(--selva-cielo);
 }

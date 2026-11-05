@@ -5,10 +5,66 @@
   "titulo": "Viaje de la realidad",
   "guias": ["dunita"],
   "saludo": "¡Hoy viajamos a la realidad! Seis pistas nos esperan escondidas. ¿Saben dónde queda la derecha y dónde la izquierda? ¡Lo vamos a necesitar!",
-  "retoPantalla": "Una escena ilustrada con seis objetos escondidos y pistas como «búscame a la derecha de la puerta» o «estoy debajo de algo azul». Cada acierto entrega una pieza; con las seis se arma un rompecabezas misterioso.",
+  "retoPantalla": "Una escena del desierto con seis objetos escondidos y pistas como «tomo el sol encima de la roca» o «estoy debajo de algo azul». Cada acierto entrega una pieza; con las seis se arma un rompecabezas misterioso.",
   "retoMovimiento": "Pasos de explorador: caminen, salten y agáchense por el espacio siguiendo las indicaciones de la docente.",
-  "sello": { "nombre": "Huella de camello", "icono": "🐪" },
+  "sello": {
+    "nombre": "Huella de camello",
+    "imagen": "camello"
+  },
   "pista": "Hay un lugar donde el agua cubre todo. Es azul y profundo, y allí podemos encontrar peces, tortugas, corales y estrellas de mar. ¿Qué lugar es?",
+  "juego": {
+    "tipo": "rally",
+    "pistas": [
+      {
+        "objeto": "camello",
+        "imagen": "camello",
+        "pista": "Tengo joroba y descanso a la izquierda de la palmera.",
+        "x": 52,
+        "y": 58
+      },
+      {
+        "objeto": "lagarto",
+        "imagen": "lagarto",
+        "pista": "Tomo el sol encima de la roca.",
+        "x": 17,
+        "y": 48
+      },
+      {
+        "objeto": "pañuelo",
+        "imagen": "panuelo",
+        "pista": "El viento me llevó muy arriba, al lado del sol.",
+        "x": 80,
+        "y": 10
+      },
+      {
+        "objeto": "gota de agua",
+        "imagen": "gota",
+        "pista": "Estoy debajo de algo azul.",
+        "x": 78,
+        "y": 92
+      },
+      {
+        "objeto": "cactus",
+        "imagen": "cactus",
+        "pista": "Tengo espinas y estoy a la derecha de la roca.",
+        "x": 34,
+        "y": 56
+      },
+      {
+        "objeto": "reloj de arena",
+        "imagen": "reloj-arena",
+        "pista": "Estoy hecho de arena y me escondo abajo, a la izquierda.",
+        "x": 8,
+        "y": 84
+      }
+    ],
+    "reverso": "Hay un lugar donde el agua cubre todo. Es azul y profundo, y allí podemos encontrar peces, tortugas, corales y estrellas de mar. ¿Qué lugar es?",
+    "relevo": {
+      "despedida": "¡Capitana Tortu! Los exploradores armaron el rompecabezas. Esta pista es para ti.",
+      "respuesta": "¡Gracias, Dunita! Tripulación, prepárense: ¡nos vamos al fondo del mar!",
+      "siguienteGuia": "capitana-tortu"
+    }
+  },
   "planeacion": {
     "tema": "Viaje de la realidad",
     "autora": "Katerin López",

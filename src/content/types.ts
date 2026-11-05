@@ -1,5 +1,7 @@
 /** Tipos del contenido de la página. Cada parada se guarda como JSON en `paradas/`. */
 
+import type { Imagen } from '../imagenes';
+
 export const ECOSISTEMAS = ['desierto', 'mar', 'selva'] as const;
 export type EcosistemaId = (typeof ECOSISTEMAS)[number];
 
@@ -50,9 +52,68 @@ export interface Planeacion {
 
 export interface Sello {
   nombre: string;
-  /** Marcador provisional (emoji) hasta que la fase 2 entregue las ilustraciones. */
-  icono: string;
+  imagen: Imagen;
 }
+
+// --- Juegos de las paradas (fases 3 a 5) -------------------------------------------
+
+/** Parada 1 del desierto: la pelota se detiene en una pregunta y las ideas van al mural. */
+export interface JuegoPelotaPreguntona {
+  tipo: 'pelota-preguntona';
+  preguntas: string[];
+  columnas: { nombre: string; imagen: Imagen }[];
+}
+
+export interface AnimalTitere {
+  id: string;
+  nombre: string;
+  imagen: Imagen;
+  /** Cómo se adapta al calor y a la falta de agua (se lee al voltear la tarjeta). */
+  adaptacion: string;
+}
+
+export interface EscenaTeatrino {
+  titulo: string;
+  narracion: string;
+  /** Frases sugeridas para los títeres. Vacía = los niños inventan lo que dicen. */
+  frases: string[];
+}
+
+export interface Afirmacion {
+  texto: string;
+  esRealidad: boolean;
+  explicacion: string;
+}
+
+/** Parada 2 del desierto: tarjetas de animales, mímica, teatrino y «¿Mito o realidad?». */
+export interface JuegoTiteres {
+  tipo: 'titeres';
+  animales: AnimalTitere[];
+  segundosMimica: number;
+  escenas: EscenaTeatrino[];
+  mitos: Afirmacion[];
+}
+
+export interface PistaRally {
+  objeto: string;
+  imagen: Imagen;
+  pista: string;
+  /** Posición en la escena, en porcentaje desde la esquina superior izquierda. */
+  x: number;
+  y: number;
+}
+
+/** Parada 3 del desierto: buscar objetos con pistas espaciales y armar el rompecabezas. */
+export interface JuegoRally {
+  tipo: 'rally';
+  pistas: PistaRally[];
+  /** Texto al reverso del rompecabezas: la pista del siguiente ecosistema. */
+  reverso: string;
+  relevo: { despedida: string; respuesta: string; siguienteGuia: PersonajeId };
+}
+
+export type Juego = JuegoPelotaPreguntona | JuegoTiteres | JuegoRally;
+export type TipoJuego = Juego['tipo'];
 
 /** Una parada del mapa: la experiencia en pantalla más su planeación. */
 export interface Parada {
@@ -68,6 +129,14 @@ export interface Parada {
   /** La pista que deja esta parada hacia la siguiente. */
   pista: string;
   planeacion: Planeacion;
+  /** El juego de la parada; mientras no exista se muestra «en construcción». */
+  juego?: Juego;
+}
+
+/** Tarjeta imprimible para la familia al cerrar un ecosistema. */
+export interface TarjetaFamilia {
+  titulo: string;
+  ideas: string[];
 }
 
 export interface Ecosistema {
@@ -77,12 +146,19 @@ export interface Ecosistema {
   descripcion: string;
   autora: string;
   guia: PersonajeId;
-  icono: string;
+  imagen: Imagen;
+  /** Figuras que decoran su paisaje. */
+  paisaje: Imagen[];
+  familia?: TarjetaFamilia;
 }
 
 export interface Personaje {
   id: PersonajeId;
   nombre: string;
+  /** Nombre corto para los diálogos. */
+  corto: string;
   descripcion: string;
-  icono: string;
+  imagen: Imagen;
+  /** Ajustes de la voz del navegador: tono (0 a 2) y velocidad (0,5 a 2). */
+  voz: { tono: number; velocidad: number };
 }

@@ -7,7 +7,7 @@
   "saludo": "¡Atención, tripulación! Soy la Capitana Tortu. En el fondo del mar hay sombras misteriosas. ¿A qué animal pertenece cada una?",
   "retoPantalla": "Arrastren el tiburón, la tortuga, el pez payaso y el pulpo hasta su silueta. Después, clasifiquen lo que come cada uno: ¿herbívoro, carnívoro u omnívoro?",
   "retoMovimiento": "¡A comer! Cada uno elige un animal del mar y se mueve como él. A la señal, busca su alimento y celebra con el movimiento de su animal.",
-  "sello": { "nombre": "Concha", "icono": "🐚" },
+  "sello": { "nombre": "Concha", "imagen": "concha" },
   "pista": "El mapa del gran tesoro marino quedó al otro lado del mar, vigilado por el Tiburón de Agua Salada. ¿Cómo lo vamos a cruzar?",
   "planeacion": {
     "tema": "Ecosistema marino: descubriendo el fondo del mar",

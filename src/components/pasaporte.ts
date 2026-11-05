@@ -1,4 +1,5 @@
-import { h, icono } from '../dom';
+import { h } from '../dom';
+import { imagen } from '../imagenes';
 import type { Contexto } from '../contexto';
 
 /** Contenido del panel «Pasaporte del Explorador»: nombre y las 9 casillas de sello. */
@@ -24,7 +25,9 @@ export function pasaporte({ store, paradas }: Contexto, alReiniciar: () => void)
         return h(
           'li',
           { class: `sello ${tiene ? 'sello--puesto' : ''} sello--${p.ecosistema}` },
-          icono(tiene ? p.sello.icono : String(i + 1), 'sello__icono'),
+          tiene
+            ? imagen(p.sello.imagen, { clase: 'sello__icono', carga: 'eager' })
+            : h('span', { class: 'sello__numero', 'aria-hidden': 'true' }, i + 1),
           h('span', { class: 'sello__nombre' }, tiene ? p.sello.nombre : 'Sin sello'),
           h('span', { class: 'visualmente-oculto' }, `, ${p.titulo}`),
         );

@@ -1,5 +1,6 @@
 import type { Parada } from '../content/types';
-import { h, icono } from '../dom';
+import { h } from '../dom';
+import { imagen } from '../imagenes';
 import { rutas } from '../router';
 import type { EstadoParada } from '../state/progreso';
 
@@ -11,6 +12,8 @@ const etiquetas: Record<EstadoParada, string> = {
 
 /** Una parada en el camino de huellitas. Las bloqueadas no son enlaces. */
 export function tarjetaParada(parada: Parada, estado: EstadoParada, posicion: number): HTMLElement {
+  const figura =
+    estado === 'completada' ? parada.sello.imagen : estado === 'bloqueada' ? 'candado' : 'huellas';
   const contenido = [
     h('span', { class: 'tarjeta-parada__numero', 'aria-hidden': 'true' }, posicion),
     h(
@@ -19,7 +22,7 @@ export function tarjetaParada(parada: Parada, estado: EstadoParada, posicion: nu
       h('span', { class: 'tarjeta-parada__titulo' }, parada.titulo),
       h('span', { class: 'tarjeta-parada__estado' }, etiquetas[estado]),
     ),
-    icono(estado === 'completada' ? parada.sello.icono : estado === 'bloqueada' ? '🔒' : '🐾'),
+    imagen(figura, { clase: 'tarjeta-parada__figura', carga: 'eager' }),
   ];
   const etiqueta = `Parada ${posicion}: ${parada.titulo}. ${etiquetas[estado]}`;
 

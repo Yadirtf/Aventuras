@@ -7,7 +7,7 @@
   "saludo": "¡Hoy la selva va a cobrar vida y ustedes serán los protagonistas! Escuchen el cuento y muévanse como cada animal. ¿Listos?",
   "retoPantalla": "El cuento «Un día en la selva» en cinco escenas animadas: amanecer, rugido, tormenta, regreso del sol y reunión final. Con los botones de lluvia, viento y trueno crearán la banda sonora de la tormenta.",
   "retoMovimiento": "Representen la historia con el cuerpo: salten como monos, vuelen como aves, arrástrense como serpientes y den saltos de rana.",
-  "sello": { "nombre": "Mariposa", "icono": "🦋" },
+  "sello": { "nombre": "Mariposa", "imagen": "mariposa" },
   "pista": "Cada ser vivo de la selva cumple una función importante y merece ser cuidado y protegido. ¡Vamos a ver todo lo que recorrimos!",
   "planeacion": {
     "tema": "La selva cobra vida",

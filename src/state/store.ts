@@ -9,6 +9,8 @@ export interface Estado {
   modoDocente: boolean;
   /** null = seguir la preferencia del sistema operativo. */
   menosMovimiento: boolean | null;
+  /** Ideas pegadas en los murales, por clave («desierto-1:Clima»). */
+  mural: Record<string, string[]>;
 }
 
 export const CLAVE = 'camino-aventuras:v1';
@@ -19,7 +21,20 @@ const inicial = (): Estado => ({
   completadas: [],
   modoDocente: false,
   menosMovimiento: null,
+  mural: {},
 });
+
+export const LARGO_MAXIMO_NOTA = 80;
+
+function leerMural(valor: unknown): Record<string, string[]> {
+  if (typeof valor !== 'object' || valor === null || Array.isArray(valor)) return {};
+  const mural: Record<string, string[]> = {};
+  for (const [clave, notas] of Object.entries(valor)) {
+    if (Array.isArray(notas))
+      mural[clave] = notas.filter((n): n is string => typeof n === 'string');
+  }
+  return mural;
+}
 
 /** Lo mínimo de `Storage` que usamos, para poder probarlo sin navegador. */
 export type Almacen = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
@@ -37,6 +52,7 @@ function leer(almacen: Almacen | null): Estado {
         : [],
       modoDocente: datos.modoDocente === true,
       menosMovimiento: typeof datos.menosMovimiento === 'boolean' ? datos.menosMovimiento : null,
+      mural: leerMural(datos.mural),
     };
   } catch {
     return inicial();
@@ -83,9 +99,24 @@ export class Store {
     this.#actualizar({ menosMovimiento: activo });
   }
 
-  /** Borra nombre y sellos para usar la página con otro grupo. Conserva las preferencias. */
+  notas(clave: string): readonly string[] {
+    return this.#estado.mural[clave] ?? [];
+  }
+
+  agregarNota(clave: string, texto: string): void {
+    const nota = texto.trim().slice(0, LARGO_MAXIMO_NOTA);
+    if (!nota) return;
+    this.#actualizar({ mural: { ...this.#estado.mural, [clave]: [...this.notas(clave), nota] } });
+  }
+
+  quitarNota(clave: string, indice: number): void {
+    const notas = this.notas(clave).filter((_, i) => i !== indice);
+    this.#actualizar({ mural: { ...this.#estado.mural, [clave]: notas } });
+  }
+
+  /** Borra nombre, sellos y murales para usar la página con otro grupo. Conserva las preferencias. */
   empezarDeNuevo(): void {
-    this.#actualizar({ explorador: '', completadas: [] });
+    this.#actualizar({ explorador: '', completadas: [], mural: {} });
   }
 
   #actualizar(cambios: Partial<Estado>): void {

@@ -46,3 +46,17 @@
     color: inherit;
   }
 }
+
+@media print {
+  .fondo-animado {
+    display: none !important;
+  }
+
+  .familia__tarjeta {
+    box-shadow: none;
+  }
+
+  .ficha {
+    box-shadow: none;
+  }
+}

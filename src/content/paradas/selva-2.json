@@ -7,7 +7,7 @@
   "saludo": "¡Exploradores! Para llegar al corazón de la selva hay que superar cuatro retos. ¡Shhh! Los Cocodrilos del Río están durmiendo. ¿Podrán saltar sin despertarlos?",
   "retoPantalla": "Un circuito de cuatro estaciones: el río de los cocodrilos (saltar en el momento justo), el camino de las serpientes (zigzag), los troncos de la selva (de aro en aro) y «¡Mono arriba, abajo, a un lado!» para practicar derecha e izquierda.",
   "retoMovimiento": "Hagan cada estación con el cuerpo: salten con los pies juntos, avancen en zigzag, pasen de aro en aro y sigan las órdenes del mono.",
-  "sello": { "nombre": "Banano", "icono": "🍌" },
+  "sello": { "nombre": "Banano", "imagen": "banano" },
   "pista": "Recuerden los movimientos que hicimos hoy: en la próxima aventura, la selva cobrará vida.",
   "planeacion": {
     "tema": "Los retos de la selva",

@@ -3,6 +3,7 @@ import { burbuja } from '../components/burbuja';
 import { tarjetaParada } from '../components/tarjeta-parada';
 import type { Contexto, Vista } from '../contexto';
 import { h, icono } from '../dom';
+import { imagen } from '../imagenes';
 import { rutas } from '../router';
 import { aventuraCompleta, estadoDeParada } from '../state/progreso';
 
@@ -18,7 +19,7 @@ export function mapa({ store, paradas }: Contexto): Vista {
     contenido: h(
       'section',
       { class: 'mapa' },
-      h('h1', { tabindex: -1 }, 'Mapa de exploración'),
+      h('h1', { tabindex: -1 }, icono('mapa', 'icono icono--titulo'), 'Mapa de exploración'),
       burbuja(
         'huellita',
         `${explorador ? `¡Vamos, ${explorador}! ` : ''}Sigue las huellitas: cada parada que completes enciende la siguiente.`,
@@ -32,10 +33,18 @@ export function mapa({ store, paradas }: Contexto): Vista {
             'li',
             { class: `region region--${id}`, 'data-tema': id },
             h(
-              'h2',
-              { class: 'region__titulo' },
-              icono(eco.icono),
-              h('a', { href: rutas.ecosistema(id) }, eco.nombre),
+              'div',
+              { class: 'region__cabecera' },
+              h(
+                'div',
+                { class: 'region__figuras', 'aria-hidden': 'true' },
+                eco.paisaje.slice(0, 3).map((img) => imagen(img)),
+              ),
+              h(
+                'h2',
+                { class: 'region__titulo' },
+                h('a', { href: rutas.ecosistema(id) }, eco.nombre),
+              ),
             ),
             h(
               'ol',
@@ -54,15 +63,15 @@ export function mapa({ store, paradas }: Contexto): Vista {
       terminado || modoDocente
         ? h(
             'a',
-            { class: 'boton boton--huellita mapa__final', href: rutas.final },
-            icono('🏆'),
+            { class: 'boton boton--huellita boton--grande mapa__final', href: rutas.final },
+            icono('trofeo'),
             'Aventura completada',
           )
         : h(
             'p',
             { class: 'mapa__meta' },
-            icono('🏆'),
-            ' Al final del camino te espera una sorpresa.',
+            icono('regalo'),
+            'Al final del camino te espera una sorpresa.',
           ),
     ),
   };

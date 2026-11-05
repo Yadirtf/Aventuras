@@ -1,0 +1,836 @@
+/* --- Estructura común de los juegos --------------------------------------------- */
+
+.juego {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.juego__parte {
+  position: relative;
+  padding: 1.25rem;
+  background: var(--acento-suave);
+  border-radius: var(--radio);
+}
+
+.juego__parte > h3 {
+  color: var(--acento-oscuro);
+}
+
+.juego__parte > h3 .icono {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.juego__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.juego__progreso:empty {
+  display: none;
+}
+
+/* --- Pelota preguntona ---------------------------------------------------------- */
+
+.ronda {
+  --radio-ronda: min(9rem, 30vw);
+  --pelota: 0deg;
+  position: relative;
+  width: calc(var(--radio-ronda) * 2 + 6rem);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  background: radial-gradient(circle, #fff 0 35%, #ffe2a8 36% 60%, transparent 61%);
+  border-radius: 50%;
+}
+
+.ronda__estaciones {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ronda__estacion {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin: -2rem 0 0 -2rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--acento-oscuro);
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: var(--sombra);
+  transform: rotate(var(--angulo)) translateY(calc(var(--radio-ronda) * -1))
+    rotate(calc(var(--angulo) * -1));
+}
+
+.ronda__estacion--hecha {
+  color: #fff;
+  background: var(--exito);
+}
+
+.ronda__estacion--pelota {
+  box-shadow:
+    0 0 0 5px var(--resalte),
+    var(--sombra);
+}
+
+.ronda__pelota {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin: -1.7rem 0 0 -1.7rem;
+  transform: rotate(var(--pelota)) translateY(calc(var(--radio-ronda) * -1 + 3.2rem))
+    rotate(calc(var(--pelota) * -1));
+  transition: transform 0.45s cubic-bezier(0.4, 1.6, 0.6, 1);
+  filter: drop-shadow(0 6px 4px rgb(42 31 61 / 0.3));
+}
+
+.ronda__palmas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: -2.25rem 0 0 -2.25rem;
+  opacity: 0.35;
+}
+
+.ronda--girando .ronda__palmas {
+  opacity: 1;
+}
+
+.ronda__palmas--golpe {
+  animation: golpe 0.3s ease-out;
+}
+
+@keyframes golpe {
+  40% {
+    transform: scale(1.3);
+  }
+}
+
+/* --- Mural ---------------------------------------------------------------------- */
+
+.mural__formulario {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.mural__formulario label {
+  font-weight: 700;
+}
+
+.mural__botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.mural__columnas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #c79a6b linear-gradient(180deg, #d6aa79, #b98654);
+  border-radius: var(--radio);
+  box-shadow: inset 0 4px 10px rgb(0 0 0 / 0.15);
+}
+
+.mural__columna {
+  min-height: 9rem;
+  padding: 0.6rem;
+  background: rgb(255 255 255 / 0.25);
+  border-radius: 14px;
+}
+
+.mural__columna h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  color: #3b2410;
+}
+
+.mural__notas {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nota {
+  position: relative;
+  padding: 0.6rem 2rem 0.6rem 0.7rem;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  background: #fff7a8;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+  transform: rotate(-1.5deg);
+}
+
+.nota:nth-child(even) {
+  background: #ffd1e8;
+  transform: rotate(1.5deg);
+}
+
+.nota:nth-child(3n) {
+  background: #c9f0ff;
+}
+
+.nota__quitar {
+  position: absolute;
+  top: 0.15rem;
+  right: 0.15rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--tinta-suave);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* --- Lienzo de dibujo ------------------------------------------------------------ */
+
+.lienzo__barra {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.lienzo__herramienta {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  background: #fff;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: var(--sombra-suave);
+  cursor: pointer;
+}
+
+.lienzo__herramienta[aria-pressed='true'] {
+  box-shadow:
+    0 0 0 4px var(--acento),
+    var(--sombra-suave);
+  transform: translateY(-3px);
+}
+
+.lienzo__herramienta .icono {
+  width: 40px;
+  height: 40px;
+}
+
+.lienzo__muestra {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.lienzo__muestra--arena {
+  background:
+    radial-gradient(circle, #c98d3f 1.5px, transparent 2px) 0 0 / 7px 7px,
+    #f3cf8e;
+}
+
+.lienzo__papel {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radio);
+  box-shadow: inset 0 0 0 3px #e9c98f;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* --- Tarjetas que se voltean ----------------------------------------------------- */
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tarjeta {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  padding: 0;
+  font: inherit;
+  color: var(--tinta);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  perspective: 800px;
+}
+
+.tarjeta__cara {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  backface-visibility: hidden;
+  transition: transform 0.5s ease;
+}
+
+.tarjeta__cara--frente {
+  background: linear-gradient(180deg, #fff, #fff3dc);
+}
+
+.tarjeta__cara--reverso {
+  font-size: 1.05rem;
+  line-height: 1.35;
+  background: var(--acento);
+  color: #fff;
+  transform: rotateY(180deg);
+}
+
+.tarjeta[aria-pressed='true'] .tarjeta__cara--frente {
+  transform: rotateY(-180deg);
+}
+
+.tarjeta[aria-pressed='true'] .tarjeta__cara--reverso {
+  transform: rotateY(0);
+}
+
+[data-movimiento='reducido'] .tarjeta[aria-pressed='true'] .tarjeta__cara--frente {
+  visibility: hidden;
+}
+
+.tarjeta__figura {
+  width: 75%;
+  height: auto;
+}
+
+.tarjeta__nombre {
+  font-family: var(--fuente-titulos);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* --- Mímica --------------------------------------------------------------------- */
+
+.mimica__mesa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.mimica__carta {
+  display: grid;
+  place-items: center;
+  width: 11rem;
+  aspect-ratio: 3 / 4;
+  padding: 0.5rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-align: center;
+  background: #fff;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.mimica__carta > span {
+  display: grid;
+  justify-items: center;
+}
+
+.mimica__carta--oculta {
+  font-size: 5rem;
+  color: #fff;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--acento) 0 14px,
+    var(--acento-oscuro) 14px 28px
+  );
+}
+
+.mimica__figura {
+  width: 8rem;
+  height: 8rem;
+}
+
+.mimica__tiempo {
+  --avance: 0;
+  display: grid;
+  place-items: center;
+  width: 8rem;
+  height: 8rem;
+  font-family: var(--fuente-titulos);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--acento-oscuro);
+  background:
+    radial-gradient(circle, #fff 58%, transparent 59%),
+    conic-gradient(var(--acento-suave) calc(var(--avance) * 360deg), var(--acento) 0);
+  border-radius: 50%;
+}
+
+.mimica__estado {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* --- Teatrino -------------------------------------------------------------------- */
+
+.teatrino__pestanas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.teatrino__pestana {
+  min-height: 48px;
+  padding: 0.3rem 1rem;
+  font: inherit;
+  font-family: var(--fuente-titulos);
+  font-weight: 800;
+  color: var(--acento-oscuro);
+  background: #fff;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.teatrino__pestana[aria-selected='true'] {
+  color: #fff;
+  background: var(--acento);
+}
+
+.teatrino__escenario {
+  position: relative;
+  min-height: 19rem;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, transparent 72%, #c47a3a 72% 76%, #9b5a24 76%),
+    linear-gradient(180deg, #ffd27a, #ffb36b);
+  border: 10px solid #b3261e;
+  border-top-width: 26px;
+  border-radius: var(--radio) var(--radio) 8px 8px;
+  box-shadow:
+    inset 40px 0 30px -20px rgb(120 10 10 / 0.6),
+    inset -40px 0 30px -20px rgb(120 10 10 / 0.6);
+}
+
+.teatrino__titulo {
+  margin: 0.6rem 0 0;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #6b2a06;
+}
+
+.teatrino__vacio {
+  position: absolute;
+  inset: 40% 10% auto;
+  text-align: center;
+  font-weight: 700;
+  color: #6b2a06;
+}
+
+.titere {
+  position: absolute;
+  bottom: 8%;
+  display: grid;
+  justify-items: center;
+  width: 7rem;
+  padding: 0;
+  font: inherit;
+  background: none;
+  border: 0;
+  transform: translateX(-50%);
+  cursor: grab;
+  touch-action: none;
+}
+
+.titere--elegido .titere__figura {
+  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 4px var(--resalte));
+}
+
+.titere__figura {
+  width: 6rem;
+  height: 6rem;
+  filter: drop-shadow(0 6px 4px rgb(0 0 0 / 0.3));
+}
+
+.titere__palito {
+  width: 8px;
+  height: 3rem;
+  background: #e8c48a;
+  border-radius: 4px;
+}
+
+.titere__globo {
+  position: absolute;
+  bottom: 100%;
+  min-width: 9rem;
+  max-width: 13rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: var(--sombra-suave);
+}
+
+.teatrino__dialogo {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: var(--radio);
+}
+
+.teatrino__frases {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.teatrino__propia {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.teatrino__propia input {
+  flex: 1;
+  text-align: left;
+}
+
+.teatrino__caja {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.teatrino__titere-caja {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 56px;
+  padding: 0.3rem 0.9rem 0.3rem 0.4rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  background: #fff;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: var(--sombra-suave);
+  cursor: pointer;
+}
+
+/* --- ¿Mito o realidad? ------------------------------------------------------------ */
+
+.mito__afirmacion {
+  margin: 0 0 1rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.mito__afirmacion:empty {
+  display: none;
+}
+
+.mito__opciones {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mito__boton {
+  min-width: 10rem;
+  color: #fff;
+}
+
+.mito__boton--mito {
+  background: #c2255c;
+  box-shadow: 0 6px 0 #8f1a44;
+}
+
+.mito__boton--realidad {
+  background: #18793a;
+  box-shadow: 0 6px 0 #0f5a2a;
+}
+
+.mito .boton--huellita {
+  display: flex;
+  margin: 0 auto;
+}
+
+/* --- Rally de pistas ------------------------------------------------------------- */
+
+.escena-desierto {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  margin: 1rem 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 30% at 20% 100%, #e99b4c 0 98%, transparent 100%),
+    radial-gradient(ellipse 80% 34% at 85% 100%, #f2a654 0 98%, transparent 100%),
+    linear-gradient(180deg, #8fd3ff 0, #ffe3a3 55%, #f7c27a 56%, #f2b066 100%);
+  border: 6px solid #fff;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.escena-desierto__oasis {
+  position: absolute;
+  left: 69%;
+  top: 70%;
+  width: 18%;
+  height: 11%;
+  background: radial-gradient(ellipse, #4fc3f7 0 60%, #1e88e5 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px #6fbf73;
+}
+
+.escena-desierto__referencia,
+.rally__objeto {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.escena-desierto__referencia img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.rally__objeto {
+  display: grid;
+  place-items: center;
+  width: 10%;
+  min-width: 48px;
+  aspect-ratio: 1;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.rally__objeto:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.rally__objeto img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.3));
+}
+
+.rally__objeto--encontrado {
+  cursor: default;
+  box-shadow: 0 0 0 5px var(--exito);
+  background: rgb(255 255 255 / 0.6);
+}
+
+.rally__contador {
+  font-family: var(--fuente-titulos);
+  font-size: 1.3rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.rally__bolsa {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rally__pieza-ganada {
+  width: 5rem;
+  aspect-ratio: 3 / 2.4;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: var(--sombra-suave);
+  animation: sellar 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+
+/* --- Rompecabezas del mar --------------------------------------------------------- */
+
+.escena-mar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #79d4ff 0, #2391d9 60%, #0b5fa5 100%);
+}
+
+.escena-mar__figura {
+  position: absolute;
+}
+
+.escena-mar__figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Cada pieza muestra su porción de la escena completa (3 × 2). */
+.pieza__recorte {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pieza__recorte > .escena-mar {
+  position: absolute;
+  width: 300%;
+  height: 200%;
+  left: calc(var(--col) * -100%);
+  top: calc(var(--fila) * -100%);
+}
+
+.rompecabezas__tablero {
+  display: grid;
+  grid-template-columns: repeat(var(--columnas), 1fr);
+  gap: 4px;
+  width: min(100%, 36rem);
+  margin: 1rem auto;
+  padding: 4px;
+  background: #fff;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.rompecabezas__tablero--completo {
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.rompecabezas__casilla {
+  display: block;
+  aspect-ratio: 3 / 2.4;
+  padding: 0;
+  overflow: hidden;
+  background: repeating-linear-gradient(45deg, #eef6ff 0 10px, #dfeefc 10px 20px);
+  border: 3px dashed #9cc5ea;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.rompecabezas__casilla--llena {
+  border: 0;
+  border-radius: 0;
+  cursor: default;
+}
+
+.rompecabezas__bandeja {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.rompecabezas__pieza {
+  width: 7rem;
+  aspect-ratio: 3 / 2.4;
+  padding: 0;
+  overflow: hidden;
+  background: none;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: var(--sombra-suave);
+  cursor: pointer;
+}
+
+.rompecabezas__pieza:nth-child(odd) {
+  transform: rotate(-4deg);
+}
+
+.rompecabezas__pieza[aria-pressed='true'] {
+  box-shadow:
+    0 0 0 5px var(--resalte),
+    var(--sombra);
+  transform: translateY(-6px);
+}
+
+.rompecabezas__ayuda {
+  text-align: center;
+  font-weight: 700;
+}
+
+.rompecabezas__mensaje {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  font-size: 1.35rem;
+  background: #fff;
+  border-left: 10px solid var(--mar);
+  border-radius: var(--radio);
+}
+
+.rompecabezas__mensaje .icono {
+  width: 3rem;
+  height: 3rem;
+}
+
+.relevo {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.relevo .burbuja:nth-child(2) {
+  flex-direction: row-reverse;
+}
+
+.relevo .burbuja:nth-child(2) .burbuja__texto {
+  border-bottom-left-radius: var(--radio-grande);
+  border-bottom-right-radius: 8px;
+}

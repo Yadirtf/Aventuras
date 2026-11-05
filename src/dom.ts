@@ -1,3 +1,5 @@
+import { imagen, type Imagen } from './imagenes';
+
 /**
  * Ayudante mínimo para crear elementos sin innerHTML: todo el texto se inserta
  * como nodos de texto, así el contenido de los JSON nunca se interpreta como HTML.
@@ -38,6 +40,20 @@ function agregar(padre: Node, hijos: Hijo[]): void {
   }
 }
 
-/** Icono decorativo (emoji provisional) que los lectores de pantalla ignoran. */
-export const icono = (simbolo: string, clase = 'icono'): HTMLSpanElement =>
-  h('span', { class: clase, 'aria-hidden': 'true' }, simbolo);
+/** Pequeña figura 3D decorativa junto a un texto (títulos, botones). */
+export const icono = (nombre: Imagen, clase = 'icono'): HTMLImageElement =>
+  imagen(nombre, { clase, carga: 'eager' });
+
+/** Baraja una copia de la lista (Fisher-Yates). */
+export function barajar<T>(lista: readonly T[], azar: () => number = Math.random): T[] {
+  const copia = [...lista];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(azar() * (i + 1));
+    [copia[i], copia[j]] = [copia[j] as T, copia[i] as T];
+  }
+  return copia;
+}
+
+/** Respeta «menos movimiento» (preferencia guardada o del sistema). */
+export const sinMovimiento = (): boolean =>
+  document.documentElement.dataset.movimiento === 'reducido';

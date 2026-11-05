@@ -1,54 +1,124 @@
-/* --- Paisaje provisional en tres partes ------------------------------------------ */
+/* --- Paisaje en tres partes ------------------------------------------------------ */
 
 .paisaje {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   overflow: hidden;
-  margin-bottom: 1.5rem;
+  margin: 0 0 2rem;
+  border: 6px solid #fff;
   border-radius: var(--radio-grande);
   box-shadow: var(--sombra);
 }
 
 .paisaje__parte {
-  display: grid;
-  place-items: center;
-  min-height: 9rem;
-  padding: 1rem;
-  font-size: clamp(1.5rem, 1rem + 2.5vw, 2.75rem);
-  text-align: center;
-  letter-spacing: 0.1em;
+  position: relative;
+  min-height: clamp(11rem, 26vw, 19rem);
+  overflow: hidden;
 }
 
 .paisaje__parte--desierto {
-  background: linear-gradient(180deg, #ffd88a, #e9a95b);
+  background: linear-gradient(180deg, #ffd27a 0, #ffb36b 100%);
 }
 
 .paisaje__parte--mar {
-  background: linear-gradient(180deg, #7cc8e4, #1b7fa6);
+  background: linear-gradient(180deg, #79d4ff 0, #2391d9 100%);
 }
 
 .paisaje__parte--selva {
-  background: linear-gradient(180deg, #a6d98a, #3f8f3a);
+  background: linear-gradient(180deg, #b9f08a 0, #45b05a 100%);
+}
+
+.paisaje__suelo {
+  position: absolute;
+  inset: auto -10% -18% -10%;
+  height: 45%;
+  border-radius: 50% 50% 0 0;
+}
+
+.paisaje__parte--desierto .paisaje__suelo {
+  background: #f2a654;
+}
+
+.paisaje__parte--mar .paisaje__suelo {
+  background: #f3d9a4;
+  height: 30%;
+}
+
+.paisaje__parte--selva .paisaje__suelo {
+  background: #2f8f45;
+}
+
+.paisaje__figura {
+  position: absolute;
+  animation: flotar 4s ease-in-out infinite;
+  animation-delay: var(--retraso, 0s);
+}
+
+.paisaje__figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 8px rgb(42 31 61 / 0.3));
+}
+
+@keyframes flotar {
+  50% {
+    transform: translateY(-8px) rotate(-3deg);
+  }
 }
 
 /* --- Portada ------------------------------------------------------------------- */
 
 .portada {
-  max-width: var(--ancho-lectura);
-  margin: 0 auto;
   text-align: center;
 }
 
+.portada__cabecera {
+  margin-bottom: 1.5rem;
+}
+
 .portada__titulo {
-  margin-bottom: 0.25rem;
-  font-size: clamp(2.4rem, 1.5rem + 4.5vw, 4.5rem);
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  margin: 0;
+  color: var(--primario);
+  line-height: 0.9;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+}
+
+.portada__titulo-chico {
+  font-size: clamp(1.6rem, 1rem + 2.5vw, 2.8rem);
+  color: var(--tinta);
+  letter-spacing: 0.04em;
+}
+
+.portada__titulo-grande {
+  font-size: clamp(3.4rem, 1.5rem + 8vw, 7.5rem);
+  background: linear-gradient(
+    90deg,
+    #e2601b 0%,
+    #ff8a3d 22%,
+    #1b8fd6 45%,
+    #0a63a8 60%,
+    #23a356 80%,
+    #18793a 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 5px 0 rgb(42 31 61 / 0.12));
 }
 
 .portada__frase {
-  font-size: 1.4rem;
+  margin: 0.5rem 0 0;
+  font-size: 1.45rem;
   color: var(--tinta-suave);
+}
+
+.portada__inicio {
+  max-width: var(--ancho-lectura);
+  margin: 0 auto;
 }
 
 .portada .burbuja {
@@ -59,33 +129,44 @@
   display: grid;
   justify-items: center;
   gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--tarjeta);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra);
 }
 
 .portada__formulario label {
-  font-weight: 700;
+  font-family: var(--fuente-titulos);
+  font-size: 1.4rem;
+  font-weight: 800;
 }
 
-.portada__formulario input {
+.portada__formulario input,
+.mural__formulario input,
+.teatrino__propia input {
   width: min(100%, 28rem);
   min-height: var(--toque-minimo);
   padding: 0.5rem 1rem;
   font: inherit;
   text-align: center;
-  background: #fff;
+  background: var(--papel);
   border: 3px solid var(--borde);
   border-radius: var(--radio);
 }
 
-.portada__formulario input:focus {
+.portada__formulario input:focus,
+.mural__formulario input:focus,
+.teatrino__propia input:focus {
   border-color: var(--acento);
+  outline: none;
 }
 
 /* --- Mapa ---------------------------------------------------------------------- */
 
 .mapa__camino {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 2.5rem;
   margin: 0 0 2rem;
   padding: 0;
   list-style: none;
@@ -93,38 +174,68 @@
 
 .region {
   position: relative;
-  padding: 1.25rem;
+  padding: 0 1.1rem 1.25rem;
   background: var(--acento-suave);
+  border: 5px solid #fff;
   border-radius: var(--radio-grande);
+  box-shadow: var(--sombra);
+}
+
+.region__cabecera {
+  margin: 0 -1.1rem 1rem;
+  padding: 1rem 1.1rem 0.25rem;
+  background: linear-gradient(180deg, var(--cielo), var(--acento-suave));
+  border-radius: calc(var(--radio-grande) - 5px) calc(var(--radio-grande) - 5px) 0 0;
+}
+
+.region__figuras {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.region__figuras img {
+  width: 4.5rem;
+  height: 4.5rem;
+  filter: drop-shadow(0 6px 5px rgb(42 31 61 / 0.25));
+}
+
+.region__figuras img:nth-child(2) {
+  width: 5.5rem;
+  height: 5.5rem;
+  transform: translateY(-6px);
+}
+
+.region__titulo {
+  justify-content: center;
+  margin: 0.25rem 0 0;
+  font-size: 2rem;
+}
+
+.region__titulo a {
+  color: var(--acento-oscuro);
+  text-decoration: none;
 }
 
 /* Huellitas que unen un ecosistema con el siguiente. */
 .region:not(:last-child)::after {
-  content: '🐾';
+  content: '';
   position: absolute;
-  right: -1.75rem;
+  right: -2.4rem;
   top: 50%;
-  font-size: 1.5rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: url('/assets/3d/huellas.webp') center / contain no-repeat;
   transform: translateY(-50%) rotate(90deg);
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 44rem) {
   .region:not(:last-child)::after {
     right: 50%;
     top: auto;
-    bottom: -1.9rem;
+    bottom: -2.5rem;
     transform: translateX(50%) rotate(180deg);
   }
-}
-
-.region__titulo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.region__titulo a {
-  color: var(--acento);
 }
 
 .mapa__final {
@@ -134,7 +245,12 @@
 }
 
 .mapa__meta {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
   color: var(--tinta-suave);
 }
 
@@ -153,22 +269,44 @@
 }
 
 .ecosistema__ilustracion {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2%;
   width: 100%;
-  min-height: 10rem;
-  font-size: 6rem;
-  background: var(--acento-suave);
+  min-height: 13rem;
+  padding: 1rem;
+  background: linear-gradient(180deg, var(--cielo), var(--acento-suave));
+  border: 6px solid #fff;
   border-radius: var(--radio-grande);
+  box-shadow: var(--sombra);
+}
+
+.ecosistema__figura {
+  width: 18%;
+  animation: flotar 4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.4s);
+}
+
+.ecosistema__figura:nth-child(odd) {
+  transform: translateY(-1.5rem);
+}
+
+.ecosistema__figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 8px rgb(42 31 61 / 0.25));
 }
 
 .ecosistema__descripcion {
-  font-size: 1.35rem;
+  font-size: 1.4rem;
 }
 
 .ecosistema__creditos {
   display: grid;
   grid-template-columns: auto 1fr;
+  align-items: center;
   gap: 0.25rem 1rem;
   margin: 0;
 }
@@ -178,6 +316,9 @@
 }
 
 .ecosistema__creditos dd {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   margin: 0;
 }
 
@@ -195,71 +336,104 @@
 
 .parada__miga {
   margin-bottom: 0.25rem;
+  font-family: var(--fuente-titulos);
   font-weight: 700;
   color: var(--tinta-suave);
 }
 
+.parada__llegada {
+  margin-bottom: 1rem;
+}
+
+.parada__llegada .personaje {
+  width: 8rem;
+}
+
 .parada__bloque {
-  margin-bottom: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  background: #fff;
-  border: 3px solid var(--borde);
+  position: relative;
+  margin-bottom: 1.75rem;
+  padding: 1.5rem;
+  background: var(--tarjeta);
   border-radius: var(--radio-grande);
+  box-shadow: var(--sombra);
 }
 
-.parada__bloque:first-of-type {
-  padding: 0;
-  background: none;
-  border: 0;
+.parada__bloque > h2 {
+  color: var(--acento-oscuro);
 }
 
-.parada__bloque h2 {
-  color: var(--acento);
+.parada__bloque > h2 .icono {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.parada__intro {
+  color: var(--tinta-suave);
 }
 
 .en-construccion {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   padding: 1rem;
   background: var(--acento-suave);
-  border: 2px dashed var(--acento);
+  border: 3px dashed var(--acento);
   border-radius: var(--radio);
   font-size: 1.1rem;
 }
 
 .parada__sello {
+  display: grid;
+  justify-items: center;
+  overflow: hidden;
   text-align: center;
-  border-color: var(--acento);
+  box-shadow:
+    inset 0 0 0 4px var(--acento),
+    var(--sombra);
+}
+
+.parada__sello h2 {
+  justify-content: center;
 }
 
 .parada__sello--puesto {
-  background: var(--acento-suave);
+  background: linear-gradient(180deg, var(--acento-suave), #fff);
 }
 
 .sello-grande {
-  display: inline-block;
-  font-size: 2.5rem;
-  vertical-align: middle;
-  animation: sellar 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+  width: 5rem;
+  height: 5rem;
+  animation: sellar 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) both;
 }
 
 @keyframes sellar {
   from {
-    transform: scale(2.4) rotate(-20deg);
+    transform: scale(2.6) rotate(-25deg);
     opacity: 0;
   }
 }
 
 .pista {
+  width: 100%;
   margin: 1rem 0 1.5rem;
   padding: 1rem 1.25rem;
   text-align: left;
   background: #fff;
   border-radius: var(--radio);
-  border-left: 8px solid var(--acento);
+  border-left: 10px solid var(--resalte);
+  box-shadow: var(--sombra-suave);
 }
 
 .pista p {
   margin: 0;
-  font-size: 1.35rem;
+  font-size: 1.4rem;
+}
+
+.parada__siguiente {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .parada__navegacion {
@@ -276,24 +450,24 @@
   padding: 2rem;
   font-size: 1.1rem;
   background: #fff;
-  border: 2px solid var(--borde);
   border-radius: var(--radio);
+  box-shadow: var(--sombra);
 }
 
 .ficha h1 {
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
 
 .ficha h2 {
   margin-top: 1.5em;
-  font-size: 1.35rem;
-  color: var(--acento);
-  border-bottom: 2px solid var(--acento-suave);
+  font-size: 1.5rem;
+  color: var(--acento-oscuro);
+  border-bottom: 3px solid var(--acento-suave);
 }
 
 .ficha h4 {
   margin: 0.75em 0 0.25em;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .ficha__acciones {
@@ -336,12 +510,76 @@
   margin-top: 0;
   border: 0;
   color: var(--tinta);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
 .ficha__vacio {
   font-style: italic;
   color: var(--tinta-suave);
+}
+
+/* --- Tarjeta para la familia ----------------------------------------------------- */
+
+.familia {
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.familia__tarjeta {
+  position: relative;
+  padding: 2rem 2.25rem;
+  background: #fff;
+  border: 6px dashed var(--acento);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra);
+}
+
+.familia__figuras {
+  float: right;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.familia__figuras img {
+  width: 5.5rem;
+  height: 5.5rem;
+}
+
+.familia__para {
+  font-weight: 700;
+}
+
+.familia__linea {
+  display: inline-block;
+  min-width: 12rem;
+  border-bottom: 2px solid var(--tinta);
+}
+
+.familia__ideas {
+  font-size: 1.35rem;
+}
+
+.familia__ideas li {
+  margin-bottom: 0.5rem;
+}
+
+.familia__escribir {
+  margin-top: 1.5rem;
+  font-weight: 700;
+}
+
+.familia__renglones span {
+  display: block;
+  height: 2.5rem;
+  border-bottom: 2px solid #bbb;
+}
+
+.familia__firma {
+  margin: 1.5rem 0 0;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  color: var(--acento-oscuro);
+  text-align: right;
 }
 
 /* --- Final y página no encontrada ---------------------------------------------- */
@@ -353,17 +591,40 @@
   text-align: center;
 }
 
+.final h1,
+.no-encontrada h1 {
+  justify-content: center;
+}
+
 .final h1 {
   text-transform: uppercase;
 }
 
+.final__personajes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.final__personajes .personaje {
+  width: 5rem;
+}
+
+.final__personajes .personaje:nth-child(even) {
+  animation-delay: 0.3s;
+}
+
 .final__nombre {
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-family: var(--fuente-titulos);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primario);
 }
 
 .final__mensaje {
-  font-size: 1.4rem;
+  font-size: 1.45rem;
 }
 
 .final__sellos {
@@ -374,5 +635,15 @@
   margin: 1.5rem 0;
   padding: 0;
   list-style: none;
-  font-size: 2.25rem;
+}
+
+.final__sello {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+}
+
+.final__sello--vacio {
+  border: 3px dashed #d9cfe6;
+  border-radius: 50%;
 }

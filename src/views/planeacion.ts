@@ -62,7 +62,7 @@ export function planeacion(_ctx: Contexto, eco: EcosistemaId, numero: number): V
         h(
           'button',
           { type: 'button', class: 'boton boton--huellita', onclick: () => window.print() },
-          icono('🖨️'),
+          icono('impresora'),
           'Imprimir planeación',
         ),
       ),

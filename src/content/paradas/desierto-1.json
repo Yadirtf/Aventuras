@@ -7,8 +7,39 @@
   "saludo": "¡Hola, exploradores! Soy Dunita. Con estas orejas tan grandes escucho todo lo que ustedes saben. ¿Qué es un desierto para ustedes?",
   "retoPantalla": "La pelota preguntona rebota al ritmo de las palmas y se detiene en una pregunta. Las respuestas se pegan en un mural digital con cuatro columnas: clima, animales, plantas y agua.",
   "retoMovimiento": "Siéntense en círculo y pasen la pelota mientras marcan el ritmo con palmas. ¡Cuando el ritmo se detenga, quien tenga la pelota responde!",
-  "sello": { "nombre": "Sol", "icono": "☀️" },
+  "sello": {
+    "nombre": "Sol",
+    "imagen": "sol"
+  },
   "pista": "Nuestro mural tiene arena, sol, plantas y animales, pero todavía están quietos. ¿Cómo hacen los animales cuando hace mucho calor y casi no hay agua? En la próxima parada, los animales cobrarán vida.",
+  "juego": {
+    "tipo": "pelota-preguntona",
+    "preguntas": [
+      "¿Qué es un desierto? ¿Han visto alguno, en fotos o en videos?",
+      "¿Cómo piensan que está el clima allí?",
+      "¿Qué animales creen que hay en ese lugar?",
+      "¿Qué plantas piensan que crecen?",
+      "¿Y qué pasa con el agua en un sitio así?"
+    ],
+    "columnas": [
+      {
+        "nombre": "Clima",
+        "imagen": "sol"
+      },
+      {
+        "nombre": "Animales",
+        "imagen": "camello"
+      },
+      {
+        "nombre": "Plantas",
+        "imagen": "cactus"
+      },
+      {
+        "nombre": "Agua",
+        "imagen": "gota"
+      }
+    ]
+  },
   "planeacion": {
     "tema": "Lo que sabemos del desierto",
     "autora": "Katerin López",
@@ -89,7 +120,11 @@
       "Si un niño o niña no quiere dibujar o hablar, puede participar ayudando a organizar el mural.",
       "Si a alguien le molesta o le produce alergia la arena, se puede sustituir por harina de maíz o papel crepé triturado."
     ],
-    "anexos": [{ "titulo": "Anexo 1: Guía de las bases del desierto (para la docente)" }],
+    "anexos": [
+      {
+        "titulo": "Anexo 1: Guía de las bases del desierto (para la docente)"
+      }
+    ],
     "pendientes": ["Fecha de la sesión."]
   }
 }
