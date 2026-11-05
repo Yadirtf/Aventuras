@@ -1,6 +1,31 @@
 # Figuras 3D
 
-Las imágenes de esta carpeta son de **Fluent Emoji** (estilo 3D) de Microsoft,
+## Personajes y elementos nuevos (noviembre 2026)
+
+Estas 18 figuras reemplazan a las de Fluent Emoji. Las originales están en `imagenes/`;
+aquí se les quitó el fondo y se dejaron en 512 × 512 px.
+
+| Archivo                                               | Origen                                                 | Licencia                |
+| ----------------------------------------------------- | ------------------------------------------------------ | ----------------------- |
+| zorro.webp                                            | Pixabay, hansuan_fabregas (7468838)                    | Pixabay Content License |
+| tortuga.webp                                          | Pixabay, tanrica (8656301)                             | Pixabay Content License |
+| mono.webp                                             | Pixabay, sergeikolo (9463746)                          | Pixabay Content License |
+| huellas.webp                                          | Pixabay, elionas (1314467), recoloreada                | Pixabay Content License |
+| tiburon.webp                                          | Pixabay, ai-hobby-kunst (8446843)                      | Pixabay Content License |
+| medusa.webp                                           | Pixabay, gugacurado (8229476)                          | Pixabay Content License |
+| cocodrilo.webp                                        | Pixabay, julientromeur (7511121)                       | Pixabay Content License |
+| cactus.webp                                           | Pixabay, katillustrationlondon (3871544)               | Pixabay Content License |
+| sol.webp                                              | Pixabay, susan-lu4esm (10065426)                       | Pixabay Content License |
+| serpiente.webp                                        | Pixabay, syaibatulhamdi (9010653)                      | Pixabay Content License |
+| pulpo.webp                                            | Pixabay, tanrica (8722580)                             | Pixabay Content License |
+| pez.webp                                              | Pixabay (5568967)                                      | Pixabay Content License |
+| loro, camello, concha, palmera, delfin, coral (.webp) | Generadas con Google Gemini por el equipo del proyecto | Uso propio              |
+
+Pixabay Content License: https://pixabay.com/service/license-summary/ (uso libre, sin atribución obligatoria).
+
+## Resto de figuras
+
+Las demás imágenes de esta carpeta son de **Fluent Emoji** (estilo 3D) de Microsoft,
 obtenidas del paquete [`@lobehub/fluent-emoji-3d`](https://www.npmjs.com/package/@lobehub/fluent-emoji-3d)
 y renombradas en español.
 
