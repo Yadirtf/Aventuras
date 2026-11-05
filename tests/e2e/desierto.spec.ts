@@ -1,26 +1,5 @@
-import { expect, test, type Page } from '@playwright/test';
-
-/** Abre una parada en Modo Docente para no depender del orden de desbloqueo. */
-async function abrir(page: Page, ruta: string) {
-  await page.addInitScript(() => {
-    // Solo la primera vez: así una recarga conserva lo guardado.
-    if (localStorage.getItem('camino-aventuras:v1')) return;
-    localStorage.setItem(
-      'camino-aventuras:v1',
-      JSON.stringify({
-        explorador: 'Prueba',
-        completadas: [],
-        modoDocente: true,
-        menosMovimiento: true,
-        mural: {},
-      }),
-    );
-  });
-  page.on('pageerror', (e) => {
-    throw e;
-  });
-  await page.goto(ruta);
-}
+import { expect, test } from '@playwright/test';
+import { abrir } from './ayuda';
 
 test.describe('Parada 1: pelota preguntona', () => {
   test('la pelota se detiene en las 5 preguntas y el juego termina', async ({ page }) => {

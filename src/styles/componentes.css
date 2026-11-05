@@ -658,3 +658,27 @@ a.tarjeta-parada__cuerpo:hover {
   font-size: 1.4rem;
   font-weight: 700;
 }
+
+.selector-voz {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.selector-voz label {
+  font-weight: 700;
+}
+
+.selector-voz__fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.selector-voz select {
+  flex: 1 1 14rem;
+  min-height: 3rem;
+  padding: 0.4rem 0.6rem;
+  font: inherit;
+  border: 3px solid var(--borde);
+  border-radius: 12px;
+}

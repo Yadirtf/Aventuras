@@ -1,5 +1,14 @@
 import { esImagen } from '../imagenes';
-import { ECOSISTEMAS, PERSONAJES, type Parada } from './types';
+import {
+  DIETAS,
+  ECOSISTEMAS,
+  ESTACIONES,
+  FONDOS_CUENTO,
+  ORDENES_MONO,
+  PERSONAJES,
+  SONIDOS_SELVA,
+  type Parada,
+} from './types';
 
 /**
  * Valida en tiempo de ejecución que un JSON de parada tenga todos los campos.
@@ -58,6 +67,22 @@ class Revisor {
     const v = obj[campo];
     if (typeof v !== 'number' || v < min || v > max)
       this.errores.push(`${ruta}${campo}: debe ser un número entre ${min} y ${max}`);
+  }
+
+  uno(obj: Registro, campo: string, ruta: string, opciones: readonly string[]): void {
+    if (!opciones.includes(obj[campo] as string))
+      this.errores.push(`${ruta}${campo}: debe ser uno de ${opciones.join(', ')}`);
+  }
+
+  relevo(obj: Registro, ruta: string): void {
+    const v = obj.relevo;
+    if (!esRegistro(v)) {
+      this.errores.push(`${ruta}relevo: falta`);
+      return;
+    }
+    this.texto(v, 'despedida', `${ruta}relevo.`);
+    this.texto(v, 'respuesta', `${ruta}relevo.`);
+    this.uno(v, 'siguienteGuia', `${ruta}relevo.`, PERSONAJES);
   }
 
   /** Revisa una lista de objetos con `revisar` y exige al menos `minimo` elementos. */
@@ -206,13 +231,80 @@ function validarJuego(r: Revisor, juego: unknown): void {
         r.numero(p, 'y', rp, 0, 100);
       });
       r.texto(juego, 'reverso', ruta);
-      if (!esRegistro(juego.relevo)) r.errores.push('juego.relevo: falta');
-      else {
-        r.texto(juego.relevo, 'despedida', 'juego.relevo.');
-        r.texto(juego.relevo, 'respuesta', 'juego.relevo.');
-        if (!PERSONAJES.includes(juego.relevo.siguienteGuia as never))
-          r.errores.push('juego.relevo.siguienteGuia: personaje desconocido');
-      }
+      r.relevo(juego, ruta);
+      return;
+    case 'siluetas':
+      r.objetos(juego, 'animales', ruta, 2, (a, ra) => {
+        for (const campo of ['id', 'nombre', 'alimento', 'explicacion']) r.texto(a, campo, ra);
+        r.imagen(a, 'imagen', ra);
+        r.imagen(a, 'imagenAlimento', ra);
+        r.uno(a, 'dieta', ra, DIETAS);
+        r.uno(a, 'articulo', ra, ['el', 'la']);
+      });
+      r.objetos(juego, 'otrosAlimentos', ruta, 0, (a, ra) => {
+        r.texto(a, 'nombre', ra);
+        r.imagen(a, 'imagen', ra);
+      });
+      return;
+    case 'mapa-tesoro':
+      r.objetos(juego, 'tarjetas', ruta, 2, (t, rt) => {
+        r.texto(t, 'nombre', rt);
+        r.imagen(t, 'imagen', rt);
+      });
+      r.texto(juego, 'mensajeMapa', ruta);
+      return;
+    case 'tesoro':
+      r.numero(juego, 'pasos', ruta, 3, 20);
+      r.numero(juego, 'segundosCongelado', ruta, 1, 10);
+      r.texto(juego, 'invitacion', ruta);
+      r.relevo(juego, ruta);
+      return;
+    case 'sonido-misterioso':
+      r.objetos(juego, 'animales', ruta, 2, (a, ra) => {
+        r.uno(a, 'sonido', ra, SONIDOS_SELVA);
+        r.uno(a, 'articulo', ra, ['el', 'la']);
+        r.texto(a, 'nombre', ra);
+        r.texto(a, 'dato', ra);
+        r.imagen(a, 'imagen', ra);
+      });
+      r.objetos(juego, 'movimientos', ruta, 1, (m, rm) => {
+        r.texto(m, 'nombre', rm);
+        r.texto(m, 'accion', rm);
+        r.imagen(m, 'imagen', rm);
+      });
+      r.numero(juego, 'segundosMovimiento', ruta, 5, 120);
+      return;
+    case 'circuito':
+      r.objetos(juego, 'estaciones', ruta, 1, (e, re) => {
+        r.uno(e, 'id', re, ESTACIONES);
+        r.texto(e, 'titulo', re);
+        r.texto(e, 'instruccion', re);
+        r.imagen(e, 'imagen', re);
+      });
+      r.numero(juego, 'saltosRio', ruta, 1, 10);
+      r.numero(juego, 'conos', ruta, 2, 10);
+      r.numero(juego, 'aros', ruta, 2, 10);
+      if (!Array.isArray(juego.ordenesMono) || juego.ordenesMono.length === 0)
+        r.errores.push(`${ruta}ordenesMono: debe ser una lista`);
+      else
+        juego.ordenesMono.forEach((o, i) => {
+          if (!ORDENES_MONO.includes(o as never))
+            r.errores.push(`${ruta}ordenesMono[${i}]: debe ser uno de ${ORDENES_MONO.join(', ')}`);
+        });
+      return;
+    case 'cuento':
+      r.texto(juego, 'titulo', ruta);
+      r.objetos(juego, 'escenas', ruta, 1, (e, re) => {
+        for (const campo of ['titulo', 'texto', 'movimiento']) r.texto(e, campo, re);
+        r.uno(e, 'fondo', re, FONDOS_CUENTO);
+        if (!Array.isArray(e.figuras) || e.figuras.length === 0)
+          r.errores.push(`${re}figuras: debe tener al menos una imagen`);
+        else
+          e.figuras.forEach((f, i) => {
+            if (!esImagen(f))
+              r.errores.push(`${re}figuras[${i}]: imagen desconocida «${String(f)}»`);
+          });
+      });
       return;
     default:
       r.errores.push(`juego.tipo: tipo de juego desconocido «${String(juego.tipo)}»`);

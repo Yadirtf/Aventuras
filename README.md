@@ -43,9 +43,9 @@ src/
   views/               Portada, mapa, ecosistema, parada, planeación, familia y final
   components/          Piezas reutilizables (personajes con poses, burbuja con voz, fondo
                        animado, celebración, rincón de calma, pasaporte, opciones)
-  juegos/              Los juegos de cada parada (pelota preguntona, títeres, rally)
+  juegos/              Los juegos de las 9 paradas y piezas comunes (aros, temporizador)
   imagenes.ts          Lista de figuras disponibles
-  voz.ts, sonido.ts    Lectura en voz alta y efectos de sonido del navegador
+  voz.ts, sonido.ts    Lectura en voz alta y sonidos (efectos, animales y tormenta)
   styles/              Variables de diseño, estilos base, de vistas y de impresión
   router.ts            Rutas limpias con la History API
 tests/                 Pruebas de contenido, progreso, pasaporte y rutas
@@ -119,6 +119,25 @@ sonidos, rincón de calma y los tres juegos del desierto (pelota preguntona con 
 títeres con mímica, teatrino y «¿Mito o realidad?», y rally de pistas con rompecabezas), además de
 la tarjeta para la familia.
 
-Pendiente de revisión de las autoras: las adaptaciones de los animales y las frases del teatrino
-del desierto son un borrador. Quedan para más adelante las fotos de la galería y las voces grabadas;
-mientras tanto la página usa la voz del navegador.
+Fases 4 y 5 listas:
+
+- **Fondo del mar:** siluetas para arrastrar, «¿Qué comen?» y «¡A comer!»; el mapa del tesoro por la
+  ruta A (línea en zigzag, con dedo, ratón o flechas) o la B (aros); el arrecife de las medusas con
+  «¡congélate 3 segundos!», el cofre y el pasaporte de viajero que abre el sobre «¿?».
+- **Selva:** sonido misterioso y pausa activa «Despertamos como animales»; el circuito de cuatro
+  estaciones (cocodrilos, serpientes, troncos y «¡Mono arriba!»); el cuento «Un día en la selva» con
+  lluvia, viento y trueno.
+
+Los sonidos de animales y de la tormenta se generan en el navegador mientras no haya grabaciones con
+licencia libre.
+
+## Voz de los personajes
+
+La lectura en voz alta usa la voz del navegador. La página elige primero las voces «naturales»
+(neuronales) en español latinoamericano y cambia el tono de cada personaje solo un poco, porque
+forzarlo hace sonar la voz a robot. En ⚙️ Opciones se puede elegir y probar otra voz del equipo.
+En Edge las voces «Online (Natural)» suenan mucho mejor que las del sistema.
+
+Pendiente de revisión de las autoras: las adaptaciones de los animales, las frases del teatrino,
+las dietas de los animales marinos, los datos de los sonidos y los textos de los juegos son un
+borrador. Quedan para más adelante las fotos de la galería y las voces grabadas.

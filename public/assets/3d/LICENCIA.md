@@ -27,7 +27,9 @@ Pixabay Content License: https://pixabay.com/service/license-summary/ (uso libre
 
 Las demás imágenes de esta carpeta son de **Fluent Emoji** (estilo 3D) de Microsoft,
 obtenidas del paquete [`@lobehub/fluent-emoji-3d`](https://www.npmjs.com/package/@lobehub/fluent-emoji-3d)
-y renombradas en español.
+y renombradas en español. Entre ellas, las que se sumaron para el mar y la selva: algas, amanecer,
+arcoiris, camaron, cangrejo, flor, gema, mascara-buceo, moneda, oreja, pajaro, pez-tropical,
+plancton, tigre, tormenta, tronco y trueno.
 
 - Proyecto original: https://github.com/microsoft/fluentui-emoji
 - Licencia: MIT

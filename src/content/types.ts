@@ -103,16 +103,126 @@ export interface PistaRally {
   y: number;
 }
 
+/** El guía de un ecosistema le entrega la pista al guía del siguiente. */
+export interface Relevo {
+  despedida: string;
+  respuesta: string;
+  siguienteGuia: PersonajeId;
+}
+
 /** Parada 3 del desierto: buscar objetos con pistas espaciales y armar el rompecabezas. */
 export interface JuegoRally {
   tipo: 'rally';
   pistas: PistaRally[];
   /** Texto al reverso del rompecabezas: la pista del siguiente ecosistema. */
   reverso: string;
-  relevo: { despedida: string; respuesta: string; siguienteGuia: PersonajeId };
+  relevo: Relevo;
 }
 
-export type Juego = JuegoPelotaPreguntona | JuegoTiteres | JuegoRally;
+export const DIETAS = ['herbivoro', 'carnivoro', 'omnivoro'] as const;
+export type Dieta = (typeof DIETAS)[number];
+
+export interface AnimalMarino {
+  id: string;
+  nombre: string;
+  /** Para armar frases: «el tiburón», «la tortuga marina». */
+  articulo: 'el' | 'la';
+  imagen: Imagen;
+  dieta: Dieta;
+  /** Lo que come, en palabras para niños (se muestra en su tarjeta de alimento). */
+  alimento: string;
+  imagenAlimento: Imagen;
+  /** Se lee al acertar su dieta. */
+  explicacion: string;
+}
+
+/** Parada 1 del mar: siluetas, «¿qué comen?» y «¡A comer!». */
+export interface JuegoSiluetas {
+  tipo: 'siluetas';
+  animales: AnimalMarino[];
+  /** Tarjetas de alimento que no son de ningún animal del juego, para despistar. */
+  otrosAlimentos: { nombre: string; imagen: Imagen }[];
+}
+
+/** Parada 2 del mar: cruzar el mar por la ruta A o la B y armar el mapa con las tarjetas. */
+export interface JuegoMapaTesoro {
+  tipo: 'mapa-tesoro';
+  /** Una tarjeta por cruce; con todas se arma el mapa. */
+  tarjetas: { nombre: string; imagen: Imagen }[];
+  /** Lo que dice el mapa armado: las últimas pistas hacia la gran X. */
+  mensajeMapa: string;
+}
+
+/** Parada 3 del mar: arrecife de medusas, cofre y pasaporte que abre el sobre «¿?». */
+export interface JuegoTesoro {
+  tipo: 'tesoro';
+  /** Pasos para cruzar el arrecife. */
+  pasos: number;
+  segundosCongelado: number;
+  /** La invitación que trae el sobre. */
+  invitacion: string;
+  relevo: Relevo;
+}
+
+export const SONIDOS_SELVA = ['mono', 'serpiente', 'rana', 'ave', 'jaguar'] as const;
+export type SonidoSelva = (typeof SONIDOS_SELVA)[number];
+
+/** Parada 1 de la selva: sonido misterioso y pausa activa «Despertamos como animales». */
+export interface JuegoSonidos {
+  tipo: 'sonido-misterioso';
+  animales: {
+    sonido: SonidoSelva;
+    nombre: string;
+    articulo: 'el' | 'la';
+    imagen: Imagen;
+    dato: string;
+  }[];
+  movimientos: { nombre: string; imagen: Imagen; accion: string }[];
+  segundosMovimiento: number;
+}
+
+export const ESTACIONES = ['rio', 'serpientes', 'troncos', 'monos'] as const;
+export type EstacionId = (typeof ESTACIONES)[number];
+export const ORDENES_MONO = ['arriba', 'abajo', 'derecha', 'izquierda'] as const;
+export type OrdenMono = (typeof ORDENES_MONO)[number];
+
+/** Parada 2 de la selva: circuito de cuatro estaciones. */
+export interface JuegoCircuito {
+  tipo: 'circuito';
+  estaciones: { id: EstacionId; titulo: string; imagen: Imagen; instruccion: string }[];
+  /** Saltos que hay que dar para cruzar el río sin despertar a los cocodrilos. */
+  saltosRio: number;
+  conos: number;
+  aros: number;
+  ordenesMono: OrdenMono[];
+}
+
+export const FONDOS_CUENTO = ['amanecer', 'rugido', 'tormenta', 'sol', 'reunion'] as const;
+export type FondoCuento = (typeof FONDOS_CUENTO)[number];
+
+/** Parada 3 de la selva: cuento en escenas con su movimiento y la banda sonora de la tormenta. */
+export interface JuegoCuento {
+  tipo: 'cuento';
+  titulo: string;
+  escenas: {
+    titulo: string;
+    texto: string;
+    movimiento: string;
+    fondo: FondoCuento;
+    figuras: Imagen[];
+  }[];
+}
+
+export type Juego =
+  | JuegoPelotaPreguntona
+  | JuegoTiteres
+  | JuegoRally
+  | JuegoSiluetas
+  | JuegoMapaTesoro
+  | JuegoTesoro
+  | JuegoSonidos
+  | JuegoCircuito
+  | JuegoCuento;
 export type TipoJuego = Juego['tipo'];
 
 /** Una parada del mapa: la experiencia en pantalla más su planeación. */

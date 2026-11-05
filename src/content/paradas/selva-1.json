@@ -7,8 +7,79 @@
   "saludo": "¡Uh, uh, ah, ah! Soy Momo y no me puedo quedar quieto. ¿Escuchan esos sonidos? ¡Algo se mueve en la selva! ¿Qué animal será?",
   "retoPantalla": "Sonido misterioso: escuchen un animal de la selva (mono, serpiente, rana, ave o jaguar) y elijan cuál es.",
   "retoMovimiento": "Despertamos como animales: estírense como una jirafa, salten como un mono, den pasos fuertes como un elefante y muevan los brazos como un ave.",
-  "sello": { "nombre": "Hoja", "imagen": "hoja" },
+  "sello": {
+    "nombre": "Hoja",
+    "imagen": "hoja"
+  },
   "pista": "En la próxima aventura seguiremos explorando la selva, pero esta vez habrá retos de movimiento para avanzar por sus caminos.",
+  "juego": {
+    "tipo": "sonido-misterioso",
+    "animales": [
+      {
+        "sonido": "mono",
+        "nombre": "Mono",
+        "articulo": "el",
+        "imagen": "mono",
+        "dato": "Los monos gritan para avisarle a su grupo dónde están."
+      },
+      {
+        "sonido": "serpiente",
+        "nombre": "Serpiente",
+        "articulo": "la",
+        "imagen": "serpiente",
+        "dato": "La serpiente sisea para decir: ¡no te acerques!"
+      },
+      {
+        "sonido": "rana",
+        "nombre": "Rana",
+        "articulo": "la",
+        "imagen": "rana",
+        "dato": "Las ranas croan más fuerte cuando llueve."
+      },
+      {
+        "sonido": "ave",
+        "nombre": "Loro",
+        "articulo": "el",
+        "imagen": "loro",
+        "dato": "Los loros silban y hasta imitan los sonidos que escuchan."
+      },
+      {
+        "sonido": "jaguar",
+        "nombre": "Jaguar",
+        "articulo": "el",
+        "imagen": "jaguar",
+        "dato": "El jaguar es el felino más grande de América y ruge con fuerza."
+      }
+    ],
+    "movimientos": [
+      {
+        "nombre": "Jirafa",
+        "imagen": "jirafa",
+        "accion": "Estírense hacia arriba como una jirafa que alcanza las hojas."
+      },
+      {
+        "nombre": "Mono",
+        "imagen": "mono",
+        "accion": "Salten con los pies juntos como un mono."
+      },
+      {
+        "nombre": "Elefante",
+        "imagen": "elefante",
+        "accion": "Den pasos fuertes como un elefante."
+      },
+      {
+        "nombre": "Ave",
+        "imagen": "pajaro",
+        "accion": "Muevan los brazos como un ave que vuela entre los árboles."
+      },
+      {
+        "nombre": "Jaguar",
+        "imagen": "jaguar",
+        "accion": "Caminen en cuatro apoyos como un jaguar que busca su alimento."
+      }
+    ],
+    "segundosMovimiento": 20
+  },
   "planeacion": {
     "tema": "Nos adentramos en la selva",
     "autora": "Yenifer Tatiana Fonseca Sánchez",

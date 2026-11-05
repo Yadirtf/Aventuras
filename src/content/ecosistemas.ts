@@ -30,6 +30,14 @@ export const ecosistemas: Record<EcosistemaId, Ecosistema> = {
     guia: 'capitana-tortu',
     imagen: 'pez',
     paisaje: ['ola', 'pez', 'pulpo', 'coral', 'delfin'],
+    familia: {
+      titulo: 'Lo que aprendimos del fondo del mar',
+      ideas: [
+        'Muéstrale a tu familia cómo se mueve tu animal marino favorito y cuéntales qué come.',
+        'Jueguen a ser equilibristas: caminen sobre una línea imaginaria sin «caer al agua».',
+        'Pregúntales qué animales creen que viven en la selva: ¡es nuestra próxima aventura!',
+      ],
+    },
   },
   selva: {
     id: 'selva',
@@ -41,5 +49,13 @@ export const ecosistemas: Record<EcosistemaId, Ecosistema> = {
     guia: 'momo',
     imagen: 'palmera',
     paisaje: ['palmera', 'mono', 'loro', 'rana', 'mariposa'],
+    familia: {
+      titulo: 'Lo que aprendimos de la selva',
+      ideas: [
+        'Cuéntale a tu familia el cuento «Un día en la selva» y represéntenlo juntos.',
+        'Jueguen a «¡Mono arriba, abajo, a un lado!» para practicar derecha e izquierda.',
+        'Conversen sobre una manera de cuidar las plantas y los animales cerca de su casa.',
+      ],
+    },
   },
 };

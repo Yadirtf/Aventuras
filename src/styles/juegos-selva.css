@@ -1,0 +1,487 @@
+/* --- Juegos de la selva (fase 5) -------------------------------------------------- */
+
+/* Sonido misterioso */
+.sonidos__escuchar--sonando .icono {
+  animation: latido 0.4s ease-in-out 3;
+}
+
+.sonidos__opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.sonidos__opcion {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  min-height: var(--toque-minimo);
+  padding: 0.75rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--tinta);
+  background: #fff;
+  border: 3px solid transparent;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  cursor: pointer;
+}
+
+.sonidos__opcion--bien {
+  border-color: var(--exito);
+  outline: 4px solid var(--resalte);
+}
+
+.sonidos__figura {
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+}
+
+.sonidos__contador {
+  margin-top: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.movimiento {
+  display: grid;
+  justify-items: center;
+  max-width: 20rem;
+  padding: 1rem;
+  text-align: center;
+  background: #fff;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.movimiento__figura {
+  width: 7rem;
+  height: 7rem;
+  object-fit: contain;
+}
+
+.movimiento__nombre {
+  margin: 0.25rem 0;
+  font-family: var(--fuente-titulos);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--acento-oscuro);
+}
+
+.movimiento__accion {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+/* Circuito */
+.circuito__progreso {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: paso;
+}
+
+.circuito__paso {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  font-weight: 700;
+  color: var(--tinta-suave);
+  background: rgb(255 255 255 / 0.6);
+  border-radius: 12px;
+}
+
+.circuito__paso--actual {
+  color: var(--tinta);
+  background: #fff;
+  outline: 3px solid var(--acento);
+}
+
+.circuito__paso--hecho {
+  color: #fff;
+  background: var(--exito);
+}
+
+.circuito__panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: var(--radio);
+}
+
+.circuito__titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+}
+
+.circuito > .boton {
+  display: flex;
+  margin: 1rem auto 0;
+}
+
+.rio,
+.serpientes,
+.monos {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.serpientes:focus-visible,
+.monos:focus-visible {
+  outline: 4px solid var(--resalte);
+  border-radius: var(--radio);
+}
+
+.rio__agua {
+  position: relative;
+  width: 100%;
+  height: 12rem;
+  background:
+    linear-gradient(180deg, #8ce99a 0 14%, transparent 14% 86%, #8ce99a 86%),
+    repeating-linear-gradient(90deg, #339af0 0 30px, #4dabf7 30px 60px);
+  border-radius: var(--radio);
+}
+
+.rio__cocodrilo {
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  width: 8rem;
+  transform: translateX(-50%);
+}
+
+.rio__cocodrilo img {
+  width: 100%;
+  height: auto;
+}
+
+.rio__zzz,
+.rio__ojos {
+  position: absolute;
+  top: -1.4rem;
+  padding: 0 0.5rem;
+  font-weight: 800;
+  background: #fff;
+  border-radius: 999px;
+}
+
+.rio__ojos {
+  display: none;
+  color: #c92a2a;
+}
+
+[data-estado='despierto'] .rio__zzz {
+  display: none;
+}
+
+[data-estado='despierto'] .rio__ojos {
+  display: block;
+}
+
+[data-estado='despierto'] img {
+  animation: sacudir 0.3s ease 2;
+}
+
+@keyframes sacudir {
+  50% {
+    transform: rotate(-6deg);
+  }
+}
+
+.rio__piedras {
+  position: absolute;
+  inset: auto 0 12% 0;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  padding: 0 calc(100% / 8);
+}
+
+.rio__piedra {
+  justify-self: center;
+  width: 3rem;
+  height: 1.6rem;
+  background: #868e96;
+  border-radius: 50%;
+}
+
+.rio__piedra--pisada {
+  background: #ffd43b;
+}
+
+.rio__ficha {
+  position: absolute;
+  bottom: 14%;
+  width: 3.5rem;
+  transform: translateX(-50%);
+  transition: left 0.25s ease;
+}
+
+.rio__ficha img {
+  width: 100%;
+  height: auto;
+}
+
+.rio__estado {
+  margin: 0;
+  font-weight: 700;
+}
+
+.zigzag {
+  position: relative;
+  width: min(100%, 18rem);
+  height: 20rem;
+  background: #d8f5a2;
+  border-radius: var(--radio);
+}
+
+.zigzag__conos {
+  display: grid;
+  height: 100%;
+  margin: 0;
+  padding: 1rem 0;
+  list-style: none;
+  place-items: center;
+}
+
+.zigzag__cono {
+  width: 0;
+  height: 0;
+  border-right: 1.1rem solid transparent;
+  border-bottom: 2.2rem solid #fd7e14;
+  border-left: 1.1rem solid transparent;
+}
+
+.zigzag__serpiente {
+  position: absolute;
+  left: 50%;
+  width: 3.5rem;
+  transform: translate(-50%, 0);
+  transition:
+    top 0.3s ease,
+    left 0.3s ease;
+}
+
+.zigzag__serpiente[data-lado='izquierda'] {
+  left: 22%;
+}
+
+.zigzag__serpiente[data-lado='derecha'] {
+  left: 78%;
+}
+
+.zigzag__serpiente img {
+  width: 100%;
+  height: auto;
+}
+
+.troncos {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  background:
+    radial-gradient(circle at 20% 80%, #2b8a3e 0 10%, transparent 11%),
+    linear-gradient(180deg, #b2f2bb, #69db7c);
+  border-radius: var(--radio);
+}
+
+.troncos .aros__aro {
+  border-color: #8d5524;
+}
+
+.monos__orden {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  color: var(--acento-oscuro);
+}
+
+.monos__escena {
+  position: relative;
+  width: min(100%, 20rem);
+  height: 14rem;
+  background: linear-gradient(180deg, #d3f9d8, #8ce99a);
+  border-radius: var(--radio);
+}
+
+.monos__mono {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6rem;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease;
+}
+
+.monos__mono img {
+  width: 100%;
+  height: auto;
+}
+
+.monos__mono[data-pose='arriba'] {
+  transform: translate(-50%, -95%);
+}
+
+.monos__mono[data-pose='abajo'] {
+  transform: translate(-50%, -10%) scaleY(0.8);
+}
+
+.monos__mono[data-pose='derecha'] {
+  transform: translate(15%, -50%);
+}
+
+.monos__mono[data-pose='izquierda'] {
+  transform: translate(-115%, -50%);
+}
+
+.monos__botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.monos__boton {
+  min-width: 8rem;
+  font-size: 1.2rem;
+}
+
+/* Cuento */
+.cuento__contador {
+  font-family: var(--fuente-titulos);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--acento-oscuro);
+}
+
+.cuento__marco {
+  overflow: hidden;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.cuento__escena {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  transition: background 0.6s ease;
+}
+
+.cuento__escena--amanecer {
+  background: linear-gradient(180deg, #ffd8a8, #ffa94d 45%, #69db7c 75%);
+}
+
+.cuento__escena--rugido {
+  background: linear-gradient(180deg, #a9e34b, #2f9e44 70%, #1b5e20);
+}
+
+.cuento__escena--tormenta {
+  background: linear-gradient(180deg, #495057, #343a40 50%, #2b8a3e 80%);
+}
+
+.cuento__escena--sol {
+  background: linear-gradient(180deg, #74c0fc, #d0ebff 45%, #69db7c 75%);
+}
+
+.cuento__escena--reunion {
+  background: linear-gradient(180deg, #e599f7, #ffd8a8 45%, #51cf66 75%);
+}
+
+.cuento__figura {
+  position: absolute;
+  bottom: 12%;
+  width: 14%;
+  transform: translateX(-50%);
+  animation: brincar 1.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.2s);
+}
+
+.cuento__figura:nth-child(odd) {
+  bottom: 30%;
+}
+
+.cuento__figura img {
+  width: 100%;
+  height: auto;
+}
+
+@keyframes brincar {
+  50% {
+    transform: translate(-50%, -10%);
+  }
+}
+
+.cuento__gotas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: repeating-linear-gradient(
+    105deg,
+    transparent 0 14px,
+    rgb(255 255 255 / 0.6) 14px 16px
+  );
+  background-size: 100% 40px;
+}
+
+.cuento__escena--lluvia .cuento__gotas {
+  opacity: 1;
+  animation: llover 0.4s linear infinite;
+}
+
+@keyframes llover {
+  to {
+    background-position: -12px 40px;
+  }
+}
+
+.cuento__escena--viento .cuento__figura {
+  animation: ventarron 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes ventarron {
+  to {
+    transform: translateX(-50%) rotate(12deg);
+  }
+}
+
+.cuento__escena--trueno {
+  animation: relampago 0.9s ease;
+}
+
+@keyframes relampago {
+  10%,
+  30% {
+    filter: brightness(2.2);
+  }
+  20%,
+  40% {
+    filter: brightness(1);
+  }
+}
+
+.cuento__movimiento {
+  padding: 0.75rem 1rem;
+  font-size: 1.15rem;
+  background: var(--resalte);
+  border-radius: var(--radio);
+}
+
+.cuento__efectos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}

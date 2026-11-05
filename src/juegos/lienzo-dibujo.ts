@@ -20,9 +20,17 @@ type Herramienta =
 export function lienzoDibujo({
   nombreArchivo,
   pegatinas,
+  papel = ['#fff6dc', '#ffe2a8'],
+  conArena = true,
+  alDibujar,
 }: {
   nombreArchivo: string;
   pegatinas: Imagen[];
+  /** Colores de arriba y de abajo del papel. */
+  papel?: [string, string];
+  conArena?: boolean;
+  /** Se llama la primera vez que alguien dibuja o pega algo. */
+  alDibujar?: () => void;
 }): HTMLElement {
   const ANCHO = 960;
   const ALTO = 600;
@@ -40,8 +48,8 @@ export function lienzoDibujo({
   const fondo = () => {
     if (!ctx) return;
     const cielo = ctx.createLinearGradient(0, 0, 0, ALTO);
-    cielo.addColorStop(0, '#fff6dc');
-    cielo.addColorStop(1, '#ffe2a8');
+    cielo.addColorStop(0, papel[0]);
+    cielo.addColorStop(1, papel[1]);
     ctx.fillStyle = cielo;
     ctx.fillRect(0, 0, ANCHO, ALTO);
   };
@@ -94,8 +102,13 @@ export function lienzoDibujo({
     img.src = rutaImagen(nombre);
   };
 
+  let dibujado = false;
   lienzo.addEventListener('pointerdown', (e) => {
     const p = punto(e);
+    if (!dibujado) {
+      dibujado = true;
+      alDibujar?.();
+    }
     if (herramienta.tipo === 'pegatina') {
       pegar(herramienta.imagen, p.x, p.y);
       return;
@@ -153,9 +166,10 @@ export function lienzoDibujo({
       'div',
       { class: 'lienzo__barra', role: 'toolbar', 'aria-label': 'Herramientas de dibujo' },
       crayones,
-      opcion('Pincel de arena', h('span', { class: 'lienzo__muestra lienzo__muestra--arena' }), {
-        tipo: 'arena',
-      }),
+      conArena &&
+        opcion('Pincel de arena', h('span', { class: 'lienzo__muestra lienzo__muestra--arena' }), {
+          tipo: 'arena',
+        }),
       pegatinas.map((p) =>
         opcion(`Pegatina ${p}`, imagen(p, { clase: 'icono', carga: 'eager' }), {
           tipo: 'pegatina',
