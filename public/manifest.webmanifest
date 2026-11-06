@@ -1,0 +1,22 @@
+{
+  "name": "El camino de las aventuras",
+  "short_name": "Aventuras",
+  "description": "Un recorrido interactivo por el desierto, el fondo del mar y la selva para niños y niñas de segundo grado.",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#fffaf0",
+  "theme_color": "#f4e9d4",
+  "icons": [
+    { "src": "/iconos/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/iconos/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/iconos/icono-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

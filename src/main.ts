@@ -201,3 +201,10 @@ prefiereMenosMovimiento.addEventListener('change', actualizarCromo);
 
 actualizarCromo();
 router.iniciar();
+
+// Uso sin internet: el service worker guarda la página la primera vez que se abre.
+if (import.meta.env.PROD && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => undefined);
+  });
+}

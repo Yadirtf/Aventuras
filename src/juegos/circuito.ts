@@ -251,6 +251,7 @@ function caminoDeSerpientes(juego: JuegoCircuito, e: Estacion): HTMLElement {
     'div',
     {
       class: 'serpientes',
+      role: 'group',
       tabindex: 0,
       'aria-label': 'Camino de conos. Flechas izquierda y derecha para pasar cada cono.',
       onkeydown: (ev: KeyboardEvent) => {
@@ -332,6 +333,7 @@ function monosExploradores(juego: JuegoCircuito, e: Estacion): HTMLElement {
     'div',
     {
       class: 'monos',
+      role: 'group',
       tabindex: 0,
       'aria-label': 'Sigan las órdenes de Momo con los botones o con las flechas del teclado.',
       onkeydown: (ev: KeyboardEvent) => {

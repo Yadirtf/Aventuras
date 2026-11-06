@@ -7,6 +7,7 @@
   "saludo": "¡Hola, exploradores! Soy Dunita. Con estas orejas tan grandes escucho todo lo que ustedes saben. ¿Qué es un desierto para ustedes?",
   "retoPantalla": "La pelota preguntona rebota al ritmo de las palmas y se detiene en una pregunta. Las respuestas se pegan en un mural digital con cuatro columnas: clima, animales, plantas y agua.",
   "retoMovimiento": "Siéntense en círculo y pasen la pelota mientras marcan el ritmo con palmas. ¡Cuando el ritmo se detenga, quien tenga la pelota responde!",
+  "retoTranquilo": "Sin levantarse de la silla: pasen la pelota de mano en mano y marquen el ritmo con suaves golpecitos en la mesa.",
   "sello": {
     "nombre": "Sol",
     "imagen": "sol"

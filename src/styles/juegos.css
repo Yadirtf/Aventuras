@@ -834,3 +834,11 @@
   border-bottom-left-radius: var(--radio-grande);
   border-bottom-right-radius: 8px;
 }
+
+.juego--cargando {
+  min-height: 12rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  color: var(--color-texto-suave, #5b5170);
+}

@@ -19,6 +19,7 @@ export function tarjetaParada(parada: Parada, estado: EstadoParada, posicion: nu
     h(
       'span',
       { class: 'tarjeta-parada__texto' },
+      h('span', { class: 'visualmente-oculto' }, `Parada ${posicion}: `),
       h('span', { class: 'tarjeta-parada__titulo' }, parada.titulo),
       h('span', { class: 'tarjeta-parada__estado' }, etiquetas[estado]),
     ),
@@ -40,7 +41,6 @@ export function tarjetaParada(parada: Parada, estado: EstadoParada, posicion: nu
           {
             class: 'tarjeta-parada__cuerpo',
             href: rutas.parada(parada.ecosistema, parada.numero),
-            'aria-label': etiqueta,
           },
           contenido,
         ),

@@ -60,3 +60,38 @@
     box-shadow: none;
   }
 }
+
+/* El diploma se imprime solo, en una hoja apaisada. */
+@media print {
+  .imprimiendo-diploma body > * {
+    display: none !important;
+  }
+
+  .imprimiendo-diploma body > .principal,
+  .imprimiendo-diploma .principal > *,
+  .imprimiendo-diploma .final {
+    display: block !important;
+  }
+
+  .imprimiendo-diploma .final > * {
+    display: none !important;
+  }
+
+  .imprimiendo-diploma .final > .diploma__impresion {
+    display: block !important;
+    width: 100%;
+    height: auto;
+  }
+
+  .imprimiendo-diploma canvas.fondo-animado {
+    display: none !important;
+  }
+}
+
+@page diploma {
+  size: A4 landscape;
+}
+
+.imprimiendo-diploma .final {
+  page: diploma;
+}

@@ -91,5 +91,21 @@ export function opciones(store: Store, menosMovimientoActivo: boolean): HTMLElem
       (v) => store.cambiarMenosMovimiento(v),
     ),
     selectorVoz(store),
+    estadoSinInternet(),
   );
+}
+
+/** Cuenta si la página ya quedó guardada en este equipo para usarla sin internet. */
+function estadoSinInternet(): HTMLElement | false {
+  if (!('serviceWorker' in navigator) || !import.meta.env.PROD) return false;
+  const aviso = h(
+    'p',
+    { class: 'opciones__sin-internet', role: 'status' },
+    'Guardando la aventura en este equipo para usarla sin internet…',
+  );
+  void navigator.serviceWorker.ready.then(() => {
+    aviso.textContent =
+      '✓ Lista para usar sin internet en este equipo. También se puede instalar como aplicación desde el menú del navegador.';
+  });
+  return aviso;
 }

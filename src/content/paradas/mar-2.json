@@ -7,6 +7,7 @@
   "saludo": "¡Buzos y buzas! El mapa del tesoro quedó al otro lado del mar y lo vigila el Tiburón de Agua Salada. ¿Están listos para ser los mejores equilibristas?",
   "retoPantalla": "Elijan la ruta A (una línea en zigzag) o la ruta B (aros para saltar) y crúcenla con el ratón, el dedo o las flechas sin tocar el agua del tiburón. Cada cruce entrega una tarjeta del mapa del tesoro.",
   "retoMovimiento": "Abran los brazos como equilibristas y caminen sobre una línea imaginaria sin caer al agua.",
+  "retoTranquilo": "Sentados: recorran con el dedo una línea imaginaria sobre la mesa, despacito, sin que el dedo «se caiga al agua».",
   "sello": {
     "nombre": "Ancla",
     "imagen": "ancla"

@@ -11,6 +11,8 @@ export default defineConfig({
     baseURL: 'http://localhost:4173',
     trace: 'off',
     reducedMotion: 'reduce',
+    // El service worker se prueba aparte (sin-internet.spec.ts); en el resto estorbaría.
+    serviceWorkers: 'block',
   },
   projects: [
     { name: 'computador', use: { ...devices['Desktop Chrome'] } },
