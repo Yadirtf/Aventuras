@@ -83,9 +83,10 @@ El proyecto de Vercel se llama **`camino-de-las-aventuras`** (URL
 - **Producción:** cada cambio que entra a `main` se publica solo.
 - **Previsualización:** cada pull request genera su propia URL para que las autoras revisen.
 - La configuración está en `vercel.json`: build con `npm run build`, salida en `dist/`, todas las
-  rutas reescritas a `index.html` (así recargar `/mapa` no da 404) y caché larga para `/assets/*`.
-  Por esa caché, **un archivo de `public/assets/` que cambia de contenido debe cambiar de nombre**
-  (por ejemplo, `dunita-v2.svg`).
+  rutas reescritas a `index.html` (así recargar `/mapa` no da 404) y caché larga para los archivos
+  del build en `/assets/*`. Las figuras de `/assets/3d/` no llevan esa caché larga, así que se pueden
+  reemplazar sin cambiarles el nombre. `sw.js` se sirve sin caché para que el aula reciba siempre la
+  última versión.
 
 Para conectarlo la primera vez: en [vercel.com/new](https://vercel.com/new) importar
 `Yadirtf/Aventuras`, poner como nombre `camino-de-las-aventuras` y dejar el resto como lo detecta
@@ -130,6 +131,33 @@ Fases 4 y 5 listas:
 
 Los sonidos de animales y de la tormenta se generan en el navegador mientras no haya grabaciones con
 licencia libre.
+
+Fase 6 lista (cierre):
+
+- **Aventura completada** (`/final`): los tres paisajes juntos, los 8 personajes celebrando, el
+  mensaje de doc1.txt, el recorrido con los 9 sellos y el **diploma del explorador** con el nombre del
+  grupo, los sellos y la fecha. Se descarga como imagen o se imprime (y desde ahí «Guardar como PDF»,
+  en hoja A4 horizontal). «Una nueva aventura con otro grupo» pide confirmación antes de borrar.
+- **Accesibilidad:** `tests/e2e/accesibilidad.spec.ts` revisa con axe (WCAG 2.1 AA) las 17 pantallas
+  en computador y tableta; todos los botones miden al menos 64 px; cada reto de movimiento tiene una
+  **alternativa tranquila** (campo `retoTranquilo` del contenido) para quien no puede o no quiere
+  moverse.
+- **Rendimiento:** los juegos se bajan por ecosistema solo al entrar a una de sus paradas; las letras
+  principales se precargan y el fondo animado arranca cuando la página ya cargó. Lighthouse (móvil,
+  red lenta simulada): rendimiento 97–99 y accesibilidad 100 en portada, mapa, ecosistemas, paradas y
+  final.
+- **Sin internet:** después de la primera visita, `sw.js` (generado en el build por el plugin de
+  `vite.config.ts`) guarda la página, el código y las figuras; Opciones muestra «Lista para usar sin
+  internet». También se puede instalar como aplicación (`public/manifest.webmanifest`).
+
+### Lista para el lanzamiento
+
+1. Revisar la previsualización del pull request de la fase 6 y fusionarlo a `main`: Vercel publica en
+   `https://camino-de-las-aventuras.vercel.app`.
+2. (Opcional) Dominio propio: en Vercel, proyecto → Settings → Domains → Add.
+3. Prueba en el aula: abrir la página una vez con internet en cada equipo o tablero (queda guardada),
+   recorrer una parada con el grupo y anotar lo que haya que ajustar.
+4. Pendiente de contenido: escena 3 de títeres, cuento de Canva del mar, fotos y fechas.
 
 ## Voz de los personajes
 

@@ -134,7 +134,14 @@ export function validarParada(datos: unknown, origen: string): Parada {
   if (![1, 2, 3].includes(datos.numero as number)) r.errores.push('numero: debe ser 1, 2 o 3');
   if (esTexto(datos.id) && datos.id !== `${String(datos.ecosistema)}-${String(datos.numero)}`)
     r.errores.push('id: debe ser «ecosistema-numero»');
-  for (const campo of ['titulo', 'saludo', 'retoPantalla', 'retoMovimiento', 'pista'])
+  for (const campo of [
+    'titulo',
+    'saludo',
+    'retoPantalla',
+    'retoMovimiento',
+    'retoTranquilo',
+    'pista',
+  ])
     r.texto(datos, campo, '');
 
   if (!Array.isArray(datos.guias) || datos.guias.length === 0)

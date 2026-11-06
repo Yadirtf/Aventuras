@@ -235,6 +235,8 @@ export interface Parada {
   saludo: string;
   retoPantalla: string;
   retoMovimiento: string;
+  /** Versión sentada o en silencio del reto de movimiento, para quien la necesite. */
+  retoTranquilo: string;
   sello: Sello;
   /** La pista que deja esta parada hacia la siguiente. */
   pista: string;

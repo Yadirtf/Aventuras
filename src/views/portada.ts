@@ -54,7 +54,7 @@ export const paisaje = (): HTMLElement =>
               class: 'paisaje__figura',
               style: `left:${x}%;top:${y}%;width:${ancho}%;--retraso:${(i * 4 + j) * 0.35}s`,
             },
-            imagen(img, { carga: 'eager' }),
+            imagen(img, { carga: 'eager', prioridad: 'baja' }),
           ),
         ),
       ),

@@ -76,7 +76,7 @@
 }
 
 .boton--chico {
-  min-height: 52px;
+  min-height: var(--toque-minimo, 64px);
   padding: 0.4rem 1.1rem;
   font-size: 1.1rem;
 }
@@ -681,4 +681,12 @@ a.tarjeta-parada__cuerpo:hover {
   font: inherit;
   border: 3px solid var(--borde);
   border-radius: 12px;
+}
+
+.opciones__sin-internet {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  background: var(--primario-suave);
+  font-weight: 700;
 }

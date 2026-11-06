@@ -34,6 +34,8 @@ export class FondoAnimado {
   #particulas: Particula[] = [];
   #cuadro = 0;
   #activo = false;
+  /** El movimiento arranca cuando la página ya cargó, para no frenar la primera pintura. */
+  #listo = false;
 
   constructor() {
     this.lienzo.className = 'fondo-animado';
@@ -41,6 +43,13 @@ export class FondoAnimado {
     window.addEventListener('resize', () => this.#ajustar());
     document.addEventListener('visibilitychange', () => this.#actualizar());
     this.#ajustar();
+    const arrancar = () =>
+      window.setTimeout(() => {
+        this.#listo = true;
+        this.#actualizar();
+      }, 1500);
+    if (document.readyState === 'complete') arrancar();
+    else window.addEventListener('load', arrancar, { once: true });
   }
 
   cambiarTema(tema: Tema): void {
@@ -58,7 +67,7 @@ export class FondoAnimado {
 
   #actualizar(): void {
     cancelAnimationFrame(this.#cuadro);
-    if (this.#activo && !document.hidden) this.#bucle();
+    if (this.#activo && this.#listo && !document.hidden) this.#bucle();
     else this.#dibujar();
   }
 

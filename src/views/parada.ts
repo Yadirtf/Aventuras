@@ -178,6 +178,12 @@ export function parada(ctx: Contexto, eco: EcosistemaId, numero: number): Vista 
         { class: 'parada__bloque' },
         h('h2', null, icono('acrobata'), 'Reto de movimiento'),
         h('p', null, p.retoMovimiento),
+        h(
+          'p',
+          { class: 'parada__tranquilo' },
+          h('strong', null, 'Alternativa tranquila: '),
+          p.retoTranquilo,
+        ),
       ),
       sello,
       rinconCalma(eco),

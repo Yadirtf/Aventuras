@@ -7,6 +7,7 @@
   "saludo": "¡Uh, uh, ah, ah! Soy Momo y no me puedo quedar quieto. ¿Escuchan esos sonidos? ¡Algo se mueve en la selva! ¿Qué animal será?",
   "retoPantalla": "Sonido misterioso: escuchen un animal de la selva (mono, serpiente, rana, ave o jaguar) y elijan cuál es.",
   "retoMovimiento": "Despertamos como animales: estírense como una jirafa, salten como un mono, den pasos fuertes como un elefante y muevan los brazos como un ave.",
+  "retoTranquilo": "Desde la silla: estiren el cuello como una jirafa, aplaudan como un mono, golpeen suave el piso como un elefante y aleteen como un ave.",
   "sello": {
     "nombre": "Hoja",
     "imagen": "hoja"

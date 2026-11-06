@@ -172,6 +172,7 @@ function arrecifeDeMedusas(juego: JuegoTesoro, alTerminar: () => void): HTMLElem
     'div',
     {
       class: 'arrecife',
+      role: 'group',
       tabindex: 0,
       'aria-label': 'Arrecife de las medusas. Flecha derecha para avanzar.',
       onkeydown: (e: KeyboardEvent) => {

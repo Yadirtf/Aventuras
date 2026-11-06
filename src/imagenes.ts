@@ -112,7 +112,14 @@ export function imagen(
     alt = '',
     clase = 'figura',
     carga = 'lazy',
-  }: { alt?: string; clase?: string; carga?: 'lazy' | 'eager' } = {},
+    prioridad,
+  }: {
+    alt?: string;
+    clase?: string;
+    carga?: 'lazy' | 'eager';
+    /** «baja» para figuras de adorno: así el texto aparece primero. */
+    prioridad?: 'baja';
+  } = {},
 ): HTMLImageElement {
   const img = document.createElement('img');
   img.src = rutaImagen(nombre);
@@ -122,6 +129,7 @@ export function imagen(
   img.height = 256;
   img.loading = carga;
   img.decoding = 'async';
+  if (prioridad === 'baja') img.fetchPriority = 'low';
   img.draggable = false;
   return img;
 }
