@@ -9,7 +9,7 @@ describe('progreso', () => {
   it('al empezar solo está disponible la primera parada', () => {
     expect(paradas.map((p) => estado(p.id, []))).toEqual([
       'disponible',
-      ...Array<string>(8).fill('bloqueada'),
+      ...Array<string>(9).fill('bloqueada'),
     ]);
   });
 
@@ -29,7 +29,8 @@ describe('progreso', () => {
 
   it('sabe cuál es la siguiente parada y cuándo termina la aventura', () => {
     expect(siguienteParada(paradas, 'desierto-3')?.id).toBe('mar-1');
-    expect(siguienteParada(paradas, 'selva-3')).toBeUndefined();
+    expect(siguienteParada(paradas, 'selva-3')?.id).toBe('globo-1');
+    expect(siguienteParada(paradas, 'globo-1')).toBeUndefined();
     expect(aventuraCompleta(paradas, new Set(paradas.map((p) => p.id)))).toBe(true);
     expect(aventuraCompleta(paradas, new Set(['desierto-1']))).toBe(false);
   });

@@ -34,6 +34,11 @@
   --selva-suave: #e3f8e6;
   --selva-cielo: #b9f0a8;
 
+  --globo: #b0204f;
+  --globo-oscuro: #86173b;
+  --globo-suave: #fff0f6;
+  --globo-cielo: #c5e6ff;
+
   --exito: #18793a;
   --bloqueado: #6f6680;
 
@@ -70,4 +75,11 @@
   --acento-oscuro: var(--selva-oscuro);
   --acento-suave: var(--selva-suave);
   --cielo: var(--selva-cielo);
+}
+
+[data-tema='globo'] {
+  --acento: var(--globo);
+  --acento-oscuro: var(--globo-oscuro);
+  --acento-suave: var(--globo-suave);
+  --cielo: var(--globo-cielo);
 }

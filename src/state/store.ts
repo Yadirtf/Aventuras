@@ -11,6 +11,8 @@ export interface Estado {
   menosMovimiento: boolean | null;
   /** Ideas pegadas en los murales, por clave («desierto-1:Clima»). */
   mural: Record<string, string[]>;
+  /** Dibujos colgados en la cuerda de una parada (miniaturas JPEG en data URL), por parada. */
+  galeria: Record<string, string[]>;
   /** Voz del navegador elegida en Opciones (su voiceURI); null = la mejor disponible. */
   voz: string | null;
 }
@@ -24,20 +26,29 @@ const inicial = (): Estado => ({
   modoDocente: false,
   menosMovimiento: null,
   mural: {},
+  galeria: {},
   voz: null,
 });
 
 export const LARGO_MAXIMO_NOTA = 80;
+/** Dibujos que caben en la cuerda de una parada (cada uno pesa unos 15 KB). */
+export const MAXIMO_DIBUJOS = 30;
 
-function leerMural(valor: unknown): Record<string, string[]> {
+/** Lee un registro de listas de textos guardado; descarta lo que no tenga esa forma. */
+function leerListas(
+  valor: unknown,
+  valido: (texto: string) => boolean = () => true,
+): Record<string, string[]> {
   if (typeof valor !== 'object' || valor === null || Array.isArray(valor)) return {};
-  const mural: Record<string, string[]> = {};
-  for (const [clave, notas] of Object.entries(valor)) {
-    if (Array.isArray(notas))
-      mural[clave] = notas.filter((n): n is string => typeof n === 'string');
+  const listas: Record<string, string[]> = {};
+  for (const [clave, items] of Object.entries(valor)) {
+    if (Array.isArray(items))
+      listas[clave] = items.filter((n): n is string => typeof n === 'string' && valido(n));
   }
-  return mural;
+  return listas;
 }
+
+const esDibujo = (texto: string) => texto.startsWith('data:image/');
 
 /** Lo mínimo de `Storage` que usamos, para poder probarlo sin navegador. */
 export type Almacen = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
@@ -55,7 +66,8 @@ function leer(almacen: Almacen | null): Estado {
         : [],
       modoDocente: datos.modoDocente === true,
       menosMovimiento: typeof datos.menosMovimiento === 'boolean' ? datos.menosMovimiento : null,
-      mural: leerMural(datos.mural),
+      mural: leerListas(datos.mural),
+      galeria: leerListas(datos.galeria, esDibujo),
       voz: typeof datos.voz === 'string' ? datos.voz : null,
     };
   } catch {
@@ -122,9 +134,38 @@ export class Store {
     this.#actualizar({ mural: { ...this.#estado.mural, [clave]: notas } });
   }
 
-  /** Borra nombre, sellos y murales para usar la página con otro grupo. Conserva las preferencias. */
+  /** Cambia una idea de columna del mural (queda al final de la columna nueva). */
+  moverNota(desde: string, indice: number, hasta: string): void {
+    const nota = this.notas(desde)[indice];
+    if (nota === undefined || desde === hasta) return;
+    this.#actualizar({
+      mural: {
+        ...this.#estado.mural,
+        [desde]: this.notas(desde).filter((_, i) => i !== indice),
+        [hasta]: [...this.notas(hasta), nota],
+      },
+    });
+  }
+
+  dibujos(parada: string): readonly string[] {
+    return this.#estado.galeria[parada] ?? [];
+  }
+
+  /** Cuelga un dibujo en la cuerda. Si ya está llena, se descuelga el más antiguo. */
+  colgarDibujo(parada: string, dibujo: string): void {
+    if (!esDibujo(dibujo)) return;
+    const dibujos = [...this.dibujos(parada), dibujo].slice(-MAXIMO_DIBUJOS);
+    this.#actualizar({ galeria: { ...this.#estado.galeria, [parada]: dibujos } });
+  }
+
+  descolgarDibujo(parada: string, indice: number): void {
+    const dibujos = this.dibujos(parada).filter((_, i) => i !== indice);
+    this.#actualizar({ galeria: { ...this.#estado.galeria, [parada]: dibujos } });
+  }
+
+  /** Borra nombre, sellos, murales y dibujos para usar la página con otro grupo. Conserva las preferencias. */
   empezarDeNuevo(): void {
-    this.#actualizar({ explorador: '', completadas: [], mural: {} });
+    this.#actualizar({ explorador: '', completadas: [], mural: {}, galeria: {} });
   }
 
   #actualizar(cambios: Partial<Estado>): void {

@@ -1,5 +1,5 @@
 import { personajes } from './content';
-import { PERSONAJES } from './content/types';
+import { PERSONAJES, type EcosistemaId } from './content/types';
 import { rutaImagen, type Imagen } from './imagenes';
 
 /**
@@ -14,11 +14,16 @@ export const ALTO_DIPLOMA = 1414;
 export interface DatosDiploma {
   nombre: string;
   /** Sellos conseguidos, en el orden del recorrido. */
-  sellos: { nombre: string; imagen: Imagen; ecosistema: 'desierto' | 'mar' | 'selva' }[];
+  sellos: { nombre: string; imagen: Imagen; ecosistema: EcosistemaId }[];
   fecha: Date;
 }
 
-const COLOR_ECOSISTEMA = { desierto: '#e8590c', mar: '#1c7ed6', selva: '#2f9e44' };
+const COLOR_ECOSISTEMA: Record<EcosistemaId, string> = {
+  desierto: '#e8590c',
+  mar: '#1c7ed6',
+  selva: '#2f9e44',
+  globo: '#c2255c',
+};
 
 function cargar(nombre: Imagen): Promise<HTMLImageElement | null> {
   return new Promise((resolver) => {
@@ -164,8 +169,8 @@ export async function dibujarDiploma(
 
   ctx.fillStyle = '#2a1f3d';
   for (const [i, linea] of [
-    'por recorrer el desierto, explorar el fondo del mar y descubrir los secretos',
-    'de la selva con curiosidad, valentía y trabajo en equipo.',
+    'por recorrer el desierto, explorar el fondo del mar, descubrir los secretos de la selva',
+    'y viajar en globo por los tres mundos con curiosidad, valentía y trabajo en equipo.',
   ].entries())
     texto(ctx, linea, W / 2, 620 + i * 58, {
       fuente: '400 {t}px Andika, sans-serif',
@@ -175,7 +180,7 @@ export async function dibujarDiploma(
 
   // Los sellos del pasaporte.
   const lado = 150;
-  const paso = 178;
+  const paso = Math.min(178, (W - 280) / Math.max(1, datos.sellos.length));
   const inicio = W / 2 - ((datos.sellos.length - 1) * paso) / 2;
   datos.sellos.forEach((s, i) => {
     const x = inicio + i * paso;

@@ -5,9 +5,7 @@
   "titulo": "Nos adentramos en la selva",
   "guias": ["momo"],
   "saludo": "¡Uh, uh, ah, ah! Soy Momo y no me puedo quedar quieto. ¿Escuchan esos sonidos? ¡Algo se mueve en la selva! ¿Qué animal será?",
-  "retoPantalla": "Sonido misterioso: escuchen un animal de la selva (mono, serpiente, rana, ave o jaguar) y elijan cuál es.",
-  "retoMovimiento": "Despertamos como animales: estírense como una jirafa, salten como un mono, den pasos fuertes como un elefante y muevan los brazos como un ave.",
-  "retoTranquilo": "Desde la silla: estiren el cuello como una jirafa, aplaudan como un mono, golpeen suave el piso como un elefante y aleteen como un ave.",
+  "retoPantalla": "Primero, «Despertamos como animales»: estírense como una jirafa, salten como un mono, den pasos de elefante y aleteen como un ave. Después, el sonido misterioso: escuchen el sonido real de un animal de la selva (mono, serpiente, rana, ave o jaguar) y elijan cuál es.",
   "sello": {
     "nombre": "Hoja",
     "imagen": "hoja"
@@ -87,7 +85,7 @@
     "docenteTutora": null,
     "fecha": "1 de noviembre de 2026",
     "duracion": "40 a 50 minutos",
-    "objetivo": "Reconocer algunas características de la selva y sus animales mediante la imitación de sus movimientos y la representación de diferentes especies, favoreciendo la coordinación y la expresión corporal.",
+    "objetivo": "Reconocer algunas características de la selva y sus animales, mediante la imitación de sus movimientos y la representación de diferentes especies.",
     "inicio": [
       {
         "titulo": "Despertamos como animales de la selva",

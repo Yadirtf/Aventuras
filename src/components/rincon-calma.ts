@@ -5,6 +5,7 @@ const TEXTOS: Record<EcosistemaId, string> = {
   desierto: 'Respiren como las dunas: suben… y bajan.',
   mar: 'Respiren como las olas: vienen… y van.',
   selva: 'Respiren como las hojas con el viento: suben… y bajan.',
+  globo: 'Respiren como el globo: se infla… y se desinfla.',
 };
 
 /** Animación de respiración para el cierre de cada parada (3 respiraciones). */

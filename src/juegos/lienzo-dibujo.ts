@@ -13,9 +13,15 @@ const CRAYONES = [
 type Herramienta =
   { tipo: 'crayon'; color: string } | { tipo: 'arena' } | { tipo: 'pegatina'; imagen: Imagen };
 
+/** Pasos que se pueden deshacer. */
+const MAXIMO_DESHACER = 25;
+/** Tamaño de la miniatura que se cuelga en la cuerda. */
+const MINIATURA = { ancho: 320, alto: 200, calidad: 0.72 };
+
 /**
  * Lienzo para dibujar con el dedo o el ratón: crayones, pincel de arena y pegatinas
- * de animales. El dibujo no se guarda en la página; se puede descargar como imagen.
+ * de animales. Se puede deshacer paso a paso, descargar como imagen y, si la parada
+ * tiene cuerda, colgar en ella una miniatura.
  */
 export function lienzoDibujo({
   nombreArchivo,
@@ -23,6 +29,7 @@ export function lienzoDibujo({
   papel = ['#fff6dc', '#ffe2a8'],
   conArena = true,
   alDibujar,
+  alColgar,
 }: {
   nombreArchivo: string;
   pegatinas: Imagen[];
@@ -31,6 +38,8 @@ export function lienzoDibujo({
   conArena?: boolean;
   /** Se llama la primera vez que alguien dibuja o pega algo. */
   alDibujar?: () => void;
+  /** Si se indica, aparece «Colgar en la cuerda» y recibe la miniatura en JPEG. */
+  alColgar?: (miniatura: string) => void;
 }): HTMLElement {
   const ANCHO = 960;
   const ALTO = 600;
@@ -44,6 +53,7 @@ export function lienzoDibujo({
   const ctx = lienzo.getContext('2d');
   let herramienta: Herramienta = { tipo: 'crayon', color: CRAYONES[0]?.color ?? '#000' };
   let ultimo: { x: number; y: number } | null = null;
+  const historia: ImageData[] = [];
 
   const fondo = () => {
     if (!ctx) return;
@@ -54,6 +64,28 @@ export function lienzoDibujo({
     ctx.fillRect(0, 0, ANCHO, ALTO);
   };
   fondo();
+
+  const deshacer = h(
+    'button',
+    { type: 'button', class: 'boton boton--secundario boton--chico', disabled: true },
+    '↶ Deshacer',
+  );
+  /** Guarda cómo está el papel antes de cada cambio, para poder volver un paso atrás. */
+  const recordar = () => {
+    if (!ctx) return;
+    historia.push(ctx.getImageData(0, 0, ANCHO, ALTO));
+    if (historia.length > MAXIMO_DESHACER) historia.shift();
+    deshacer.disabled = false;
+  };
+  deshacer.addEventListener('click', () => {
+    const anterior = historia.pop();
+    if (anterior) ctx?.putImageData(anterior, 0, 0);
+    deshacer.disabled = historia.length === 0;
+  });
+  const borrarTodo = () => {
+    recordar();
+    fondo();
+  };
 
   const punto = (e: PointerEvent) => {
     const caja = lienzo.getBoundingClientRect();
@@ -109,6 +141,7 @@ export function lienzoDibujo({
       dibujado = true;
       alDibujar?.();
     }
+    recordar();
     if (herramienta.tipo === 'pegatina') {
       pegar(herramienta.imagen, p.x, p.y);
       return;
@@ -181,12 +214,30 @@ export function lienzoDibujo({
     h(
       'div',
       { class: 'juego__acciones' },
+      deshacer,
       h(
         'button',
-        { type: 'button', class: 'boton boton--secundario boton--chico', onclick: fondo },
+        { type: 'button', class: 'boton boton--secundario boton--chico', onclick: borrarTodo },
         icono('escoba'),
         'Borrar todo',
       ),
+      alColgar &&
+        h(
+          'button',
+          {
+            type: 'button',
+            class: 'boton boton--huellita boton--chico',
+            onclick: () => {
+              const copia = h('canvas', { width: MINIATURA.ancho, height: MINIATURA.alto });
+              copia.getContext('2d')?.drawImage(lienzo, 0, 0, MINIATURA.ancho, MINIATURA.alto);
+              alColgar(copia.toDataURL('image/jpeg', MINIATURA.calidad));
+              // El papel queda limpio para el siguiente dibujo (y se puede deshacer).
+              borrarTodo();
+            },
+          },
+          icono('panuelo'),
+          'Colgar en la cuerda',
+        ),
       h(
         'button',
         {

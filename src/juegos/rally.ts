@@ -1,9 +1,10 @@
 import { burbuja, decir } from '../components/burbuja';
 import { celebrar } from '../components/celebracion';
 import type { JuegoRally } from '../content/types';
-import { barajar, h, icono } from '../dom';
+import { h, icono } from '../dom';
 import { imagen, type Imagen } from '../imagenes';
 import { acierto, error } from '../sonido';
+import { rompecabezas } from './rompecabezas';
 import type { MontarJuego } from './tipos';
 
 /** Elementos fijos del paisaje que sirven de referencia para las pistas (no se buscan). */
@@ -49,21 +50,36 @@ function escenaMar(): HTMLElement {
   );
 }
 
-function pieza(indice: number): HTMLElement {
-  const col = indice % COLUMNAS;
-  const fila = Math.floor(indice / COLUMNAS);
-  const recorte = h('span', { class: 'pieza__recorte', 'aria-hidden': 'true' }, escenaMar());
-  recorte.style.setProperty('--col', String(col));
-  recorte.style.setProperty('--fila', String(fila));
-  return recorte;
-}
-
 /** Parada 3 del desierto: rally de pistas espaciales y rompecabezas del mar. */
 export const rally: MontarJuego<JuegoRally> = ({ juego, alTerminar }) => {
   let actual = 0;
   const ganadas: number[] = [];
 
   const guia = burbuja('dunita', '', { pose: 'pregunta', vivo: true });
+  const reverso = h('div', { class: 'rompecabezas__reverso', hidden: true });
+  const puzzle = rompecabezas({
+    columnas: COLUMNAS,
+    filas: FILAS,
+    escena: escenaMar,
+    titulo: 'El rompecabezas misterioso',
+    alCompletar: () => {
+      reverso.hidden = false;
+      reverso.replaceChildren(
+        h('p', { class: 'rompecabezas__ayuda' }, 'Miren lo que dice al reverso:'),
+        h('p', { class: 'rompecabezas__mensaje' }, icono('sobre'), juego.reverso),
+        h(
+          'div',
+          { class: 'relevo' },
+          burbuja('dunita', juego.relevo.despedida, { pose: 'celebracion' }),
+          burbuja(juego.relevo.siguienteGuia, juego.relevo.respuesta, { pose: 'saludo' }),
+        ),
+      );
+      celebrar(puzzle.elemento);
+      alTerminar();
+    },
+  });
+  puzzle.elemento.append(reverso);
+  const { pieza } = puzzle;
   const contador = h('p', { class: 'rally__contador', 'aria-live': 'polite' });
   const bolsa = h('ol', { class: 'rally__bolsa', 'aria-label': 'Piezas ganadas' });
 
@@ -129,8 +145,8 @@ export const rally: MontarJuego<JuegoRally> = ({ juego, alTerminar }) => {
         'celebracion',
       );
       contador.textContent = `Piezas: ${ganadas.length} de ${juego.pistas.length}`;
-      rompecabezas.hidden = false;
-      rompecabezas.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      puzzle.elemento.hidden = false;
+      puzzle.elemento.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -171,97 +187,6 @@ export const rally: MontarJuego<JuegoRally> = ({ juego, alTerminar }) => {
     objetos,
   );
 
-  // --- Rompecabezas ------------------------------------------------------------------
-  let elegida: number | null = null;
-  const colocadas = new Set<number>();
-  const bandeja = h('div', { class: 'rompecabezas__bandeja', 'aria-label': 'Piezas sueltas' });
-  const tablero = h('div', { class: 'rompecabezas__tablero', style: `--columnas:${COLUMNAS}` });
-  const ayuda = h(
-    'p',
-    { class: 'rompecabezas__ayuda', 'aria-live': 'polite' },
-    'Toquen una pieza y luego el lugar donde va.',
-  );
-  const reverso = h('div', { class: 'rompecabezas__reverso', hidden: true });
-
-  const casillas = Array.from({ length: COLUMNAS * FILAS }, (_, i) =>
-    h('button', {
-      type: 'button',
-      class: 'rompecabezas__casilla',
-      'aria-label': `Lugar ${i + 1}`,
-      onclick: () => colocar(i),
-    }),
-  );
-  tablero.append(...casillas);
-
-  const botonesPieza = barajar(Array.from({ length: COLUMNAS * FILAS }, (_, i) => i)).map((i) => {
-    const b = h(
-      'button',
-      {
-        type: 'button',
-        class: 'rompecabezas__pieza',
-        'aria-label': `Pieza ${i + 1}`,
-        'aria-pressed': 'false',
-        'data-pieza': i,
-      },
-      pieza(i),
-    );
-    b.addEventListener('click', () => {
-      elegida = i;
-      bandeja
-        .querySelectorAll('button')
-        .forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      ayuda.textContent = 'Ahora toquen el lugar donde va esa pieza.';
-    });
-    return b;
-  });
-  bandeja.append(...botonesPieza);
-
-  const colocar = (lugar: number) => {
-    if (elegida === null || colocadas.has(lugar)) return;
-    if (elegida !== lugar) {
-      error();
-      ayuda.textContent = 'Esa pieza va en otro lugar. ¡Miren los bordes del dibujo!';
-      return;
-    }
-    acierto();
-    colocadas.add(lugar);
-    const casilla = casillas[lugar];
-    casilla?.replaceChildren(pieza(lugar));
-    casilla?.setAttribute('disabled', '');
-    casilla?.classList.add('rompecabezas__casilla--llena');
-    bandeja.querySelector(`[data-pieza="${elegida}"]`)?.remove();
-    elegida = null;
-    ayuda.textContent = `Van ${colocadas.size} de ${COLUMNAS * FILAS} piezas.`;
-    if (colocadas.size === COLUMNAS * FILAS) terminar();
-  };
-
-  const terminar = () => {
-    tablero.classList.add('rompecabezas__tablero--completo');
-    ayuda.textContent = '¡Rompecabezas completo! Miren lo que dice al reverso.';
-    reverso.hidden = false;
-    reverso.replaceChildren(
-      h('p', { class: 'rompecabezas__mensaje' }, icono('sobre'), juego.reverso),
-      h(
-        'div',
-        { class: 'relevo' },
-        burbuja('dunita', juego.relevo.despedida, { pose: 'celebracion' }),
-        burbuja(juego.relevo.siguienteGuia, juego.relevo.respuesta, { pose: 'saludo' }),
-      ),
-    );
-    celebrar(rompecabezas);
-    alTerminar();
-  };
-
-  const rompecabezas = h(
-    'section',
-    { class: 'juego__parte rompecabezas', hidden: true },
-    h('h3', null, icono('rompecabezas'), 'El rompecabezas misterioso'),
-    ayuda,
-    tablero,
-    bandeja,
-    reverso,
-  );
-
   pintarPista();
 
   return h(
@@ -276,6 +201,6 @@ export const rally: MontarJuego<JuegoRally> = ({ juego, alTerminar }) => {
       contador,
       bolsa,
     ),
-    rompecabezas,
+    puzzle.elemento,
   );
 };

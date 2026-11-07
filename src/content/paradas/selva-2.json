@@ -5,9 +5,11 @@
   "titulo": "Los retos de la selva",
   "guias": ["momo", "cocodrilos"],
   "saludo": "¡Exploradores! Para llegar al corazón de la selva hay que superar cuatro retos. ¡Shhh! Los Cocodrilos del Río están durmiendo. ¿Podrán saltar sin despertarlos?",
-  "retoPantalla": "Un circuito de cuatro estaciones: el río de los cocodrilos (saltar en el momento justo), el camino de las serpientes (zigzag), los troncos de la selva (de aro en aro) y «¡Mono arriba, abajo, a un lado!» para practicar derecha e izquierda.",
-  "retoMovimiento": "Hagan cada estación con el cuerpo: salten con los pies juntos, avancen en zigzag, pasen de aro en aro y sigan las órdenes del mono.",
-  "retoTranquilo": "Con las manos sobre la mesa: den saltitos con dos dedos, hagan zigzag, pasen de aro en aro dibujado y sigan las órdenes del mono con los brazos.",
+  "retoPantalla": "Un circuito de cuatro estaciones: el río de los cocodrilos (saltar en el momento justo), el camino de las serpientes (el mono pasa los conos en zigzag sin que la serpiente lo alcance), los troncos de la selva (de aro en aro) y los monos exploradores, que siguen las flechas: arriba, abajo, derecha e izquierda.",
+  "movimiento": {
+    "texto": "Hagan cada estación con el cuerpo: salten con los pies juntos, avancen en zigzag, pasen de aro en aro y sigan las órdenes del mono.",
+    "tranquilo": "Con las manos sobre la mesa: den saltitos con dos dedos, hagan zigzag, pasen de aro en aro dibujado y sigan las órdenes del mono con los brazos."
+  },
   "sello": {
     "nombre": "Banano",
     "imagen": "banano"
@@ -26,7 +28,7 @@
         "id": "serpientes",
         "titulo": "El camino de las serpientes",
         "imagen": "serpiente",
-        "instruccion": "Avancen en zigzag: pasen un cono por un lado y el siguiente por el otro."
+        "instruccion": "¡Cuidado, la serpiente es el peligro! Ayuden al mono a pasar los conos en zigzag: un cono por un lado y el siguiente por el otro, sin que la serpiente lo alcance."
       },
       {
         "id": "troncos",
@@ -38,7 +40,7 @@
         "id": "monos",
         "titulo": "Los monos exploradores",
         "imagen": "mono",
-        "instruccion": "Hagan lo que dice Momo: ¡arriba, abajo, a la derecha o a la izquierda!"
+        "instruccion": "Miren la flecha y muévanse hacia donde apunta: arriba, abajo, a la derecha o a la izquierda."
       }
     ],
     "saltosRio": 3,
@@ -61,7 +63,7 @@
     "docenteTutora": null,
     "fecha": "2 de noviembre de 2026",
     "duracion": "40 a 50 minutos",
-    "objetivo": "Explorar la selva a través de diferentes retos de movimiento relacionados con sus animales y elementos naturales, fortaleciendo el equilibrio, la coordinación, la lateralidad y la orientación espacial.",
+    "objetivo": "Explorar la selva a través de diferentes retos de movimiento inspirados en los animales y elementos naturales de este ecosistema, mediante el equilibrio, la coordinación, la lateralidad y la orientación espacial.",
     "inicio": [
       {
         "titulo": "Recordamos los movimientos de la selva",

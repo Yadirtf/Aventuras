@@ -43,7 +43,12 @@ export function mapa({ store, paradas }: Contexto): Vista {
               h(
                 'h2',
                 { class: 'region__titulo' },
-                h('a', { href: rutas.ecosistema(id) }, eco.nombre),
+                h(
+                  'a',
+                  { href: rutas.ecosistema(id) },
+                  eco.nombre,
+                  h('span', { class: 'region__lugar' }, eco.lugar),
+                ),
               ),
             ),
             h(

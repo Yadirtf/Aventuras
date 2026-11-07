@@ -19,6 +19,14 @@ test.describe('Parada 7: nos adentramos en la selva', () => {
     await expect(botonSello(page)).toHaveClass(/boton--latido/);
   });
 
+  test('primero la pausa activa y después los sonidos', async ({ page }) => {
+    await abrir(page, '/selva/1');
+    await expect(page.locator('.juego--sonidos h3')).toHaveText([
+      'Despertamos como animales',
+      'El sonido misterioso',
+    ]);
+  });
+
   test('la pausa activa cuenta el tiempo', async ({ page }) => {
     await abrir(page, '/selva/1');
     await page.getByRole('button', { name: '¡A moverse!' }).click();
@@ -48,7 +56,8 @@ test.describe('Parada 8: los retos de la selva', () => {
     // 2. Serpientes: repetir el lado no es zigzag.
     await page.getByRole('button', { name: '← Por la izquierda' }).click();
     await page.getByRole('button', { name: '← Por la izquierda' }).click();
-    await expect(momo).toContainText('no es zigzag');
+    await expect(momo).toContainText('la serpiente');
+    await expect(page.locator('.zigzag__explorador img')).toHaveAttribute('src', /mono/);
     for (let i = 0; i < 4; i++)
       await page
         .getByRole('button', { name: i % 2 === 0 ? 'Por la derecha →' : '← Por la izquierda' })
@@ -59,22 +68,23 @@ test.describe('Parada 8: los retos de la selva', () => {
     for (let i = 1; i <= 5; i++) await page.getByRole('button', { name: `Aro ${i}` }).click();
     await siguiente.click();
 
-    // 4. Monos: seguir las órdenes con el teclado.
+    // 4. Monos: solo flechas, sin palabras; se siguen con el teclado.
     const teclas: Record<string, string> = {
-      '¡Mono arriba!': 'ArrowUp',
-      '¡Mono abajo!': 'ArrowDown',
-      '¡Mono a la derecha!': 'ArrowRight',
-      '¡Mono a la izquierda!': 'ArrowLeft',
+      '↑': 'ArrowUp',
+      '↓': 'ArrowDown',
+      '→': 'ArrowRight',
+      '←': 'ArrowLeft',
     };
-    const orden = page.locator('.monos__orden');
+    const flecha = page.locator('.monos__flecha');
+    await expect(page.locator('.monos__boton').first()).toHaveText('←');
     await page.locator('.monos').focus();
     for (let i = 0; i < 8; i++) {
-      const texto = (await orden.textContent()) ?? '';
+      const texto = (await flecha.textContent()) ?? '';
       const tecla = teclas[texto];
       if (!tecla) throw new Error(`orden desconocida: ${texto}`);
       await page.keyboard.press(tecla);
     }
-    await expect(orden).toHaveText('¡Monos expertos!');
+    await expect(flecha).toHaveText('★');
     await expect(page.locator('.circuito__paso--hecho')).toHaveCount(4);
     await expect(botonSello(page)).toHaveClass(/boton--latido/);
   });
@@ -82,11 +92,20 @@ test.describe('Parada 8: los retos de la selva', () => {
 
 test.describe('Parada 9: la selva cobra vida', () => {
   test('el cuento llega al final y la tormenta tiene sonidos', async ({ page }) => {
+    // Sin voz en el navegador, las figuras igual se mueven una por una.
+    await page.addInitScript(() => {
+      delete (window as { speechSynthesis?: unknown }).speechSynthesis;
+    });
     await abrir(page, '/selva/3');
     const siguiente = page
       .locator('.cuento')
       .getByRole('button', { name: /Siguiente|Fin del cuento/ });
     await expect(page.getByRole('button', { name: 'Lluvia' })).toBeHidden();
+
+    // Al leer la escena, la figura que se nombra se mueve.
+    await page.getByRole('button', { name: '▶ Mover las figuras' }).click();
+    await expect(page.locator('.cuento__figura--activa')).toHaveCount(1, { timeout: 15000 });
+    await expect(page.locator('.cuento__frase--leyendo')).toHaveCount(1);
     await siguiente.click();
     await siguiente.click();
     await expect(page.locator('.cuento__contador')).toContainText('La tormenta');

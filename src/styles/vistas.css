@@ -811,6 +811,23 @@
   color: var(--selva-oscuro);
 }
 
+.final__ecosistema--globo {
+  background: var(--globo-suave);
+}
+
+.final__ecosistema--globo h3 {
+  color: var(--globo-oscuro);
+}
+
+.final__lugar,
+.region__lugar {
+  display: block;
+  font-family: var(--fuente);
+  font-size: 0.55em;
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
 .final__ecosistema-figura {
   width: 5.5rem;
   height: 5.5rem;
@@ -893,4 +910,21 @@
   border-radius: 1rem;
   background: var(--color-calma-suave, #eef6ff);
   border-left: 6px solid var(--color-calma, #74c0fc);
+}
+
+.parada__etiqueta {
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.7rem;
+  font-family: var(--fuente);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--tinta);
+  vertical-align: middle;
+  background: var(--resalte);
+  border-radius: 999px;
+}
+
+.parada__nota {
+  color: var(--tinta-suave);
+  font-style: italic;
 }

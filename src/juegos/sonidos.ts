@@ -7,13 +7,13 @@ import { acierto, error, sonidoAnimal } from '../sonido';
 import { temporizador } from './comunes';
 import type { MontarJuego } from './tipos';
 
-/** Parada 1 de la selva: sonido misterioso y pausa activa «Despertamos como animales». */
+/** Parada 1 de la selva: primero la pausa activa «Despertamos como animales» y luego el sonido misterioso. */
 export const sonidos: MontarJuego<JuegoSonidos> = ({ juego, alTerminar }) =>
   h(
     'div',
     { class: 'juego juego--sonidos' },
-    sonidoMisterioso(juego, alTerminar),
     despertamos(juego),
+    sonidoMisterioso(juego, alTerminar),
   );
 
 function sonidoMisterioso(juego: JuegoSonidos, alTerminar: () => void): HTMLElement {

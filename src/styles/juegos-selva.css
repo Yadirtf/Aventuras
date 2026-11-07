@@ -265,7 +265,7 @@
   border-left: 1.1rem solid transparent;
 }
 
-.zigzag__serpiente {
+.zigzag__explorador {
   position: absolute;
   left: 50%;
   width: 3.5rem;
@@ -275,15 +275,15 @@
     left 0.3s ease;
 }
 
-.zigzag__serpiente[data-lado='izquierda'] {
+.zigzag__explorador[data-lado='izquierda'] {
   left: 22%;
 }
 
-.zigzag__serpiente[data-lado='derecha'] {
+.zigzag__explorador[data-lado='derecha'] {
   left: 78%;
 }
 
-.zigzag__serpiente img {
+.zigzag__explorador img {
   width: 100%;
   height: auto;
 }
@@ -304,9 +304,32 @@
 .monos__orden {
   margin: 0;
   font-family: var(--fuente-titulos);
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-size: clamp(4rem, 14vw, 7rem);
   font-weight: 800;
+  line-height: 1;
   color: var(--acento-oscuro);
+}
+
+.monos__flecha {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4em;
+  height: 1.4em;
+  background: #fff;
+  border: 6px solid var(--acento);
+  border-radius: 50%;
+  box-shadow: var(--sombra);
+}
+
+.monos__flecha--nueva {
+  animation: aparecer-flecha 0.35s ease-out;
+}
+
+@keyframes aparecer-flecha {
+  from {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
 }
 
 .monos__escena {
@@ -355,8 +378,45 @@
 }
 
 .monos__boton {
-  min-width: 8rem;
-  font-size: 1.2rem;
+  min-width: 5.5rem;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+/* La serpiente vigila el camino de conos: se arrastra de lado a lado. */
+.zigzag__peligro {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 4.5rem;
+  animation: patrullar 5s ease-in-out infinite alternate;
+}
+
+.zigzag__peligro img {
+  width: 100%;
+  height: auto;
+}
+
+.zigzag__peligro--ataca {
+  animation: atacar 0.6s ease;
+}
+
+@keyframes patrullar {
+  from {
+    left: -2%;
+    top: 20%;
+  }
+  to {
+    left: 82%;
+    top: 65%;
+  }
+}
+
+@keyframes atacar {
+  50% {
+    left: 40%;
+    transform: scale(1.4);
+  }
 }
 
 /* Cuento */
@@ -404,8 +464,88 @@
   bottom: 12%;
   width: 14%;
   transform: translateX(-50%);
-  animation: brincar 1.6s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 0.2s);
+  transition: filter 0.3s ease;
+  animation: respirar 3s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.3s);
+}
+
+/* La figura que nombra el cuento se mueve a su manera y brilla. */
+.cuento__figura--activa {
+  z-index: 2;
+  filter: drop-shadow(0 0 14px #fff) drop-shadow(0 0 6px var(--resalte));
+  animation: brincar 0.7s ease-in-out infinite;
+}
+
+.cuento__figura--activa:is([data-figura='pajaro'], [data-figura='loro'], [data-figura='mariposa']) {
+  animation: volar 1.2s ease-in-out infinite;
+}
+
+.cuento__figura--activa[data-figura='serpiente'] {
+  animation: reptar 1.4s ease-in-out infinite;
+}
+
+.cuento__figura--activa:is([data-figura='arbol'], [data-figura='nube'], [data-figura='lluvia']) {
+  animation: mecerse 0.8s ease-in-out infinite alternate;
+}
+
+.cuento__figura--activa[data-figura='tigre'] {
+  animation: acechar 1.6s ease-in-out infinite;
+}
+
+@keyframes respirar {
+  50% {
+    transform: translateX(-50%) scale(1.03);
+  }
+}
+
+@keyframes volar {
+  25% {
+    transform: translate(-30%, -35%) rotate(-8deg);
+  }
+  75% {
+    transform: translate(-70%, -20%) rotate(8deg);
+  }
+}
+
+@keyframes reptar {
+  25% {
+    transform: translate(-30%, 0) skewX(10deg);
+  }
+  75% {
+    transform: translate(-70%, 0) skewX(-10deg);
+  }
+}
+
+@keyframes mecerse {
+  from {
+    transform: translateX(-50%) rotate(-8deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(8deg);
+  }
+}
+
+@keyframes acechar {
+  50% {
+    transform: translate(-15%, 0) scale(1.15);
+  }
+}
+
+.cuento__texto {
+  margin: 1rem auto 0;
+  max-width: var(--ancho-lectura);
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+
+.cuento__frase {
+  border-radius: 0.4rem;
+  transition: background-color 0.2s ease;
+}
+
+.cuento__frase--leyendo {
+  background: var(--resalte);
+  box-shadow: 0 0 0 0.2rem var(--resalte);
 }
 
 .cuento__figura:nth-child(odd) {
@@ -419,7 +559,7 @@
 
 @keyframes brincar {
   50% {
-    transform: translate(-50%, -10%);
+    transform: translate(-50%, -30%) scale(1.1);
   }
 }
 

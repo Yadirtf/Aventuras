@@ -52,6 +52,55 @@ test.describe('Parada 1: pelota preguntona', () => {
     await page.mouse.up();
     expect(await lienzo.evaluate((c: HTMLCanvasElement) => c.toDataURL())).not.toBe(antes);
   });
+
+  test('una idea del mural se puede pasar a otra columna', async ({ page }) => {
+    await abrir(page, '/desierto/1');
+    const campo = page.getByLabel('Escriban una idea y elijan dónde pegarla:');
+    await campo.fill('Vive el camello');
+    // Enter ya no pega la idea en Clima: pide elegir la columna.
+    await campo.press('Enter');
+    await expect(page.locator('.mural__columna .nota')).toHaveCount(0);
+    await expect(page.locator('.mural__ayuda')).not.toBeEmpty();
+    await page.locator('.mural__botones').getByRole('button', { name: 'Clima' }).click();
+    await page.getByRole('button', { name: 'Cambiar de columna «Vive el camello»' }).click();
+    await page.getByRole('button', { name: 'Pasar a Animales' }).click();
+    await expect(page.locator('.mural__columna[aria-label="Animales"] .nota')).toHaveText(
+      /Vive el camello/,
+    );
+    await expect(page.locator('.mural__columna[aria-label="Clima"] .nota')).toHaveCount(0);
+    await page.reload();
+    await expect(page.locator('.mural__columna[aria-label="Animales"] .nota')).toHaveCount(1);
+  });
+
+  test('el dibujo se deshace paso a paso y se cuelga en la cuerda', async ({ page }) => {
+    await abrir(page, '/desierto/1');
+    const lienzo = page.locator('.lienzo__papel');
+    await lienzo.scrollIntoViewIfNeeded();
+    const blanco = await lienzo.evaluate((c: HTMLCanvasElement) => c.toDataURL());
+    const caja = await lienzo.boundingBox();
+    if (!caja) throw new Error('sin lienzo');
+    const trazo = async (y: number) => {
+      await page.mouse.move(caja.x + 40, caja.y + y);
+      await page.mouse.down();
+      await page.mouse.move(caja.x + 220, caja.y + y, { steps: 6 });
+      await page.mouse.up();
+    };
+    await trazo(40);
+    const unTrazo = await lienzo.evaluate((c: HTMLCanvasElement) => c.toDataURL());
+    await trazo(110);
+    await page.getByRole('button', { name: '↶ Deshacer' }).click();
+    expect(await lienzo.evaluate((c: HTMLCanvasElement) => c.toDataURL())).toBe(unTrazo);
+    await page.getByRole('button', { name: '↶ Deshacer' }).click();
+    expect(await lienzo.evaluate((c: HTMLCanvasElement) => c.toDataURL())).toBe(blanco);
+
+    await trazo(80);
+    await page.getByRole('button', { name: 'Colgar en la cuerda' }).click();
+    await expect(page.locator('.cuerda__dibujo')).toHaveCount(1);
+    await page.reload();
+    await expect(page.locator('.cuerda__dibujo')).toHaveCount(1);
+    await page.getByRole('button', { name: 'Descolgar el dibujo 1' }).click();
+    await expect(page.locator('.cuerda__dibujo')).toHaveCount(0);
+  });
 });
 
 test.describe('Parada 2: títeres', () => {

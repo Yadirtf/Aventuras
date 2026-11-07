@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { ecosistemas, paradas, personajes } from '../src/content';
 import desierto1 from '../src/content/paradas/desierto-1.json';
+import desierto2 from '../src/content/paradas/desierto-2.json';
+import selva3 from '../src/content/paradas/selva-3.json';
 import { ContenidoInvalido, validarParada } from '../src/content/validar';
 
 describe('contenido', () => {
-  it('tiene las 9 paradas en el orden desierto → mar → selva', () => {
+  it('tiene las 10 paradas en el orden desierto → mar → selva → globo', () => {
     expect(paradas.map((p) => p.id)).toEqual([
       'desierto-1',
       'desierto-2',
@@ -15,6 +17,7 @@ describe('contenido', () => {
       'selva-1',
       'selva-2',
       'selva-3',
+      'globo-1',
     ]);
   });
 
@@ -30,6 +33,13 @@ describe('contenido', () => {
       const apellido = ecosistemas[p.ecosistema].autora.split(' ').at(-1) ?? '';
       expect(p.planeacion.autora).toContain(apellido);
     }
+  });
+
+  it('las paradas sin reto de movimiento son las que pidieron las autoras', () => {
+    const sinReto = paradas.filter((p) => !p.movimiento).map((p) => p.id);
+    expect(sinReto).toEqual(['desierto-1', 'mar-3', 'selva-1', 'globo-1']);
+    expect(paradas.find((p) => p.id === 'desierto-3')?.movimiento?.opcional).toBe(true);
+    expect(paradas.find((p) => p.id === 'mar-2')?.movimiento?.antesDelJuego).toBe(true);
   });
 
   it('los sellos no se repiten', () => {
@@ -70,6 +80,25 @@ describe('validarParada', () => {
     pl.indicadoresDeLogro = [];
     pl.pendientes = [];
     expect(() => validarParada(datos, 'prueba')).toThrow(/indicadoresDeLogro: vacío/);
+  });
+
+  it('exige que las figuras que se mueven en el cuento estén en la escena', () => {
+    const datos = structuredClone(selva3) as unknown as {
+      juego: { escenas: { partes: object[] }[] };
+    };
+    datos.juego.escenas[0]?.partes.push({ texto: 'Un elefante pasó.', figura: 'elefante' });
+    expect(() => validarParada(datos, 'prueba')).toThrow(/no está en las figuras de la escena/);
+  });
+
+  it('exige que los diálogos de los títeres sean de animales del juego', () => {
+    const datos = structuredClone(desierto2) as unknown as {
+      juego: { escenas: { dialogos: Record<string, string> }[] };
+    };
+    const escena = datos.juego.escenas[0];
+    if (escena) escena.dialogos.dragon = '¡Hola!';
+    expect(() => validarParada(datos, 'prueba')).toThrow(
+      /dialogos\.dragon: no es un animal del juego/,
+    );
   });
 
   it('rechaza personajes desconocidos', () => {

@@ -3,7 +3,9 @@ import { celebrar } from '../components/celebracion';
 import type { AnimalTitere, EscenaTeatrino, JuegoTiteres } from '../content/types';
 import { barajar, h, icono } from '../dom';
 import { imagen } from '../imagenes';
+import { personajes } from '../content';
 import { acierto, error } from '../sonido';
+import { hablar, hayVoz, leerEnOrden } from '../voz';
 import type { MontarJuego } from './tipos';
 
 /** Parada 2 del desierto: tarjetas, mímica, teatrino y «¿Mito o realidad?». */
@@ -170,6 +172,16 @@ function mimica(animales: AnimalTitere[], segundos: number): HTMLElement {
 
 // --- Teatrino ------------------------------------------------------------------------
 
+/** Cada títere habla con un tono propio (cambios suaves, para que no suene a robot). */
+const VOCES: Record<string, { voz: { tono: number; velocidad: number } }> = {
+  camello: personajes['don-camelio'],
+  zorro: personajes.dunita,
+  lagarto: { voz: { tono: 1.2, velocidad: 1.05 } },
+  serpiente: { voz: { tono: 0.95, velocidad: 0.85 } },
+  tortuga: { voz: { tono: 1.0, velocidad: 0.8 } },
+};
+const vozDe = (animal: AnimalTitere) => VOCES[animal.id] ?? personajes.huellita;
+
 interface TitereEnEscena {
   animal: AnimalTitere;
   x: number;
@@ -184,6 +196,54 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
   const narracion = h('div', { class: 'teatrino__narracion' });
   const escenario = h('div', { class: 'teatrino__escenario' });
   const dialogo = h('div', { class: 'teatrino__dialogo', 'aria-live': 'polite' });
+  /** Sube el títere al escenario de la escena actual; si el guion le da una frase, la dice. */
+  const subir = (a: AnimalTitere, { hablarAlSubir = true } = {}): TitereEnEscena | null => {
+    const elenco = elencos[escena];
+    const e = escenas[escena];
+    if (!elenco || !e) return null;
+    const ya = elenco.find((t) => t.animal.id === a.id);
+    if (ya) return ya;
+    if (elenco.length >= 5) return null;
+    const t: TitereEnEscena = {
+      animal: a,
+      x: 12 + ((elenco.length * 19) % 80),
+      dice: e.dialogos[a.id] ?? '',
+    };
+    elenco.push(t);
+    seleccionado = t;
+    pintar();
+    if (hablarAlSubir && t.dice) void hablar(t.dice, vozDe(a));
+    return t;
+  };
+
+  const representar = h(
+    'button',
+    { type: 'button', class: 'boton boton--huellita' },
+    hayVoz() ? '▶ Representar la escena' : '▶ Subir a todos',
+  );
+  representar.addEventListener('click', async () => {
+    const e = escenas[escena];
+    const elenco = elencos[escena];
+    if (!e || !elenco) return;
+    elenco.length = 0;
+    seleccionado = null;
+    pintar();
+    const actores = animales.filter((a) => e.dialogos[a.id]);
+    representar.disabled = true;
+    // Primero la narradora; luego cada títere sube justo cuando le toca hablar.
+    await leerEnOrden(
+      [
+        { texto: e.narracion, voz: personajes.dunita },
+        ...actores.map((a) => ({ texto: e.dialogos[a.id] ?? '', voz: vozDe(a) })),
+      ],
+      (i) => {
+        const a = actores[i - 1];
+        if (a) subir(a, { hablarAlSubir: false });
+      },
+    );
+    representar.disabled = false;
+  });
+
   const pestanas = h('div', {
     class: 'teatrino__pestanas',
     role: 'tablist',
@@ -194,6 +254,7 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
     const e = escenas[escena];
     if (!e) return;
     narracion.replaceChildren(burbuja('dunita', e.narracion, { pose: 'quieto' }));
+    representar.hidden = Object.keys(e.dialogos).length === 0;
     pestanas.replaceChildren(
       ...escenas.map((es, i) =>
         h(
@@ -222,7 +283,9 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
             h(
               'p',
               { class: 'teatrino__vacio' },
-              'Elijan títeres de la caja para subirlos al escenario.',
+              Object.keys(e.dialogos).length > 0
+                ? 'Suban los títeres de la caja: cada uno dirá su parte del guion.'
+                : 'Suban los títeres de la caja e inventen qué dice cada uno.',
             ),
           ]
         : []),
@@ -278,7 +341,13 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
   const pintarDialogo = () => {
     const e = escenas[escena];
     if (!e || !seleccionado) {
-      dialogo.replaceChildren(h('p', null, 'Toquen un títere del escenario para elegir qué dice.'));
+      dialogo.replaceChildren(
+        h(
+          'p',
+          null,
+          'Toquen un títere del escenario para elegir qué dice o para que hable otra vez.',
+        ),
+      );
       return;
     }
     const t = seleccionado;
@@ -289,8 +358,27 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
       placeholder: 'Escriban lo que dice',
       autocomplete: 'off',
     });
+    const decirFrase = (frase: string) => {
+      t.dice = frase;
+      pintar();
+      void hablar(frase, vozDe(t.animal));
+    };
     dialogo.replaceChildren(
       h('p', null, h('strong', null, `¿Qué dice el ${t.animal.nombre.toLowerCase()}?`)),
+      ...(t.dice && hayVoz()
+        ? [
+            h(
+              'button',
+              {
+                type: 'button',
+                class: 'boton boton--chico boton--huellita',
+                onclick: () => void hablar(t.dice, vozDe(t.animal)),
+              },
+              imagen('altavoz', { clase: 'icono', carga: 'eager' }),
+              '¡Que hable!',
+            ),
+          ]
+        : []),
       h(
         'div',
         { class: 'teatrino__frases' },
@@ -300,10 +388,7 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
             {
               type: 'button',
               class: 'boton boton--chico boton--secundario',
-              onclick: () => {
-                t.dice = f;
-                pintar();
-              },
+              onclick: () => decirFrase(f),
             },
             f,
           ),
@@ -315,8 +400,8 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
           class: 'teatrino__propia',
           onsubmit: (ev: Event) => {
             ev.preventDefault();
-            if (otra.value.trim()) t.dice = otra.value.trim();
-            pintar();
+            if (otra.value.trim()) decirFrase(otra.value.trim());
+            else pintar();
           },
         },
         h('label', { for: 'frase-propia', class: 'visualmente-oculto' }, 'Frase propia'),
@@ -349,14 +434,7 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
         {
           type: 'button',
           class: 'teatrino__titere-caja',
-          onclick: () => {
-            const elenco = elencos[escena];
-            if (!elenco || elenco.length >= 5) return;
-            const t: TitereEnEscena = { animal: a, x: 12 + ((elenco.length * 19) % 80), dice: '' };
-            elenco.push(t);
-            seleccionado = t;
-            pintar();
-          },
+          onclick: () => void subir(a),
         },
         imagen(a.imagen, { clase: 'icono' }),
         `Subir ${a.nombre.toLowerCase()}`,
@@ -371,6 +449,7 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
     h('h3', null, icono('teatro'), 'El teatrino del desierto'),
     pestanas,
     narracion,
+    h('div', { class: 'juego__acciones' }, representar),
     escenario,
     dialogo,
     caja,
