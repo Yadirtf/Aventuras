@@ -209,3 +209,52 @@ export function musica(estilo: keyof typeof MELODIAS): () => void {
   const reloj = window.setInterval(tocar, paso * 1000);
   return () => window.clearInterval(reloj);
 }
+
+// --- Toques suaves de la interfaz ------------------------------------------------------
+
+/**
+ * Una nota de kalimba: seno con un armónico muy bajito, ataque suave y caída corta,
+ * filtrada para que no suene chillona. Pensada para repetirse muchas veces sin cansar.
+ */
+function kalimba(frecuencia: number, retraso = 0, volumen = 0.07): void {
+  const ctx = audio();
+  if (!ctx) return;
+  const inicio = ctx.currentTime + retraso;
+  const filtro = ctx.createBiquadFilter();
+  filtro.type = 'lowpass';
+  filtro.frequency.value = 2200;
+  const vol = ctx.createGain();
+  vol.gain.setValueAtTime(0.0001, inicio);
+  vol.gain.exponentialRampToValueAtTime(volumen, inicio + 0.012);
+  vol.gain.exponentialRampToValueAtTime(0.0001, inicio + 0.45);
+  vol.connect(filtro).connect(ctx.destination);
+  [
+    [1, 1],
+    [3.01, 0.12],
+  ].forEach(([multiplo = 1, nivel = 1]) => {
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = frecuencia * multiplo;
+    g.gain.value = nivel;
+    osc.connect(g).connect(vol);
+    osc.start(inicio);
+    osc.stop(inicio + 0.5);
+  });
+}
+
+/** El toque de cualquier botón: una nota suave y grave de kalimba. */
+export const toqueSuave = (): void => kalimba(587.33);
+
+/** Pasar de pantalla: dos notas que suben (o bajan, al volver), como una campanita lejana. */
+export const pasarPantalla = (adelante = true): void => {
+  const [a, b] = adelante ? [523.25, 783.99] : [783.99, 523.25];
+  kalimba(a, 0, 0.06);
+  kalimba(b, 0.09, 0.05);
+};
+
+/** El golpe del sello sobre el pasaporte: un «tum» grave y acolchado. */
+export const golpeSello = (): void => {
+  tono(150, 0.35, 0, 'sine', { hasta: 60, volumen: 0.35 });
+  ruido(0.18, { filtro: 'lowpass', frecuencia: 500, volumen: 0.25, ataque: 0.004 });
+};

@@ -10,6 +10,7 @@ import './styles/juegos.css';
 import './styles/juegos-mar.css';
 import './styles/juegos-selva.css';
 import './styles/juegos-globo.css';
+import './styles/huella.css';
 import './styles/imprimir.css';
 
 import { paradas } from './content';
@@ -18,6 +19,7 @@ import { opciones } from './components/opciones';
 import { pasaporte } from './components/pasaporte';
 import type { Contexto, Vista } from './contexto';
 import { h, icono } from './dom';
+import { toqueSuave } from './sonido';
 import { detenerVoz, usarVoz } from './voz';
 import { Router, rutas, type Ruta } from './router';
 import { almacenDelNavegador, Store } from './state/store';
@@ -150,6 +152,28 @@ document.body.replaceChildren(
   principal,
   dialogoPasaporte,
   dialogoOpciones,
+);
+
+// La huella ocupa justo el alto que deja la cabecera, para jugarla sin scroll.
+new ResizeObserver(() =>
+  document.documentElement.style.setProperty('--alto-cabecera', `${cabecera.offsetHeight}px`),
+).observe(cabecera);
+
+/**
+ * Toque suave al presionar un botón o un enlace con forma de botón. Los que ya tienen su
+ * propio sonido (pasar de pantalla) lo indican con data-sonido.
+ */
+document.addEventListener(
+  'click',
+  (evento) => {
+    if (!store.estado.sonidoBotones) return;
+    const boton = (evento.target as Element | null)?.closest<HTMLElement>(
+      'button, a.boton, a.tarjeta-parada__cuerpo, [role="button"]',
+    );
+    if (!boton || boton.matches(':disabled') || boton.dataset.sonido) return;
+    toqueSuave();
+  },
+  true,
 );
 
 // --- Sincronización con el estado ----------------------------------------------------

@@ -41,7 +41,7 @@ export const pelotaPreguntona: MontarJuego<JuegoPelotaPreguntona> = ({
     palmas,
   );
   const guia = burbuja(
-    'dunita',
+    'don-camelio',
     'Presionen «Empezar palmas» y aplaudan al ritmo. Cuando alguien diga «¡Alto!», la pelota se detiene en una pregunta.',
     { vivo: true },
   );
@@ -63,7 +63,7 @@ export const pelotaPreguntona: MontarJuego<JuegoPelotaPreguntona> = ({
       respondidas.add(actual);
       estaciones[actual]?.classList.add('ronda__estacion--hecha');
       decir(guia, `Pregunta ${actual + 1}: ${pregunta}`, 'pregunta');
-      void hablar(pregunta, personajes.dunita);
+      void hablar(pregunta, personajes['don-camelio']);
       if (respondidas.size === juego.preguntas.length) {
         window.setTimeout(() => {
           decir(

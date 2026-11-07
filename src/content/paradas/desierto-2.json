@@ -3,8 +3,8 @@
   "ecosistema": "desierto",
   "numero": 2,
   "titulo": "Los animales del desierto en títeres",
-  "guias": ["dunita", "don-camelio"],
-  "saludo": "¡Volvieron, exploradores! Don Camelio y yo tenemos una pregunta: ¿qué hacen los animales cuando hace mucho calor y casi no hay agua?",
+  "guias": ["don-camelio", "dunita"],
+  "saludo": "¡Volvieron, exploradores! Dunita la zorrita y yo tenemos una pregunta: ¿qué hacen los animales cuando hace mucho calor y casi no hay agua?",
   "retoPantalla": "Cinco tarjetas de animales (camello, zorro, lagarto, serpiente y tortuga) se voltean para descubrir cómo se adaptan. Luego, el teatrino: al subir cada títere al escenario dice su parte del guion en voz alta; en la escena 3 ustedes inventan el final. Don Camelio pregunta: «¿Mito o realidad?».",
   "movimiento": {
     "titulo": "Para terminar: estiramiento y respiración",

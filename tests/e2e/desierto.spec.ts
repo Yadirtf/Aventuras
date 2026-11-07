@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { abrir } from './ayuda';
+import { abrir, pantalla, selloListo } from './ayuda';
 
 test.describe('Parada 1: pelota preguntona', () => {
   test('la pelota se detiene en las 5 preguntas y el juego termina', async ({ page }) => {
@@ -19,9 +19,7 @@ test.describe('Parada 1: pelota preguntona', () => {
         timeout: 5000,
       },
     );
-    await expect(page.getByRole('button', { name: '¡Lo logramos! Poner el sello' })).toHaveClass(
-      /boton--latido/,
-    );
+    await expect(selloListo(page)).toHaveClass(/huella__paso--listo/);
   });
 
   test('las ideas del mural se guardan y se pueden quitar', async ({ page }) => {
@@ -39,6 +37,7 @@ test.describe('Parada 1: pelota preguntona', () => {
 
   test('se puede dibujar en el lienzo con el pincel de arena', async ({ page }) => {
     await abrir(page, '/desierto/1');
+    await pantalla(page, 'Mi desierto en un dibujo');
     const lienzo = page.locator('.lienzo__papel');
     await lienzo.scrollIntoViewIfNeeded();
     const antes = await lienzo.evaluate((c: HTMLCanvasElement) => c.toDataURL());
@@ -74,6 +73,7 @@ test.describe('Parada 1: pelota preguntona', () => {
 
   test('el dibujo se deshace paso a paso y se cuelga en la cuerda', async ({ page }) => {
     await abrir(page, '/desierto/1');
+    await pantalla(page, 'Mi desierto en un dibujo');
     const lienzo = page.locator('.lienzo__papel');
     await lienzo.scrollIntoViewIfNeeded();
     const blanco = await lienzo.evaluate((c: HTMLCanvasElement) => c.toDataURL());
@@ -98,6 +98,7 @@ test.describe('Parada 1: pelota preguntona', () => {
     await expect(page.locator('.cuerda__dibujo')).toHaveCount(1);
     await page.reload();
     await expect(page.locator('.cuerda__dibujo')).toHaveCount(1);
+    await pantalla(page, 'El mural del desierto');
     await page.getByRole('button', { name: 'Descolgar el dibujo 1' }).click();
     await expect(page.locator('.cuerda__dibujo')).toHaveCount(0);
   });
@@ -113,6 +114,7 @@ test.describe('Parada 2: títeres', () => {
 
   test('la mímica sortea, cuenta y revela', async ({ page }) => {
     await abrir(page, '/desierto/2');
+    await pantalla(page, 'Mímica de 30 segundos');
     const mimica = page.locator('.mimica');
     await mimica.getByRole('button', { name: 'Sortear animal' }).click();
     await mimica.getByRole('button', { name: 'Empezar 30 segundos' }).click();
@@ -125,6 +127,7 @@ test.describe('Parada 2: títeres', () => {
     page,
   }) => {
     await abrir(page, '/desierto/2');
+    await pantalla(page, 'El teatrino del desierto');
     await page.getByRole('button', { name: 'Subir camello' }).click();
     await page.locator('.teatrino__frases').getByRole('button').first().click();
     const titere = page.locator('.titere').first();
@@ -143,6 +146,7 @@ test.describe('Parada 2: títeres', () => {
 
   test('¿Mito o realidad? llega al final', async ({ page }) => {
     await abrir(page, '/desierto/2');
+    await pantalla(page, '¿Mito o realidad?');
     const mito = page.locator('.mito');
     for (let i = 0; i < 4; i++) {
       await mito.getByRole('button', { name: 'Mito', exact: true }).click();

@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { abrir, botonSello } from './ayuda';
+import { abrir, pantalla, selloListo } from './ayuda';
 
 test.describe('Parada 4: descubriendo el fondo del mar', () => {
   test('siluetas, dietas y «¡A comer!» llevan al sello', async ({ page }) => {
@@ -42,7 +42,7 @@ test.describe('Parada 4: descubriendo el fondo del mar', () => {
       await page.locator('.carta-comida', { hasText: a.comida }).click();
     }
     await expect(page.locator('.carta-comida--comida')).toHaveCount(4);
-    await expect(botonSello(page)).toHaveClass(/boton--latido/);
+    await expect(selloListo(page)).toHaveClass(/huella__paso--listo/);
   });
 });
 
@@ -58,6 +58,7 @@ test.describe('Parada 5: el mapa del tesoro', () => {
     await expect(page.locator('.mar-tablero__aleta')).toHaveCount(0);
 
     // Ruta B con un chapuzón primero.
+    await pantalla(page, 'El mar de los tiburones');
     await page.getByRole('button', { name: 'Ruta B: los aros' }).click();
     await expect(page.locator('.mar-tablero__aleta')).toHaveCount(2);
     const agua = page.getByRole('button', { name: 'Agua del Tiburón' });
@@ -88,11 +89,12 @@ test.describe('Parada 5: el mapa del tesoro', () => {
       await puzzle.getByRole('button', { name: `Lugar ${i + 1}` }).click();
     }
     await expect(page.locator('.mapa-armado__mensaje')).toContainText('gran X');
-    await expect(botonSello(page)).toHaveClass(/boton--latido/);
+    await expect(selloListo(page)).toHaveClass(/huella__paso--listo/);
   });
 
   test('en la ruta A, salirse de la línea es caer al agua', async ({ page }) => {
     await abrir(page, '/mar/2');
+    await pantalla(page, 'El mar de los tiburones');
     await page.getByRole('button', { name: 'Ruta A: la línea en zigzag' }).click();
     const buzo = page.getByRole('button', { name: /^Buzo/ });
     const caja = await buzo.boundingBox();
@@ -152,7 +154,7 @@ test.describe('Parada 6: el tesoro del mar', () => {
     await abrirCandado.click();
     await expect(page.locator('.sobre__invitacion')).toContainText('fuera del agua');
     await expect(page.locator('.relevo .burbuja[data-personaje="momo"]')).toBeVisible();
-    await expect(botonSello(page)).toHaveClass(/boton--latido/);
+    await expect(selloListo(page)).toHaveClass(/huella__paso--listo/);
   });
 
   test('rozar un tentáculo congela 3 segundos', async ({ page }) => {

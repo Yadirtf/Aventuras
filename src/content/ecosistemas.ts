@@ -9,7 +9,7 @@ export const ecosistemas: Record<EcosistemaId, Ecosistema> = {
     descripcion:
       'Un lugar con mucho sol y muy poca agua, donde viven animales y plantas que aprendieron a cuidar cada gota.',
     autora: 'Katerin López',
-    guia: 'dunita',
+    guia: 'don-camelio',
     imagen: 'cactus',
     paisaje: ['sol', 'cactus', 'camello', 'lagarto', 'serpiente'],
     familia: {

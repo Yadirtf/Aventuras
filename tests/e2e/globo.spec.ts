@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { abrir, botonSello } from './ayuda';
+import { abrir, pantalla, selloListo } from './ayuda';
 
 const MUNDO: Record<string, string> = {
   'Hay muy poca agua.': 'desierto',
@@ -16,6 +16,7 @@ const MUNDO: Record<string, string> = {
 test('el gran viaje en globo recorre los tres mundos y termina', async ({ page }) => {
   await page.clock.install();
   await abrir(page, '/globo/1');
+  await pantalla(page, 'El gran viaje en globo');
   const juego = page.locator('.juego--globo');
   await juego.getByRole('button', { name: '¡Subir al globo y despegar!' }).click();
 
@@ -59,5 +60,5 @@ test('el gran viaje en globo recorre los tres mundos y termina', async ({ page }
   }
   await expect(juego.locator('.globo__semejanza')).toBeVisible();
   await juego.getByRole('button', { name: '¡Terminamos el viaje!' }).click();
-  await expect(botonSello(page)).toHaveClass(/boton--latido/);
+  await expect(selloListo(page)).toHaveClass(/huella__paso--listo/);
 });

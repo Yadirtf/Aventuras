@@ -3,7 +3,7 @@
   "ecosistema": "desierto",
   "numero": 3,
   "titulo": "Viaje de la realidad",
-  "guias": ["dunita"],
+  "guias": ["don-camelio"],
   "saludo": "¡Hoy viajamos a la realidad! Seis pistas nos esperan escondidas. ¿Saben dónde queda la derecha y dónde la izquierda? ¡Lo vamos a necesitar!",
   "retoPantalla": "Una escena del desierto con seis objetos escondidos y pistas como «tomo el sol encima de la roca» o «estoy debajo de algo azul». Cada acierto entrega una pieza; con las seis se arma un rompecabezas misterioso.",
   "movimiento": {
@@ -66,7 +66,7 @@
     "reverso": "Hay un lugar donde el agua cubre todo. Es azul y profundo, y allí podemos encontrar peces, tortugas, corales y estrellas de mar. ¿Qué lugar es?",
     "relevo": {
       "despedida": "¡Capitana Tortu! Los exploradores armaron el rompecabezas. Esta pista es para ti.",
-      "respuesta": "¡Gracias, Dunita! Tripulación, prepárense: ¡nos vamos al fondo del mar!",
+      "respuesta": "¡Gracias, Don Camelio! Tripulación, prepárense: ¡nos vamos al fondo del mar!",
       "siguienteGuia": "capitana-tortu"
     }
   },

@@ -15,6 +15,8 @@ export interface Estado {
   galeria: Record<string, string[]>;
   /** Voz del navegador elegida en Opciones (su voiceURI); null = la mejor disponible. */
   voz: string | null;
+  /** Toque suave al presionar un botón. */
+  sonidoBotones: boolean;
 }
 
 export const CLAVE = 'camino-aventuras:v1';
@@ -28,6 +30,7 @@ const inicial = (): Estado => ({
   mural: {},
   galeria: {},
   voz: null,
+  sonidoBotones: true,
 });
 
 export const LARGO_MAXIMO_NOTA = 80;
@@ -69,6 +72,7 @@ function leer(almacen: Almacen | null): Estado {
       mural: leerListas(datos.mural),
       galeria: leerListas(datos.galeria, esDibujo),
       voz: typeof datos.voz === 'string' ? datos.voz : null,
+      sonidoBotones: datos.sonidoBotones !== false,
     };
   } catch {
     return inicial();
@@ -117,6 +121,10 @@ export class Store {
 
   cambiarVoz(voz: string | null): void {
     this.#actualizar({ voz });
+  }
+
+  cambiarSonidoBotones(activo: boolean): void {
+    this.#actualizar({ sonidoBotones: activo });
   }
 
   notas(clave: string): readonly string[] {

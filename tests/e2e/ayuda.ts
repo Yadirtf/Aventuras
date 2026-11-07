@@ -22,6 +22,20 @@ export async function abrir(page: Page, ruta: string): Promise<void> {
   await page.goto(ruta);
 }
 
-/** El botón del sello late cuando el juego de la parada terminó. */
-export const botonSello = (page: Page) =>
-  page.getByRole('button', { name: '¡Lo logramos! Poner el sello' });
+/** El último paso de la huella (el sello) late cuando el juego de la parada terminó. */
+export const selloListo = (page: Page) => page.locator('.huella__paso').last();
+
+/** Pasa a la pantalla de la huella que tiene ese título (los botones de la barra de pasos). */
+export async function pantalla(page: Page, titulo: string): Promise<void> {
+  await page
+    .getByRole('list', { name: 'Pantallas de esta huella' })
+    .getByRole('button', { name: new RegExp(`^Pantalla \\d+ de \\d+: ${escapar(titulo)}$`) })
+    .click();
+}
+
+/** Pasa a la pantalla del sello, la última de la huella. */
+export async function pantallaSello(page: Page): Promise<void> {
+  await pantalla(page, 'El sello');
+}
+
+const escapar = (texto: string) => texto.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

@@ -3,7 +3,7 @@
   "ecosistema": "globo",
   "numero": 1,
   "titulo": "El gran viaje en globo por los tres mundos",
-  "guias": ["huellita", "dunita", "capitana-tortu", "momo"],
+  "guias": ["huellita", "don-camelio", "capitana-tortu", "momo"],
   "saludo": "¡Pasajeros, a sus puestos! Hoy subimos a un globo aerostático para volver a los tres mundos que exploramos. En cada uno nos espera una misión. ¿Tienen su boleto?",
   "retoPantalla": "Un viaje en tres aterrizajes. Entre uno y otro, el globo vuela un minuto mientras ustedes flotan en cámara lenta. Cada aterrizaje se anuncia con una señal (tambor, campana o maracas): adivinen a qué mundo llegamos y cumplan su misión. Al volver al globo, ordenen las tarjetas para descubrir en qué se diferencian y en qué se parecen los tres mundos.",
   "sello": {
