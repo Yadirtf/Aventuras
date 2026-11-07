@@ -1,6 +1,9 @@
 import { expect, test, type Page } from '@playwright/test';
 
-const IDS = ['desierto', 'mar', 'selva'].flatMap((eco) => [1, 2, 3].map((n) => `${eco}-${n}`));
+const IDS = [
+  ...['desierto', 'mar', 'selva'].flatMap((eco) => [1, 2, 3].map((n) => `${eco}-${n}`)),
+  'globo-1',
+];
 
 async function sembrar(page: Page, completadas: string[]): Promise<void> {
   await page.addInitScript((ids) => {
@@ -18,8 +21,8 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-test('sin los 9 sellos, la pantalla final invita a seguir', async ({ page }) => {
-  await sembrar(page, IDS.slice(0, 7));
+test('sin todos los sellos, la pantalla final invita a seguir', async ({ page }) => {
+  await sembrar(page, IDS.slice(0, 8));
   await page.goto('/final');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText(
     '¡Todavía no termina la aventura!',
@@ -34,8 +37,9 @@ test('con la aventura completa: personajes, recorrido y diploma', async ({ page 
   await expect(page.locator('.final__nombre')).toHaveText('Los Jaguares');
   await expect(page.getByText('¡Nuestra aventura ha terminado!')).toBeVisible();
   await expect(page.locator('.final__amigo')).toHaveCount(8);
-  await expect(page.locator('.final__ecosistema')).toHaveCount(3);
-  await expect(page.locator('.final__sello-item img')).toHaveCount(9);
+  await expect(page.locator('.final__ecosistema')).toHaveCount(4);
+  await expect(page.locator('.final__ecosistema h3').first()).toContainText('Desértico');
+  await expect(page.locator('.final__sello-item img')).toHaveCount(10);
   await expect(
     page.getByRole('img', { name: /Diploma del explorador para Los Jaguares/ }),
   ).toBeVisible();
@@ -87,13 +91,20 @@ test('empezar de nuevo pide confirmación y borra el progreso', async ({ page })
   await page.getByRole('button', { name: 'Una nueva aventura con otro grupo' }).click();
   await page.getByRole('button', { name: 'Sí, empezar de nuevo' }).click();
   await expect(page).toHaveURL('/');
-  await expect(page.locator('.cabecera__cuenta')).toHaveText('0/9');
+  await expect(page.locator('.cabecera__cuenta')).toHaveText('0/10');
 });
 
-test('cada reto de movimiento tiene su alternativa tranquila', async ({ page }) => {
+test('cada reto de movimiento tiene su alternativa tranquila; las autoras quitaron algunos', async ({
+  page,
+}) => {
   await sembrar(page, IDS);
+  const sinReto = ['desierto-1', 'mar-3', 'selva-1', 'globo-1'];
   for (const id of IDS) {
     await page.goto(`/${id.replace('-', '/')}`);
-    await expect(page.locator('.parada__tranquilo')).toContainText('Alternativa tranquila');
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    if (sinReto.includes(id)) await expect(page.locator('.parada__movimiento')).toHaveCount(0);
+    else await expect(page.locator('.parada__tranquilo')).toContainText('Alternativa tranquila');
   }
+  await page.goto('/desierto/3');
+  await expect(page.locator('.parada__movimiento')).toContainText('Opcional');
 });

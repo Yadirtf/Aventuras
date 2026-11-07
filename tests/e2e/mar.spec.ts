@@ -51,11 +51,20 @@ test.describe('Parada 5: el mapa del tesoro', () => {
     await abrir(page, '/mar/2');
     const tortu = page.locator('.juego--mapa .burbuja__frase').first();
 
+    // Antes de cruzar: el cuento para escuchar y el mapa de las dos rutas.
+    await expect(page.locator('.lectura__parrafo')).toHaveCount(4);
+    await expect(page.locator('.lectura')).toContainText('tiburón de agua salada');
+    await expect(page.locator('.rutas')).toContainText('Ruta A');
+    await expect(page.locator('.mar-tablero__aleta')).toHaveCount(0);
+
     // Ruta B con un chapuzón primero.
     await page.getByRole('button', { name: 'Ruta B: los aros' }).click();
-    await page
-      .getByRole('button', { name: 'Agua del Tiburón' })
-      .click({ position: { x: 5, y: 5 } });
+    await expect(page.locator('.mar-tablero__aleta')).toHaveCount(2);
+    const agua = page.getByRole('button', { name: 'Agua del Tiburón' });
+    await agua.evaluate((el) => el.scrollIntoView({ block: 'center' }));
+    const cajaAgua = await agua.boundingBox();
+    if (!cajaAgua) throw new Error('sin agua');
+    await agua.click({ position: { x: 40, y: cajaAgua.height - 40 } });
     await expect(tortu).toContainText('Splash');
     await page.getByRole('button', { name: 'Aro 3' }).click();
     await expect(tortu).toContainText('muy lejos');
@@ -71,7 +80,13 @@ test.describe('Parada 5: el mapa del tesoro', () => {
     }
     await expect(page.locator('.mapa__tarjeta')).toHaveCount(4);
 
-    await page.getByRole('button', { name: 'Unir las tarjetas' }).click();
+    // Las cuatro piezas arman el rompecabezas del mapa del tesoro.
+    const puzzle = page.locator('.rompecabezas');
+    await expect(puzzle).toBeVisible();
+    for (let i = 0; i < 4; i++) {
+      await puzzle.locator(`[data-pieza="${i}"]`).click();
+      await puzzle.getByRole('button', { name: `Lugar ${i + 1}` }).click();
+    }
     await expect(page.locator('.mapa-armado__mensaje')).toContainText('gran X');
     await expect(botonSello(page)).toHaveClass(/boton--latido/);
   });

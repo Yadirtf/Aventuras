@@ -1,4 +1,10 @@
-import { buscarParada, ecosistemas, type EcosistemaId } from '../content';
+import {
+  buscarParada,
+  ecosistemas,
+  paradasDe,
+  type EcosistemaId,
+  type RetoMovimiento,
+} from '../content';
 import { burbuja } from '../components/burbuja';
 import { celebrar } from '../components/celebracion';
 import { rinconCalma } from '../components/rincon-calma';
@@ -12,9 +18,39 @@ import { noEncontrada } from './no-encontrada';
 
 export const ID_SELLO = 'sello-conseguido';
 
+/** El reto con el cuerpo: antes del juego (calentamiento) o después, a veces opcional. */
+function bloqueMovimiento(m: RetoMovimiento): HTMLElement {
+  return h(
+    'section',
+    {
+      class: `parada__bloque parada__movimiento${m.opcional ? ' parada__movimiento--opcional' : ''}`,
+    },
+    h(
+      'h2',
+      null,
+      icono('acrobata'),
+      m.titulo ?? 'Reto de movimiento',
+      m.opcional && h('span', { class: 'parada__etiqueta' }, 'Opcional'),
+    ),
+    m.opcional &&
+      h(
+        'p',
+        { class: 'parada__nota' },
+        'La docente decide si lo hacen hoy, según el tiempo y el ánimo del grupo.',
+      ),
+    h('p', null, m.texto),
+    h(
+      'p',
+      { class: 'parada__tranquilo' },
+      h('strong', null, 'Alternativa tranquila: '),
+      m.tranquilo,
+    ),
+  );
+}
+
 /**
- * Plantilla común a las 9 paradas: llegada del guía, reto en pantalla (el juego),
- * reto de movimiento, sello, pista y rincón de calma.
+ * Plantilla común a las paradas: llegada del guía, reto en pantalla (el juego),
+ * reto de movimiento (si la parada lo tiene), sello, pista y rincón de calma.
  */
 export function parada(ctx: Contexto, eco: EcosistemaId, numero: number): Vista {
   const p = buscarParada(eco, numero);
@@ -24,6 +60,7 @@ export function parada(ctx: Contexto, eco: EcosistemaId, numero: number): Vista 
   const { modoDocente } = store.estado;
   const estado = estadoDeParada(paradas, p.id, store.completadas, modoDocente);
   const posicion = paradas.indexOf(p) + 1;
+  const delTramo = paradasDe(eco).length;
   const siguiente = siguienteParada(paradas, p.id);
   const [guia = 'huellita'] = p.guias;
   const ecosistema = ecosistemas[eco];
@@ -35,7 +72,7 @@ export function parada(ctx: Contexto, eco: EcosistemaId, numero: number): Vista 
       'p',
       { class: 'parada__miga' },
       h('a', { href: rutas.ecosistema(eco) }, ecosistema.nombre),
-      ` · Parada ${numero} de 3`,
+      ` · Parada ${numero} de ${delTramo}`,
     ),
     h('h1', { tabindex: -1 }, p.titulo),
   );
@@ -121,7 +158,7 @@ export function parada(ctx: Contexto, eco: EcosistemaId, numero: number): Vista 
                 icono('trofeo'),
                 'Ver el final de la aventura',
               ),
-          numero === 3 &&
+          numero === delTramo &&
             ecosistema.familia &&
             h(
               'a',
@@ -166,6 +203,7 @@ export function parada(ctx: Contexto, eco: EcosistemaId, numero: number): Vista 
         { class: 'parada__llegada', 'aria-label': 'Llegada del guía' },
         burbuja(guia, p.saludo),
       ),
+      p.movimiento?.antesDelJuego && bloqueMovimiento(p.movimiento),
       h(
         'section',
         { class: 'parada__bloque' },
@@ -173,18 +211,7 @@ export function parada(ctx: Contexto, eco: EcosistemaId, numero: number): Vista 
         h('p', { class: 'parada__intro' }, p.retoPantalla),
         juego,
       ),
-      h(
-        'section',
-        { class: 'parada__bloque' },
-        h('h2', null, icono('acrobata'), 'Reto de movimiento'),
-        h('p', null, p.retoMovimiento),
-        h(
-          'p',
-          { class: 'parada__tranquilo' },
-          h('strong', null, 'Alternativa tranquila: '),
-          p.retoTranquilo,
-        ),
-      ),
+      p.movimiento && !p.movimiento.antesDelJuego && bloqueMovimiento(p.movimiento),
       sello,
       rinconCalma(eco),
       h(

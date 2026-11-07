@@ -2,8 +2,15 @@
 
 import type { Imagen } from '../imagenes';
 
-export const ECOSISTEMAS = ['desierto', 'mar', 'selva'] as const;
+/**
+ * Tramos del camino, en orden: los tres ecosistemas y el gran viaje en globo, que los recorre
+ * de nuevo para compararlos. El globo se maneja como un tramo más (mapa, rutas, color y
+ * planeación), aunque no es un ecosistema.
+ */
+export const ECOSISTEMAS = ['desierto', 'mar', 'selva', 'globo'] as const;
 export type EcosistemaId = (typeof ECOSISTEMAS)[number];
+/** Solo los tres ecosistemas naturales (sin el globo). */
+export type EcosistemaNatural = Exclude<EcosistemaId, 'globo'>;
 
 export const PERSONAJES = [
   'huellita',
@@ -75,6 +82,8 @@ export interface AnimalTitere {
 export interface EscenaTeatrino {
   titulo: string;
   narracion: string;
+  /** Lo que dice cada animal del guion al subir al escenario, por su `id`. */
+  dialogos: Record<string, string>;
   /** Frases sugeridas para los títeres. Vacía = los niños inventan lo que dicen. */
   frases: string[];
 }
@@ -144,10 +153,19 @@ export interface JuegoSiluetas {
   otrosAlimentos: { nombre: string; imagen: Imagen }[];
 }
 
-/** Parada 2 del mar: cruzar el mar por la ruta A o la B y armar el mapa con las tarjetas. */
+/** Un cuento corto para leer en voz alta, párrafo por párrafo. */
+export interface Cuento {
+  titulo: string;
+  autora: string;
+  parrafos: string[];
+}
+
+/** Parada 2 del mar: cuento, cruzar el mar por la ruta A o la B y armar el mapa con las piezas. */
 export interface JuegoMapaTesoro {
   tipo: 'mapa-tesoro';
-  /** Una tarjeta por cruce; con todas se arma el mapa. */
+  /** El cuento que se lee como provocación, para quienes todavía no leen. */
+  cuento: Cuento;
+  /** Una pieza del rompecabezas por cruce; con todas se arma el mapa (de 4 o 6). */
   tarjetas: { nombre: string; imagen: Imagen }[];
   /** Lo que dice el mapa armado: las últimas pistas hacia la gran X. */
   mensajeMapa: string;
@@ -200,17 +218,64 @@ export interface JuegoCircuito {
 export const FONDOS_CUENTO = ['amanecer', 'rugido', 'tormenta', 'sol', 'reunion'] as const;
 export type FondoCuento = (typeof FONDOS_CUENTO)[number];
 
+/**
+ * Un trozo del cuento y la figura que se mueve mientras se lee (debe estar en la escena);
+ * «todas» mueve a todas las figuras a la vez.
+ */
+export interface ParteCuento {
+  texto: string;
+  figura?: Imagen | 'todas';
+}
+
 /** Parada 3 de la selva: cuento en escenas con su movimiento y la banda sonora de la tormenta. */
 export interface JuegoCuento {
   tipo: 'cuento';
   titulo: string;
   escenas: {
     titulo: string;
-    texto: string;
+    partes: ParteCuento[];
     movimiento: string;
     fondo: FondoCuento;
     figuras: Imagen[];
   }[];
+}
+
+export const SENALES = ['tambor', 'campana', 'maracas'] as const;
+export type Senal = (typeof SENALES)[number];
+
+/** Un aterrizaje del globo: la señal que lo anuncia y la misión de movimiento del lugar. */
+export interface Aterrizaje {
+  ecosistema: EcosistemaNatural;
+  senal: Senal;
+  mision: string;
+  descripcion: string;
+  minutos: number;
+  /** Retos de la misión, en orden (estaciones del recorrido o animales de la estatua musical). */
+  pasos: { texto: string; imagen: Imagen }[];
+  /** «recorrido»: se marca cada reto al terminarlo; «estatua»: música que se detiene. */
+  modo: 'recorrido' | 'estatua';
+  /** Música de fondo que la docente puede poner durante la misión. */
+  musica?: 'suave' | 'animada';
+  pregunta: string;
+}
+
+/** Una característica para comparar los ecosistemas al volver al globo. */
+export interface Caracteristica {
+  texto: string;
+  ecosistema: EcosistemaNatural;
+}
+
+/** Parada final: el gran viaje en globo por los tres mundos. */
+export interface JuegoGlobo {
+  tipo: 'globo';
+  preguntasDespegue: string[];
+  acuerdos: string[];
+  segundosVuelo: number;
+  aterrizajes: Aterrizaje[];
+  caracteristicas: Caracteristica[];
+  /** Lo que tienen en común los tres ecosistemas. */
+  semejanza: string;
+  preguntaFinal: string;
 }
 
 export type Juego =
@@ -222,8 +287,22 @@ export type Juego =
   | JuegoTesoro
   | JuegoSonidos
   | JuegoCircuito
-  | JuegoCuento;
+  | JuegoCuento
+  | JuegoGlobo;
 export type TipoJuego = Juego['tipo'];
+
+/** Lo que se hace con el cuerpo en el salón, además del juego en pantalla. */
+export interface RetoMovimiento {
+  /** Por defecto, «Reto de movimiento». */
+  titulo?: string;
+  texto: string;
+  /** Versión sentada o en silencio, para quien la necesite. */
+  tranquilo: string;
+  /** Si es true, la docente decide si lo hace. */
+  opcional?: boolean;
+  /** Si es true, se hace antes del juego (calentamiento) y no al final. */
+  antesDelJuego?: boolean;
+}
 
 /** Una parada del mapa: la experiencia en pantalla más su planeación. */
 export interface Parada {
@@ -234,9 +313,8 @@ export interface Parada {
   guias: PersonajeId[];
   saludo: string;
   retoPantalla: string;
-  retoMovimiento: string;
-  /** Versión sentada o en silencio del reto de movimiento, para quien la necesite. */
-  retoTranquilo: string;
+  /** Algunas paradas no lo llevan: su cierre ya es tranquilo o el juego ya es de movimiento. */
+  movimiento?: RetoMovimiento;
   sello: Sello;
   /** La pista que deja esta parada hacia la siguiente. */
   pista: string;
@@ -253,7 +331,10 @@ export interface TarjetaFamilia {
 
 export interface Ecosistema {
   id: EcosistemaId;
+  /** Nombre del ecosistema: Desértico, Marino, Selvático. */
   nombre: string;
+  /** El lugar en palabras de los niños: «el desierto», «el fondo del mar». */
+  lugar: string;
   titulo: string;
   descripcion: string;
   autora: string;

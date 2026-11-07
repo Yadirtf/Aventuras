@@ -5,9 +5,7 @@
   "titulo": "Lo que sabemos del desierto",
   "guias": ["dunita"],
   "saludo": "¡Hola, exploradores! Soy Dunita. Con estas orejas tan grandes escucho todo lo que ustedes saben. ¿Qué es un desierto para ustedes?",
-  "retoPantalla": "La pelota preguntona rebota al ritmo de las palmas y se detiene en una pregunta. Las respuestas se pegan en un mural digital con cuatro columnas: clima, animales, plantas y agua.",
-  "retoMovimiento": "Siéntense en círculo y pasen la pelota mientras marcan el ritmo con palmas. ¡Cuando el ritmo se detenga, quien tenga la pelota responde!",
-  "retoTranquilo": "Sin levantarse de la silla: pasen la pelota de mano en mano y marquen el ritmo con suaves golpecitos en la mesa.",
+  "retoPantalla": "La pelota preguntona rebota al ritmo de las palmas y se detiene en una pregunta. Las ideas se pegan en cuatro columnas (clima, animales, plantas y agua) y se pueden cambiar de columna. Después, cada uno dibuja su desierto y lo cuelga con pinzas en la cuerda del mural.",
   "sello": {
     "nombre": "Sol",
     "imagen": "sol"
@@ -45,59 +43,59 @@
     "tema": "Lo que sabemos del desierto",
     "autora": "Katerin López",
     "docenteTutora": null,
-    "fecha": null,
+    "fecha": "1 de noviembre de 2026",
     "duracion": "45 minutos",
-    "objetivo": "Indagar lo que los niños y niñas conocen del desierto mediante preguntas y un dibujo, y construir entre todos un mural para colgar en el salón, fortaleciendo la expresión oral, el trazo, la motricidad fina y la cooperación, como abrebocas de la actividad de la siguiente sesión.",
+    "objetivo": "Representar algunos conocimientos previos sobre el desierto mediante la expresión oral y la elaboración de un dibujo individual, a través de la creatividad, la motricidad fina y la construcción de un mural colectivo.",
     "inicio": [
       {
         "titulo": "Ambientación (antes de la llegada del grupo)",
-        "texto": "Se despeja un espacio amplio, con sillas o cojines en círculo. En la mesa se deja escrito el título «El desierto» y se preparan la pelota, las hojas o cartulinas, los colores y una caja con arena, una piedra y una tela."
+        "texto": "Se despeja un espacio amplio del salón, organizado con sillas o cojines en círculo. En una mesa se ubica el título «El desierto» y se disponen los materiales que se utilizarán durante la actividad: una pelota, hojas o cartulinas, colores y una caja que contiene arena, una piedra y una tela."
       },
       {
         "titulo": "La pelota preguntona",
-        "texto": "Los niños y niñas se sientan en círculo y la docente va pasando una pelota mientras marca un ritmo con palmas. Cuando el ritmo se para, quien tenga la pelota contesta una pregunta:",
+        "texto": "Los niños y las niñas se sientan en círculo mientras la docente pasa una pelota al ritmo de las palmas. Cuando el ritmo se detiene, quien tenga la pelota responde una pregunta relacionada con el desierto:",
         "lista": [
-          "¿Qué es un desierto? ¿Han visto alguno, ya sea en fotos o en videos?",
-          "¿Cómo piensan que está el clima allí?",
-          "¿Qué animales creen que hay en ese lugar?",
-          "¿Qué plantas piensan que crecen?",
-          "¿Y qué pasa con el agua en un sitio así?"
+          "¿Qué es un desierto? ¿Han visto alguno en fotografías o videos?",
+          "¿Cómo imaginan que es el clima allí?",
+          "¿Qué animales creen que habitan en ese lugar?",
+          "¿Qué plantas piensan que pueden crecer?",
+          "¿Qué creen que sucede con el agua en un sitio así?"
         ]
       },
       {
-        "texto": "La maestra escucha sin corregir, anota las ideas en el pizarrón con una palabra o un dibujo y las agrupa en clima, animales, plantas y agua."
+        "texto": "La docente escucha atentamente las respuestas, sin corregirlas, y registra las ideas principales en el tablero mediante palabras o dibujos. Posteriormente, organiza los aportes en cuatro aspectos: clima, animales, plantas y agua."
       },
       {
         "titulo": "Presentación",
-        "texto": "Se dice que hoy cada niño y niña dibujará lo que sabe o se imagina del desierto y que con esos dibujos harán entre todos un mural para poner en el salón. Se acuerdan algunas reglas: escuchar al que habla, esperar el turno y cuidar los materiales."
+        "texto": "A partir de las ideas compartidas, la docente les cuenta que cada niño y niña realizará un dibujo de lo que sabe o imagina sobre el desierto y que luego reunirán sus producciones para elaborar entre todos un mural que será ubicado en el salón. Finalmente, se establecen algunos acuerdos: escuchar a quien habla, esperar el turno y cuidar los materiales."
       }
     ],
     "desarrollo": [
       {
         "titulo": "Mi desierto en un dibujo",
-        "texto": "Cada niño y niña recibe una hoja o media cartulina y dibuja lo que conoce o imagina del desierto: animales, plantas, el sol, la arena, las personas. Con pegante pueden pegar un poco de arena sobre las dunas. La caja con arena, la piedra y la tela están ahí para que quien necesite inspiración la mire y la toque. La maestra pasa por los puestos preguntando «¿Qué dibujaste?» y «¿Cómo vive ese animal?» y, si el niño o la niña quiere, escribe una frase junto al dibujo."
+        "texto": "Cada niño y niña recibe una hoja o media cartulina para dibujar lo que conoce o imagina del desierto: animales, plantas, el sol, la arena o las personas. Para complementar sus creaciones pueden usar pegamento y agregar un poco de arena sobre las dunas. La docente dispone una caja con arena, una piedra y una tela para que quienes lo necesiten puedan observar y explorar estos elementos como fuente de inspiración. Durante la actividad pasa por los puestos y pregunta: «¿Qué dibujaste?», «¿Cómo vive ese animal?». Si el niño o la niña lo desea, escribe una frase junto a su dibujo."
       },
       {
         "titulo": "Cuéntale a tu equipo",
-        "texto": "En grupos de cuatro o cinco niños y niñas, cada uno muestra su dibujo y lo explica en una frase. Después el equipo elige un dato que todos tienen en común y uno que apareció en un solo dibujo, y se lo cuenta al grupo."
+        "texto": "Al terminar, los niños y las niñas se organizan en grupos de cuatro o cinco integrantes para compartir sus dibujos y explicar brevemente lo que representaron. Cada equipo identifica un aspecto que tengan en común todos los dibujos y otro que aparezca únicamente en uno de ellos, para compartirlo después con el resto del grupo."
       },
       {
         "titulo": "Preparación del mural",
-        "texto": "Los equipos ordenan sus dibujos en una tira de papel kraft o los preparan para colgar con pinzas o cinta."
+        "texto": "A partir de lo compartido, los equipos organizan sus dibujos en una tira de papel kraft o los preparan para exhibirlos con pinzas o cinta, dando forma al mural colectivo del desierto."
       },
       {
         "titulo": "Papel de la docente",
-        "texto": "Observar qué saben los niños y las niñas y qué ideas se confunden (por ejemplo, creer que el desierto siempre es de arena o que no hay vida), pero sin corregir todavía: esas ideas serán la base de la siguiente sesión."
+        "texto": "Durante todo el proceso observa los conocimientos de los niños y las niñas e identifica las ideas que pueden generar confusión, como creer que el desierto siempre está cubierto de arena o que en él no existe vida, sin corregirlas todavía: servirán como punto de partida para la siguiente sesión."
       }
     ],
     "cierre": [
       {
         "titulo": "Galería del desierto",
-        "texto": "Cada equipo cuelga sus dibujos en una pared o en una cuerda del salón con pinzas, formando el mural del desierto. Todos juntos añaden un gran sol de cartulina y una franja de dunas de papel. Después, en fila y en silencio, como en un museo, el grupo recorre la galería mirando los dibujos de los demás."
+        "texto": "Cada equipo cuelga sus dibujos en una pared o en una cuerda del salón, con pinzas, para formar la galería del desierto. Entre todos añaden un gran sol de cartulina y una franja de dunas de papel. Una vez organizado, los niños y las niñas recorren la galería en fila y en silencio, como si estuvieran visitando un museo."
       },
       {
         "titulo": "Abrebocas de la siguiente sesión",
-        "texto": "La docente comenta que en el mural hay arena, sol, plantas y animales, pero que todavía están estáticos, y pregunta: «¿Cómo creen que hacen los animales cuando hace mucho calor y casi no hay agua?». Anota algunas ideas y avisa que mañana los animales cobrarán vida, ya que serán los niños y las niñas. Termina con tres respiraciones profundas."
+        "texto": "La docente retoma lo observado en el mural: allí están la arena, el sol, las plantas y los animales, pero todavía permanecen estáticos. Plantea la pregunta «¿Cómo creen que hacen los animales cuando hace mucho calor y casi no hay agua?», registra algunas ideas y anticipa que en la próxima sesión los animales cobrarán vida, pues serán ellos mismos quienes los representen. Para terminar, se hacen tres respiraciones profundas."
       }
     ],
     "materiales": [
@@ -126,6 +124,6 @@
         "titulo": "Anexo 1: Guía de las bases del desierto (para la docente)"
       }
     ],
-    "pendientes": ["Fecha de la sesión."]
+    "pendientes": []
   }
 }

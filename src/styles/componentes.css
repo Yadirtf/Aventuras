@@ -562,6 +562,10 @@ a.tarjeta-parada__cuerpo:hover {
   border-color: var(--selva);
 }
 
+.sello--puesto.sello--globo {
+  border-color: var(--globo);
+}
+
 .interruptor {
   display: grid;
   grid-template-columns: auto 1fr;

@@ -2,7 +2,7 @@ import { h } from '../dom';
 import { imagen } from '../imagenes';
 import type { Contexto } from '../contexto';
 
-/** Contenido del panel «Pasaporte del Explorador»: nombre y las 9 casillas de sello. */
+/** Contenido del panel «Pasaporte del Explorador»: nombre y una casilla de sello por parada. */
 export function pasaporte({ store, paradas }: Contexto, alReiniciar: () => void): HTMLElement {
   const completadas = store.completadas;
   const total = paradas.filter((p) => completadas.has(p.id)).length;

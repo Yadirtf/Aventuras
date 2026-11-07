@@ -6,8 +6,10 @@
   "guias": ["capitana-tortu"],
   "saludo": "¡Atención, tripulación! Soy la Capitana Tortu. En el fondo del mar hay sombras misteriosas. ¿A qué animal pertenece cada una?",
   "retoPantalla": "Arrastren el tiburón, la tortuga, el pez payaso y el pulpo hasta su silueta. Después, clasifiquen lo que come cada uno: ¿herbívoro, carnívoro u omnívoro?",
-  "retoMovimiento": "¡A comer! Cada uno elige un animal del mar y se mueve como él. A la señal, busca su alimento y celebra con el movimiento de su animal.",
-  "retoTranquilo": "Sentados: imiten a su animal con las manos (aletas, tentáculos, pinzas) y celebren con una sonrisa al encontrar el alimento.",
+  "movimiento": {
+    "texto": "¡A comer! Cada uno elige un animal del mar y se mueve como él. A la señal, busca su alimento y celebra con el movimiento de su animal.",
+    "tranquilo": "Sentados: imiten a su animal con las manos (aletas, tentáculos, pinzas) y celebren con una sonrisa al encontrar el alimento."
+  },
   "sello": {
     "nombre": "Concha",
     "imagen": "concha"

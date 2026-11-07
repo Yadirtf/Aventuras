@@ -6,8 +6,12 @@
   "guias": ["dunita"],
   "saludo": "¡Hoy viajamos a la realidad! Seis pistas nos esperan escondidas. ¿Saben dónde queda la derecha y dónde la izquierda? ¡Lo vamos a necesitar!",
   "retoPantalla": "Una escena del desierto con seis objetos escondidos y pistas como «tomo el sol encima de la roca» o «estoy debajo de algo azul». Cada acierto entrega una pieza; con las seis se arma un rompecabezas misterioso.",
-  "retoMovimiento": "Pasos de explorador: caminen, salten y agáchense por el espacio siguiendo las indicaciones de la docente.",
-  "retoTranquilo": "Sentados: «caminen» moviendo los pies en el piso, «salten» levantando los brazos y «agáchense» bajando la cabeza.",
+  "movimiento": {
+    "titulo": "Pasos de explorador",
+    "opcional": true,
+    "texto": "Antes o después del rally: caminen, salten y agáchense por el espacio siguiendo las indicaciones de la docente.",
+    "tranquilo": "Sentados: «caminen» moviendo los pies en el piso, «salten» levantando los brazos y «agáchense» bajando la cabeza."
+  },
   "sello": {
     "nombre": "Huella de camello",
     "imagen": "camello"
@@ -70,57 +74,57 @@
     "tema": "Viaje de la realidad",
     "autora": "Katerin López",
     "docenteTutora": null,
-    "fecha": null,
+    "fecha": "3 de noviembre de 2026",
     "duracion": "45 minutos",
-    "objetivo": "Disfrutar de lo que se ha sentido y aprendido sobre el desierto por medio de un rally de pistas que identifican animales y objetos, como forma de afianzar la observación, los desplazamientos, la orientación espacial y el trabajo en grupo, y para dar pie a la curiosidad frente al siguiente ecosistema: el fondo del mar.",
+    "objetivo": "Compartir lo aprendido sobre el desierto mediante un rally de pistas con animales y objetos, que involucra la observación, los desplazamientos, la orientación espacial y el trabajo en grupo, con el fin de despertar la curiosidad frente al siguiente ecosistema: el fondo del mar.",
     "inicio": [
       {
-        "titulo": "Ambiente",
-        "texto": "Hay seis puestos distribuidos por el espacio (camello, cactus, arena, pañuelo y lagarto), preparados con todo el material correspondiente y una marca de color. El mural de las sesiones anteriores está a la vista. Las hojas de pistas y las piezas del rompecabezas están listas."
+        "titulo": "Ambientación (antes de la llegada del grupo)",
+        "texto": "Se organizan seis puestos distribuidos por el espacio, correspondientes al camello, el cactus, la arena, el pañuelo y el lagarto, cada uno preparado con los materiales necesarios y una marca de color. El mural de las sesiones anteriores permanece en un lugar visible y se disponen las hojas con las pistas y las piezas del rompecabezas."
       },
       {
         "titulo": "El mural habla",
-        "texto": "La docente señala partes del mural (el sol, las dunas, los dibujos y los animales con sus títeres) y los niños dicen qué recuerdan de cada una: qué animal es, cómo se adapta, qué pasó en la obra."
+        "texto": "La docente señala diferentes elementos del mural, como el sol, las dunas, los dibujos y los animales representados con sus títeres, e invita a recordar lo aprendido: qué recuerdan de cada elemento, qué animales identifican, cómo se adaptan a las condiciones del desierto y qué sucedió durante la obra."
       },
       {
         "titulo": "Presentación",
-        "texto": "Se dice que hoy van a viajar a la realidad: en vez de dibujar o representar, irán a explorar y tocar lo que han aprendido. Cada equipo recibe una hoja con seis pistas para descubrir de qué animal u objeto se trata, ir a buscarlo en el espacio y hacer una pequeña experiencia con él. Se acuerdan las normas: leer las pistas en conjunto, tener cuidado, no correr, respetar los materiales y esperar el turno. Para calentar hacen «pasos de explorador»: caminar, saltar y agacharse por el espacio siguiendo las indicaciones de la docente."
+        "texto": "La docente cuenta que hoy realizarán un viaje para explorar y descubrir de manera directa lo que han aprendido: en lugar de dibujar o representar, explorarán y tocarán los elementos preparados en el espacio. Cada equipo recibe una hoja con seis pistas para descubrir de qué animal u objeto se trata, encontrarlo y realizar una pequeña experiencia con él. Antes de iniciar se acuerda leer las pistas en conjunto, tener cuidado, no correr, respetar los materiales y esperar el turno. Para preparar el cuerpo hacen los «pasos de explorador»: caminatas, saltos y movimientos para agacharse, siguiendo las indicaciones de la docente."
       }
     ],
     "desarrollo": [
       {
-        "titulo": "Formación de los equipos y entrega de las pistas",
-        "texto": "Los niños y las niñas se agrupan en equipos de cuatro o cinco integrantes. Cada grupo recibe una hoja con las seis pistas en distinto orden, de forma que nunca coincidan en la misma posición."
+        "titulo": "Formación de los equipos",
+        "texto": "Los niños y las niñas se organizan en equipos de cuatro o cinco integrantes. Cada equipo recibe una hoja con seis pistas, presentadas en un orden diferente para cada grupo, de manera que no todos encuentren los animales u objetos en la misma secuencia."
       },
       {
         "titulo": "Rally de pistas",
-        "texto": "Cada pista hace referencia a un animal o a un objeto e indica cómo localizarlo en el espacio (por ejemplo, «búscame a la derecha de la puerta» o «estoy debajo de algo azul»). Al llegar al puesto, el grupo lleva a cabo la experiencia indicada y recibe una pieza de un rompecabezas. Cada grupo emplea aproximadamente 3 minutos en cada puesto."
+        "texto": "Cada pista hace referencia a un animal o a un objeto e indica cómo localizarlo en el espacio (por ejemplo, «Búscame a la derecha de la puerta» o «Estoy debajo de algo azul»). Cuando el equipo encuentra el elemento, realiza la experiencia indicada en ese puesto y recibe una pieza del rompecabezas. Cada grupo dispone de unos tres minutos por puesto."
       },
       {
         "titulo": "La última pista: el rompecabezas",
-        "texto": "El equipo ensambla sus seis piezas y obtiene una imagen con olas, peces, una tortuga y corales. Al reverso dice: «Hay un lugar donde el agua cubre todo. Es azul y profundo, y allí podemos encontrar peces, tortugas, corales y estrellas de mar. ¿Qué lugar es?». Así llega la pista del siguiente ecosistema: el fondo del mar."
+        "texto": "Al reunir las seis piezas, cada equipo arma su rompecabezas y descubre una imagen con olas, peces, una tortuga y corales. En el reverso encuentran el mensaje: «Hay un lugar donde el agua cubre todo. Es azul y profundo, y allí podemos encontrar peces, tortugas, corales y estrellas de mar. ¿Qué lugar es?». Así descubren la pista del siguiente ecosistema: el fondo del mar."
       },
       {
         "titulo": "Rol de la docente",
-        "texto": "Reparte las hojas de pistas, cuida que todos los equipos tengan un sitio, ayuda con preguntas a quienes no logran descifrar una pista (por ejemplo: «¿Qué animal tiene joroba?») y vigila la seguridad de los desplazamientos."
+        "texto": "Entrega las hojas con las pistas, organiza los espacios para que todos los equipos puedan participar, orienta con preguntas a quienes tengan dificultades para resolverlas (por ejemplo: «¿Qué animal tiene joroba?») y acompaña los desplazamientos para garantizar la seguridad."
       }
     ],
     "cierre": [
       {
         "titulo": "Ceremonia del descubrimiento",
-        "texto": "Todos los equipos muestran su rompecabezas terminado y dicen qué lugar creen que podría ser. La docente cuenta que el siguiente ecosistema es el fondo del mar y pregunta: «¿En qué se parece y en qué es diferente del desierto?» (en el desierto casi no hay agua; en el mar hay mucha). Anota algunas ideas sobre los animales que creen que pueden vivir allí."
+        "texto": "Todos los equipos presentan sus rompecabezas y comparten qué lugar creen que representa la imagen. La docente revela que el siguiente ecosistema será el fondo del mar y pregunta: «¿En qué se parece y en qué se diferencia del desierto?». Se espera que reconozcan que en el desierto hay poca agua, mientras que en el mar abunda. La docente registra algunas ideas sobre los animales que creen que pueden habitar en este nuevo ecosistema."
       },
       {
         "titulo": "Cierre de la aventura del desierto",
-        "texto": "En círculo, la docente pregunta:",
+        "texto": "En círculo, la docente orienta la reflexión:",
         "lista": [
           "¿Qué fue lo que más les gustó de todo el viaje por el desierto?",
-          "¿Qué aprendieron de los animales, de las plantas y del clima?",
-          "¿Cómo se puede cuidar el agua en la casa y en la escuela?"
+          "¿Qué aprendieron de los animales, las plantas y el clima?",
+          "¿Cómo podemos cuidar el agua en la casa y en la escuela?"
         ]
       },
       {
-        "texto": "Recupera las tres sesiones: dibujaron lo que sabían y armaron el mural, actuaron como animales en época de sequía y viajaron a la realidad siguiendo pistas."
+        "texto": "La docente retoma las tres sesiones: primero dibujaron lo que sabían o imaginaban sobre el desierto y construyeron un mural colectivo; después representaron a los animales y sus formas de adaptación al calor y a la escasez de agua; y, finalmente, hicieron un recorrido de pistas para descubrir los elementos del ecosistema y encontrar el mensaje que los lleva a una nueva aventura."
       }
     ],
     "materiales": [
@@ -141,6 +145,8 @@
       "Mensaje para la familia: contarle tres cosas que aprendieron del desierto, acordar una manera de cuidar el agua en casa y preguntar qué saben del fondo del mar."
     ],
     "anexos": [],
-    "pendientes": ["El documento menciona seis puestos pero nombra cinco.", "Fecha de la sesión."]
+    "pendientes": [
+      "El documento menciona seis puestos pero nombra cinco (camello, cactus, arena, pañuelo y lagarto)."
+    ]
   }
 }

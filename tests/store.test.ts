@@ -34,6 +34,26 @@ describe('Store', () => {
     expect(store.estado).toMatchObject({ explorador: '', completadas: [], modoDocente: true });
   });
 
+  it('mueve una idea del mural a otra columna', () => {
+    const store = new Store(almacenFalso());
+    store.agregarNota('desierto-1:Clima', 'serpiente');
+    store.agregarNota('desierto-1:Clima', 'hace calor');
+    store.moverNota('desierto-1:Clima', 0, 'desierto-1:Animales');
+    expect(store.notas('desierto-1:Clima')).toEqual(['hace calor']);
+    expect(store.notas('desierto-1:Animales')).toEqual(['serpiente']);
+  });
+
+  it('cuelga y descuelga dibujos, y «Empezar de nuevo» los borra', () => {
+    const store = new Store(almacenFalso());
+    store.colgarDibujo('desierto-1', 'data:image/jpeg;base64,AAA');
+    store.colgarDibujo('desierto-1', 'no es una imagen');
+    store.colgarDibujo('desierto-1', 'data:image/jpeg;base64,BBB');
+    store.descolgarDibujo('desierto-1', 0);
+    expect(store.dibujos('desierto-1')).toEqual(['data:image/jpeg;base64,BBB']);
+    store.empezarDeNuevo();
+    expect(store.dibujos('desierto-1')).toEqual([]);
+  });
+
   it('ignora datos guardados dañados', () => {
     expect(new Store(almacenFalso('{no es json')).estado.completadas).toEqual([]);
     const raro = new Store(

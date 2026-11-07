@@ -28,6 +28,8 @@ async function cargarJuego(juego: Juego, base: Base): Promise<HTMLElement> {
       return (await import('./selva')).circuito({ ...base, juego });
     case 'cuento':
       return (await import('./selva')).cuento({ ...base, juego });
+    case 'globo':
+      return (await import('./globo')).globo({ ...base, juego });
   }
 }
 

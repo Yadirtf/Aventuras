@@ -1,15 +1,20 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-const PARADAS = ['desierto', 'mar', 'selva'].flatMap((eco) => [1, 2, 3].map((n) => `/${eco}/${n}`));
+const PARADAS = [
+  ...['desierto', 'mar', 'selva'].flatMap((eco) => [1, 2, 3].map((n) => `/${eco}/${n}`)),
+  '/globo/1',
+];
 const RUTAS = [
   '/',
   '/mapa',
   '/desierto',
   '/mar',
   '/selva',
+  '/globo',
   ...PARADAS,
   '/desierto/1/planeacion',
+  '/globo/1/planeacion',
   '/mar/familia',
   '/final',
 ];

@@ -5,9 +5,11 @@
   "titulo": "La selva cobra vida",
   "guias": ["momo"],
   "saludo": "¡Hoy la selva va a cobrar vida y ustedes serán los protagonistas! Escuchen el cuento y muévanse como cada animal. ¿Listos?",
-  "retoPantalla": "El cuento «Un día en la selva» en cinco escenas animadas: amanecer, rugido, tormenta, regreso del sol y reunión final. Con los botones de lluvia, viento y trueno crearán la banda sonora de la tormenta.",
-  "retoMovimiento": "Representen la historia con el cuerpo: salten como monos, vuelen como aves, arrástrense como serpientes y den saltos de rana.",
-  "retoTranquilo": "Sentados: cuenten la historia con las manos y los sonidos de cada animal: monos que ríen, aves que cantan, serpientes que sisean y ranas que croan.",
+  "retoPantalla": "El cuento «Un día en la selva» en cinco escenas animadas. Toquen «Leer la escena»: mientras se lee, cada animal que se nombra se mueve en la pantalla. En la tormenta, los botones de lluvia, viento y trueno crean la banda sonora.",
+  "movimiento": {
+    "texto": "Representen la historia con el cuerpo: salten como monos, vuelen como aves, arrástrense como serpientes y den saltos de rana.",
+    "tranquilo": "Sentados: cuenten la historia con las manos y los sonidos de cada animal: monos que ríen, aves que cantan, serpientes que sisean y ranas que croan."
+  },
   "sello": {
     "nombre": "Mariposa",
     "imagen": "mariposa"
@@ -21,35 +23,129 @@
         "titulo": "La selva despierta",
         "fondo": "amanecer",
         "figuras": ["arbol", "mono", "pajaro", "serpiente", "rana"],
-        "texto": "Una mañana, cuando el sol comenzó a salir, la selva despertó poco a poco. Los árboles movían sus ramas y las hojas bailaban con el viento. Los monos saltaban de árbol en árbol, las aves volaban por el cielo, las serpientes se deslizaban entre las plantas y las ranas daban grandes saltos.",
+        "partes": [
+          {
+            "texto": "Una mañana, cuando el sol comenzó a salir, la selva despertó poco a poco."
+          },
+          {
+            "texto": "Los árboles movían sus ramas y las hojas bailaban con el viento.",
+            "figura": "arbol"
+          },
+          {
+            "texto": "Los monos saltaban de árbol en árbol,",
+            "figura": "mono"
+          },
+          {
+            "texto": "las aves volaban por el cielo,",
+            "figura": "pajaro"
+          },
+          {
+            "texto": "las serpientes se deslizaban entre las plantas",
+            "figura": "serpiente"
+          },
+          {
+            "texto": "y las ranas daban grandes saltos.",
+            "figura": "rana"
+          }
+        ],
         "movimiento": "Muevan los brazos como ramas, salten como monos, vuelen como aves, arrástrense como serpientes y den saltos de rana."
       },
       {
         "titulo": "¡Un rugido!",
         "fondo": "rugido",
         "figuras": ["tigre", "mono", "loro", "mariposa"],
-        "texto": "De repente, se escuchó el rugido de un tigre que caminaba entre los árboles buscando alimento. Los monos se movieron rápido y las aves volaron a las ramas más altas. Mientras tanto, una familia de mariposas salió a pasear moviendo sus alas.",
+        "partes": [
+          {
+            "texto": "De repente, se escuchó el rugido de un tigre que caminaba entre los árboles buscando alimento.",
+            "figura": "tigre"
+          },
+          {
+            "texto": "Los monos se movieron rápido",
+            "figura": "mono"
+          },
+          {
+            "texto": "y las aves volaron a las ramas más altas.",
+            "figura": "loro"
+          },
+          {
+            "texto": "Mientras tanto, una familia de mariposas salió a pasear moviendo sus alas.",
+            "figura": "mariposa"
+          }
+        ],
         "movimiento": "Caminen despacio como el tigre, muévanse rápido como los monos y aleteen suave como mariposas."
       },
       {
         "titulo": "La tormenta",
         "fondo": "tormenta",
         "figuras": ["nube", "lluvia", "arbol", "serpiente", "mono"],
-        "texto": "Más tarde, unas nubes grandes cubrieron el cielo y sopló un viento muy fuerte. Los árboles se movían de un lado a otro y las hojas caían. Los animales buscaron refugio: las serpientes se escondieron entre las plantas, los monos se sujetaron de las ramas y las aves buscaron un lugar seguro.",
+        "partes": [
+          {
+            "texto": "Más tarde, unas nubes grandes cubrieron el cielo",
+            "figura": "nube"
+          },
+          {
+            "texto": "y sopló un viento muy fuerte.",
+            "figura": "lluvia"
+          },
+          {
+            "texto": "Los árboles se movían de un lado a otro y las hojas caían.",
+            "figura": "arbol"
+          },
+          {
+            "texto": "Los animales buscaron refugio: las serpientes se escondieron entre las plantas,",
+            "figura": "serpiente"
+          },
+          {
+            "texto": "los monos se sujetaron de las ramas y las aves buscaron un lugar seguro.",
+            "figura": "mono"
+          }
+        ],
         "movimiento": "Muévanse de un lado a otro como los árboles con el viento. Luego, ¡a buscar refugio: agáchense y abrácense!"
       },
       {
         "titulo": "Vuelve el sol",
         "fondo": "sol",
         "figuras": ["sol", "arcoiris", "mono", "pajaro", "mariposa"],
-        "texto": "Después de un rato, la lluvia terminó, el sol volvió a aparecer y la selva se llenó de sonidos. Los monos salieron a saltar, las aves volvieron a volar y las mariposas movieron sus alas.",
+        "partes": [
+          {
+            "texto": "Después de un rato, la lluvia terminó, el sol volvió a aparecer",
+            "figura": "sol"
+          },
+          {
+            "texto": "y la selva se llenó de sonidos.",
+            "figura": "arcoiris"
+          },
+          {
+            "texto": "Los monos salieron a saltar,",
+            "figura": "mono"
+          },
+          {
+            "texto": "las aves volvieron a volar",
+            "figura": "pajaro"
+          },
+          {
+            "texto": "y las mariposas movieron sus alas.",
+            "figura": "mariposa"
+          }
+        ],
         "movimiento": "Salten de alegría como monos, vuelen como aves y abran las alas como mariposas."
       },
       {
         "titulo": "Todos juntos",
         "fondo": "reunion",
         "figuras": ["mono", "tigre", "loro", "rana", "serpiente", "mariposa"],
-        "texto": "Finalmente, todos los animales se encontraron en medio de la selva, donde los árboles, las plantas, el agua y los animales forman un ecosistema lleno de vida. Cada ser vivo cumple una función importante y merece ser cuidado y protegido.",
+        "partes": [
+          {
+            "texto": "Finalmente, todos los animales se encontraron en medio de la selva,",
+            "figura": "todas"
+          },
+          {
+            "texto": "donde los árboles, las plantas, el agua y los animales forman un ecosistema lleno de vida."
+          },
+          {
+            "texto": "Cada ser vivo cumple una función importante y merece ser cuidado y protegido."
+          }
+        ],
         "movimiento": "Formen un círculo, tómense de las manos y hagan el movimiento de su animal favorito."
       }
     ]
@@ -60,7 +156,7 @@
     "docenteTutora": null,
     "fecha": "3 de noviembre de 2026",
     "duracion": "40 a 50 minutos",
-    "objetivo": "Representar el ecosistema de la selva mediante movimientos corporales que imiten sus animales y elementos naturales, fortaleciendo la expresión corporal, la creatividad, la coordinación y el trabajo en equipo.",
+    "objetivo": "Representar el ecosistema selvático mediante movimientos corporales que expresen las formas de desplazamiento de diferentes animales y los elementos naturales de este entorno, a través de la creatividad, la coordinación y el trabajo en equipo.",
     "inicio": [
       {
         "titulo": "La selva despierta",

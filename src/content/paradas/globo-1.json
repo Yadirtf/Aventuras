@@ -1,0 +1,226 @@
+{
+  "id": "globo-1",
+  "ecosistema": "globo",
+  "numero": 1,
+  "titulo": "El gran viaje en globo por los tres mundos",
+  "guias": ["huellita", "dunita", "capitana-tortu", "momo"],
+  "saludo": "¡Pasajeros, a sus puestos! Hoy subimos a un globo aerostático para volver a los tres mundos que exploramos. En cada uno nos espera una misión. ¿Tienen su boleto?",
+  "retoPantalla": "Un viaje en tres aterrizajes. Entre uno y otro, el globo vuela un minuto mientras ustedes flotan en cámara lenta. Cada aterrizaje se anuncia con una señal (tambor, campana o maracas): adivinen a qué mundo llegamos y cumplan su misión. Al volver al globo, ordenen las tarjetas para descubrir en qué se diferencian y en qué se parecen los tres mundos.",
+  "sello": {
+    "nombre": "Globo",
+    "imagen": "globo"
+  },
+  "pista": "¡Recorrimos los tres mundos! Ya están listos para recibir su diploma de explorador.",
+  "juego": {
+    "tipo": "globo",
+    "preguntasDespegue": [
+      "¿Qué animales creen que vamos a encontrar?",
+      "¿Cómo será el clima en cada lugar?",
+      "¿Qué recuerdan de los ecosistemas que hemos conocido?"
+    ],
+    "acuerdos": [
+      "Escuchar las señales.",
+      "Desplazarnos con cuidado y sin empujar.",
+      "Esperar el turno.",
+      "Cuidar a los compañeros."
+    ],
+    "segundosVuelo": 60,
+    "aterrizajes": [
+      {
+        "ecosistema": "desierto",
+        "senal": "tambor",
+        "mision": "Cruzar la arena caliente",
+        "minutos": 7,
+        "modo": "recorrido",
+        "descripcion": "La arena del desierto se pone muy, muy caliente. El camello y la lagartija tienen formas especiales de moverse y protegerse del calor. ¡Crucemos sin quemarnos los pies!",
+        "pasos": [
+          {
+            "texto": "Pasen las dunas gateando o caminando con cuidado.",
+            "imagen": "cactus"
+          },
+          {
+            "texto": "Caminen por la línea con equilibrio, con el paso lento y seguro del camello.",
+            "imagen": "camello"
+          },
+          {
+            "texto": "Den saltos cortos de aro en aro, como la lagartija.",
+            "imagen": "lagarto"
+          }
+        ],
+        "pregunta": "¿Cómo se protege del calor el animal que representamos?"
+      },
+      {
+        "ecosistema": "mar",
+        "senal": "campana",
+        "mision": "Rescatar la perla",
+        "minutos": 7,
+        "modo": "recorrido",
+        "musica": "suave",
+        "descripcion": "Bajo el agua todo se mueve despacio. Hay que llevar la perla de un lado al otro del salón sin dejarla caer y esquivando las medusas.",
+        "pasos": [
+          {
+            "texto": "Muévanse en cámara lenta, como bajo el agua.",
+            "imagen": "burbujas"
+          },
+          {
+            "texto": "Lleven la perla sin dejarla caer y esquiven las medusas.",
+            "imagen": "perla"
+          },
+          {
+            "texto": "Hagan movimientos ondulantes como los peces o caminen de lado como los cangrejos.",
+            "imagen": "cangrejo"
+          }
+        ],
+        "pregunta": "¿Qué fue lo más difícil de moverse como en el agua?"
+      },
+      {
+        "ecosistema": "selva",
+        "senal": "maracas",
+        "mision": "Despertar a los animales",
+        "minutos": 8,
+        "modo": "estatua",
+        "descripcion": "Estatua musical: mientras suena la música, muévanse como el animal de la tarjeta. Cuando la música se detenga, ¡quietos, escondidos entre las plantas!",
+        "pasos": [
+          {
+            "texto": "Salten y balanceen los brazos como el mono.",
+            "imagen": "mono"
+          },
+          {
+            "texto": "Vuelen y giren como un ave.",
+            "imagen": "pajaro"
+          },
+          {
+            "texto": "Caminen en cuatro apoyos, sigilosos, como el jaguar.",
+            "imagen": "jaguar"
+          },
+          {
+            "texto": "Arrástrense a ras del piso como la serpiente.",
+            "imagen": "serpiente"
+          },
+          {
+            "texto": "Muévanse muy, muy lento, como el perezoso.",
+            "imagen": "perezoso"
+          }
+        ],
+        "pregunta": "¿Qué animal te gustó más imitar? ¿Por qué?"
+      }
+    ],
+    "caracteristicas": [
+      {
+        "texto": "Hay muy poca agua.",
+        "ecosistema": "desierto"
+      },
+      {
+        "texto": "El sol calienta mucho la arena.",
+        "ecosistema": "desierto"
+      },
+      {
+        "texto": "El camello camina despacio para no gastar energía.",
+        "ecosistema": "desierto"
+      },
+      {
+        "texto": "El agua lo cubre todo.",
+        "ecosistema": "mar"
+      },
+      {
+        "texto": "Los peces nadan entre corales.",
+        "ecosistema": "mar"
+      },
+      {
+        "texto": "El cangrejo camina de lado.",
+        "ecosistema": "mar"
+      },
+      {
+        "texto": "Hay muchos árboles y plantas.",
+        "ecosistema": "selva"
+      },
+      {
+        "texto": "Llueve y se escuchan muchos sonidos.",
+        "ecosistema": "selva"
+      },
+      {
+        "texto": "El mono salta de rama en rama.",
+        "ecosistema": "selva"
+      }
+    ],
+    "semejanza": "en todos los ecosistemas los animales se adaptan al lugar donde viven.",
+    "preguntaFinal": "¿Qué aprendieron hoy que no sabían?"
+  },
+  "planeacion": {
+    "tema": "El gran viaje en globo por los tres mundos",
+    "autora": "Katerin López",
+    "docenteTutora": null,
+    "fecha": "10 de noviembre de 2026",
+    "duracion": "45 minutos",
+    "objetivo": "Promover el desarrollo psicomotor y el trabajo en equipo en niños y niñas, a través de un viaje imaginario en globo aerostático por los ecosistemas desértico, acuático y selvático, en el que cumplen una misión de movimiento y juego en cada uno y comparan cómo viven y se adaptan sus animales.",
+    "inicio": [
+      {
+        "titulo": "Ambientación (antes de la llegada del grupo)",
+        "texto": "Se marca en el piso, con cinta o lana, un círculo grande que representa la canasta del globo aerostático. Se preparan los espacios de las tres misiones (el desierto, el fondo del mar y la selva) y los instrumentos de las señales sonoras: tambor, campana y maracas."
+      },
+      {
+        "titulo": "Subir al globo",
+        "texto": "Al llegar, cada niño y niña recibe su boleto de viaje, sube al globo y se ubica dentro del círculo. La docente les da la bienvenida y anuncia que durante la jornada recorrerán tres mundos diferentes, en cada uno de los cuales encontrarán una misión por cumplir. Sentados en círculo, se recuperan los conocimientos previos:",
+        "lista": [
+          "¿Qué animales creen que vamos a encontrar?",
+          "¿Cómo será el clima en cada lugar?",
+          "¿Qué recuerdan de los ecosistemas que hemos conocido?"
+        ]
+      },
+      {
+        "texto": "La docente escucha atentamente y recoge las ideas para retomarlas en el cierre. Antes de iniciar el viaje se establecen acuerdos: escuchar las señales sonoras, desplazarse con cuidado y sin empujar, esperar el turno y cuidar a los compañeros."
+      }
+    ],
+    "desarrollo": [
+      {
+        "titulo": "Tres aterrizajes y tres vuelos",
+        "texto": "El globo hará tres aterrizajes, uno por ecosistema, y en cada uno los niños y las niñas cumplen una misión. Cada aterrizaje se anuncia con una señal sonora: el tambor para el desierto, la campana para el fondo del mar y las maracas para la selva. Entre misión y misión hay un vuelo de un minuto en el que se desplazan en cámara lenta, como si flotaran, mientras la docente prepara el siguiente espacio. Tiempos: tres vuelos de un minuto, siete minutos para el desierto, siete para el fondo del mar y ocho para la selva."
+      },
+      {
+        "titulo": "Desierto: «Cruzar la arena caliente»",
+        "texto": "La docente cuenta que la arena puede alcanzar temperaturas muy altas y que animales como el camello y la lagartija tienen formas especiales de moverse y protegerse del calor. Para cumplir la misión hacen un recorrido sin «quemarse los pies»: atraviesan dunas de cojines o colchonetas gateando o caminando con cuidado, recorren una línea de cinta manteniendo el equilibrio con el paso lento y seguro del camello, y dan saltos cortos entre aros o marcas, como la lagartija. Al terminar responden: «¿Cómo se protege del calor el animal que representamos?»."
+      },
+      {
+        "titulo": "Fondo del mar: «Rescatar la perla»",
+        "texto": "Con música suave se desplazan en cámara lenta, simulando los movimientos bajo el agua. El reto es llevar una pelota o perla de papel de un extremo del salón al otro sin dejarla caer y esquivando las medusas (pañuelos o tiras de tela colgadas). Durante el recorrido hacen movimientos ondulantes como los peces o se desplazan de lado como los cangrejos, trabajando el control corporal, la coordinación y el equilibrio. Al finalizar, la docente pregunta: «¿Qué fue lo más difícil de moverse como en el agua?»."
+      },
+      {
+        "titulo": "Selva: «Despertar a los animales»",
+        "texto": "Estatua musical: mientras suena la música, se mueven imitando al animal que indique la docente (mono, ave, jaguar, serpiente o perezoso); cuando la música se detiene, se quedan inmóviles, como escondidos entre las plantas. En cada ronda cambia el animal y se alternan movimientos rápidos y lentos, saltos, giros y desplazamientos a ras del piso. Al terminar, cada niño y niña cuenta qué animal le gustó más imitar y por qué."
+      }
+    ],
+    "cierre": [
+      {
+        "titulo": "De vuelta en el globo",
+        "texto": "Al finalizar las tres misiones, regresan al globo y se sientan en círculo para compartir su experiencia: cada uno cuenta cuál fue su mundo favorito y qué animal representó."
+      },
+      {
+        "titulo": "Semejanzas y diferencias",
+        "texto": "Cada estudiante menciona una característica que diferencie los ecosistemas (por ejemplo: «En el desierto hay poca agua y en el mar hay mucha») y otra que tengan en común, como que en todos los animales se adaptan al lugar donde viven. La docente registra las respuestas en el tablero o en un pliego de papel y retoma las ideas del inicio sobre los animales y el clima de cada lugar. Luego plantea la pregunta final: «¿Qué aprendieron hoy que no sabían?»."
+      },
+      {
+        "titulo": "Diploma y despedida",
+        "texto": "Se entrega a cada niño y niña un diploma con su nombre y una frase de felicitación por haber completado el viaje por los tres mundos. La docente agradece al grupo por permitirle acompañarlos durante este proceso y se despide de los pequeños aventureros."
+      }
+    ],
+    "materiales": [
+      "Cinta o lana para marcar en el piso el círculo que representa el globo.",
+      "Boletos de viaje y diplomas de aventurero (hojas o cartulina, marcadores y colores).",
+      "Tambor, campana y maracas (o instrumentos caseros) para las tres señales sonoras.",
+      "Equipo de sonido o celular con música suave y música animada.",
+      "Desierto: cojines o colchonetas para las dunas, aros o marcas en el piso y cinta para la línea de equilibrio.",
+      "Fondo del mar: pelota o perla de papel, pañuelos o tiras de tela para las medusas.",
+      "Cierre: tablero o pliego de papel y marcadores para registrar las semejanzas y diferencias."
+    ],
+    "tiempos": "Inicio 10 minutos, desarrollo 25 minutos y cierre 10 minutos (total: 45 minutos).",
+    "indicadoresDeLogro": [],
+    "observaciones": [
+      "Ubicar el recorrido del desierto y el del mar lejos de mesas y sillas, con el piso despejado, para que los niños se muevan sin riesgo de caídas.",
+      "Si hay compañeras practicantes, ubicar una por misión; si no, dejar las instrucciones de cada misión visibles y explicarlas antes de cada aterrizaje.",
+      "Cuidar la seguridad: las dunas y la línea de equilibrio se hacen a ras del piso, sin alturas, y quien no quiera gatear o moverse en algún reto puede participar de otra forma (por ejemplo, guiando al grupo o llevando la perla caminando).",
+      "Si el grupo es más pequeño o más grande, el recorrido se mantiene igual y se organizan turnos por grupos para que todos participen en cada misión."
+    ],
+    "anexos": [],
+    "pendientes": ["Indicadores de logro."]
+  }
+}

@@ -9,6 +9,7 @@ import './styles/vistas.css';
 import './styles/juegos.css';
 import './styles/juegos-mar.css';
 import './styles/juegos-selva.css';
+import './styles/juegos-globo.css';
 import './styles/imprimir.css';
 
 import { paradas } from './content';

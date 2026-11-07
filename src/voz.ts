@@ -65,16 +65,58 @@ function vozElegida(): SpeechSynthesisVoice | null {
   return voces.find((v) => v.voiceURI === preferida) ?? voces[0] ?? null;
 }
 
+/** Cada lectura nueva o cada detención cambia este número; así una lectura larga sabe si la cortaron. */
+let lecturaActual = 0;
+
 export function detenerVoz(): void {
+  lecturaActual += 1;
   sintesis()?.cancel();
 }
 
+type Voz = Pick<Personaje, 'voz'>;
+
 /** Lee el texto con la voz del personaje. La promesa se cumple al terminar o al interrumpirse. */
-export function hablar(texto: string, personaje?: Pick<Personaje, 'voz'>): Promise<void> {
+export function hablar(texto: string, personaje?: Voz): Promise<void> {
+  lecturaActual += 1;
+  return decirFrase(texto, personaje);
+}
+
+const esperar = (ms: number) => new Promise<void>((listo) => window.setTimeout(listo, ms));
+
+/**
+ * Lee varias partes una tras otra y avisa antes de cada una (para resaltar el texto o mover
+ * una figura). Sin voz en el navegador, igual avanza con una pausa según el largo del texto.
+ * Devuelve false si otra lectura o «detener» la interrumpió.
+ */
+export async function leerEnOrden(
+  partes: readonly { texto: string; voz?: Voz }[],
+  alLeer: (indice: number) => void,
+): Promise<boolean> {
+  const mia = ++lecturaActual;
+  sintesis()?.cancel();
+  for (const [i, parte] of partes.entries()) {
+    if (mia !== lecturaActual) return false;
+    alLeer(i);
+    const inicio = Date.now();
+    if (hayVoz()) await decirFrase(parte.texto, parte.voz);
+    // Sin voz, o si la voz falló al instante, igual se deja tiempo para mirar la parte.
+    const pausa = Math.max(1500, parte.texto.length * 55) - (Date.now() - inicio);
+    if (mia === lecturaActual && pausa > 0 && Date.now() - inicio < 400) await esperar(pausa);
+  }
+  return mia === lecturaActual;
+}
+
+function decirFrase(texto: string, personaje?: Voz): Promise<void> {
   const s = sintesis();
   if (!s) return Promise.resolve();
   s.cancel();
-  return new Promise((resolver) => {
+  return new Promise((listo) => {
+    // Algunos equipos nunca avisan que la voz terminó: se sigue igual pasado un tiempo prudente.
+    const seguro = window.setTimeout(listo, 3000 + texto.length * 120);
+    const resolver = () => {
+      window.clearTimeout(seguro);
+      listo();
+    };
     const frase = new SpeechSynthesisUtterance(texto);
     const voz = vozElegida();
     frase.lang = voz?.lang ?? 'es-CO';

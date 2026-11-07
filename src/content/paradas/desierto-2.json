@@ -5,9 +5,12 @@
   "titulo": "Los animales del desierto en títeres",
   "guias": ["dunita", "don-camelio"],
   "saludo": "¡Volvieron, exploradores! Don Camelio y yo tenemos una pregunta: ¿qué hacen los animales cuando hace mucho calor y casi no hay agua?",
-  "retoPantalla": "Cinco tarjetas de animales (camello, zorro, lagarto, serpiente y tortuga) se voltean para descubrir cómo se adaptan. Luego, un teatrino de tres escenas donde ustedes deciden qué dice cada títere. Don Camelio pregunta: «¿Mito o realidad?».",
-  "retoMovimiento": "Mímica de 30 segundos: un grupo representa su animal con el cuerpo, sin hablar, y los demás adivinan cuál es y cómo se las arregla con el calor.",
-  "retoTranquilo": "Desde su puesto: muestren el animal solo con las manos y la cara, y los demás adivinan.",
+  "retoPantalla": "Cinco tarjetas de animales (camello, zorro, lagarto, serpiente y tortuga) se voltean para descubrir cómo se adaptan. Luego, el teatrino: al subir cada títere al escenario dice su parte del guion en voz alta; en la escena 3 ustedes inventan el final. Don Camelio pregunta: «¿Mito o realidad?».",
+  "movimiento": {
+    "titulo": "Para terminar: estiramiento y respiración",
+    "texto": "Estiren el cuerpo suavemente: brazos arriba como el cuello de un camello, a un lado y al otro como las orejas del zorro, y abajo, despacito, como la tortuga que entra en su cueva. Luego hagan tres respiraciones profundas en el rincón de calma.",
+    "tranquilo": "Sentados: estiren solo los brazos arriba y a los lados, y respiren tres veces bien despacio."
+  },
   "sello": {
     "nombre": "Cactus",
     "imagen": "cactus"
@@ -51,7 +54,14 @@
     "escenas": [
       {
         "titulo": "Escena 1: amanece y hace mucho calor",
-        "narracion": "Sale el sol y la arena se calienta. Cada animal se despierta. ¿Cómo se siente con el sol tan fuerte?",
+        "narracion": "Amanece en el desierto. El sol sale poco a poco y la arena empieza a calentarse. ¡Qué calor! Vamos a ver cómo se despiertan nuestros animales.",
+        "dialogos": {
+          "camello": "¡Buenos días! Hoy va a hacer mucho calor, pero yo camino despacio para no gastar mucha energía.",
+          "zorro": "¡Uf, qué sueño! Yo salgo más de noche. Mis orejas grandes me ayudan a soltar el calor.",
+          "lagarto": "¡Ay, la arena está caliente! Voy corriendo de sombra en sombra.",
+          "serpiente": "Shhh… yo me quedo escondida. El sol está muy fuerte.",
+          "tortuga": "Buenos días a todos. Voy despacito a mi cueva, allí siempre está fresquito."
+        },
         "frases": [
           "¡Uf, qué calor hace hoy!",
           "Voy a buscar una sombra.",
@@ -61,7 +71,14 @@
       },
       {
         "titulo": "Escena 2: se acaba el agua",
-        "narracion": "El oasis se está secando. ¿Cómo se las arregla cada animal sin agua?",
+        "narracion": "Pasan las horas y el sol brilla en lo más alto. No ha llovido y el agua se está acabando. ¿Qué hará cada animal?",
+        "dialogos": {
+          "camello": "Tengo sed, pero puedo pasar muchos días sin beber. Guardo grasa en mi joroba y eso me da energía. ¡Miren! ¡Veo palmeras! ¡Creo que hay agua!",
+          "zorro": "Yo esperaré a que llegue la noche, cuando hace más fresquito, para buscar agua y comida.",
+          "lagarto": "Mi color de arena me ayuda a esconderme. Me quedo quietito bajo la sombra de las piedras.",
+          "serpiente": "Yo duermo todo el día y salgo de noche, cuando ya no hay tanto calor.",
+          "tortuga": "Yo me quedo en mi cueva bajo la tierra hasta que pase el calor."
+        },
         "frases": [
           "Yo me escondo debajo de una piedra.",
           "Guardo mi energía y descanso.",
@@ -70,8 +87,9 @@
         ]
       },
       {
-        "titulo": "Escena 3: ¡la inventan ustedes!",
-        "narracion": "El guion todavía no tiene escena 3. ¿Qué pasa al final? Muevan los títeres y escriban lo que dicen.",
+        "titulo": "Escena 3: un nuevo encuentro en el desierto",
+        "narracion": "Los animales llegaron al oasis. ¿Qué pasa ahora? Esta escena la inventan ustedes: decidan qué hace y qué dice cada animal, y escríbanlo.",
+        "dialogos": {},
         "frases": []
       }
     ],
@@ -102,51 +120,74 @@
     "tema": "Los animales del desierto en obras de títeres",
     "autora": "Katerin López",
     "docenteTutora": null,
-    "fecha": null,
+    "fecha": "2 de noviembre de 2026",
     "duracion": "45 minutos",
-    "objetivo": "Entender cómo los animales del desierto se adaptan al calor y a la falta de agua, representarlos con un juego de roles y una obra de títeres, y fortalecer la expresión corporal, la motricidad fina, la creatividad y el trabajo en equipo.",
+    "objetivo": "Comprender cómo los animales del desierto se adaptan al calor y a la falta de agua, representándolos mediante un juego de roles y una obra de títeres que involucran la expresión corporal, la motricidad fina, la creatividad y el trabajo en equipo.",
     "inicio": [
       {
         "titulo": "Ambientación (antes de la llegada del grupo)",
-        "texto": "Se deja a la vista el mural que se realizó en la actividad anterior, se prepara el espacio con forma de dunas con cojines y telas, un sol de cartulina y las tarjetas de animales."
+        "texto": "Se deja expuesto el mural elaborado en la actividad anterior. Se prepara el espacio simulando un entorno de dunas con cojines y telas, se ubica un sol de cartulina y se disponen tarjetas con imágenes de animales del desierto."
       },
       {
         "titulo": "Cada grupo es un animal",
-        "texto": "La profesora recuerda el mural y la pregunta con la que se cerró la actividad anterior: «¿Qué hacen los animales cuando hace mucho calor y casi no hay agua?». A continuación forma cuatro o cinco grupos; cada uno saca de la bolsa una tarjeta con un animal del desierto y una pista de la forma en que se adapta a la escasez de agua. Cada grupo tiene unos 3 minutos para decidir cómo se mueve su animal, cómo busca sombra o agua según el momento del día y cómo se adapta, y después lo representa durante 30 segundos con el cuerpo y sin explicarlo. El grupo que sigue intenta adivinar qué animal es y cómo se las arregla con el calor."
+        "texto": "La docente retoma el mural y recuerda la pregunta que quedó planteada al finalizar la sesión anterior: «¿Qué hacen los animales cuando hace mucho calor y casi no hay agua?». A partir de ella organiza a los niños y las niñas en cuatro o cinco grupos. Cada grupo saca de una bolsa una tarjeta con la imagen de un animal del desierto y una pista sobre la forma en que se adapta a la escasez de agua. Cada grupo cuenta con unos tres minutos para decidir cómo se mueve su animal, cómo busca sombra o agua y de qué manera se adapta a las condiciones del desierto. Después lo representa corporalmente durante 30 segundos, sin palabras, mientras los demás grupos intentan adivinar de qué animal se trata y cómo logra desenvolverse en ese ambiente."
       }
     ],
     "desarrollo": [
       {
         "titulo": "El títere",
-        "texto": "Cada niño y niña colorea y recorta la figura de su animal y la pega en un palito de helado para confeccionar un títere de paleta."
+        "texto": "Cada niño y niña colorea y recorta la figura de su animal del desierto y la pega en un palito de helado para elaborar su propio títere de paleta, que utilizará durante la representación de la obra."
       },
       {
-        "titulo": "El guion guía",
-        "texto": "La docente narra las tres escenas de la obra y cada grupo decide qué hará y qué dirá su animal en cada una de ellas (ver Anexo 2):",
+        "titulo": "El guion de la obra (Anexo 2)",
+        "texto": "Una vez elaborados los títeres, la docente presenta la narración de las tres escenas de la obra. A partir de esta historia, cada grupo decide qué hará y qué dirá su animal en los diferentes momentos de la representación."
+      },
+      {
+        "titulo": "Escena 1: amanece y hace mucho calor",
+        "texto": "Los animales están agachados detrás de las dunas y la docente sube el sol poco a poco. Narradora: «Amanece en el desierto. El sol sale poco a poco y la arena empieza a calentarse. ¡Qué calor! Vamos a ver cómo se despiertan nuestros animales».",
         "lista": [
-          "Escena 1, amanece y hace mucho calor: cada animal se despierta y cuenta cómo se siente con el sol fuerte.",
-          "Escena 2, se acaba el agua: cada animal muestra cómo se las arregla (buscando sombra, escondiéndose, reservando energía o saliendo de noche).",
-          "Escena 3: pendiente en el guion original."
+          "El camello se levanta despacio y se estira: «¡Buenos días! Hoy va a hacer mucho calor, pero yo camino despacio para no gastar mucha energía».",
+          "El zorro bosteza y se toca las orejas: «¡Uf, qué sueño! Yo salgo más de noche. Mis orejas grandes me ayudan a soltar el calor».",
+          "El lagarto camina rápido y salta de una sombra a otra: «¡Ay, la arena está caliente! Voy corriendo de sombra en sombra».",
+          "La serpiente se esconde bajo una tela o una roca: «Shhh… yo me quedo escondida. El sol está muy fuerte».",
+          "La tortuga avanza muy despacio hacia su cueva: «Buenos días a todos. Voy despacito a mi cueva, allí siempre está fresquito».",
+          "Narradora: «El sol sigue subiendo… ¡cada vez hace más calor!»."
         ]
       },
       {
+        "titulo": "Escena 2: se acaba el agua",
+        "texto": "La docente sube el sol hasta el punto más alto y los animales se mueven despacio, mostrando cansancio. Narradora: «Pasan las horas y el sol brilla en lo más alto. No ha llovido y el agua se está acabando. ¿Qué hará cada animal?».",
+        "lista": [
+          "Camello: «Tengo sed, pero puedo pasar muchos días sin beber. Guardo grasa en mi joroba y eso me da energía».",
+          "Zorro del desierto: «Yo esperaré a que llegue la noche, cuando hace más fresquito, para buscar agua y comida».",
+          "Lagarto: «Mi color de arena me ayuda a esconderme. Me quedo quietito bajo la sombra de las piedras».",
+          "Serpiente: «Yo duermo todo el día y salgo de noche, cuando ya no hay tanto calor».",
+          "Tortuga: «Yo me quedo en mi cueva bajo la tierra hasta que pase el calor».",
+          "Narradora: «Los animales están cansados y con sed. De pronto, el camello mira a lo lejos…». El camello levanta la cabeza y señala la zona azul: «¡Miren! ¡Veo palmeras! ¡Creo que hay agua!»."
+        ]
+      },
+      {
+        "titulo": "Escena 3: un nuevo encuentro en el desierto",
+        "texto": "En esta última escena se deja espacio para la imaginación y la creatividad de los niños y las niñas, quienes, a partir de lo sucedido en las escenas anteriores, construyen libremente la continuación de la historia, decidiendo qué harán y qué dirán sus animales."
+      },
+      {
         "titulo": "Rol de la docente",
-        "texto": "Acompaña a los grupos con preguntas («¿Cómo camina tu animal aunque haga mucho calor?», «¿Qué haría para conseguir agua?») y vela porque todos dispongan de un tiempo para participar."
+        "texto": "Acompaña a los grupos con preguntas orientadoras como «¿Cómo camina tu animal aunque haga mucho calor?» y «¿Qué haría para conseguir agua?», y procura que todos los niños y las niñas dispongan de un tiempo para participar en la elaboración de los títeres y en la representación de la historia."
       }
     ],
     "cierre": [
       {
         "titulo": "Conversación en círculo",
-        "texto": "La maestra pregunta:",
+        "texto": "La docente reúne a los niños y las niñas en círculo para abrir un espacio de diálogo y reflexión sobre lo vivido durante la representación:",
         "lista": [
           "¿De qué forma se adapta tu animal al calor o a la falta de agua?",
-          "¿De qué forma se ayudaron los animales y de qué manera se ayudaron ustedes en el grupo?",
-          "¿Cómo se sintieron representando un animal?"
+          "¿De qué manera se ayudaron los animales y cómo se apoyaron ustedes dentro del grupo?",
+          "¿Cómo se sintieron al representar a un animal del desierto?"
         ]
       },
       {
         "titulo": "Aclaración y mural",
-        "texto": "La maestra aclara las ideas del mural: no todos los desiertos son arenosos y, aunque el camello guarda grasa y no agua en la joroba, resiste muchos días sin beber. A continuación, cada grupo pega su títere o la tarjeta de su animal en el mural para que los animales «cobren vida» en él. Se hace un estiramiento suave con el cuerpo y tres respiraciones profundas. Se anticipa que mañana harán un viaje de pistas por todo lo que vivieron y que encontrarán una pista sobre el siguiente lugar que van a visitar."
+        "texto": "A partir de las respuestas, la docente retoma algunas ideas y aclara los conocimientos representados en el mural: no todos los desiertos son arenosos y, aunque el camello almacena grasa y no agua en su joroba, puede resistir muchos días sin beber. Luego cada grupo pega su títere o la tarjeta de su animal en el mural, para que los animales «cobren vida» en la construcción colectiva. Para finalizar, hacen un estiramiento suave del cuerpo y tres respiraciones profundas. La docente anticipa que en la siguiente sesión harán un viaje de pistas para recordar lo vivido y descubrir una nueva pista sobre el próximo lugar que visitarán."
       }
     ],
     "materiales": [
@@ -174,6 +215,6 @@
         "titulo": "Anexo 2: Guion guía de la obra de títeres"
       }
     ],
-    "pendientes": ["Escena 3 del guion de títeres.", "Fecha de la sesión."]
+    "pendientes": []
   }
 }

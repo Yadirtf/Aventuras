@@ -23,9 +23,10 @@ const COLORES: Record<Tema, string[]> = {
   desierto: ['#f6c177', '#f2a65a', '#ffe0a3'],
   mar: ['#ffffff', '#bfe9ff', '#9fd8f5'],
   selva: ['#7cc56b', '#4fa548', '#b5e08c', '#f2c94c'],
+  globo: ['#ffffff', '#e7f5ff', '#fff0f6'],
 };
 
-const CANTIDAD: Record<Tema, number> = { general: 10, desierto: 40, mar: 28, selva: 22 };
+const CANTIDAD: Record<Tema, number> = { general: 10, desierto: 40, mar: 28, selva: 22, globo: 14 };
 
 export class FondoAnimado {
   readonly lienzo = document.createElement('canvas');

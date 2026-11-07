@@ -6,6 +6,7 @@ import {
   FONDOS_CUENTO,
   ORDENES_MONO,
   PERSONAJES,
+  SENALES,
   SONIDOS_SELVA,
   type Parada,
 } from './types';
@@ -134,15 +135,20 @@ export function validarParada(datos: unknown, origen: string): Parada {
   if (![1, 2, 3].includes(datos.numero as number)) r.errores.push('numero: debe ser 1, 2 o 3');
   if (esTexto(datos.id) && datos.id !== `${String(datos.ecosistema)}-${String(datos.numero)}`)
     r.errores.push('id: debe ser «ecosistema-numero»');
-  for (const campo of [
-    'titulo',
-    'saludo',
-    'retoPantalla',
-    'retoMovimiento',
-    'retoTranquilo',
-    'pista',
-  ])
-    r.texto(datos, campo, '');
+  for (const campo of ['titulo', 'saludo', 'retoPantalla', 'pista']) r.texto(datos, campo, '');
+
+  if ('movimiento' in datos) {
+    const m = datos.movimiento;
+    if (!esRegistro(m)) r.errores.push('movimiento: debe ser un objeto');
+    else {
+      r.texto(m, 'texto', 'movimiento.');
+      r.texto(m, 'tranquilo', 'movimiento.');
+      if ('titulo' in m) r.texto(m, 'titulo', 'movimiento.');
+      for (const campo of ['opcional', 'antesDelJuego'])
+        if (campo in m && typeof m[campo] !== 'boolean')
+          r.errores.push(`movimiento.${campo}: debe ser true o false`);
+    }
+  }
 
   if (!Array.isArray(datos.guias) || datos.guias.length === 0)
     r.errores.push('guias: debe tener al menos un personaje');
@@ -197,6 +203,8 @@ export function validarParada(datos: unknown, origen: string): Parada {
   return datos as unknown as Parada;
 }
 
+const ECOSISTEMAS_NATURALES = ECOSISTEMAS.filter((e) => e !== 'globo');
+
 function validarJuego(r: Revisor, juego: unknown): void {
   const ruta = 'juego.';
   if (!esRegistro(juego)) {
@@ -221,6 +229,16 @@ function validarJuego(r: Revisor, juego: unknown): void {
         r.texto(e, 'titulo', re);
         r.texto(e, 'narracion', re);
         r.listaDeTextos(e, 'frases', re);
+        const ids = Array.isArray(juego.animales)
+          ? juego.animales.map((a) => (esRegistro(a) ? a.id : null))
+          : [];
+        if (!esRegistro(e.dialogos))
+          r.errores.push(`${re}dialogos: debe ser un objeto (puede ir vacío)`);
+        else
+          for (const [id, texto] of Object.entries(e.dialogos)) {
+            if (!ids.includes(id)) r.errores.push(`${re}dialogos.${id}: no es un animal del juego`);
+            if (!esTexto(texto)) r.errores.push(`${re}dialogos.${id}: falta o está vacío`);
+          }
       });
       r.objetos(juego, 'mitos', ruta, 1, (m, rm) => {
         r.texto(m, 'texto', rm);
@@ -254,10 +272,18 @@ function validarJuego(r: Revisor, juego: unknown): void {
       });
       return;
     case 'mapa-tesoro':
+      if (!esRegistro(juego.cuento)) r.errores.push(`${ruta}cuento: falta`);
+      else {
+        r.texto(juego.cuento, 'titulo', `${ruta}cuento.`);
+        r.texto(juego.cuento, 'autora', `${ruta}cuento.`);
+        r.listaDeTextos(juego.cuento, 'parrafos', `${ruta}cuento.`, { vacia: false });
+      }
       r.objetos(juego, 'tarjetas', ruta, 2, (t, rt) => {
         r.texto(t, 'nombre', rt);
         r.imagen(t, 'imagen', rt);
       });
+      if (Array.isArray(juego.tarjetas) && ![4, 6].includes(juego.tarjetas.length))
+        r.errores.push(`${ruta}tarjetas: deben ser 4 o 6 (las piezas del rompecabezas)`);
       r.texto(juego, 'mensajeMapa', ruta);
       return;
     case 'tesoro':
@@ -302,16 +328,44 @@ function validarJuego(r: Revisor, juego: unknown): void {
     case 'cuento':
       r.texto(juego, 'titulo', ruta);
       r.objetos(juego, 'escenas', ruta, 1, (e, re) => {
-        for (const campo of ['titulo', 'texto', 'movimiento']) r.texto(e, campo, re);
+        for (const campo of ['titulo', 'movimiento']) r.texto(e, campo, re);
         r.uno(e, 'fondo', re, FONDOS_CUENTO);
-        if (!Array.isArray(e.figuras) || e.figuras.length === 0)
-          r.errores.push(`${re}figuras: debe tener al menos una imagen`);
-        else
-          e.figuras.forEach((f, i) => {
-            if (!esImagen(f))
-              r.errores.push(`${re}figuras[${i}]: imagen desconocida «${String(f)}»`);
-          });
+        const figuras = Array.isArray(e.figuras) ? e.figuras : [];
+        if (figuras.length === 0) r.errores.push(`${re}figuras: debe tener al menos una imagen`);
+        figuras.forEach((f, i) => {
+          if (!esImagen(f)) r.errores.push(`${re}figuras[${i}]: imagen desconocida «${String(f)}»`);
+        });
+        r.objetos(e, 'partes', re, 1, (p, rp) => {
+          r.texto(p, 'texto', rp);
+          if ('figura' in p && p.figura !== 'todas' && !figuras.includes(p.figura))
+            r.errores.push(
+              `${rp}figura: «${String(p.figura)}» no está en las figuras de la escena`,
+            );
+        });
       });
+      return;
+    case 'globo':
+      r.listaDeTextos(juego, 'preguntasDespegue', ruta, { vacia: false });
+      r.listaDeTextos(juego, 'acuerdos', ruta, { vacia: false });
+      r.numero(juego, 'segundosVuelo', ruta, 5, 120);
+      r.objetos(juego, 'aterrizajes', ruta, 1, (a, ra) => {
+        r.uno(a, 'ecosistema', ra, ECOSISTEMAS_NATURALES);
+        r.uno(a, 'senal', ra, SENALES);
+        r.uno(a, 'modo', ra, ['recorrido', 'estatua']);
+        if ('musica' in a) r.uno(a, 'musica', ra, ['suave', 'animada']);
+        for (const campo of ['mision', 'descripcion', 'pregunta']) r.texto(a, campo, ra);
+        r.numero(a, 'minutos', ra, 1, 20);
+        r.objetos(a, 'pasos', ra, 1, (p, rp) => {
+          r.texto(p, 'texto', rp);
+          r.imagen(p, 'imagen', rp);
+        });
+      });
+      r.objetos(juego, 'caracteristicas', ruta, 3, (c, rc) => {
+        r.texto(c, 'texto', rc);
+        r.uno(c, 'ecosistema', rc, ECOSISTEMAS_NATURALES);
+      });
+      r.texto(juego, 'semejanza', ruta);
+      r.texto(juego, 'preguntaFinal', ruta);
       return;
     default:
       r.errores.push(`juego.tipo: tipo de juego desconocido «${String(juego.tipo)}»`);

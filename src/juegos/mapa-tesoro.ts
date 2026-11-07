@@ -1,10 +1,12 @@
 import { burbuja, decir } from '../components/burbuja';
 import { celebrar } from '../components/celebracion';
+import { lectura } from '../components/lectura';
 import type { JuegoMapaTesoro } from '../content/types';
 import { h, icono } from '../dom';
-import { imagen } from '../imagenes';
+import { imagen, type Imagen } from '../imagenes';
 import { acierto, chapuzon } from '../sonido';
 import { saltoDeAros } from './comunes';
+import { rompecabezas } from './rompecabezas';
 import type { MontarJuego } from './tipos';
 
 /** Puntos de la línea en zigzag (ruta A), en un tablero de 100 × 60. */
@@ -36,17 +38,41 @@ function proyectar(p: Punto, a: [number, number], b: [number, number]) {
   return { t, distancia: Math.hypot(p.x - x, p.y - y), x, y };
 }
 
-/** Parada 2 del mar: cruzar por la ruta A o la B; cada cruce da una tarjeta del mapa. */
+/**
+ * Parada 2 del mar: el cuento, el mapa de las dos rutas, cruzar por la ruta A o la B
+ * (cada cruce da una pieza) y armar el rompecabezas del mapa del tesoro.
+ */
 export const mapaTesoro: MontarJuego<JuegoMapaTesoro> = ({ juego, alTerminar }) => {
   let ganadas = 0;
   const tortu = burbuja(
     'capitana-tortu',
-    'Elijan una ruta para cruzar el mar. ¡No toquen el agua del Tiburón!',
+    'Elijan una ruta para cruzar el mar. ¡No toquen el agua: el Tiburón está nadando!',
     { pose: 'pregunta', vivo: true },
   );
-  const tarjetas = h('ol', { class: 'mapa__tarjetas', 'aria-label': 'Tarjetas del mapa' });
+  const tarjetas = h('ol', { class: 'mapa__tarjetas', 'aria-label': 'Piezas del mapa ganadas' });
   const tablero = h('div', { class: 'mar-tablero' });
-  const mapa = h('section', { class: 'juego__parte mapa-armado', hidden: true });
+  const mapa = h('div', { class: 'mapa-armado', hidden: true });
+
+  const puzzle = rompecabezas({
+    columnas: 2,
+    filas: juego.tarjetas.length / 2,
+    escena: escenaMapa,
+    titulo: 'El rompecabezas del mapa del tesoro',
+    alCompletar: () => {
+      mapa.hidden = false;
+      mapa.replaceChildren(
+        h('p', { class: 'mapa-armado__mensaje' }, icono('mapa'), juego.mensajeMapa),
+        burbuja(
+          'capitana-tortu',
+          '¡Miren lo que lograron armar uniendo cada pieza con la ayuda de todos! Este mapa lo guardamos en el rincón del mar.',
+          { pose: 'celebracion' },
+        ),
+      );
+      celebrar(puzzle.elemento);
+      alTerminar();
+    },
+  });
+  puzzle.elemento.append(mapa);
 
   const cruzar = () => {
     const tarjeta = juego.tarjetas[ganadas];
@@ -57,7 +83,7 @@ export const mapaTesoro: MontarJuego<JuegoMapaTesoro> = ({ juego, alTerminar }) 
       h(
         'li',
         { class: 'mapa__tarjeta' },
-        imagen(tarjeta.imagen, { clase: 'icono', carga: 'eager' }),
+        h('span', { class: 'mapa__miniatura' }, puzzle.pieza(ganadas - 1)),
         tarjeta.nombre,
       ),
     );
@@ -66,19 +92,19 @@ export const mapaTesoro: MontarJuego<JuegoMapaTesoro> = ({ juego, alTerminar }) 
     if (ganadas < juego.tarjetas.length) {
       decir(
         tortu,
-        `¡Llegaron a la isla segura! Ganaron la tarjeta «${tarjeta.nombre}». Faltan ${juego.tarjetas.length - ganadas}: ¡crucen otra vez!`,
+        `¡Llegaron a la isla segura! Ganaron la pieza «${tarjeta.nombre}». Faltan ${juego.tarjetas.length - ganadas}: ¡crucen otra vez!`,
         'celebracion',
       );
       return;
     }
     decir(
       tortu,
-      '¡Tienen todas las tarjetas! Únanlas para armar el mapa del tesoro.',
+      '¡Tienen todas las piezas! Ahora armen el rompecabezas para descubrir el mapa del tesoro.',
       'celebracion',
     );
     elegirRuta.hidden = true;
-    unir.hidden = false;
-    unir.focus();
+    puzzle.elemento.hidden = false;
+    puzzle.elemento.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const avisar = (mensaje: string) => decir(tortu, mensaje);
@@ -202,44 +228,26 @@ export const mapaTesoro: MontarJuego<JuegoMapaTesoro> = ({ juego, alTerminar }) 
     ),
   );
 
-  const unir = h(
-    'button',
-    {
-      type: 'button',
-      class: 'boton boton--huellita boton--grande',
-      hidden: true,
-      onclick: () => {
-        unir.hidden = true;
-        mapa.hidden = false;
-        mapa.replaceChildren(
-          h('h3', null, icono('mapa'), '¡El mapa del tesoro!'),
-          h(
-            'div',
-            { class: 'mapa-armado__dibujo' },
-            juego.tarjetas.map((t, i) =>
-              h(
-                'span',
-                { class: `mapa-armado__pieza mapa-armado__pieza--${i + 1}` },
-                imagen(t.imagen, { clase: 'icono', carga: 'eager' }),
-                t.nombre,
-              ),
-            ),
-            h('span', { class: 'mapa-armado__x', 'aria-hidden': 'true' }, 'X'),
-          ),
-          h('p', { class: 'mapa-armado__mensaje' }, juego.mensajeMapa),
-        );
-        celebrar(mapa);
-        mapa.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        alTerminar();
-      },
-    },
-    icono('mapa'),
-    'Unir las tarjetas',
-  );
-
   return h(
     'div',
     { class: 'juego juego--mapa' },
+    h(
+      'section',
+      { class: 'juego__parte' },
+      h('h3', null, icono('libro'), 'El cuento'),
+      lectura(juego.cuento, 'capitana-tortu'),
+    ),
+    h(
+      'section',
+      { class: 'juego__parte' },
+      h('h3', null, icono('mapa'), 'El mapa de los circuitos'),
+      h(
+        'p',
+        null,
+        'Miren el camino antes de empezar: las dos rutas salen de la playa, cruzan el mar del Tiburón y llegan a la isla segura.',
+      ),
+      mapaDeRutas(),
+    ),
     h(
       'section',
       { class: 'juego__parte' },
@@ -248,9 +256,8 @@ export const mapaTesoro: MontarJuego<JuegoMapaTesoro> = ({ juego, alTerminar }) 
       elegirRuta,
       tablero,
       tarjetas,
-      unir,
     ),
-    mapa,
+    puzzle.elemento,
   );
 };
 
@@ -272,6 +279,7 @@ function lineaZigzag(): SVGSVGElement {
   return svg;
 }
 
+/** Las islas y los tiburones, que nadan por todo el mar (uno rápido y otro más lento). */
 const islas = (): HTMLElement[] => [
   h('span', { class: 'mar-tablero__isla mar-tablero__isla--inicio', 'aria-hidden': 'true' }),
   h(
@@ -284,4 +292,97 @@ const islas = (): HTMLElement[] => [
     { class: 'mar-tablero__aleta', 'aria-hidden': 'true' },
     imagen('tiburon', { carga: 'eager' }),
   ),
+  h(
+    'span',
+    { class: 'mar-tablero__aleta mar-tablero__aleta--segunda', 'aria-hidden': 'true' },
+    imagen('tiburon', { carga: 'eager' }),
+  ),
 ];
+
+/** Mapa visual de los dos circuitos, para entender el trayecto sin depender de la voz. */
+function mapaDeRutas(): HTMLElement {
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 100 60');
+  svg.setAttribute('class', 'rutas__trazos');
+  svg.setAttribute('aria-hidden', 'true');
+  const zigzag = document.createElementNS(NS, 'polyline');
+  zigzag.setAttribute('points', '14,16 26,6 38,24 50,6 62,24 74,6 86,16');
+  zigzag.setAttribute('class', 'rutas__zigzag');
+  svg.append(zigzag);
+  for (let i = 0; i < 6; i++) {
+    const aro = document.createElementNS(NS, 'circle');
+    aro.setAttribute('cx', String(20 + i * 12));
+    aro.setAttribute('cy', String(i % 2 === 0 ? 48 : 40));
+    aro.setAttribute('r', '4.2');
+    aro.setAttribute('class', 'rutas__aro');
+    svg.append(aro);
+  }
+  const etiqueta = (texto: string, clase: string, figura?: Imagen) =>
+    h(
+      'span',
+      { class: `rutas__etiqueta ${clase}` },
+      figura && imagen(figura, { carga: 'eager' }),
+      texto,
+    );
+  return h(
+    'figure',
+    { class: 'rutas' },
+    h(
+      'div',
+      { class: 'rutas__mar' },
+      svg,
+      etiqueta('Playa: salida', 'rutas__etiqueta--salida', 'huellas'),
+      etiqueta('Isla segura: llegada', 'rutas__etiqueta--llegada', 'palmera'),
+      etiqueta('Ruta A', 'rutas__etiqueta--a'),
+      etiqueta('Ruta B', 'rutas__etiqueta--b'),
+      h(
+        'span',
+        { class: 'rutas__tiburon', 'aria-hidden': 'true' },
+        imagen('tiburon', { carga: 'eager' }),
+      ),
+    ),
+    h(
+      'figcaption',
+      null,
+      h('strong', null, 'Ruta A: '),
+      'camino en zigzag. Caminen con los brazos abiertos, pisando solo la línea. ',
+      h('strong', null, 'Ruta B: '),
+      'aros. Salten de aro en aro sin tocar el agua.',
+    ),
+  );
+}
+
+/** La imagen del rompecabezas: un mapa del tesoro con el mar, la isla, el barco y la gran X. */
+function escenaMapa(): HTMLElement {
+  const figuras: [Imagen, number, number, number][] = [
+    ['brujula', 4, 4, 16],
+    ['isla', 58, 8, 30],
+    ['palmera', 70, 0, 16],
+    ['ancla', 10, 60, 14],
+    ['tiburon', 30, 36, 20],
+    ['medusa', 56, 62, 12],
+    ['pulpo', 82, 66, 14],
+    ['gema', 80, 30, 9],
+  ];
+  const ruta = document.createElementNS(NS, 'svg');
+  ruta.setAttribute('viewBox', '0 0 100 100');
+  ruta.setAttribute('preserveAspectRatio', 'none');
+  ruta.setAttribute('class', 'escena-mapa__ruta');
+  const camino = document.createElementNS(NS, 'path');
+  camino.setAttribute('d', 'M14 74 C 30 90, 34 56, 48 62 S 70 86, 72 50 S 80 36, 84 36');
+  ruta.append(camino);
+  return h(
+    'div',
+    { class: 'escena-mapa', 'aria-hidden': 'true' },
+    h('span', { class: 'escena-mapa__isla' }),
+    ruta,
+    figuras.map(([img, x, y, t]) =>
+      h(
+        'span',
+        { class: 'escena-mapa__figura', style: `left:${x}%;top:${y}%;width:${t}%` },
+        imagen(img, { carga: 'eager' }),
+      ),
+    ),
+    h('span', { class: 'escena-mapa__x' }, 'X'),
+  );
+}

@@ -5,7 +5,7 @@ import { validarParada } from './validar';
 
 const archivos = import.meta.glob<unknown>('./paradas/*.json', { eager: true, import: 'default' });
 
-/** Las 9 paradas en el orden del recorrido: desierto → mar → selva. */
+/** Las paradas en el orden del recorrido: desierto → mar → selva → gran viaje en globo. */
 export const paradas: readonly Parada[] = Object.entries(archivos)
   .map(([ruta, datos]) => validarParada(datos, ruta))
   .sort(

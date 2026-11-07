@@ -153,7 +153,7 @@ export function final({ store, paradas, router }: Contexto): Vista {
     h(
       'div',
       { class: 'final__huellitas', 'aria-hidden': 'true' },
-      Array.from({ length: 9 }, () => imagen('huellas', { clase: 'final__huellita' })),
+      paradas.map(() => imagen('huellas', { clase: 'final__huellita' })),
     ),
     burbuja('huellita', MENSAJE, { pose: 'celebracion' }),
 
@@ -188,7 +188,7 @@ export function final({ store, paradas, router }: Contexto): Vista {
             'li',
             { class: `final__ecosistema final__ecosistema--${eco}` },
             imagen(e.imagen, { clase: 'final__ecosistema-figura' }),
-            h('h3', null, e.nombre),
+            h('h3', null, e.nombre, h('span', { class: 'final__lugar' }, e.lugar)),
             h('p', null, `Guía: ${personajes[e.guia].corto}`),
             h(
               'ul',

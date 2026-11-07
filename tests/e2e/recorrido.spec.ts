@@ -13,7 +13,7 @@ test('de la portada al final, con progreso que sobrevive a recargar', async ({ p
   await expect(page).toHaveURL('/mapa');
   await expect(page.locator('.tarjeta-parada--disponible')).toHaveCount(1);
 
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 10; i++) {
     await page.locator('.tarjeta-parada--disponible a').click();
     await page.getByRole('button', { name: '¡Lo logramos! Poner el sello' }).click();
     await expect(page.locator('#sello-conseguido')).toBeFocused();
@@ -27,7 +27,7 @@ test('de la portada al final, con progreso que sobrevive a recargar', async ({ p
       .click();
   }
 
-  await expect(page.locator('.cabecera__cuenta')).toHaveText('9/9');
+  await expect(page.locator('.cabecera__cuenta')).toHaveText('10/10');
   await page.getByRole('link', { name: 'Aventura completada' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Felicitaciones');
 });
@@ -41,12 +41,18 @@ test('una parada bloqueada no se abre por URL y una ruta desconocida no da error
   await expect(page.getByRole('heading', { level: 1 })).toContainText('no existe');
 });
 
-test('Modo Docente abre todo y muestra las 9 planeaciones', async ({ page }) => {
+test('Modo Docente abre todo y muestra las 10 planeaciones', async ({ page }) => {
   await page.goto('/mapa');
   await page.getByRole('button', { name: 'Opciones' }).click();
   await page.getByRole('switch', { name: 'Modo Docente' }).check();
   await page.keyboard.press('Escape');
-  await expect(page.locator('.tarjeta-parada--disponible')).toHaveCount(9);
+  await expect(page.locator('.tarjeta-parada--disponible')).toHaveCount(10);
+  await expect(page.locator('.region__titulo')).toContainText([
+    'Desértico',
+    'Marino',
+    'Selvático',
+    'Gran viaje en globo',
+  ]);
 
   for (const ruta of [
     'desierto/1',
@@ -58,6 +64,7 @@ test('Modo Docente abre todo y muestra las 9 planeaciones', async ({ page }) => 
     'selva/1',
     'selva/2',
     'selva/3',
+    'globo/1',
   ]) {
     await page.goto(`/${ruta}/planeacion`);
     for (const seccion of ['Objetivo', 'Inicio', 'Desarrollo', 'Cierre', 'Indicadores de logro'])

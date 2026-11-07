@@ -1,10 +1,11 @@
-import type { SonidoSelva } from './content/types';
+import type { Senal, SonidoSelva } from './content/types';
 
 /**
- * Efectos cortos generados con Web Audio (sin archivos): palmas, acierto, error, los
- * sonidos de los animales de la selva y la tormenta. Cuando haya grabaciones con licencia
- * libre, basta cambiar estas funciones por la reproducción del archivo.
- * Se crean al primer uso porque los navegadores exigen un gesto del usuario.
+ * Sonidos de la página. El mono y la serpiente son grabaciones reales con licencia libre
+ * (public/assets/sonidos, créditos en su LEEME.md); los demás animales usan una imitación
+ * hasta tener su grabación. El resto son efectos cortos generados con
+ * Web Audio: palmas, acierto, error, la tormenta, las señales del globo y la música de la
+ * estatua. Se crean al primer uso porque los navegadores exigen un gesto del usuario.
  */
 
 let contexto: AudioContext | null = null;
@@ -104,7 +105,8 @@ function ruido(
   fuente.start(inicio);
 }
 
-const ANIMALES: Record<SonidoSelva, () => void> = {
+/** Imitaciones sintéticas: solo se usan si la grabación no se puede reproducir. */
+const IMITACIONES: Record<SonidoSelva, () => void> = {
   // «¡Uh, uh, ah, ah!»: cuatro gritos que suben.
   mono: () =>
     [0, 0.22, 0.5, 0.72].forEach((t, i) =>
@@ -128,7 +130,18 @@ const ANIMALES: Record<SonidoSelva, () => void> = {
   },
 };
 
-export const sonidoAnimal = (animal: SonidoSelva): void => ANIMALES[animal]();
+/** Animales con grabación real en public/assets/sonidos/<animal>.mp3. */
+const GRABADOS: ReadonlySet<SonidoSelva> = new Set(['mono', 'serpiente']);
+
+let grabacion: HTMLAudioElement | null = null;
+
+/** Reproduce la grabación real del animal; si no la hay o falla, la imitación. */
+export function sonidoAnimal(animal: SonidoSelva): void {
+  grabacion?.pause();
+  if (typeof Audio === 'undefined' || !GRABADOS.has(animal)) return IMITACIONES[animal]();
+  grabacion = new Audio(`/assets/sonidos/${animal}.mp3`);
+  grabacion.play().catch(() => IMITACIONES[animal]());
+}
 
 export const lluvia = (): void =>
   ruido(3, { filtro: 'bandpass', frecuencia: 2600, q: 0.6, volumen: 0.35, ataque: 0.4 });
@@ -149,3 +162,50 @@ export const chapuzon = (): void => {
 
 /** Un salto corto. */
 export const salto = (): void => tono(300, 0.15, 0, 'sine', { hasta: 700, volumen: 0.2 });
+
+// --- Señales del globo ---------------------------------------------------------------
+
+/** Tres golpes graves de tambor: aterrizamos en el desierto. */
+const tambor = (): void =>
+  [0, 0.35, 0.7, 0.85].forEach((t) => {
+    tono(110, 0.35, t, 'sine', { hasta: 55, volumen: 0.6 });
+    ruido(0.12, { filtro: 'lowpass', frecuencia: 900, volumen: 0.35, retraso: t, ataque: 0.005 });
+  });
+
+/** Una campana que suena dos veces: aterrizamos en el fondo del mar. */
+const campana = (): void =>
+  [0, 0.9].forEach((t) => {
+    tono(880, 1.6, t, 'sine', { volumen: 0.3 });
+    tono(2210, 1.0, t, 'sine', { volumen: 0.1 });
+    tono(1320, 1.2, t, 'triangle', { volumen: 0.06 });
+  });
+
+/** Maracas: ruido agudo y cortito, al ritmo. */
+const maracas = (): void =>
+  [0, 0.18, 0.36, 0.6, 0.78, 0.96].forEach((t) =>
+    ruido(0.09, { filtro: 'highpass', frecuencia: 5000, volumen: 0.45, retraso: t, ataque: 0.005 }),
+  );
+
+export const senal: Record<Senal, () => void> = { tambor, campana, maracas };
+
+// --- Música para moverse (estatua musical y vuelo) --------------------------------------
+
+const MELODIAS = {
+  animada: { notas: [523, 659, 784, 659, 587, 698, 880, 698], paso: 0.22, tipo: 'triangle' },
+  suave: { notas: [392, 440, 523, 440, 392, 330, 294, 330], paso: 0.55, tipo: 'sine' },
+} as const;
+
+/** Toca una melodía en bucle hasta que se llame a la función que devuelve. */
+export function musica(estilo: keyof typeof MELODIAS): () => void {
+  const { notas, paso, tipo } = MELODIAS[estilo];
+  let i = 0;
+  const tocar = () => {
+    tono(notas[i % notas.length] ?? 440, paso * 0.9, 0, tipo, { volumen: 0.12 });
+    if (i % 2 === 0)
+      tono((notas[i % notas.length] ?? 440) / 2, paso * 1.6, 0, 'sine', { volumen: 0.08 });
+    i += 1;
+  };
+  tocar();
+  const reloj = window.setInterval(tocar, paso * 1000);
+  return () => window.clearInterval(reloj);
+}

@@ -21,6 +21,8 @@ aquí se les quitó el fondo y se dejaron en 512 × 512 px.
 | pez.webp                                              | Pixabay (5568967)                                      | Pixabay Content License |
 | loro, camello, concha, palmera, delfin, coral (.webp) | Generadas con Google Gemini por el equipo del proyecto | Uso propio              |
 
+El globo aerostático (`globo.webp`) lo dibujó en SVG el equipo del proyecto (uso propio).
+
 Pixabay Content License: https://pixabay.com/service/license-summary/ (uso libre, sin atribución obligatoria).
 
 ## Resto de figuras
@@ -29,7 +31,8 @@ Las demás imágenes de esta carpeta son de **Fluent Emoji** (estilo 3D) de Micr
 obtenidas del paquete [`@lobehub/fluent-emoji-3d`](https://www.npmjs.com/package/@lobehub/fluent-emoji-3d)
 y renombradas en español. Entre ellas, las que se sumaron para el mar y la selva: algas, amanecer,
 arcoiris, camaron, cangrejo, flor, gema, mascara-buceo, moneda, oreja, pajaro, pez-tropical,
-plancton, tigre, tormenta, tronco y trueno.
+plancton, tigre, tormenta, tronco y trueno. Para el gran viaje en globo se sumaron campana, maracas,
+musica, perezoso, perla (la ostra con su perla) y tambor.
 
 - Proyecto original: https://github.com/microsoft/fluentui-emoji
 - Licencia: MIT

@@ -1,10 +1,11 @@
 # El camino de las aventuras
 
 Página interactiva para niños y niñas de segundo grado (7 a 8 años) de la Corporación Everyday
-Home. Convierte las nueve planeaciones de `docs/` en un recorrido por tres ecosistemas
-(desierto → fondo del mar → selva) con un Pasaporte del Explorador que se llena de sellos.
+Home. Convierte las diez planeaciones de la unidad didáctica en un recorrido por tres ecosistemas
+(Desértico → Marino → Selvático) y un cierre, «El gran viaje en globo por los tres mundos», con un
+Pasaporte del Explorador que se llena de sellos.
 
-- **Modo Explorador:** pensado para proyectarse en el salón. Portada, mapa de huellitas y nueve
+- **Modo Explorador:** pensado para proyectarse en el salón. Portada, mapa de huellitas y diez
   paradas que se desbloquean una tras otra.
 - **Modo Docente:** desde ⚙️ Opciones. Abre todas las paradas y muestra la planeación completa de
   cada una, lista para imprimir.
@@ -43,7 +44,7 @@ src/
   views/               Portada, mapa, ecosistema, parada, planeación, familia y final
   components/          Piezas reutilizables (personajes con poses, burbuja con voz, fondo
                        animado, celebración, rincón de calma, pasaporte, opciones)
-  juegos/              Los juegos de las 9 paradas y piezas comunes (aros, temporizador)
+  juegos/              Los juegos de las 10 paradas y piezas comunes (aros, temporizador)
   imagenes.ts          Lista de figuras disponibles
   voz.ts, sonido.ts    Lectura en voz alta y sonidos (efectos, animales y tormenta)
   styles/              Variables de diseño, estilos base, de vistas y de impresión
@@ -61,6 +62,7 @@ tests/e2e/             Recorridos en el navegador (Playwright)
 | `/mapa`                       | Mapa de exploración                       |
 | `/desierto`, `/mar`, `/selva` | Presentación de cada ecosistema           |
 | `/desierto/1` … `/selva/3`    | Paradas (1 a 3 dentro de cada ecosistema) |
+| `/globo/1`                    | El gran viaje en globo (parada de cierre) |
 | `/desierto/1/planeacion` …    | Ficha imprimible de la planeación         |
 | `/desierto/familia` …         | Tarjeta imprimible para la familia        |
 | `/final`                      | Aventura completada                       |
@@ -129,18 +131,32 @@ Fases 4 y 5 listas:
   estaciones (cocodrilos, serpientes, troncos y «¡Mono arriba!»); el cuento «Un día en la selva» con
   lluvia, viento y trueno.
 
-Los sonidos de animales y de la tormenta se generan en el navegador mientras no haya grabaciones con
-licencia libre.
+Ajustes de la revisión de noviembre de 2026 (capturas y unidad didáctica actualizada):
+
+- **Desierto:** las ideas del mural se pasan de una columna a otra (botón ⇄ o arrastrando); el
+  lienzo tiene «Deshacer»; los dibujos se cuelgan en una cuerda con pinzas y se recorren como en un
+  museo. Los títeres dicen en voz alta el guion de la unidad al subir, y la escena 3 es de cierre
+  libre. El reto de movimiento de la parada 3 es opcional.
+- **Mar:** el cuento «La misión de los exploradores del mar» (Lina Campo) se lee en voz alta,
+  hay calentamiento de buzos, mapa de los circuitos, tiburones que patrullan las rutas y un
+  rompecabezas del mapa del tesoro al final.
+- **Selva:** primero «Despertamos como animales» y después el sonido misterioso, con grabaciones
+  reales del mono y la serpiente (`public/assets/sonidos/LEEME.md`); en el circuito la serpiente
+  es el peligro y el mono pasa los conos; «¡Mono arriba!» usa solo flechas; en el cuento cada
+  figura se mueve cuando se nombra.
+- **El gran viaje en globo:** boleto, vuelos en cámara lenta, señales (tambor, campana, maracas)
+  para adivinar dónde se aterriza, una misión por ecosistema (con estatua musical en la selva) y,
+  al volver, ordenar las características de los tres mundos.
 
 Fase 6 lista (cierre):
 
 - **Aventura completada** (`/final`): los tres paisajes juntos, los 8 personajes celebrando, el
-  mensaje de doc1.txt, el recorrido con los 9 sellos y el **diploma del explorador** con el nombre del
+  mensaje de doc1.txt, el recorrido con los 10 sellos y el **diploma del explorador** con el nombre del
   grupo, los sellos y la fecha. Se descarga como imagen o se imprime (y desde ahí «Guardar como PDF»,
   en hoja A4 horizontal). «Una nueva aventura con otro grupo» pide confirmación antes de borrar.
 - **Accesibilidad:** `tests/e2e/accesibilidad.spec.ts` revisa con axe (WCAG 2.1 AA) las 17 pantallas
   en computador y tableta; todos los botones miden al menos 64 px; cada reto de movimiento tiene una
-  **alternativa tranquila** (campo `retoTranquilo` del contenido) para quien no puede o no quiere
+  **alternativa tranquila** (campo `movimiento.tranquilo` del contenido) para quien no puede o no quiere
   moverse.
 - **Rendimiento:** los juegos se bajan por ecosistema solo al entrar a una de sus paradas; las letras
   principales se precargan y el fondo animado arranca cuando la página ya cargó. Lighthouse (móvil,
@@ -157,7 +173,8 @@ Fase 6 lista (cierre):
 2. (Opcional) Dominio propio: en Vercel, proyecto → Settings → Domains → Add.
 3. Prueba en el aula: abrir la página una vez con internet en cada equipo o tablero (queda guardada),
    recorrer una parada con el grupo y anotar lo que haya que ajustar.
-4. Pendiente de contenido: escena 3 de títeres, cuento de Canva del mar, fotos y fechas.
+4. Pendiente de contenido: indicadores de logro del viaje en globo, el sexto puesto del rally del
+   desierto, el día de las paradas del mar, fotos y grabaciones de la rana, el ave y el jaguar.
 
 ## Voz de los personajes
 

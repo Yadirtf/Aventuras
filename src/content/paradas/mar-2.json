@@ -5,9 +5,13 @@
   "titulo": "El mapa del tesoro",
   "guias": ["capitana-tortu", "tiburon"],
   "saludo": "¡Buzos y buzas! El mapa del tesoro quedó al otro lado del mar y lo vigila el Tiburón de Agua Salada. ¿Están listos para ser los mejores equilibristas?",
-  "retoPantalla": "Elijan la ruta A (una línea en zigzag) o la ruta B (aros para saltar) y crúcenla con el ratón, el dedo o las flechas sin tocar el agua del tiburón. Cada cruce entrega una tarjeta del mapa del tesoro.",
-  "retoMovimiento": "Abran los brazos como equilibristas y caminen sobre una línea imaginaria sin caer al agua.",
-  "retoTranquilo": "Sentados: recorran con el dedo una línea imaginaria sobre la mesa, despacito, sin que el dedo «se caiga al agua».",
+  "retoPantalla": "Primero escuchen el cuento «La misión de los exploradores del mar» y miren el mapa de las dos rutas. Luego crucen el mar por la ruta A (una línea en zigzag) o la ruta B (aros para saltar) sin tocar el agua: ¡el tiburón está nadando! Cada cruce entrega una pieza; con las cuatro se arma el rompecabezas del mapa del tesoro.",
+  "movimiento": {
+    "titulo": "Calentamiento de buzos",
+    "antesDelJuego": true,
+    "texto": "Antes de cruzar el mar, imiten a un buzo: estiren los brazos y las piernas, giren el tronco a un lado y al otro, y respiren hondo como si se pusieran la máscara. ¡Listos para la expedición!",
+    "tranquilo": "Sentados: estiren los brazos hacia arriba y a los lados, giren suave el tronco y hagan como si se pusieran la máscara de buzo."
+  },
   "sello": {
     "nombre": "Ancla",
     "imagen": "ancla"
@@ -15,6 +19,16 @@
   "pista": "¡Armamos el mapa del tesoro! Ahora hay que seguir sus últimas pistas hasta la gran X.",
   "juego": {
     "tipo": "mapa-tesoro",
+    "cuento": {
+      "titulo": "La misión de los exploradores del mar",
+      "autora": "Lina Campo",
+      "parrafos": [
+        "Había una vez un grupo de valientes exploradores que, en su primera gran misión por el fondo del mar, lograron descubrir los secretos de los animales marinos y su alimentación al asociar cada imagen con su silueta.",
+        "Parecía que la aventura había terminado, pero al revisar sus equipos se dieron cuenta de algo muy importante: faltaba lo más valioso… ¡el mapa del gran tesoro del océano!",
+        "En medio de una vieja botella que flotaba cerca del arrecife, encontraron un mensaje secreto que decía: «El mapa del tesoro está escondido al otro lado del gran mar azul, pero solo los exploradores más audaces podrán alcanzarlo, cruzando un territorio habitado por el temido tiburón de agua salada».",
+        "Desde ese preciso momento, los exploradores supieron que debían entrenar sus cuerpos, volverse expertos en equilibrio y preparar sus superpoderes para cruzar sin caer al agua."
+      ]
+    },
     "tarjetas": [
       {
         "nombre": "La isla segura",
@@ -44,7 +58,7 @@
     "objetivo": "Afianzar el equilibrio dinámico, la agilidad motriz y el trabajo cooperativo superando dos circuitos de aventura con rutas graduadas para encontrar el mapa del tesoro.",
     "inicio": [
       {
-        "texto": "Se inicia con un saludo de buenos días enérgico y se reproduce una canción corta y alegre llamada «Sinfonía inconclusa en la mar» (Anexo 1). Luego la docente reúne a los niños y niñas en un semicírculo y les lee como provocación el cuento corto «La misión de los exploradores del mar» (Anexo 2)."
+        "texto": "Se inicia con un saludo de buenos días enérgico y se reproduce una canción corta y alegre llamada «Sinfonía inconclusa en la mar» (Anexo 1). Luego la docente reúne a los niños y niñas en un semicírculo y les lee como provocación el cuento corto «La misión de los exploradores del mar» (Anexo 2), que en la página se puede escuchar en voz alta para quienes todavía no leen."
       },
       {
         "texto": "«¡Muy bien, equipo! Así como en el cuento, hoy nos toca a nosotros cumplir esa misión. ¡Atención, buzos y buzas! Como ya sabemos, el mapa del gran tesoro marino ha quedado al otro lado del mar, vigilado por el temido Tiburón de Agua Salada, y para alcanzarlo hoy no podemos ir corriendo de cualquier manera. Necesitamos convertirnos en los mejores equilibristas. ¡Listos, que empieza nuestra expedición!»"
@@ -92,17 +106,13 @@
         "url": "https://youtu.be/ycH8d5ZE8-Q"
       },
       {
-        "titulo": "Anexo 2: Campo (2026). La misión de los exploradores del mar (cuento en Canva).",
+        "titulo": "Anexo 2: Campo (2026). La misión de los exploradores del mar (cuento infantil, Canva).",
         "url": "https://canva.link/0wb0igvwuxpqoiy"
       },
       {
         "titulo": "Anexo 3: Mar con tiburones (imagen de referencia)"
       }
     ],
-    "pendientes": [
-      "Indicadores de logro.",
-      "Texto del cuento «La misión de los exploradores del mar» (está en Canva).",
-      "Día exacto de la sesión (noviembre de 2026)."
-    ]
+    "pendientes": ["Indicadores de logro.", "Día exacto de la sesión (noviembre de 2026)."]
   }
 }

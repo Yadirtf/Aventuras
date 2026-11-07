@@ -200,9 +200,15 @@ function caminoDeSerpientes(juego: JuegoCircuito, e: Estacion): HTMLElement {
   let pasados = 0;
   let ultimoLado: 'izquierda' | 'derecha' | null = null;
   const conos = Array.from({ length: juego.conos }, () => h('li', { class: 'zigzag__cono' }));
+  // El mono recorre los conos; la serpiente es el peligro que vigila el camino.
+  const mono = h(
+    'span',
+    { class: 'zigzag__explorador', 'aria-hidden': 'true' },
+    imagen('mono', { carga: 'eager' }),
+  );
   const serpiente = h(
     'span',
-    { class: 'zigzag__serpiente', 'aria-hidden': 'true' },
+    { class: 'zigzag__peligro', 'aria-hidden': 'true' },
     imagen('serpiente', { carga: 'eager' }),
   );
   const camino = h(
@@ -210,11 +216,12 @@ function caminoDeSerpientes(juego: JuegoCircuito, e: Estacion): HTMLElement {
     { class: 'zigzag' },
     h('ol', { class: 'zigzag__conos' }, conos),
     serpiente,
+    mono,
   );
 
   const mover = () => {
-    serpiente.style.top = `${(pasados / juego.conos) * 100}%`;
-    serpiente.dataset.lado = ultimoLado ?? 'centro';
+    mono.style.top = `${(pasados / juego.conos) * 100}%`;
+    mono.dataset.lado = ultimoLado ?? 'centro';
   };
   mover();
 
@@ -223,9 +230,12 @@ function caminoDeSerpientes(juego: JuegoCircuito, e: Estacion): HTMLElement {
     if (lado === ultimoLado) {
       error();
       e.avisar(
-        `¡Así no es zigzag! El cono anterior lo pasaron por la ${lado}: este va por el otro lado.`,
+        `¡Cuidado, la serpiente! El cono anterior lo pasaron por la ${lado}: este va por el otro lado.`,
         'pregunta',
       );
+      serpiente.classList.remove('zigzag__peligro--ataca');
+      void serpiente.offsetWidth;
+      serpiente.classList.add('zigzag__peligro--ataca');
       return;
     }
     ultimoLado = lado;
@@ -236,7 +246,11 @@ function caminoDeSerpientes(juego: JuegoCircuito, e: Estacion): HTMLElement {
     if (pasados === juego.conos) {
       botones.forEach((b) => (b.disabled = true));
       e.listo();
-    } else e.avisar(`¡Sss! Cono ${pasados} por la ${lado}. ¿Y el siguiente?`, 'celebracion');
+    } else
+      e.avisar(
+        `¡Bien, mono! Cono ${pasados} por la ${lado} y la serpiente no lo alcanzó. ¿Y el siguiente?`,
+        'celebracion',
+      );
   };
 
   const botones = (['izquierda', 'derecha'] as const).map((lado) =>
@@ -268,16 +282,23 @@ function caminoDeSerpientes(juego: JuegoCircuito, e: Estacion): HTMLElement {
 
 // --- Los monos exploradores ---------------------------------------------------------
 
-const ORDENES: Record<OrdenMono, { frase: string; boton: string; tecla: string }> = {
-  arriba: { frase: '¡Mono arriba!', boton: '↑ Arriba', tecla: 'ArrowUp' },
-  abajo: { frase: '¡Mono abajo!', boton: '↓ Abajo', tecla: 'ArrowDown' },
-  derecha: { frase: '¡Mono a la derecha!', boton: 'Derecha →', tecla: 'ArrowRight' },
-  izquierda: { frase: '¡Mono a la izquierda!', boton: '← Izquierda', tecla: 'ArrowLeft' },
+/**
+ * Las órdenes se muestran solo con flechas, sin palabras: el reto es reconocer qué es
+ * arriba, abajo, derecha e izquierda. Las palabras quedan para los lectores de pantalla.
+ */
+const ORDENES: Record<OrdenMono, { flecha: string; nombre: string; tecla: string }> = {
+  arriba: { flecha: '↑', nombre: 'arriba', tecla: 'ArrowUp' },
+  abajo: { flecha: '↓', nombre: 'abajo', tecla: 'ArrowDown' },
+  derecha: { flecha: '→', nombre: 'a la derecha', tecla: 'ArrowRight' },
+  izquierda: { flecha: '←', nombre: 'a la izquierda', tecla: 'ArrowLeft' },
 };
 
 function monosExploradores(juego: JuegoCircuito, e: Estacion): HTMLElement {
   let indice = 0;
   const orden = h('p', { class: 'monos__orden', 'aria-live': 'assertive' });
+  const flecha = h('span', { class: 'monos__flecha', 'aria-hidden': 'true' });
+  const lector = h('span', { class: 'visualmente-oculto' });
+  orden.append(flecha, lector);
   const mono = h(
     'div',
     { class: 'monos__escena' },
@@ -287,7 +308,11 @@ function monosExploradores(juego: JuegoCircuito, e: Estacion): HTMLElement {
 
   const pintar = () => {
     const o = juego.ordenesMono[indice];
-    orden.textContent = o ? ORDENES[o].frase : '';
+    flecha.textContent = o ? ORDENES[o].flecha : '';
+    lector.textContent = o ? `Mono ${ORDENES[o].nombre}` : '';
+    flecha.classList.remove('monos__flecha--nueva');
+    void flecha.offsetWidth;
+    flecha.classList.add('monos__flecha--nueva');
   };
 
   const responder = (o: OrdenMono) => {
@@ -297,8 +322,8 @@ function monosExploradores(juego: JuegoCircuito, e: Estacion): HTMLElement {
       error();
       e.avisar(
         o === 'derecha' || o === 'izquierda'
-          ? `¡Ups! Esa es la ${o}. ¡Inténtenlo otra vez!`
-          : '¡Ups! Escuchen bien lo que dice Momo.',
+          ? `¡Ups! Esa es la ${o}. ¡Miren bien hacia dónde apunta la flecha!`
+          : '¡Ups! Miren bien hacia dónde apunta la flecha.',
         'pregunta',
       );
       return;
@@ -307,7 +332,8 @@ function monosExploradores(juego: JuegoCircuito, e: Estacion): HTMLElement {
     salto();
     indice += 1;
     if (indice === juego.ordenesMono.length) {
-      orden.textContent = '¡Monos expertos!';
+      flecha.textContent = '★';
+      lector.textContent = '¡Monos expertos!';
       botones.forEach((b) => (b.disabled = true));
       e.listo();
       return;
@@ -322,9 +348,10 @@ function monosExploradores(juego: JuegoCircuito, e: Estacion): HTMLElement {
       {
         type: 'button',
         class: 'boton boton--secundario monos__boton',
+        'aria-label': ORDENES[o].nombre,
         onclick: () => responder(o),
       },
-      ORDENES[o].boton,
+      ORDENES[o].flecha,
     ),
   );
   pintar();
@@ -335,7 +362,7 @@ function monosExploradores(juego: JuegoCircuito, e: Estacion): HTMLElement {
       class: 'monos',
       role: 'group',
       tabindex: 0,
-      'aria-label': 'Sigan las órdenes de Momo con los botones o con las flechas del teclado.',
+      'aria-label': 'Sigan la flecha con los botones o con las flechas del teclado.',
       onkeydown: (ev: KeyboardEvent) => {
         const o = (Object.keys(ORDENES) as OrdenMono[]).find((k) => ORDENES[k].tecla === ev.key);
         if (!o) return;

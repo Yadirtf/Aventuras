@@ -1,0 +1,383 @@
+/* --- El gran viaje en globo ----------------------------------------------------------- */
+
+.globo__progreso {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: etapa;
+}
+
+.globo__etapa {
+  padding: 0.3rem 0.9rem;
+  font-weight: 700;
+  color: var(--tinta-suave);
+  background: #fff;
+  border: 3px solid var(--borde);
+  border-radius: 999px;
+}
+
+.globo__etapa--hecha {
+  color: var(--exito);
+  border-color: var(--exito);
+}
+
+.globo__etapa--hecha::before {
+  content: '✓ ';
+}
+
+.globo__etapa--actual {
+  color: var(--acento-texto);
+  background: var(--acento);
+  border-color: var(--acento);
+}
+
+.globo__titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  font-size: 1.6rem;
+  color: var(--acento-oscuro);
+}
+
+.globo__titulo--desierto {
+  color: var(--desierto-oscuro);
+}
+
+.globo__titulo--mar {
+  color: var(--mar-oscuro);
+}
+
+.globo__titulo--selva {
+  color: var(--selva-oscuro);
+}
+
+.globo__panel {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Boleto de viaje */
+.boleto {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 34rem;
+  padding: 1rem 1.25rem;
+  background:
+    radial-gradient(circle at 0 50%, var(--papel) 0 0.9rem, transparent 0.95rem),
+    radial-gradient(circle at 100% 50%, var(--papel) 0 0.9rem, transparent 0.95rem), #fff3bf;
+  border: 3px dashed #f59f00;
+  border-radius: var(--radio);
+}
+
+.boleto p {
+  margin: 0.15rem 0;
+}
+
+.boleto__titulo {
+  font-family: var(--fuente-titulos);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #8a5a00;
+}
+
+.boleto__figura {
+  width: 5rem;
+  height: 5rem;
+}
+
+.globo__preguntas,
+.globo__acuerdos ul {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.globo__acuerdos {
+  padding: 0.75rem 1rem;
+  background: var(--acento-suave);
+  border-radius: var(--radio);
+}
+
+/* El cielo del vuelo */
+.cielo {
+  position: relative;
+  height: 15rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #74c0fc, #d0ebff);
+  border-radius: var(--radio);
+}
+
+.cielo__globo {
+  position: absolute;
+  left: 40%;
+  top: 12%;
+  width: 9rem;
+  height: auto;
+  animation: flotar 6s ease-in-out infinite;
+}
+
+.cielo__nube {
+  position: absolute;
+  width: 7rem;
+  height: auto;
+  opacity: 0.9;
+  animation: nube-pasa 14s linear infinite;
+}
+
+.cielo__nube--1 {
+  top: 10%;
+}
+
+.cielo__nube--2 {
+  top: 60%;
+  width: 5rem;
+  animation-duration: 20s;
+  animation-delay: -8s;
+}
+
+@keyframes flotar {
+  50% {
+    transform: translate(-1.5rem, 1.5rem) rotate(-3deg);
+  }
+}
+
+@keyframes nube-pasa {
+  from {
+    left: 105%;
+  }
+  to {
+    left: -25%;
+  }
+}
+
+/* ¿Dónde aterrizamos? */
+.globo__destinos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+}
+
+.globo__destino {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  min-height: var(--toque-minimo);
+  padding: 1rem;
+  font: inherit;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--tinta);
+  background: #fff;
+  border: 4px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  cursor: pointer;
+}
+
+.globo__destino--desierto {
+  border-color: var(--desierto);
+}
+
+.globo__destino--mar {
+  border-color: var(--mar);
+}
+
+.globo__destino--selva {
+  border-color: var(--selva);
+}
+
+.globo__destino-figura {
+  width: 5rem;
+  height: 5rem;
+}
+
+.globo__destino-senal {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+/* Misiones */
+.globo__reloj {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.globo__pasos {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.globo__paso {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  font-size: 1.2rem;
+  background: #fff;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-suave);
+}
+
+.globo__paso-texto {
+  flex: 1;
+}
+
+.globo__paso-figura {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.globo__paso--hecho {
+  background: var(--selva-suave);
+}
+
+.globo__paso--hecho .globo__paso-texto::after {
+  content: ' ✓';
+  font-weight: 800;
+  color: var(--exito);
+}
+
+.estatua__mesa {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+}
+
+.estatua {
+  min-width: min(100%, 20rem);
+}
+
+.estatua[data-estado='bailando'] .movimiento__figura {
+  animation: bailar 0.6s ease-in-out infinite alternate;
+}
+
+.estatua[data-estado='estatua'] {
+  outline: 6px solid var(--resalte);
+}
+
+.estatua[data-estado='estatua'] .movimiento__accion {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--acento-oscuro);
+}
+
+@keyframes bailar {
+  from {
+    transform: rotate(-10deg) translateY(0);
+  }
+  to {
+    transform: rotate(10deg) translateY(-0.5rem);
+  }
+}
+
+/* Regreso: comparar los tres mundos */
+.globo__mazo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.globo__tarjeta {
+  min-height: var(--toque-minimo);
+  padding: 0.5rem 1rem;
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--tinta);
+  background: #fff7a8;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.15);
+  cursor: pointer;
+}
+
+.globo__tarjeta[aria-pressed='true'] {
+  outline: 5px solid var(--resalte);
+  transform: translateY(-4px);
+}
+
+.globo__mundos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.75rem;
+}
+
+.globo__mundo {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  min-height: 10rem;
+  padding: 0.75rem;
+  font: inherit;
+  text-align: left;
+  color: var(--tinta);
+  border: 4px solid transparent;
+  border-radius: var(--radio);
+  cursor: pointer;
+}
+
+.globo__mundo--desierto {
+  background: var(--desierto-suave);
+  border-color: var(--desierto);
+}
+
+.globo__mundo--mar {
+  background: var(--mar-suave);
+  border-color: var(--mar);
+}
+
+.globo__mundo--selva {
+  background: var(--selva-suave);
+  border-color: var(--selva);
+}
+
+.globo__mundo-nombre {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--fuente-titulos);
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.globo__lista {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 1.05rem;
+}
+
+.globo__semejanza {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  font-size: 1.3rem;
+  background: #fff;
+  border-left: 10px solid var(--resalte);
+  border-radius: var(--radio);
+}
+
+.globo__semejanza .icono {
+  width: 3rem;
+  height: 3rem;
+}
+
+.globo__final {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}

@@ -305,10 +305,19 @@
 .mar-tablero__aleta {
   position: absolute;
   bottom: 4%;
-  left: 40%;
+  left: 20%;
   width: 14%;
   pointer-events: none;
-  animation: nadar 9s ease-in-out infinite alternate;
+  animation: patrulla-tiburon 6s ease-in-out infinite alternate;
+}
+
+/* El segundo tiburón nada al revés y más lento, por la parte de arriba. */
+.mar-tablero__aleta--segunda {
+  width: 11%;
+  animation-duration: 8.5s;
+  animation-direction: alternate-reverse;
+  animation-delay: -2s;
+  opacity: 0.85;
 }
 
 .mar-tablero__aleta img {
@@ -316,9 +325,37 @@
   height: auto;
 }
 
-@keyframes nadar {
-  to {
-    left: 62%;
+/* El tiburón recorre el mar de un lado a otro, sube, baja y se da la vuelta. */
+@keyframes patrulla-tiburon {
+  0% {
+    left: 14%;
+    bottom: 6%;
+    transform: scaleX(1);
+  }
+  30% {
+    left: 46%;
+    bottom: 40%;
+    transform: scaleX(1) rotate(-6deg);
+  }
+  49% {
+    left: 70%;
+    bottom: 14%;
+    transform: scaleX(1);
+  }
+  51% {
+    left: 70%;
+    bottom: 14%;
+    transform: scaleX(-1);
+  }
+  75% {
+    left: 40%;
+    bottom: 58%;
+    transform: scaleX(-1) rotate(6deg);
+  }
+  100% {
+    left: 20%;
+    bottom: 30%;
+    transform: scaleX(-1);
   }
 }
 
@@ -401,53 +438,211 @@
   box-shadow: var(--sombra-suave);
 }
 
-.mapa-armado__dibujo {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4px;
-  max-width: 34rem;
-  margin: 0 auto;
-  padding: 4px;
-  background: #b08950;
+.mapa-armado__mensaje {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 36rem;
+  margin: 1rem auto;
+  padding: 1rem 1.25rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: #fff8e6;
+  border-left: 10px solid #c92a2a;
   border-radius: var(--radio);
 }
 
-.mapa-armado__pieza {
-  display: grid;
-  place-items: center;
-  gap: 0.25rem;
-  aspect-ratio: 4 / 3;
-  padding: 0.75rem;
-  font-family: var(--fuente-titulos);
-  font-weight: 800;
-  color: #5c3b0b;
-  text-align: center;
-  background: radial-gradient(circle at 30% 30%, rgb(255 255 255 / 0.4), transparent 60%), #f7e1b5;
+.mapa-armado__mensaje .icono {
+  width: 3rem;
+  height: 3rem;
 }
 
-.mapa-armado__pieza .icono {
-  width: 3.5rem;
-  height: 3.5rem;
+.mapa__miniatura {
+  display: block;
+  width: 4.5rem;
+  aspect-ratio: 3 / 2.4;
+  overflow: hidden;
+  border-radius: 6px;
 }
 
-.mapa-armado__x {
+/* --- La imagen del rompecabezas: el mapa del tesoro --------------------------------- */
+
+.escena-mapa {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 75% 25%, #f3d9a4 0 16%, transparent 17%),
+    repeating-linear-gradient(170deg, rgb(255 255 255 / 0.18) 0 6px, transparent 6px 26px),
+    linear-gradient(180deg, #6cc4f0, #2a8ccf 70%, #1b6fae);
+  box-shadow: inset 0 0 0 10px #c49a5a;
+}
+
+.escena-mapa__ruta {
   position: absolute;
-  right: 12%;
-  bottom: 10%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.escena-mapa__ruta path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.4;
+  stroke-dasharray: 3 3;
+  stroke-linecap: round;
+}
+
+.escena-mapa__figura {
+  position: absolute;
+}
+
+.escena-mapa__figura img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.escena-mapa__x {
+  position: absolute;
+  left: 80%;
+  top: 24%;
   font-family: var(--fuente-titulos);
-  font-size: 4rem;
+  font-size: clamp(1.4rem, 5vw, 3.2rem);
   font-weight: 800;
   line-height: 1;
   color: #c92a2a;
+  text-shadow: 0 2px 0 #fff;
 }
 
-.mapa-armado__mensaje {
-  max-width: 34rem;
-  margin: 1rem auto 0;
-  font-size: 1.2rem;
-  font-weight: 700;
+/* --- El mapa de los circuitos -------------------------------------------------------- */
+
+.rutas {
+  margin: 0;
+}
+
+.rutas__mar {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, #f3d9a4 0 10%, transparent 10% 90%, #b2f2bb 90%),
+    linear-gradient(180deg, #74c0fc, #1c7ed6);
+  border-radius: var(--radio);
+}
+
+.rutas__trazos {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rutas__zigzag {
+  fill: none;
+  stroke: #ffe066;
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+
+.rutas__aro {
+  fill: rgb(255 255 255 / 0.2);
+  stroke: #ff922b;
+  stroke-width: 1.4;
+}
+
+.rutas__etiqueta {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.6rem;
+  font-weight: 800;
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: var(--sombra-suave);
+}
+
+.rutas__etiqueta img {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.rutas__etiqueta--salida {
+  left: 1%;
+  bottom: 4%;
+}
+
+.rutas__etiqueta--llegada {
+  right: 1%;
+  bottom: 4%;
+}
+
+.rutas__etiqueta--a {
+  left: 40%;
+  top: 46%;
+  color: #8a6100;
+  transform: translateY(-120%);
+}
+
+.rutas__etiqueta--b {
+  left: 40%;
+  top: 56%;
+  color: #b34700;
+}
+
+.rutas__tiburon {
+  position: absolute;
+  left: 12%;
+  width: 12%;
+  animation: patrulla-tiburon 7s ease-in-out infinite alternate;
+}
+
+.rutas__tiburon img {
+  width: 100%;
+  height: auto;
+}
+
+.rutas figcaption {
+  margin-top: 0.75rem;
+  font-size: 1.1rem;
+}
+
+/* --- Lectura del cuento -------------------------------------------------------------- */
+
+.lectura {
+  max-width: var(--ancho-lectura);
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  background: #fffdf5;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra-suave);
+}
+
+.lectura__titulo {
+  margin: 0;
+  font-size: 1.6rem;
   text-align: center;
+  color: var(--acento-oscuro);
+}
+
+.lectura__autora {
+  margin: 0 0 0.5rem;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+.lectura__parrafo {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.lectura__parrafo--leyendo {
+  background: #fff3bf;
+  box-shadow: 0 0 0 0.4rem #fff3bf;
 }
 
 /* --- El tesoro del mar ------------------------------------------------------------ */

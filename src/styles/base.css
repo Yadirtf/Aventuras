@@ -25,7 +25,8 @@ body {
 
 body[data-tema='desierto'],
 body[data-tema='mar'],
-body[data-tema='selva'] {
+body[data-tema='selva'],
+body[data-tema='globo'] {
   background: linear-gradient(180deg, var(--cielo) 0, var(--acento-suave) 26rem, var(--papel) 60rem)
     fixed;
 }
