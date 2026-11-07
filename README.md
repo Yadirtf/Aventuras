@@ -36,6 +36,8 @@ public/assets/3d/      Figuras 3D de animales y objetos (ver «Imágenes»)
 src/
   content/
     paradas/*.json     Una parada por archivo: textos de pantalla + planeación completa
+    pantallas.ts       Cómo se reparte cada huella en pantallas (y qué pasos de la planeación
+                       acompañan cada una en la guía docente)
     types.ts           Formato del contenido
     validar.ts         Validador: avisa qué campo falta en qué archivo
     ecosistemas.ts     Nombre, descripción, autora y guía de cada ecosistema
@@ -147,6 +149,19 @@ Ajustes de la revisión de noviembre de 2026 (capturas y unidad didáctica actua
 - **El gran viaje en globo:** boleto, vuelos en cámara lenta, señales (tambor, campana, maracas)
   para adivinar dónde se aterriza, una misión por ecosistema (con estatua musical en la selva) y,
   al volver, ordenar las características de los tres mundos.
+
+Huellas en pantallas (sin scroll):
+
+- Cada parada se juega como una **huella** dividida en pantallas: cada parte del juego (o el reto
+  de movimiento) ocupa la pantalla completa y se pasa con «Siguiente» o con los pasos de arriba,
+  con transiciones suaves. Si una parte no cabe, se reduce un poco hasta caber; el reparto está
+  en `src/content/pantallas.ts`.
+- Al final, un **sello de madera** baja y estampa el sello en el pasaporte, con confeti, y aparecen
+  «Ir al mapa» y «Siguiente huellita».
+- En Modo Docente, cada pantalla tiene su **guía docente**: los pasos de la planeación de ese
+  momento, el enlace a la planeación completa y un atajo al sello.
+- Los botones suenan con un toque suave de kalimba (se apaga en Opciones).
+- Don Camelio, el camello, es ahora el guía del desierto; Dunita sigue en el teatrino.
 
 Fase 6 lista (cierre):
 

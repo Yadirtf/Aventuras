@@ -1,0 +1,1227 @@
+/*
+ * Huella en pantallas: cada momento de la clase ocupa la pantalla completa, sin scroll.
+ * Arriba, el título y los pasos; en medio, la pantalla actual; abajo, la navegación.
+ * Las transiciones son suaves y se apagan con «menos movimiento».
+ */
+
+.principal:has(> .huella) {
+  width: min(100% - 1.5rem, 92rem);
+  padding: 0.6rem 0 0.75rem;
+}
+
+.huella.parada {
+  max-width: none;
+  margin: 0;
+}
+
+.huella {
+  height: calc(100dvh - var(--alto-cabecera, 76px) - 1.35rem);
+  min-height: 28rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 0.6rem;
+}
+
+.huella [hidden] {
+  display: none !important;
+}
+
+/* --- Cabecera: título y pasos ------------------------------------------------------ */
+
+.huella__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.huella__titulos {
+  min-width: 0;
+}
+
+.huella__titulos .parada__miga {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.huella__titulos h1 {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.4vw, 2.15rem);
+  line-height: 1.1;
+}
+
+.huella__pasos {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0.35rem 0.6rem;
+  list-style: none;
+  background: rgb(255 255 255 / 0.75);
+  border-radius: 999px;
+  box-shadow: var(--sombra-suave);
+}
+
+.huella__paso {
+  position: relative;
+}
+
+/* Huellitas punteadas entre un paso y el siguiente. */
+.huella__paso:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 0.9rem;
+  border-top: 3px dotted color-mix(in srgb, var(--acento) 45%, transparent);
+}
+
+.huella__punto {
+  display: grid;
+  place-items: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  padding: 0;
+  cursor: pointer;
+  background: #fff;
+  border: 3px solid var(--borde);
+  border-radius: 50%;
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2),
+    border-color 0.4s,
+    background-color 0.4s,
+    box-shadow 0.4s;
+}
+
+.huella__punto:hover {
+  transform: translateY(-2px);
+}
+
+.huella__punto-figura {
+  width: 1.8rem;
+  height: 1.8rem;
+  opacity: 0.5;
+  filter: grayscale(0.6);
+  transition:
+    opacity 0.4s,
+    filter 0.4s;
+}
+
+.huella__paso--hecho .huella__punto {
+  background: var(--acento-suave);
+  border-color: color-mix(in srgb, var(--acento) 60%, #fff);
+}
+
+.huella__paso--hecho .huella__punto-figura,
+.huella__paso--actual .huella__punto-figura {
+  opacity: 1;
+  filter: none;
+}
+
+.huella__paso--actual .huella__punto {
+  background: #fff;
+  border-color: var(--acento);
+  transform: scale(1.18);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--acento) 22%, transparent);
+}
+
+.huella__paso--listo .huella__punto {
+  animation: latido 1.4s ease-in-out infinite;
+}
+
+/* --- Escenario y pantallas ----------------------------------------------------------- */
+
+.huella__escenario {
+  position: relative;
+  min-height: 0;
+}
+
+.pantalla {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 0.8rem 1.1rem;
+  background: rgb(255 255 255 / 0.86);
+  border: 4px solid #fff;
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra);
+}
+
+.pantalla__interior {
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.pantalla__titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  color: var(--acento-oscuro);
+}
+
+.pantalla__titulo .icono {
+  width: 2.3rem;
+  height: 2.3rem;
+}
+
+.pantalla__titulo:focus {
+  outline: none;
+}
+
+/* Entrada y salida: un deslizamiento corto con desvanecido. */
+.pantalla--entra {
+  animation: pantalla-entra 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) both;
+}
+
+.pantalla--entra.pantalla--atras {
+  --desde: -42px;
+}
+
+.pantalla--sale {
+  pointer-events: none;
+  animation: pantalla-sale 0.42s ease-in both;
+}
+
+.pantalla--sale.pantalla--atras {
+  --hacia: 42px;
+}
+
+@keyframes pantalla-entra {
+  from {
+    opacity: 0;
+    transform: translateX(var(--desde, 42px)) scale(0.985);
+  }
+}
+
+@keyframes pantalla-sale {
+  to {
+    opacity: 0;
+    transform: translateX(var(--hacia, -42px)) scale(0.985);
+  }
+}
+
+/* Llegada del guía y reto en pantalla, lado a lado. */
+.pantalla__llegada {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+
+.pantalla__llegada .burbuja {
+  margin: 0;
+}
+
+.pantalla__llegada .personaje {
+  width: 6.5rem;
+}
+
+.pantalla__reto {
+  padding: 0.85rem 1.1rem;
+  background: var(--acento-suave);
+  border-radius: var(--radio);
+}
+
+.pantalla__reto h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.15rem;
+  color: var(--acento-oscuro);
+}
+
+.pantalla__reto p {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+/* Pantalla que solo tiene la llegada: el guía en grande, en el centro. */
+.pantalla__llegada--grande {
+  grid-template-columns: 1fr;
+  max-width: 52rem;
+  margin: auto;
+  padding-top: 1rem;
+}
+
+.pantalla__llegada--grande .personaje {
+  width: 11rem;
+}
+
+.pantalla__llegada--grande .burbuja__frase {
+  font-size: 1.45rem;
+}
+
+.pantalla__llegada--grande .pantalla__reto {
+  font-size: 1.15rem;
+}
+
+.pantalla__interior:has(> .pantalla__llegada--grande) {
+  min-height: 100%;
+}
+
+/* Partes del juego: una al lado de la otra si caben. */
+.pantalla__partes.juego {
+  gap: 1rem;
+}
+
+@media (min-width: 64rem) {
+  .pantalla__partes[data-partes='2'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.pantalla__partes--dormida {
+  display: none;
+}
+
+.pantalla__espera {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  margin: auto;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+  color: var(--tinta-suave);
+}
+
+.pantalla__espera-figura {
+  width: 5rem;
+  height: 5rem;
+  opacity: 0.7;
+  animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.pantalla .parada__bloque {
+  margin: 0;
+}
+
+/* Pantalla del reto de movimiento: el reto en grande y centrado. */
+.pantalla--movimiento .pantalla__interior {
+  min-height: 100%;
+}
+
+.pantalla--movimiento .parada__movimiento,
+.pantalla__llegada + .parada__movimiento {
+  width: min(100%, 50rem);
+  margin: 0 auto;
+  font-size: 1.2rem;
+  background: var(--acento-suave);
+  box-shadow: none;
+}
+
+.pantalla--movimiento .parada__movimiento {
+  margin: auto;
+  font-size: 1.3rem;
+}
+
+.parada__movimiento > h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0;
+  color: var(--acento-oscuro);
+}
+
+.parada__movimiento > h3 .icono {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+/* --- Pantalla del sello -------------------------------------------------------------- */
+
+.pantalla__interior--sello {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 1.5rem 2.5rem;
+  min-height: 100%;
+}
+
+.pantalla__sello-texto {
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
+}
+
+.pantalla__sello-texto .pista {
+  margin: 0;
+}
+
+.pantalla__sello-texto .parada__siguiente {
+  justify-content: flex-start;
+}
+
+.pantalla__sello-ayuda {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--tinta-suave);
+}
+
+.pantalla--sello .pantalla__titulo {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+}
+
+.sello-escena {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 3.5rem 0 0.5rem;
+}
+
+.sello-escena__hoja {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 20rem);
+  aspect-ratio: 4 / 4.6;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 27px, rgb(180 140 80 / 0.12) 27px 28px),
+    linear-gradient(160deg, #fffdf6, #fff1d6);
+  border: 2px solid #efdcb5;
+  border-radius: 18px;
+  box-shadow:
+    0 2px 0 #e9d3a6,
+    0 18px 34px rgb(42 31 61 / 0.16);
+  transform: rotate(-3deg);
+}
+
+.sello-escena__titulo {
+  position: absolute;
+  top: 0.9rem;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+
+.sello-escena__hueco {
+  display: grid;
+  place-items: center;
+  width: 12rem;
+  height: 12rem;
+  margin-top: 1.5rem;
+  border: 4px dashed color-mix(in srgb, var(--acento) 40%, transparent);
+  border-radius: 50%;
+}
+
+.sello-marca {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 9%, transparent);
+  border: 6px solid var(--acento);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 0 0 4px #fffaf0,
+    inset 0 0 0 7px var(--acento);
+  opacity: 0;
+  transform: rotate(-12deg);
+}
+
+.sello-marca__figura {
+  width: 5.2rem;
+  height: 5.2rem;
+  filter: drop-shadow(0 3px 2px rgb(42 31 61 / 0.2));
+}
+
+.sello-marca__nombre {
+  font-family: var(--fuente-titulos);
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sello-marca__fecha {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.sello-escena--puesto .sello-marca,
+.sello-escena--marcada .sello-marca {
+  opacity: 1;
+}
+
+.sello-escena--puesto .sello-escena__hueco,
+.sello-escena--marcada .sello-escena__hueco {
+  border-color: transparent;
+}
+
+.sello-escena--marcada .sello-marca {
+  animation: marca-aparece 0.6s cubic-bezier(0.2, 1.3, 0.4, 1) both;
+}
+
+@keyframes marca-aparece {
+  from {
+    opacity: 0;
+    transform: rotate(-12deg) scale(1.3);
+    filter: blur(3px);
+  }
+  35% {
+    opacity: 1;
+  }
+}
+
+.sello-escena__tinta {
+  position: absolute;
+  top: calc(50% + 0.75rem);
+  left: 50%;
+  width: 12rem;
+  height: 12rem;
+  margin: -6rem 0 0 -6rem;
+  border: 4px solid var(--acento);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sello-escena--marcada .sello-escena__tinta {
+  animation: tinta-onda 0.9s ease-out both;
+}
+
+@keyframes tinta-onda {
+  from {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.75);
+  }
+}
+
+.sello-escena--marcada .sello-escena__hoja {
+  animation: hoja-golpe 0.4s ease-out;
+}
+
+@keyframes hoja-golpe {
+  30% {
+    transform: rotate(-3deg) translateY(5px) scale(0.975);
+  }
+}
+
+/* El sello de madera que baja, estampa y se va. */
+.sellador {
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% - 6.6rem);
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -260px);
+  transform-origin: 50% 100%;
+}
+
+.sellador__mango {
+  width: 4.4rem;
+  height: 4.4rem;
+  background:
+    radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.55), transparent 42%), var(--acento);
+  border-radius: 50%;
+  box-shadow: inset -6px -8px 0 rgb(0 0 0 / 0.18);
+}
+
+.sellador__cuello {
+  width: 2rem;
+  height: 2.6rem;
+  margin-top: -0.4rem;
+  background: linear-gradient(90deg, #8b5a2b, #c99052 45%, #8b5a2b);
+}
+
+.sellador__base {
+  display: grid;
+  place-items: center;
+  width: 12.5rem;
+  height: 3.2rem;
+  background: linear-gradient(180deg, #e0ab69, #a8692f);
+  border-bottom: 0.65rem solid var(--acento-oscuro);
+  border-radius: 14px 14px 6px 6px;
+  box-shadow: 0 10px 18px rgb(42 31 61 / 0.25);
+}
+
+.sellador__base img {
+  width: 2.2rem;
+  height: 2.2rem;
+  opacity: 0.85;
+}
+
+.sello-escena--sellando .sellador {
+  animation: sellar-golpe 2.2s cubic-bezier(0.45, 0, 0.3, 1) both;
+}
+
+@keyframes sellar-golpe {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -280px) rotate(-16deg);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -150px) rotate(-8deg);
+  }
+  32% {
+    transform: translate(-50%, -175px) rotate(-12deg);
+  }
+  37% {
+    transform: translate(-50%, 0) rotate(-12deg) scale(1);
+  }
+  42% {
+    transform: translate(-50%, 6px) rotate(-12deg) scale(1.04, 0.9);
+  }
+  52% {
+    opacity: 1;
+    transform: translate(-50%, 0) rotate(-12deg) scale(1);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -190px) rotate(-4deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -320px) rotate(6deg);
+  }
+}
+
+/* --- Pie: navegación ----------------------------------------------------------------- */
+
+.huella__pie {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.huella__pie-grupo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.huella__pie-grupo--centro {
+  justify-content: center;
+}
+
+.huella__pie-grupo--fin {
+  justify-content: flex-end;
+}
+
+.huella__pie .boton {
+  min-height: 3.5rem;
+  padding: 0.45rem 1.15rem;
+}
+
+.huella__siguiente {
+  font-size: 1.15rem;
+}
+
+.huella__siguiente-corto {
+  display: none;
+}
+
+.huella__flecha {
+  font-size: 1.4rem;
+  transition: transform 0.3s;
+}
+
+.huella__siguiente:hover .huella__flecha {
+  transform: translateX(4px);
+}
+
+.boton--docente {
+  color: var(--primario-oscuro);
+  background: var(--primario-suave);
+  border: 3px dashed var(--primario);
+}
+
+@media (max-width: 52rem) {
+  .huella__pie {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .huella__pie-etiqueta {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .huella__siguiente-texto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .huella__siguiente-corto {
+    display: inline;
+  }
+
+  .huella__pie .boton {
+    padding-inline: 0.8rem;
+  }
+
+  .huella__cabecera {
+    flex-wrap: nowrap;
+  }
+
+  .huella__titulos h1 {
+    font-size: 1.3rem;
+  }
+
+  .pantalla__llegada,
+  .pantalla__interior--sello {
+    grid-template-columns: 1fr;
+  }
+
+  .huella__pasos {
+    gap: 0.5rem;
+  }
+
+  .huella__paso:not(:last-child)::after {
+    width: 0.5rem;
+  }
+
+  .huella__punto {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .huella__punto-figura {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
+
+/* --- Paneles laterales: guía docente y rincón de calma -------------------------------- */
+
+.panel--docente {
+  width: min(100%, 34rem);
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0 0 0 auto;
+  border-radius: var(--radio-grande) 0 0 var(--radio-grande);
+}
+
+.panel--docente[open] {
+  display: flex;
+  flex-direction: column;
+  animation: panel-lateral 0.45s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.panel--docente .panel__cuerpo {
+  overflow: auto;
+}
+
+@keyframes panel-lateral {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
+.panel--calma[open] {
+  animation: panel-aparece 0.4s ease-out;
+}
+
+@keyframes panel-aparece {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.panel--calma .calma {
+  margin: 0;
+  box-shadow: none;
+}
+
+.panel--calma .calma > h2 {
+  display: none;
+}
+
+.guia-docente__plan summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--primario-oscuro);
+}
+
+.guia-docente__plan[open] summary {
+  margin-bottom: 0.5rem;
+}
+
+.guia-docente {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.guia-docente__donde {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.guia-docente h3 {
+  margin: 0.5rem 0 0;
+  font-size: 1.15rem;
+  color: var(--primario-oscuro);
+}
+
+.guia-docente__pasos {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.guia-docente__pasos p {
+  margin: 0.15rem 0 0;
+}
+
+.guia-docente__datos {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: var(--primario-suave);
+  border-radius: var(--radio);
+}
+
+.guia-docente__datos dt {
+  font-weight: 700;
+  color: var(--primario-oscuro);
+}
+
+.guia-docente__datos dd {
+  margin: 0 0 0.4rem;
+}
+
+.guia-docente__datos ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.guia-docente__aviso {
+  margin: 0;
+  padding: 0.6rem 0.9rem;
+  background: #fff6d6;
+  border-radius: var(--radio);
+}
+
+.guia-docente__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* --- Menos movimiento ------------------------------------------------------------------ */
+
+[data-movimiento='reducido'] .pantalla--entra,
+[data-movimiento='reducido'] .pantalla--sale,
+[data-movimiento='reducido'] .sellador,
+[data-movimiento='reducido'] .panel--docente[open],
+[data-movimiento='reducido'] .panel--calma[open],
+[data-movimiento='reducido'] .pantalla__espera-figura {
+  animation: none;
+}
+
+/* --- Ajustes de los juegos dentro de una pantalla ----------------------------------- */
+
+/* Si la pantalla solo tiene partes del juego, el título de la parte hace de título. */
+.pantalla--juego:not(:has(.pantalla__llegada)) > .pantalla__interior > .pantalla__titulo,
+.pantalla--titulo-repetido > .pantalla__interior > .pantalla__titulo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.pantalla .juego__parte {
+  padding: 0.9rem 1.1rem;
+}
+
+.pantalla .juego__parte > h3 {
+  margin-top: 0;
+}
+
+.pantalla .burbuja {
+  margin-bottom: 0.6rem;
+}
+
+/* El lienzo de dibujo no pasa del alto de la pantalla. */
+.pantalla .lienzo__papel {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - var(--alto-cabecera, 76px) - 21rem);
+  margin: 0 auto;
+}
+
+/*
+ * En pantallas anchas, cada parte se divide en dos: a la izquierda lo que se lee y se
+ * presiona (título, guía, botones) y a la derecha el escenario del juego. Así cabe sin scroll.
+ */
+@media (min-width: 64rem) {
+  .pantalla__partes:not([data-partes='2'])
+    > .juego__parte:has(
+      > :is(
+        .ronda,
+        .cuerda__pared,
+        .tarjetas,
+        .mimica__mesa,
+        .teatrino__escenario,
+        .escena-desierto,
+        .rompecabezas__tablero,
+        .sombras,
+        .cartas-comida,
+        .rutas,
+        .mar-tablero,
+        .arrecife,
+        .cofre,
+        .cuento__marco
+      )
+    ) {
+    display: grid;
+    grid-template-columns: minmax(15rem, 1fr) minmax(0, 1.9fr);
+    grid-template-rows: repeat(11, auto) 1fr;
+    grid-auto-flow: row dense;
+    column-gap: 1.5rem;
+    align-items: start;
+  }
+
+  .pantalla__partes:not([data-partes='2']) > .juego__parte > * {
+    grid-column: 1;
+  }
+
+  .pantalla__partes:not([data-partes='2'])
+    > .juego__parte
+    > :is(
+      .ronda,
+      .cuerda__pared,
+      .tarjetas,
+      .mimica__mesa,
+      .teatrino__escenario,
+      .escena-desierto,
+      .rompecabezas__tablero,
+      .sombras,
+      .cartas-comida,
+      .rutas,
+      .mar-tablero,
+      .arrecife,
+      .cofre,
+      .cuento__marco
+    ) {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: center;
+    margin-block: 0;
+  }
+
+  .pantalla .juego__parte .burbuja {
+    align-items: flex-start;
+  }
+
+  .pantalla .juego__parte .personaje {
+    width: 4.5rem;
+  }
+
+  .pantalla .ronda {
+    --radio-ronda: 7rem;
+  }
+
+  .pantalla [data-partes='2'] .ronda {
+    --radio-ronda: 5.5rem;
+    margin: 0;
+  }
+
+  /* La pelota preguntona junto a otra parte: la ronda y su botón, lado a lado. */
+  .pantalla [data-partes='2'] > .juego__parte:has(> .ronda) {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1rem;
+    align-items: center;
+  }
+
+  .pantalla [data-partes='2'] > .juego__parte:has(> .ronda) > :not(.ronda, .juego__acciones) {
+    grid-column: 1 / -1;
+  }
+
+  .pantalla [data-partes='2'] > .juego__parte:has(> .ronda) > .juego__acciones {
+    justify-content: center;
+  }
+
+  /*
+   * Llegada + juego: arriba el título y el reto en pantalla a todo lo ancho; abajo, el guía
+   * en una columna angosta y el juego al lado.
+   */
+  .pantalla--juego:has(.pantalla__llegada) > .pantalla__interior {
+    display: grid;
+    grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 3fr);
+    grid-template-areas:
+      'titulo reto'
+      'guia juego';
+    align-items: start;
+    gap: 0.6rem 1rem;
+  }
+
+  .pantalla--juego .pantalla__llegada {
+    display: contents;
+  }
+
+  .pantalla--juego:has(.pantalla__llegada) .pantalla__titulo {
+    grid-area: titulo;
+    align-self: center;
+    line-height: 1.15;
+  }
+
+  .pantalla--juego .pantalla__reto {
+    grid-area: reto;
+    padding: 0.55rem 1rem;
+  }
+
+  .pantalla--juego .pantalla__reto h3 {
+    display: inline-flex;
+    margin: 0 0.5rem 0 0;
+    vertical-align: middle;
+  }
+
+  .pantalla--juego .pantalla__reto p {
+    display: inline;
+  }
+
+  .pantalla--juego .pantalla__llegada .burbuja {
+    grid-area: guia;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .pantalla--juego .pantalla__llegada .personaje {
+    width: 5rem;
+  }
+
+  .pantalla--juego:has(.pantalla__llegada) .pantalla__partes,
+  .pantalla--juego:has(.pantalla__llegada) .pantalla__espera {
+    grid-area: juego;
+  }
+}
+
+@media (min-width: 64rem) {
+  /* Viaje en globo: cada etapa se acomoda en dos columnas. */
+  .pantalla .globo__panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem 1.5rem;
+    align-items: start;
+  }
+
+  .pantalla
+    .globo__panel
+    > :is(
+      h4,
+      .juego__acciones,
+      .cielo,
+      .globo__destinos,
+      .globo__mundos,
+      .globo__final,
+      .globo__pregunta
+    ) {
+    grid-column: 1 / -1;
+  }
+
+  .pantalla .globo__panel > * {
+    margin-block: 0;
+  }
+
+  .pantalla .cuento__marco {
+    max-height: calc(100dvh - var(--alto-cabecera, 76px) - 19rem);
+  }
+
+  /* Cuento del mar: a dos columnas, como un libro abierto. */
+  .pantalla .lectura {
+    max-width: none;
+    column-count: 2;
+    column-gap: 2.5rem;
+  }
+
+  .pantalla .lectura > :not(.lectura__parrafo) {
+    column-span: all;
+  }
+
+  .pantalla .lectura__parrafo {
+    margin-top: 0;
+    break-inside: avoid;
+  }
+
+  /* Teatrino: el escenario y la caja de títeres, juntos a la derecha. */
+  .pantalla__partes > .juego__parte > .teatrino__escenario {
+    grid-row: 1 / 6;
+    align-self: start;
+  }
+
+  .pantalla__partes > .juego__parte > .teatrino__caja {
+    grid-column: 2;
+    grid-row: 6 / -1;
+  }
+
+  /* Cuento de la selva: los botones para cambiar de escena, debajo del escenario. */
+  .pantalla__partes > .juego__parte.cuento > .cuento__marco {
+    grid-row: 1 / 6;
+  }
+
+  .pantalla__partes > .juego__parte.cuento > .juego__acciones:last-child {
+    grid-column: 2;
+    grid-row: 6 / -1;
+    align-self: start;
+  }
+
+  /* Mural junto a la pelota: columnas más bajitas. */
+  .pantalla [data-partes='2'] .mural__columnas {
+    grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    padding: 0.6rem;
+  }
+
+  .pantalla [data-partes='2'] .mural__columna {
+    min-height: 5.5rem;
+  }
+}
+
+.pantalla .cuento__texto {
+  margin-block: 0.25rem;
+}
+
+/* --- Mapa: título y guía en una fila, tres mundos lado a lado y el globo como meta ------ */
+
+.mapa__cabecera {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.mapa__cabecera h1 {
+  margin: 0;
+}
+
+.mapa__cabecera .burbuja {
+  margin: 0;
+}
+
+.mapa__progreso {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.mapa__barra {
+  position: relative;
+  width: 12rem;
+  height: 0.9rem;
+  overflow: hidden;
+  background: var(--primario-suave);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 3px rgb(42 31 61 / 0.15);
+}
+
+.mapa__barra::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--resalte), #ff9f45);
+  border-radius: inherit;
+  transform: scaleX(var(--avance, 0));
+  transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+@media (min-width: 64rem) {
+  .mapa__camino {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem 2.5rem;
+  }
+
+  /* El gran viaje en globo cruza todo el ancho: es la meta del camino. */
+  .region--globo {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(16rem, auto) minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0 1.5rem 0 0;
+  }
+
+  .region--globo .region__cabecera {
+    align-self: stretch;
+    display: grid;
+    align-content: center;
+    margin: 0;
+    padding: 1rem 1.5rem;
+    border-radius: calc(var(--radio-grande) - 5px) 0 0 calc(var(--radio-grande) - 5px);
+    background: linear-gradient(90deg, var(--cielo), var(--acento-suave));
+  }
+
+  .region--globo .region__paradas {
+    margin: 0;
+  }
+
+  .region--globo .mapa__final,
+  .region--globo .mapa__meta {
+    margin: 0;
+    justify-self: center;
+  }
+
+  /* Huellitas: de la selva bajan hacia el globo. */
+  .region--selva::after {
+    display: none;
+  }
+
+  .region--globo::before {
+    content: '';
+    position: absolute;
+    top: -1.85rem;
+    right: 16%;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: url('/assets/3d/huellas.webp') center / contain no-repeat;
+    transform: rotate(180deg);
+  }
+}
+
+@media (max-width: 48rem) {
+  .mapa__cabecera {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 64rem) {
+  .pantalla--juego.pantalla--titulo-repetido > .pantalla__interior {
+    grid-template-areas:
+      'reto reto'
+      'guia juego';
+  }
+}

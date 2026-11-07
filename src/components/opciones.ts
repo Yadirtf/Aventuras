@@ -73,7 +73,7 @@ function selectorVoz(store: Store): HTMLElement | false {
   );
 }
 
-/** Preferencias de la clase: Modo Docente, menos movimiento y voz. */
+/** Preferencias de la clase: Modo Docente, menos movimiento, sonido de los botones y voz. */
 export function opciones(store: Store, menosMovimientoActivo: boolean): HTMLElement {
   return h(
     'div',
@@ -89,6 +89,12 @@ export function opciones(store: Store, menosMovimientoActivo: boolean): HTMLElem
       'Quita las animaciones y transiciones entre pantallas.',
       menosMovimientoActivo,
       (v) => store.cambiarMenosMovimiento(v),
+    ),
+    interruptor(
+      'Sonido de los botones',
+      'Un toque suave y bajito cada vez que se presiona un botón.',
+      store.estado.sonidoBotones,
+      (v) => store.cambiarSonidoBotones(v),
     ),
     selectorVoz(store),
     estadoSinInternet(),

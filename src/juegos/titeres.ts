@@ -233,7 +233,7 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
     // Primero la narradora; luego cada títere sube justo cuando le toca hablar.
     await leerEnOrden(
       [
-        { texto: e.narracion, voz: personajes.dunita },
+        { texto: e.narracion, voz: personajes['don-camelio'] },
         ...actores.map((a) => ({ texto: e.dialogos[a.id] ?? '', voz: vozDe(a) })),
       ],
       (i) => {
@@ -253,7 +253,7 @@ function teatrino(animales: AnimalTitere[], escenas: EscenaTeatrino[]): HTMLElem
   const pintar = () => {
     const e = escenas[escena];
     if (!e) return;
-    narracion.replaceChildren(burbuja('dunita', e.narracion, { pose: 'quieto' }));
+    narracion.replaceChildren(burbuja('don-camelio', e.narracion, { pose: 'quieto' }));
     representar.hidden = Object.keys(e.dialogos).length === 0;
     pestanas.replaceChildren(
       ...escenas.map((es, i) =>

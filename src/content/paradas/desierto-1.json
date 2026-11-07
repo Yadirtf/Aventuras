@@ -3,8 +3,8 @@
   "ecosistema": "desierto",
   "numero": 1,
   "titulo": "Lo que sabemos del desierto",
-  "guias": ["dunita"],
-  "saludo": "¡Hola, exploradores! Soy Dunita. Con estas orejas tan grandes escucho todo lo que ustedes saben. ¿Qué es un desierto para ustedes?",
+  "guias": ["don-camelio"],
+  "saludo": "¡Hola, exploradores! Soy Don Camelio. Con estas orejas atentas escucho todo lo que ustedes saben. ¿Qué es un desierto para ustedes?",
   "retoPantalla": "La pelota preguntona rebota al ritmo de las palmas y se detiene en una pregunta. Las ideas se pegan en cuatro columnas (clima, animales, plantas y agua) y se pueden cambiar de columna. Después, cada uno dibuja su desierto y lo cuelga con pinzas en la cuerda del mural.",
   "sello": {
     "nombre": "Sol",

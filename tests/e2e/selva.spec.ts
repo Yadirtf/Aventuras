@@ -1,9 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { abrir, botonSello } from './ayuda';
+import { abrir, pantalla, selloListo } from './ayuda';
 
 test.describe('Parada 7: nos adentramos en la selva', () => {
   test('adivinar los 5 sonidos termina el juego', async ({ page }) => {
     await abrir(page, '/selva/1');
+    await pantalla(page, 'El sonido misterioso');
     const contador = page.locator('.sonidos__contador');
     const opciones = page.locator('.sonidos__opcion');
     for (let ronda = 1; ronda <= 5; ronda++) {
@@ -16,7 +17,7 @@ test.describe('Parada 7: nos adentramos en la selva', () => {
       await expect(contador).toHaveText(`Adivinados: ${ronda} de 5`);
       if (ronda < 5) await page.getByRole('button', { name: 'Otro sonido' }).click();
     }
-    await expect(botonSello(page)).toHaveClass(/boton--latido/);
+    await expect(selloListo(page)).toHaveClass(/huella__paso--listo/);
   });
 
   test('primero la pausa activa y después los sonidos', async ({ page }) => {
@@ -40,6 +41,7 @@ test.describe('Parada 8: los retos de la selva', () => {
   test('las cuatro estaciones del circuito', async ({ page }) => {
     test.slow();
     await abrir(page, '/selva/2');
+    await pantalla(page, 'El camino de los retos');
     const momo = page.locator('.circuito .burbuja__frase');
     const siguiente = page.getByRole('button', { name: 'Siguiente estación' });
 
@@ -86,7 +88,7 @@ test.describe('Parada 8: los retos de la selva', () => {
     }
     await expect(flecha).toHaveText('★');
     await expect(page.locator('.circuito__paso--hecho')).toHaveCount(4);
-    await expect(botonSello(page)).toHaveClass(/boton--latido/);
+    await expect(selloListo(page)).toHaveClass(/huella__paso--listo/);
   });
 });
 
@@ -97,6 +99,7 @@ test.describe('Parada 9: la selva cobra vida', () => {
       delete (window as { speechSynthesis?: unknown }).speechSynthesis;
     });
     await abrir(page, '/selva/3');
+    await pantalla(page, 'Un día en la selva');
     const siguiente = page
       .locator('.cuento')
       .getByRole('button', { name: /Siguiente|Fin del cuento/ });
@@ -116,6 +119,6 @@ test.describe('Parada 9: la selva cobra vida', () => {
     await expect(siguiente).toHaveText('¡Fin del cuento!');
     await siguiente.click();
     await expect(page.locator('.cuento .burbuja__frase')).toContainText('¡Fin!');
-    await expect(botonSello(page)).toHaveClass(/boton--latido/);
+    await expect(selloListo(page)).toHaveClass(/huella__paso--listo/);
   });
 });

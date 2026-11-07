@@ -39,6 +39,7 @@ export function montarJuego(
   parada: Parada,
   store: Store,
   alTerminar: () => void,
+  alListo?: (juego: HTMLElement) => void,
 ): HTMLElement {
   const espera = h(
     'div',
@@ -46,7 +47,10 @@ export function montarJuego(
     'Huellita está preparando el juego…',
   );
   cargarJuego(juego, { parada, store, alTerminar })
-    .then((listo) => espera.replaceWith(listo))
+    .then((listo) => {
+      espera.replaceWith(listo);
+      alListo?.(listo);
+    })
     .catch(() => {
       espera.textContent =
         'No se pudo cargar el juego. Revisen la conexión y vuelvan a abrir esta parada.';

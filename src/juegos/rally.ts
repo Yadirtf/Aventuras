@@ -55,7 +55,7 @@ export const rally: MontarJuego<JuegoRally> = ({ juego, alTerminar }) => {
   let actual = 0;
   const ganadas: number[] = [];
 
-  const guia = burbuja('dunita', '', { pose: 'pregunta', vivo: true });
+  const guia = burbuja('don-camelio', '', { pose: 'pregunta', vivo: true });
   const reverso = h('div', { class: 'rompecabezas__reverso', hidden: true });
   const puzzle = rompecabezas({
     columnas: COLUMNAS,
@@ -70,7 +70,7 @@ export const rally: MontarJuego<JuegoRally> = ({ juego, alTerminar }) => {
         h(
           'div',
           { class: 'relevo' },
-          burbuja('dunita', juego.relevo.despedida, { pose: 'celebracion' }),
+          burbuja('don-camelio', juego.relevo.despedida, { pose: 'celebracion' }),
           burbuja(juego.relevo.siguienteGuia, juego.relevo.respuesta, { pose: 'saludo' }),
         ),
       );
