@@ -1225,3 +1225,13 @@
       'guia juego';
   }
 }
+
+/* Tarjetas de adaptación: un poco más anchas para que el reverso quepa completo. */
+.pantalla .tarjetas {
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+}
+
+.pantalla .tarjeta__cara--reverso {
+  padding: 0.5rem;
+  font-size: 0.95rem;
+}
